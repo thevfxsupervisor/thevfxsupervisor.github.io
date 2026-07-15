@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How a one-person VFX department orchestrates AI</title>
+<meta name="description" content="The mechanical half automates. The judgment half stays with the supervisor. Notes on briefing an AI assistant with guardrails on a live production.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23131619'/%3E%3Crect x='6' y='6' width='4' height='20' rx='1.5' fill='%23e6963c'/%3E%3Crect x='14' y='6' width='4' height='20' rx='1.5' fill='%239aa1a8'/%3E%3Crect x='22' y='6' width='4' height='20' rx='1.5' fill='%239aa1a8'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="logo"><i></i></span>the vfx supervisor</a>
+    <nav>
+      <a href="/projects/breakdown-studio/" class="hide-sm">Breakdown Studio</a>
+      <a href="/course/" class="hide-sm">Course</a>
+      <a href="/notes/" class="hide-sm current">Notes</a>
+      <a href="/about/" class="hide-sm">About</a>
+      <a class="btn btn-a" href="/course/">Join the waitlist</a>
+    </nav>
+  </div>
+</header>
+
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Notes &middot; 2026-07-13</span>
+    <h1 style="margin-top:18px">How a one-person VFX department orchestrates AI</h1>
+  </div>
+</section>
+<hr class="rule">
+<section>
+  <div class="wrap prose">
+    <p>When there is no department behind you, just one person and a schedule, the question is not whether to use an AI assistant. It is where to let it run unattended, and where to keep your hand on the wheel.</p>
+<h2>The mechanical half and the judgment half</h2>
+<p>A film's shot breakdown splits cleanly into two kinds of work. The mechanical half: detecting where the cuts are, reading a burned-in slate, uploading a thumbnail, formatting a row in a spreadsheet. None of that needs a human in the loop once the rules are right, and all of it is exactly what an AI assistant, or a small offline model, does well and tirelessly.</p>
+<p>The judgment half is different. Whether a shot that vanished between cuts is a real drop or a protected shot that never had a slate. Whether two shots that look similar are the same setup re-labelled or two different takes. Which row in a master breakdown a drifted shot code actually belongs to. That is the supervisor's eye, built from doing the job, and it does not delegate cleanly.</p>
+<p>The practical answer, running Breakdown Studio's own pipeline as the example: automate the first half completely, and build the second half as a set of narrow, well-briefed tasks with explicit guardrails, not a single open-ended "figure it out" instruction.</p>
+<h2>Briefed assistants with guardrails</h2>
+<p>A briefed assistant is not a chatbot you paste a spreadsheet into. It is an assistant that opens every session already knowing the rules of the pipeline: what identity means in this system (a slate, never a timecode), what counts as a protected shot, what is allowed to touch the master file and what is not. The brief travels with the project, so the fifth session behaves like the first.</p>
+<p>The guardrails matter more than the intelligence. A rule as simple as "nothing writes to the master without a human sign-off" turns a fast, occasionally wrong assistant into a safe one. A rule like "protected shots never auto-omit" catches the one mistake that would have quietly cost real shots off a budget. The assistant's job is to stage the change and show its work; the sign-off stays with the person whose name is on the delivery.</p>
+<h2>Memory that learns the show</h2>
+<p>The other piece that makes this work over a whole production is memory that survives between sessions and between re-cuts. A decision made once, this shot is intentionally slate-less, this pair of shots always merges, should not have to be re-argued every time the picture changes. Recording that decision against something stable, a slate identity rather than a timecode that moves with every cut, means each new cut only surfaces what actually changed, not the whole film again.</p>
+<p>That is the shape of the method: automate hard, brief narrowly, gate the writes, and give the system a memory that respects how a film cut actually evolves. None of it requires naming the production it was built on. The pattern is the point.</p>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <a class="btn btn-b" href="/notes/">&larr; All notes</a>
+  </div>
+</section>
+
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="font-size:14px"><span class="logo"><i></i></span>the vfx supervisor</div>
+    <nav>
+      <a href="/projects/breakdown-studio/">Breakdown Studio</a>
+      <a href="/course/">Course</a>
+      <a href="/notes/">Notes</a>
+      <a href="/about/">About</a>
+      <a href="https://github.com/thevfxsupervisor">GitHub</a>
+      <a href="mailto:geoff@thevfxsupervisor.com">Contact</a>
+    </nav>
+    <div class="mono">&copy; 2026 Geoffrey Hancock</div>
+  </div>
+</footer>
+
+</body>
+</html>

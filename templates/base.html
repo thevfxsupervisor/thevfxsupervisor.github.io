@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{TITLE}}</title>
+<meta name="description" content="{{DESCRIPTION}}">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23131619'/%3E%3Crect x='6' y='6' width='4' height='20' rx='1.5' fill='%23e6963c'/%3E%3Crect x='14' y='6' width='4' height='20' rx='1.5' fill='%239aa1a8'/%3E%3Crect x='22' y='6' width='4' height='20' rx='1.5' fill='%239aa1a8'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="{{ROOT}}static/style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="{{ROOT}}"><span class="logo"><i></i></span>the vfx supervisor</a>
+    <nav>
+      <a href="{{ROOT}}projects/breakdown-studio/" class="hide-sm{{NAV_PROJECTS}}">Breakdown Studio</a>
+      <a href="{{ROOT}}course/" class="hide-sm{{NAV_COURSE}}">Course</a>
+      <a href="{{ROOT}}notes/" class="hide-sm{{NAV_NOTES}}">Notes</a>
+      <a href="{{ROOT}}about/" class="hide-sm{{NAV_ABOUT}}">About</a>
+      <a class="btn btn-a" href="{{ROOT}}course/">Join the waitlist</a>
+    </nav>
+  </div>
+</header>
+
+{{CONTENT}}
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="font-size:14px"><span class="logo"><i></i></span>the vfx supervisor</div>
+    <nav>
+      <a href="{{ROOT}}projects/breakdown-studio/">Breakdown Studio</a>
+      <a href="{{ROOT}}course/">Course</a>
+      <a href="{{ROOT}}notes/">Notes</a>
+      <a href="{{ROOT}}about/">About</a>
+      <a href="https://github.com/thevfxsupervisor">GitHub</a>
+      <a href="mailto:geoff@thevfxsupervisor.com">Contact</a>
+    </nav>
+    <div class="mono">&copy; 2026 Geoffrey Hancock</div>
+  </div>
+</footer>
+{{EXTRA_SCRIPT}}
+</body>
+</html>
