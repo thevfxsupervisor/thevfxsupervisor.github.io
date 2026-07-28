@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Case study: link-session, coordinating a fleet of AI agents on one production | the vfx supervisor</title>
+<meta name="description" content="How I coordinate several live AI agents on a single film production over shared files, with no server. A small open-source Claude Code skill.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23131619'/%3E%3Crect x='6' y='6' width='4' height='20' rx='1.5' fill='%23e6963c'/%3E%3Crect x='14' y='6' width='4' height='20' rx='1.5' fill='%239aa1a8'/%3E%3Crect x='22' y='6' width='4' height='20' rx='1.5' fill='%239aa1a8'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="logo"><i></i></span>the vfx supervisor</a>
+    <nav>
+      <a href="/projects/" class=" current">Projects</a>
+      <a href="/course/" class="hide-sm">Course</a>
+      <a href="/notes/" class="hide-sm">Notes</a>
+      <a href="/about/" class="hide-sm">About</a>
+      <a class="btn btn-a" href="/course/">Join the waitlist</a>
+    </nav>
+  </div>
+</header>
+
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Case study</span>
+    <h1 style="margin-top:18px">How I run a fleet of AI agents on one film, coordinated over shared files, no server</h1>
+    <p class="lede">A small utility that does one job well: let several live AI sessions coordinate on the same production, hand off work, and stay out of each other's way. Open source, MIT.</p>
+    <div class="cta-row"><a class="btn btn-a" href="https://github.com/thevfxsupervisor/link-session">Get the skill</a><a class="btn btn-b" href="/about/">Work with me</a></div>
+    <div class="cred"><span class="dot"></span><b>Designed and shipped solo, running daily across three operating systems on a live feature.</b></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap prose">
+    <h2>The problem</h2>
+<p>Running a film's VFX department with an AI pair is not one chatbot in a window. It is several live agent sessions at once: one on the shot breakdown, one on the vendor bids and finance, others driving GPU jobs across machines. They share the same sheets, the same files, the same production, and left uncoordinated they collide, two sessions editing the same sheet, work redone, a job started twice.</p>
+<h2>The design call</h2>
+<p>I did not want a server, a message bus, or an orchestration framework to babysit a side utility. So link-session coordinates over plain files: each session writes one small JSON outbox into a shared folder, and a lightweight watcher surfaces what every other session is doing, without polling. Files over a service buys three things that matter on a production: zero infrastructure to run or break, a coordination trail you can read by eye, and state that survives a session dying, a restart, or a flaky network mount.</p>
+<h2>In production</h2>
+<p>It runs daily across Windows, macOS and Linux machines on a live feature film, coordinating the agents that drive <a href="/projects/breakdown-studio/">Breakdown Studio</a>, the finance and vendor sheets, and heavier GPU work farmed out to other machines. The rules that keep it safe are the point: one writer per file, long payloads as files rather than single-slot messages, a clean stop protocol, and a hard line that coordination carries metadata, never client or show content. No client names, no show names, ever.</p>
+<h2>What it proves</h2>
+<p>The tool is small on purpose, and I lead with that. The point is not the utility, it is the operating model: I run AI as a coordinated team on real production work, with guardrails, not a single assistant in a tab. That is the hardest half of "a VFX supervisor who orchestrates AI" to demonstrate, and this is the public proof of it.</p>
+  </div>
+</section>
+
+<section id="get">
+  <div class="wrap">
+    <div class="final">
+      <span class="soon"><span class="dot"></span>Open source · MIT · on GitHub</span>
+      <h2>Want AI-assisted pipeline work on your show?</h2>
+      <p>I run AI as a coordinated team on real film productions, with the guardrails that keep it safe. If that is useful to your show, let's talk. Or join the course waitlist for the method.</p>
+      <div class="cta-row">
+        <a class="btn btn-a" href="/about/">Work with me</a>
+        <a class="btn btn-b" href="/course/">Join the course waitlist</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="font-size:14px"><span class="logo"><i></i></span>the vfx supervisor</div>
+    <nav>
+      <a href="/projects/">Projects</a>
+      <a href="/course/">Course</a>
+      <a href="/notes/">Notes</a>
+      <a href="/about/">About</a>
+      <a href="https://github.com/thevfxsupervisor">GitHub</a>
+      <a href="mailto:geoff@wanglemedia.com">Contact</a>
+    </nav>
+    <div class="mono">&copy; 2026 Geoffrey Hancock</div>
+  </div>
+</footer>
+
+</body>
+</html>

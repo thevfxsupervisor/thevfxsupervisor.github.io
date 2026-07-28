@@ -256,7 +256,7 @@ def render_home():
 
     quicklinks = [
         ("Breakdown Studio", SITE_ROOT + "projects/breakdown-studio/"),
-        ("link-session", "https://github.com/thevfxsupervisor/link-session"),
+        ("link-session (agent coordination)", SITE_ROOT + "projects/link-session/"),
         ("Course waitlist", SITE_ROOT + "course/"),
         ("Notes", SITE_ROOT + "notes/"),
         ("GitHub", "https://github.com/thevfxsupervisor"),
@@ -303,22 +303,43 @@ def render_home():
     return render_shell(fm.get("title", SITE_NAME), fm.get("description", ""), content, nav_active=None)
 
 
-def render_breakdown_studio():
-    fm, body = parse_frontmatter((CONTENT_DIR / "projects" / "breakdown-studio.md").read_text(encoding="utf-8"))
+PROJECT_ORDER = ["breakdown-studio", "link-session"]  # flagship first
+
+
+def render_project(md_path):
+    """Generic case-study page for anything under content/projects/."""
+    fm, body = parse_frontmatter(md_path.read_text(encoding="utf-8"))
     stats, body = extract_block(body, "stats")
     prose_html = markdown_to_html(body)
+    slug = fm.get("slug", md_path.stem)
+
+    ctas = []
+    if fm.get("get_href"):
+        ctas.append(f'<a class="btn btn-a" href="{fm["get_href"]}">{html.escape(fm.get("get_label","Get the tool"), quote=False)}</a>')
+    ctas.append(f'<a class="btn btn-b" href="{SITE_ROOT}about/">Work with me</a>')
+    cta_row = f'<div class="cta-row">{"".join(ctas)}</div>'
+
+    stats_section = ""
+    if stats:
+        stats_section = f'''
+<hr class="rule">
+
+<section id="proof">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Validated, not vibes</span>
+      <h2>{html.escape(fm.get("stats_h2","The numbers"), quote=False)}</h2></div>
+    <div style="margin-top:26px;max-width:820px">{tiers_html(stats, win_all=True)}</div>
+  </div>
+</section>
+'''
 
     content = f'''
 <section class="hero">
   <div class="wrap">
-    <span class="eyebrow">{html.escape(fm.get("eyebrow","Project launch"), quote=False)}</span>
+    <span class="eyebrow">{html.escape(fm.get("eyebrow","Case study"), quote=False)}</span>
     <h1 style="margin-top:18px">{html.escape(fm["h1"], quote=False)}</h1>
     <p class="lede">{html.escape(fm.get("lede",""), quote=False)}</p>
-    <div class="cta-row">
-      <a class="btn btn-a" href="{fm.get("live_url","")}">Open Breakdown Studio</a>
-      <a class="btn btn-b" href="{fm.get("repo_url","")}">Source on GitHub</a>
-      <a class="btn btn-b" href="{fm.get("release_url","")}">v1.0.0 release</a>
-    </div>
+    {cta_row}
     <div class="cred"><span class="dot"></span><b>{html.escape(fm.get("cred",""), quote=False)}</b></div>
   </div>
 </section>
@@ -330,27 +351,55 @@ def render_breakdown_studio():
     {prose_html}
   </div>
 </section>
+{stats_section}'''
+    content += final_cta(
+        fm.get("final_h2", "Work with me"),
+        fm.get("final_p", ""),
+        fm.get("final_primary_label", "Get in touch"),
+        fm.get("final_primary_href", SITE_ROOT + "about/"),
+        fm.get("final_secondary_label", "Join the course waitlist"),
+        fm.get("final_secondary_href", SITE_ROOT + "course/"),
+        soon=fm.get("soon"),
+    )
+    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="projects"), slug
 
-<hr class="rule">
 
-<section id="proof">
+def render_projects():
+    """The /projects/ index: flagship-first case-study cards."""
+    cards = []
+    for i, slug in enumerate(PROJECT_ORDER):
+        p = CONTENT_DIR / "projects" / f"{slug}.md"
+        if not p.exists():
+            continue
+        fm, _ = parse_frontmatter(p.read_text(encoding="utf-8"))
+        cls = "proj-card flagship" if i == 0 else "proj-card"
+        eyebrow = fm.get("card_eyebrow", fm.get("eyebrow", "Case study"))
+        title = fm.get("card_title", fm.get("h1", ""))
+        summary = fm.get("card_summary", fm.get("description", ""))
+        cards.append(
+            f'<a class="{cls}" href="{SITE_ROOT}projects/{slug}/">'
+            f'<span class="eyebrow">{html.escape(eyebrow, quote=False)}</span>'
+            f'<h2>{html.escape(title, quote=False)}</h2>'
+            f'<p>{html.escape(summary, quote=False)}</p>'
+            f'<span class="proj-more mono">Read the case study &rarr;</span></a>'
+        )
+    content = f'''
+<section class="hero">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Validated, not vibes</span>
-      <h2>{html.escape(fm.get("stats_h2","The numbers"), quote=False)}</h2></div>
-    <div style="margin-top:26px;max-width:820px">{tiers_html(stats, win_all=True)}</div>
+    <span class="eyebrow">Projects</span>
+    <h1 style="margin-top:18px">Tools I built on real productions, then open-sourced</h1>
+    <p class="lede">I build the tooling a one-person VFX department needs to survive a real film, then release it. Here is what has shipped.</p>
+    <div class="proj-grid">{''.join(cards)}</div>
   </div>
 </section>
 '''
     content += final_cta(
-        fm.get("final_h2", "Star it, and follow along"),
-        fm.get("final_p", ""),
-        "Star on GitHub",
-        fm.get("repo_url", ""),
-        "Back to the waitlist",
-        SITE_ROOT + "course/",
-        soon=fm.get("soon", "Open source · MIT · on GitHub"),
+        "Want this kind of tooling on your show?",
+        "I build and run AI-assisted VFX pipelines on real productions. If that is useful to your film, let's talk. Or join the course waitlist for the method behind the tools.",
+        "Work with me", SITE_ROOT + "about/",
+        "Join the course waitlist", SITE_ROOT + "course/",
     )
-    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="projects")
+    return render_shell("Projects | the vfx supervisor", "The tools I built running a feature's VFX department solo, then open-sourced: Breakdown Studio and link-session.", content, nav_active="projects")
 
 
 def render_course():
@@ -579,7 +628,10 @@ def main():
     print("Building thevfxsupervisor.com ...")
 
     write_page("", render_home())
-    write_page("projects/breakdown-studio", render_breakdown_studio())
+    for md_path in sorted((CONTENT_DIR / "projects").glob("*.md")):
+        proj_html, slug = render_project(md_path)
+        write_page(f"projects/{slug}", proj_html)
+    write_page("projects", render_projects())
     write_page("course", render_course())
     write_page("about", render_about())
     write_page("notes", render_notes())

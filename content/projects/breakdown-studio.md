@@ -1,43 +1,46 @@
 ---
 type: project
 slug: breakdown-studio
-title: Breakdown Studio launch | the vfx supervisor
-description: Breakdown Studio is now open source. A shot-breakdown pipeline that turns weeks of hand-logging a film cut into an afternoon, built solo and validated on a real production.
-eyebrow: Project launch
-h1: Breakdown Studio is live and open source
-lede: I built Breakdown Studio because I was hand-matching hundreds of shots across every re-cut of a feature, alone, and losing real work to the noise. It is now free, MIT licensed, and running on real productions.
-live_url: https://thevfxsupervisor.github.io/breakdown-studio/
-repo_url: https://github.com/thevfxsupervisor/breakdown-studio
-release_url: https://github.com/thevfxsupervisor/breakdown-studio/releases/tag/v1.0.0
+title: Case study: Breakdown Studio, a shot-breakdown pipeline for solo VFX supervisors | the vfx supervisor
+description: How I built Breakdown Studio, a shot-breakdown pipeline that turns weeks of hand-logging a film cut into an afternoon, solo, on a feature in active production, then open-sourced it.
+eyebrow: Case study
+h1: I was hand-matching hundreds of shots across every re-cut of a feature. So I built the tool that does it.
+lede: Breakdown Studio is the shot-breakdown pipeline I built to survive running a feature's VFX department alone. It is open source now, MIT, and it turns weeks of hand-logging a cut into an afternoon.
 cred: Designed, hardened and shipped end to end by one person, on a live feature film.
+get_label: Get the tool
+get_href: https://thevfxsupervisor.github.io/breakdown-studio/
 stats_h2: The numbers
-final_h2: Star it, and follow along
-final_p: Breakdown Studio is open source and on GitHub now. Star the repo to follow development, or join the course waitlist to learn the method behind it.
+final_h2: Want this on your show?
+final_p: I run AI-assisted VFX pipelines on real productions. If that is useful to your film, let's talk. Or join the course waitlist for the method behind the tool.
+final_primary_label: Work with me
+final_primary_href: /about/
+final_secondary_label: Join the course waitlist
+final_secondary_href: /course/
 soon: Open source · MIT · on GitHub
+card_title: Breakdown Studio
+card_eyebrow: Flagship · open source
+card_summary: A shot-breakdown pipeline that turns weeks of hand-logging a film cut into an afternoon. Built solo, validated on a feature in active production, MIT.
 ---
+
+## The problem
+
+A production hands you the edit and needs a number. The shot breakdown is what every bid, schedule and vendor package hangs off, and on an evolving cut it used to mean weeks of hand-logging that got half-thrown-away on every re-cut. I was doing that alone, cut after cut, and losing real work to the noise.
 
 ## What it does
 
-A film production hands you the edit and needs a number. Breakdown Studio builds the shot breakdown that every bid, schedule and vendor package hangs off, straight from the cut:
+Breakdown Studio builds that breakdown straight from the edit and keeps it current: it detects every shot offline, reads the burned-in slates and VFX notes, thumbnails it into a live sheet you can bid immediately, and re-matches each new cut back to your master one to one, so a re-cut is a short review instead of a full re-log. [Get the tool and the full feature list.](https://thevfxsupervisor.github.io/breakdown-studio/)
 
-- Detects every shot in the edit, offline
-- Reads the burned-in slates and VFX notes
-- Builds a live, thumbnailed breakdown you can bid and share immediately
-- Re-matches every new cut back to your master, one to one, so a re-cut is a short review instead of a full re-log
+## Decisions and trade-offs
 
-## Why it exists
+I built it offline-first, running on your own machine and your own Google account, on purpose: a breakdown holds unreleased footage and confidential notes, so nothing leaves the machine and there is no service to trust. The hard part was never detecting shots, it was identity, deciding which master row a drifted shot code belongs to across a re-cut, and keeping that match one to one so a rename never silently collides. It ships with a context pack that briefs an AI assistant on those rules, so the mechanical half runs on its own while the judgment calls, what counts as a real drop versus a protected shot, stay with the supervisor. The agent fleet that actually runs it is coordinated with [link-session](/projects/link-session/).
 
-The job that produced it was running the VFX department of an independent feature alone: supervising, budgeting, and keeping the breakdown current through cut after cut. The evolving film cut used to mean weeks of hand-logging that got half-thrown-away on every re-cut. Breakdown Studio turns that into one pass that updates itself.
+## Proof in production
 
-It also ships with a context pack that briefs an AI assistant on the pipeline's rules and guardrails, so the mechanical half runs on its own and the judgment calls, what counts as a real drop versus a protected shot, which master row a drifted code belongs to, stay with the supervisor.
-
-## Try it
-
-The pipeline is validated against a real feature in active production: multiple successive cuts, thousands of operator-verified slate reads, and a producer-approved master match as ground truth. It runs on your own machine, on your own Google account, offline.
+The pipeline is regression-tested against a real feature in active production: multiple successive cuts, thousands of operator-verified slate reads, and a producer-approved master match as ground truth.
 
 <!-- stats -->
-### turnaround::Weeks to an afternoon
-A full-film breakdown that used to take weeks of hand-logging, and got half-thrown-away on every re-cut, now runs in one pass and updates itself.
+### 1 afternoon::Down from weeks of hand-logging
+A full-film breakdown, half-thrown-away on every re-cut, now runs in one pass and updates itself.
 
 ### 498::Unit tests, all green
 Frame math, slate grammar, boundary repair, and the matching algorithm's uniqueness invariants, all covered.
