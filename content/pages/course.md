@@ -8,7 +8,7 @@ h1: Breakdown and Budget a Whole Film. Solo.
 lede: For independent VFX supervisors and producers who have to run the whole department themselves. This is the method behind Breakdown Studio, taught end to end, so you can do it on your own show.
 included_h2: The method, end to end
 waitlist_endpoint:
-contact_email: geoff@thevfxsupervisor.com
+contact_email: geoff@wanglemedia.com
 ---
 
 ## Who it is for

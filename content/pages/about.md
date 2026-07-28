@@ -5,7 +5,7 @@ title: About | Geoffrey Hancock, the vfx supervisor
 description: Geoffrey Hancock is a VFX supervisor and producer at Wangle Media, building production tooling and open-source pipeline software.
 eyebrow: About
 h1: Geoffrey Hancock
-contact_email: geoff@thevfxsupervisor.com
+contact_email: geoff@wanglemedia.com
 final_p: Questions, collaborations, or just say hello. I read everything myself.
 ---
 

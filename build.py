@@ -260,7 +260,7 @@ def render_home():
         ("Course waitlist", SITE_ROOT + "course/"),
         ("Notes", SITE_ROOT + "notes/"),
         ("GitHub", "https://github.com/thevfxsupervisor"),
-        ("Contact", "mailto:geoff@thevfxsupervisor.com"),
+        ("Contact", "mailto:geoff@wanglemedia.com"),
     ]
     ql_html = " &middot; ".join(f'<a href="{href}">{label}</a>' for label, href in quicklinks)
 
@@ -376,7 +376,7 @@ def render_course():
 <hr class="rule">'''
 
     waitlist_endpoint = fm.get("waitlist_endpoint", "")
-    contact_email = fm.get("contact_email", "geoff@thevfxsupervisor.com")
+    contact_email = fm.get("contact_email", "geoff@wanglemedia.com")
 
     content = f'''
 <section class="hero">
@@ -496,7 +496,7 @@ def render_about():
         "Get in touch",
         fm.get("final_p", "Questions, collaborations, or just say hello."),
         "Email",
-        f'mailto:{fm.get("contact_email","geoff@thevfxsupervisor.com")}',
+        f'mailto:{fm.get("contact_email","geoff@wanglemedia.com")}',
         "See Breakdown Studio",
         SITE_ROOT + "projects/breakdown-studio/",
     )
