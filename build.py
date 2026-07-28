@@ -256,6 +256,7 @@ def render_home():
 
     quicklinks = [
         ("Breakdown Studio", SITE_ROOT + "projects/breakdown-studio/"),
+        ("link-session", "https://github.com/thevfxsupervisor/link-session"),
         ("Course waitlist", SITE_ROOT + "course/"),
         ("Notes", SITE_ROOT + "notes/"),
         ("GitHub", "https://github.com/thevfxsupervisor"),
@@ -274,7 +275,10 @@ def render_home():
       <a class="btn btn-b" href="{fm.get("cta_secondary_href","")}">{html.escape(fm.get("cta_secondary_label",""), quote=False)}</a>
     </div>
     <div class="cred"><span class="dot"></span><b>{html.escape(fm.get("cred",""), quote=False)}</b></div>
-    <div class="cred mono" style="margin-top:6px">{ql_html}</div>
+    <div class="quicklinks">
+      <span class="eyebrow">Projects &amp; links</span>
+      <div class="ql-row">{ql_html}</div>
+    </div>
   </div>
 </section>
 

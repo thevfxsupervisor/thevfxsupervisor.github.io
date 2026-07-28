@@ -58,12 +58,17 @@ section{padding:clamp(46px,7vw,80px) 0}
 .hero h1 span{color:var(--amber)}
 .lede{margin-top:22px;font-size:clamp(16px,1.8vw,19px);color:var(--dim);max-width:60ch}
 .cta-row{margin-top:30px;display:flex;gap:12px;flex-wrap:wrap}
-.cred{margin-top:26px;font-family:var(--mono);font-size:13px;color:var(--txt);display:flex;
+.cred{margin-top:26px;font-family:var(--mono);font-size:14.5px;color:var(--txt);display:flex;
   align-items:center;gap:9px;letter-spacing:.02em;flex-wrap:wrap}
 .cred b{color:var(--txt);font-weight:600}
 .cred a{color:var(--amber);text-decoration:none}
 .cred a:hover{color:var(--amber-soft);text-decoration:underline}
 .dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(91,191,143,.16)}
+.quicklinks{margin-top:22px}
+.quicklinks .eyebrow{display:block;margin-bottom:9px}
+.ql-row{font-family:var(--mono);font-size:15px;color:var(--dim);line-height:1.9;letter-spacing:.01em}
+.ql-row a{color:var(--amber);text-decoration:none;font-weight:500;white-space:nowrap}
+.ql-row a:hover{color:var(--amber-soft);text-decoration:underline}
 
 .pillars{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:34px}
 @media(max-width:820px){.pillars{grid-template-columns:1fr}}
