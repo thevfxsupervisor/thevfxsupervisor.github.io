@@ -4,8 +4,8 @@ slug: home
 title: the vfx supervisor | Geoffrey Hancock, VFX Supervisor and Producer
 description: Geoffrey Hancock is a VFX supervisor and producer who builds the pipeline and orchestrates the AI. Maker of Breakdown Studio, teaching the method.
 hero_eyebrow: VFX Supervisor & Producer
-hero_h1: I build the pipeline. I orchestrate the AI.
-hero_h1_accent: I orchestrate the AI.
+hero_h1: Shot supervision. Pipeline engineering. AI orchestration.
+hero_h1_accent: AI orchestration.
 hero_lede: I supervise and produce visual effects, and I write the tooling that makes one person able to do a department's job. Breakdown Studio is the first thing I have shipped in the open. A course on the method is next.
 cta_primary_href: /projects/breakdown-studio/
 cta_primary_label: See Breakdown Studio
