@@ -595,9 +595,14 @@ def main():
             shutil.copy2(f, static_out / f.name)
             print(f"  copied static/{f.name}")
 
-    # CNAME for GitHub Pages custom domain (harmless before DNS cutover)
-    (DOCS_DIR / "CNAME").write_text(DOMAIN + "\n", encoding="utf-8")
-    print(f"  wrote docs/CNAME ({DOMAIN})")
+    # CNAME for a GitHub Pages custom domain. DISABLED: thevfxsupervisor.com is NOT cut
+    # over (parked at easyDNS). Emitting docs/CNAME makes Pages auto-set the custom domain,
+    # which 301-redirects github.io into the parked lander = site DOWN. Set True ONLY after
+    # the DNS cutover is real (see dev/MAINTAINING.md). .gitignore also excludes docs/CNAME.
+    CUTOVER_DONE = False
+    if CUTOVER_DONE:
+        (DOCS_DIR / "CNAME").write_text(DOMAIN + "\n", encoding="utf-8")
+        print(f"  wrote docs/CNAME ({DOMAIN})")
 
     # .nojekyll so Pages serves the docs/ tree as-is (no Jekyll processing)
     (DOCS_DIR / ".nojekyll").write_text("", encoding="utf-8")

@@ -1,0 +1,4 @@
+# thevfxsupervisor.com is parked at easyDNS and NOT cut over to GitHub Pages.
+# A committed docs/CNAME makes Pages 301-redirect github.io into the parked lander (site down).
+# build.py also gates CNAME emission behind CUTOVER_DONE=False. Remove this line only after real cutover.
+docs/CNAME
