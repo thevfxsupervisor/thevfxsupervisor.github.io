@@ -2,7 +2,7 @@
 type: page
 slug: about
 title: About | Geoffrey Hancock, the vfx supervisor
-description: Geoffrey Hancock, VFX supervisor and producer. VES Award for Changeling. Argo, Cloud Atlas, J. Edgar, Invictus, Atlantic Crossing. Copenhagen, available for freelance supervision.
+description: Geoffrey Hancock, VFX supervisor and producer. VES Award for Changeling. Argo, Cloud Atlas, J. Edgar, Invictus, Atlantic Crossing. Netflix, Pandora, LEGO, Sony. Copenhagen, available for freelance supervision.
 eyebrow: About
 h1: Geoffrey Hancock
 contact_email: geoff@wanglemedia.com
@@ -13,7 +13,7 @@ I am a VFX supervisor and producer. I run VFX departments on film and television
 
 Twenty five years of it. I hold a **VES Award for Changeling**, and a Robert nomination for Skammerens datter II. I have supervised visual effects on films directed by Clint Eastwood, the Wachowskis and Ben Affleck: **Changeling, J. Edgar, Invictus, Argo, Cloud Atlas**, along with Twilight, Night at the Museum and Red Dawn. On **Atlantic Crossing** I ran the full VFX lifecycle across vendors in Belgium, Germany and Scandinavia. On **LEGO Ninjago** I art directed seasons coordinating Danish and Chinese teams.
 
-Through Wangle Media in Copenhagen I have delivered animation, VFX and real time work for **Pandora, LEGO, Sony, Kia, BRIO and Novo Nordisk**, and collaborated with Larissa Sansour on In Vitro, which won at the Venice Biennale and went to Netflix.
+Through Wangle Media in Copenhagen I have delivered animation, VFX and real time work for **Netflix, Pandora, LEGO, Sony, Kia, BRIO and Novo Nordisk**, and collaborated with Larissa Sansour on In Vitro, which won at the Venice Biennale and went to Netflix.
 
 Work under a live NDA stays unnamed here, so the feature I am on this year is just that: a feature in production.
 

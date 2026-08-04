@@ -23,7 +23,7 @@ final_secondary_href: /projects/breakdown-studio/
 
 <!-- pillars -->
 ### Twenty five years, and a VES Award
-I have supervised visual effects for Clint Eastwood, the Wachowskis and Ben Affleck: Changeling, which won me the VES Award for Outstanding Supporting Visual Effects, then J. Edgar, Invictus, Argo and Cloud Atlas. Atlantic Crossing across vendors in three countries. LEGO Ninjago art directed across Danish and Chinese teams. Brand work for Pandora, LEGO, Sony, Kia and Novo Nordisk.
+I have supervised visual effects for Clint Eastwood, the Wachowskis and Ben Affleck: Changeling, which won me the VES Award for Outstanding Supporting Visual Effects, then J. Edgar, Invictus, Argo and Cloud Atlas. Atlantic Crossing across vendors in three countries. LEGO Ninjago art directed across Danish and Chinese teams. Work for Netflix, Pandora, LEGO, Sony, Kia and Novo Nordisk.
 
 ### Ran a whole feature's VFX department solo
 On an independent feature film in production, I carried the VFX department alone: bidding, scheduling, vendor management, the shot breakdown, and delivery. No coordinator, no second supervisor. The pipeline had to hold, cut after cut, or the schedule slipped.
