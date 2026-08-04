@@ -70,8 +70,11 @@ add a repo-name prefix.
 ## Hard rules (content + design)
 
 - **No em-dashes or en-dashes** anywhere, in content or copy.
-- **No client, show, or vendor names.** The only named work anywhere on the site is Breakdown Studio
-  itself; everything else uses the anonymous "a real feature in production" phrasing.
+- **Named credits ARE published** (changed 2026-08-04). Past, publicly-credited work is on the site:
+  the VES Award, the features, the directors, the brand clients. All of it is public record on IMDb
+  and the VES site, and hiding it removed the only reason a stranger would buy a course from him.
+  **The one exception: work under a live NDA stays anonymous**, so the current feature in production
+  is still "a feature in production" and stays that way until it ships.
 - **Single dark look** (graphite / amber), no light theme, matching the Breakdown Studio site's
   design language.
 

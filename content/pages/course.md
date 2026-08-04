@@ -2,7 +2,7 @@
 type: page
 slug: course
 title: Breakdown and Budget a Whole Film. Solo. | the vfx supervisor
-description: A course for independent VFX supervisors and producers on breaking down and budgeting an entire film alone, with an AI pair carrying the mechanical work. Waitlist open, no pricing yet.
+description: A course for independent VFX supervisors and producers on breaking down and budgeting an entire film alone, with an AI pair carrying the mechanical work. Waitlist open, no pricing yet. Taught by Geoffrey Hancock, VES Award winner, 25 years supervising VFX on Changeling, Argo, Cloud Atlas and Atlantic Crossing.
 eyebrow: Course · waitlist open
 h1: Breakdown and Budget a Whole Film. Solo.
 lede: For independent VFX supervisors and producers who have to run the whole department themselves. This is the method behind Breakdown Studio, taught end to end, so you can do it on your own show.

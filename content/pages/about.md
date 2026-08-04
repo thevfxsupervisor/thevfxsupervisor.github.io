@@ -2,16 +2,20 @@
 type: page
 slug: about
 title: About | Geoffrey Hancock, the vfx supervisor
-description: Geoffrey Hancock is a VFX supervisor and producer at Wangle Media, building production tooling and open-source pipeline software.
+description: Geoffrey Hancock, VFX supervisor and producer. VES Award for Changeling. Argo, Cloud Atlas, J. Edgar, Invictus, Atlantic Crossing. Copenhagen, available for freelance supervision.
 eyebrow: About
 h1: Geoffrey Hancock
 contact_email: geoff@wanglemedia.com
-final_p: Questions, collaborations, or just say hello. I read everything myself.
+final_p: Based in Copenhagen, EU work authorisation. Available for freelance VFX supervision, production or consulting: on site, remote or hybrid. I read everything myself.
 ---
 
 I am a VFX supervisor and producer. I run VFX departments on film and television productions, and I build the tooling that makes that work possible when there is no department to hand it to, just one person and the schedule.
 
-My background is the pattern most working supervisors share: years on set and in the pipeline, across the full arc of a production from bid to final delivery, learning the parts of the job that never make it into a job description. I don't publish specific credits here; ask, and I'm happy to talk about the work.
+Twenty five years of it. I hold a **VES Award for Changeling**, and a Robert Award for Skammerens datter II. I have supervised visual effects on films directed by Clint Eastwood, the Wachowskis and Ben Affleck: **Changeling, J. Edgar, Invictus, Argo, Cloud Atlas**, along with Twilight, Night at the Museum and Red Dawn. On **Atlantic Crossing** I ran the full VFX lifecycle across vendors in Belgium, Germany and Scandinavia. On **LEGO Ninjago** I art directed seasons coordinating Danish and Chinese teams.
+
+Through Wangle Media in Copenhagen I have delivered animation, VFX and real time work for **Pandora, LEGO, Sony, Kia, BRIO and Novo Nordisk**, and collaborated with Larissa Sansour on In Vitro, which won at the Venice Biennale and went to Netflix.
+
+Work under a live NDA stays unnamed here, so the feature I am on this year is just that: a feature in production.
 
 I work through Wangle Media, and I build production tooling as a matter of course, because the tools that exist rarely fit the job in front of me. Breakdown Studio, an open-source shot-breakdown pipeline, is the first of that tooling I've shipped publicly, released under the MIT license.
 
