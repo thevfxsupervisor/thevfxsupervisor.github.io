@@ -37,7 +37,7 @@
 <h2>The mechanical half and the judgment half</h2>
 <p>A film's shot breakdown splits cleanly into two kinds of work. The mechanical half: detecting where the cuts are, reading a burned-in slate, uploading a thumbnail, formatting a row in a spreadsheet. None of that needs a human in the loop once the rules are right, and all of it is exactly what an AI assistant, or a small offline model, does well and tirelessly.</p>
 <p>The judgment half is different. Whether a shot that vanished between cuts is a real drop or a protected shot that never had a slate. Whether two shots that look similar are the same setup re-labelled or two different takes. Which row in a master breakdown a drifted shot code actually belongs to. That is the supervisor's eye, built from doing the job, and it does not delegate cleanly.</p>
-<p>The practical answer, running Breakdown Studio's own pipeline as the example: automate the first half completely, and build the second half as a set of narrow, well-briefed tasks with explicit guardrails, not a single open-ended "figure it out" instruction.</p>
+<p>The practical answer, running <a href="/projects/breakdown-studio/">Breakdown Studio</a>'s own pipeline as the example: automate the first half completely, and build the second half as a set of narrow, well-briefed tasks with explicit guardrails, not a single open-ended "figure it out" instruction.</p>
 <h2>Briefed assistants with guardrails</h2>
 <p>A briefed assistant is not a chatbot you paste a spreadsheet into. It is an assistant that opens every session already knowing the rules of the pipeline: what identity means in this system (a slate, never a timecode), what counts as a protected shot, what is allowed to touch the master file and what is not. The brief travels with the project, so the fifth session behaves like the first.</p>
 <p>The guardrails matter more than the intelligence. A rule as simple as "nothing writes to the master without a human sign-off" turns a fast, occasionally wrong assistant into a safe one. A rule like "protected shots never auto-omit" catches the one mistake that would have quietly cost real shots off a budget. The assistant's job is to stage the change and show its work; the sign-off stays with the person whose name is on the delivery.</p>
@@ -52,6 +52,16 @@
   </div>
 </section>
 
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <div class="quicklinks" style="margin-top:0">
+      <span class="eyebrow">The tools this method runs on</span>
+      <div class="ql-row"><a href="/projects/breakdown-studio/">Breakdown Studio</a> &middot; <a href="/projects/link-session/">link-session</a> &middot; <a href="/course/">The course</a></div>
+    </div>
+  </div>
+</section>
 
 <footer>
   <div class="wrap">

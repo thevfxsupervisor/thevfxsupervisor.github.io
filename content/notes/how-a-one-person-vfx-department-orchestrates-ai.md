@@ -16,7 +16,7 @@ A film's shot breakdown splits cleanly into two kinds of work. The mechanical ha
 
 The judgment half is different. Whether a shot that vanished between cuts is a real drop or a protected shot that never had a slate. Whether two shots that look similar are the same setup re-labelled or two different takes. Which row in a master breakdown a drifted shot code actually belongs to. That is the supervisor's eye, built from doing the job, and it does not delegate cleanly.
 
-The practical answer, running Breakdown Studio's own pipeline as the example: automate the first half completely, and build the second half as a set of narrow, well-briefed tasks with explicit guardrails, not a single open-ended "figure it out" instruction.
+The practical answer, running [Breakdown Studio](/projects/breakdown-studio/)'s own pipeline as the example: automate the first half completely, and build the second half as a set of narrow, well-briefed tasks with explicit guardrails, not a single open-ended "figure it out" instruction.
 
 ## Briefed assistants with guardrails
 

@@ -210,6 +210,33 @@ def tiers_html(items, win_all=False):
     return f'<div class="tiers">{"".join(rows)}</div>'
 
 
+NOTE_HREF = SITE_ROOT + "notes/how-a-one-person-vfx-department-orchestrates-ai/"
+NOTE_LABEL = "Note: orchestrating AI solo"
+
+
+def related_section(items, eyebrow="Keep exploring"):
+    """A compact cross-link strip so every page routes to the others.
+
+    Reuses the home-page quicklinks styling (.quicklinks / .ql-row).
+    items = list of (label, href). Discovery, not decoration: this is what
+    lets a reader who lands on the course or a note find the tools, and back.
+    """
+    links = " &middot; ".join(
+        f'<a href="{href}">{html.escape(label, quote=False)}</a>' for label, href in items
+    )
+    return f'''
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <div class="quicklinks" style="margin-top:0">
+      <span class="eyebrow">{html.escape(eyebrow, quote=False)}</span>
+      <div class="ql-row">{links}</div>
+    </div>
+  </div>
+</section>'''
+
+
 def final_cta(h2, p, primary_label, primary_href, secondary_label, secondary_href, soon=None):
     soon_html = f'<span class="soon"><span class="dot"></span>{html.escape(soon, quote=False)}</span>' if soon else ""
     return f'''
@@ -361,6 +388,21 @@ def render_project(md_path):
         fm.get("final_secondary_href", SITE_ROOT + "course/"),
         soon=fm.get("soon"),
     )
+    # Cross-links: the sibling project, the course, the note, the projects index.
+    rel = []
+    for sib in PROJECT_ORDER:
+        if sib == slug:
+            continue
+        sp = CONTENT_DIR / "projects" / f"{sib}.md"
+        if sp.exists():
+            sfm, _ = parse_frontmatter(sp.read_text(encoding="utf-8"))
+            rel.append((sfm.get("card_title", sib), f"{SITE_ROOT}projects/{sib}/"))
+    rel += [
+        ("The course", SITE_ROOT + "course/"),
+        (NOTE_LABEL, NOTE_HREF),
+        ("All projects", SITE_ROOT + "projects/"),
+    ]
+    content += related_section(rel)
     return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="projects"), slug
 
 
@@ -398,6 +440,14 @@ def render_projects():
         "I build and run AI-assisted VFX pipelines on real productions. If that is useful to your film, let's talk. Or join the course waitlist for the method behind the tools.",
         "Work with me", SITE_ROOT + "about/",
         "Join the course waitlist", SITE_ROOT + "course/",
+    )
+    content += related_section(
+        [
+            (NOTE_LABEL, NOTE_HREF),
+            ("The course", SITE_ROOT + "course/"),
+            ("About", SITE_ROOT + "about/"),
+        ],
+        eyebrow="More on the method",
     )
     return render_shell("Projects | the vfx supervisor", "The tools I built running a feature's VFX department solo, then open-sourced: Breakdown Studio and link-session.", content, nav_active="projects")
 
@@ -465,6 +515,15 @@ def render_course():
   </div>
 </section>
 '''
+    content += related_section(
+        [
+            ("Breakdown Studio", SITE_ROOT + "projects/breakdown-studio/"),
+            ("link-session", SITE_ROOT + "projects/link-session/"),
+            (NOTE_LABEL, NOTE_HREF),
+            ("Work with me", SITE_ROOT + "about/"),
+        ],
+        eyebrow="The tools and writing behind the method",
+    )
     extra_script = f'''
 <script>
 const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist.gs (see WAITLIST_SETUP.md)
@@ -549,6 +608,14 @@ def render_about():
         "See Breakdown Studio",
         SITE_ROOT + "projects/breakdown-studio/",
     )
+    content += related_section(
+        [
+            ("Breakdown Studio", SITE_ROOT + "projects/breakdown-studio/"),
+            ("link-session", SITE_ROOT + "projects/link-session/"),
+            ("The course", SITE_ROOT + "course/"),
+            ("Notes", SITE_ROOT + "notes/"),
+        ]
+    )
     return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="about")
 
 
@@ -581,6 +648,14 @@ def render_notes():
   </div>
 </section>
 '''
+    content += related_section(
+        [
+            ("Breakdown Studio", SITE_ROOT + "projects/breakdown-studio/"),
+            ("link-session", SITE_ROOT + "projects/link-session/"),
+            ("The course", SITE_ROOT + "course/"),
+        ],
+        eyebrow="The tools behind the writing",
+    )
     return render_shell("Notes | the vfx supervisor", "Notes on pipeline, production and orchestrating AI, from a working VFX supervisor and producer.", content, nav_active="notes")
 
 
@@ -606,6 +681,14 @@ def render_note(md_path):
   </div>
 </section>
 '''
+    content += related_section(
+        [
+            ("Breakdown Studio", SITE_ROOT + "projects/breakdown-studio/"),
+            ("link-session", SITE_ROOT + "projects/link-session/"),
+            ("The course", SITE_ROOT + "course/"),
+        ],
+        eyebrow="The tools this method runs on",
+    )
     return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="notes"), fm.get("slug", md_path.stem)
 
 

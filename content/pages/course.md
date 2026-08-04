@@ -17,7 +17,7 @@ Independent VFX supervisors and producers who take on a film without a departmen
 
 ## What it is
 
-Not a tutorial on one tool. A method for carrying a whole film's VFX breakdown and budget alone: what to automate, what stays a judgment call, and how to brief an AI assistant to carry the mechanical half without losing control of the numbers. Breakdown Studio is the reference implementation; the course is how to run the method on your own show, with or without it.
+Not a tutorial on one tool. A method for carrying a whole film's VFX breakdown and budget alone: what to automate, what stays a judgment call, and how to brief an AI assistant to carry the mechanical half without losing control of the numbers. [Breakdown Studio](/projects/breakdown-studio/) is the reference implementation; the course is how to run the method on your own show, with or without it.
 
 <!-- included -->
 ### Reading a cut like a budget
