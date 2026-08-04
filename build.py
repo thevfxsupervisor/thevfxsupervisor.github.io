@@ -572,7 +572,13 @@ const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist
       if (name) bodyLines.push('Name: ' + name);
       if (note) bodyLines.push('Film: ' + note);
       var mailto = 'mailto:' + CONTACT_EMAIL + '?subject=' + subject + '&body=' + encodeURIComponent(bodyLines.join('\\n'));
-      setStatus('Waitlist form is not wired up yet. Opening an email instead.', 'info');
+        // No backend yet: the mailto is the signup path.
+        setStatus('Almost there: send the email that just opened and you are on the list.', 'ok');
+        // Visible link too, for anyone without a mail client configured.
+        status.innerHTML = 'Almost there: send the email that just opened and you are on the list.'
+          + '<br><span class="tiny">Nothing happened? <a href="' + mailto + '">Click here</a>'
+          + ' or email <a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + '</a>'
+          + ' with the subject "Course waitlist".</span>';
       window.location.href = mailto;
       return;
     }}
