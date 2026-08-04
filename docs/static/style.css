@@ -1,7 +1,7 @@
 :root{
   --bg:#131619; --panel:#191d21; --raise:#1f242a; --line:#2a3037; --line2:#39424b;
   --txt:#e9e6df; --dim:#9aa1a8; --mute:#7e858d;
-  --amber:#1595e0; --amber-soft:#3aa9ea; --green:#5bbf8f; --red:#e0574f; --cyan:#54a8c4; /* --amber is the accent (now logo blue) */
+  --amber:#1595e0; --amber-soft:#3aa9ea; --green:#5ad3c0; --red:#e0574f; --cyan:#54a8c4; /* --amber is the accent (now logo blue) */
   --mono:ui-monospace,"SFMono-Regular","Cascadia Code",Menlo,Consolas,monospace;
   --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
 }
@@ -32,7 +32,7 @@ p{margin:0}
 .btn:focus-visible{outline:2px solid var(--amber);outline-offset:3px}
 .pill{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;
   padding:3px 8px;border-radius:20px;border:1px solid;white-space:nowrap}
-.pill.ship{color:var(--green);border-color:rgba(91,191,143,.4);background:rgba(91,191,143,.08)}
+.pill.ship{color:var(--green);border-color:rgba(90,211,192,.4);background:rgba(90,211,192,.08)}
 .pill.roll{color:var(--amber-soft);border-color:rgba(21,149,224,.4);background:rgba(21,149,224,.07)}
 .rule{height:1px;background:var(--line);border:0;margin:0}
 
@@ -79,7 +79,7 @@ section{padding:clamp(46px,7vw,80px) 0}
 .cred b{color:var(--txt);font-weight:600}
 .cred a{color:var(--amber);text-decoration:none}
 .cred a:hover{color:var(--amber-soft);text-decoration:underline}
-.dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(91,191,143,.16)}
+.dot{width:6px;height:6px;border-radius:50%;background:var(--green);box-shadow:0 0 0 3px rgba(90,211,192,.16)}
 .quicklinks{margin-top:22px}
 .quicklinks .eyebrow{display:block;margin-bottom:9px}
 .ql-row{font-family:var(--mono);font-size:15px;color:var(--dim);line-height:1.9;letter-spacing:.01em}
@@ -131,7 +131,7 @@ section{padding:clamp(46px,7vw,80px) 0}
 .final p{color:var(--dim);max-width:52ch;margin:0 auto 28px}
 .final .cta-row{justify-content:center}
 .soon{display:inline-flex;align-items:center;gap:8px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;
-  text-transform:uppercase;color:var(--green);border:1px solid rgba(91,191,143,.3);border-radius:20px;padding:5px 13px;margin-bottom:22px}
+  text-transform:uppercase;color:var(--green);border:1px solid rgba(90,211,192,.3);border-radius:20px;padding:5px 13px;margin-bottom:22px}
 
 /* prose (markdown body content) */
 .prose{max-width:70ch}
