@@ -10,10 +10,10 @@ cred: Designed and shipped solo, running daily across three operating systems on
 get_label: Get the skill
 get_href: https://github.com/thevfxsupervisor/link-session
 final_h2: Want AI-assisted pipeline work on your show?
-final_p: I run AI as a coordinated team on real film productions, with the guardrails that keep it safe. If that is useful to your show, let's talk. Or join the course waitlist for the method.
+final_p: I run AI as a coordinated team on real film productions, with the guardrails that keep it safe. If that is useful to your show, let's talk. Or book the course for the method.
 final_primary_label: Work with me
 final_primary_href: /about/
-final_secondary_label: Join the course waitlist
+final_secondary_label: Book the course, 3 Sept
 final_secondary_href: /course/
 soon: Open source · MIT · on GitHub
 card_title: link-session

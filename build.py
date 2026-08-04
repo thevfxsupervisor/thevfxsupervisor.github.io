@@ -305,7 +305,7 @@ def render_home():
     quicklinks = [
         ("Breakdown Studio", SITE_ROOT + "projects/breakdown-studio/"),
         ("link-session (agent coordination)", SITE_ROOT + "projects/link-session/"),
-        ("Course waitlist", SITE_ROOT + "course/"),
+        ("Course, 3 Sept", SITE_ROOT + "course/"),
         ("Notes", SITE_ROOT + "notes/"),
         ("GitHub", "https://github.com/thevfxsupervisor"),
         ("Contact", "mailto:geoff@wanglemedia.com"),
@@ -345,7 +345,7 @@ def render_home():
         fm.get("final_p", ""),
         fm.get("final_primary_label", "See Breakdown Studio"),
         fm.get("final_primary_href", SITE_ROOT + "projects/breakdown-studio/"),
-        fm.get("final_secondary_label", "Join the course waitlist"),
+        fm.get("final_secondary_label", "Book the course, 3 Sept"),
         fm.get("final_secondary_href", SITE_ROOT + "course/"),
     )
     return render_shell(fm.get("title", SITE_NAME), fm.get("description", ""), content, nav_active=None, canonical_path="")
@@ -405,7 +405,7 @@ def render_project(md_path):
         fm.get("final_p", ""),
         fm.get("final_primary_label", "Get in touch"),
         fm.get("final_primary_href", SITE_ROOT + "about/"),
-        fm.get("final_secondary_label", "Join the course waitlist"),
+        fm.get("final_secondary_label", "Book the course, 3 Sept"),
         fm.get("final_secondary_href", SITE_ROOT + "course/"),
         soon=fm.get("soon"),
     )
@@ -458,9 +458,9 @@ def render_projects():
 '''
     content += final_cta(
         "Want this kind of tooling on your show?",
-        "I build and run AI-assisted VFX pipelines on real productions. If that is useful to your film, let's talk. Or join the course waitlist for the method behind the tools.",
+        "I build and run AI-assisted VFX pipelines on real productions. If that is useful to your film, let's talk. Or book the course for the method behind the tools.",
         "Work with me", SITE_ROOT + "about/",
-        "Join the course waitlist", SITE_ROOT + "course/",
+        "Book the course, 3 Sept", SITE_ROOT + "course/",
     )
     content += related_section(
         [
@@ -501,7 +501,7 @@ def render_course():
     content = f'''
 <section class="hero">
   <div class="wrap">
-    <span class="eyebrow">{html.escape(fm.get("eyebrow","Course · waitlist open"), quote=False)}</span>
+    <span class="eyebrow">{html.escape(fm.get("eyebrow","Course · 3 September 2026"), quote=False)}</span>
     <h1 style="margin-top:18px">{html.escape(fm["h1"], quote=False)}</h1>
     <p class="lede">{html.escape(fm.get("lede",""), quote=False)}</p>
   </div>
@@ -519,19 +519,20 @@ def render_course():
 
 <section id="waitlist">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">No pricing yet, no course yet</span>
-      <h2>Join the waitlist</h2>
-      <p class="k">Leave your email and I will send one note when enrollment opens. No spam, no drip
-        sequence, one message when it is real.</p></div>
+    <div class="sec-head"><span class="eyebrow">Thursday 3 September 2026 &middot; 450 USD</span>
+      <h2>Reserve a seat</h2>
+      <p class="k">It is a working session, so the size is limited by the format rather than by
+        marketing. Reserve below and I will send an invoice from Wangle Media plus the joining
+        details. No spam, no drip sequence.</p></div>
 
     <form class="form-card" id="waitlist-form" style="margin-top:28px">
       <div class="field"><label for="wl-name">Name (optional)</label><input type="text" id="wl-name" name="name" autocomplete="name"></div>
       <div class="field"><label for="wl-email">Email</label><input type="email" id="wl-email" name="email" required autocomplete="email"></div>
-      <div class="field"><label for="wl-note">What film are you breaking down? (optional)</label>
-        <textarea id="wl-note" name="note" placeholder="e.g. an indie feature, a short, a series pilot"></textarea></div>
-      <button type="submit" class="btn btn-a" id="wl-submit">Join the waitlist</button>
+      <div class="field"><label for="wl-note">What are you breaking down right now? (optional)</label>
+        <textarea id="wl-note" name="note" placeholder="e.g. an indie feature, a series pilot, or my first show as supervisor"></textarea></div>
+      <button type="submit" class="btn btn-a" id="wl-submit">Reserve a seat</button>
       <div id="wl-status"></div>
-      <p class="tiny">Your email is used only to send the one launch note. Nothing else.</p>
+      <p class="tiny">Your email is used only to invoice you and send the joining details. Nothing else.</p>
     </form>
   </div>
 </section>
@@ -567,7 +568,7 @@ const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist
     if (!email) return;
 
     if (!WAITLIST_ENDPOINT) {{
-      var subject = encodeURIComponent('Course waitlist');
+      var subject = encodeURIComponent('Reserve a seat: 3 September workshop');
       var bodyLines = ['Email: ' + email];
       if (name) bodyLines.push('Name: ' + name);
       if (note) bodyLines.push('Film: ' + note);
@@ -578,7 +579,7 @@ const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist
         status.innerHTML = 'Almost there: send the email that just opened and you are on the list.'
           + '<br><span class="tiny">Nothing happened? <a href="' + mailto + '">Click here</a>'
           + ' or email <a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + '</a>'
-          + ' with the subject "Course waitlist".</span>';
+          + ' with the subject "Reserve a seat".</span>';
       window.location.href = mailto;
       return;
     }}
@@ -601,7 +602,7 @@ const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist
       }})
       .catch(function(){{
         setStatus('Something went wrong. Emailing you instead: ', 'err');
-        window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('Course waitlist') + '&body=' + encodeURIComponent('Email: ' + email + (name ? ('\\nName: ' + name) : '') + (note ? ('\\nFilm: ' + note) : ''));
+        window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('Reserve a seat: 3 September workshop') + '&body=' + encodeURIComponent('Email: ' + email + (name ? ('\\nName: ' + name) : '') + (note ? ('\\nFilm: ' + note) : ''));
       }})
       .finally(function(){{ submit.disabled = false; }});
   }});

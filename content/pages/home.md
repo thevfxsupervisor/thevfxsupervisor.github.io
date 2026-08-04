@@ -10,12 +10,12 @@ hero_lede: I supervise and produce visual effects, and I write the tooling that 
 cta_primary_href: /projects/breakdown-studio/
 cta_primary_label: See Breakdown Studio
 cta_secondary_href: /course/
-cta_secondary_label: Join the course waitlist
+cta_secondary_label: Book the course, 3 Sept
 cred: VES Award for Changeling. Argo, Cloud Atlas, J. Edgar, Invictus, Atlantic Crossing, LEGO Ninjago. Twenty five years. Copenhagen.
 proof_h2: What the work has actually done
 final_h2: Get the launch notice
-final_p: Breakdown Studio is open source and live now. The course is next, waitlist only, no pricing yet. One note when either moves.
-final_primary_label: Join the course waitlist
+final_p: Breakdown Studio is open source and live now. The course runs live on 3 September, 450 USD. One note when either moves.
+final_primary_label: Book the course, 3 Sept
 final_primary_href: /course/
 final_secondary_label: See Breakdown Studio
 final_secondary_href: /projects/breakdown-studio/
@@ -32,5 +32,5 @@ On an independent feature film in production, I carried the VFX department alone
 The shot-breakdown pipeline I built to survive that job now ships free, MIT licensed. Detects every shot from the edit, reads the burned-in slates and notes, and builds a live, re-matchable breakdown. Validated on a real production, not a toy demo.
 
 ### Teaches the method
-The mechanical half automates. The judgment half, matching, merging, deciding what counts as VFX, is a skill. A course on doing this solo, with an AI pair carrying the mechanical work, is coming. The waitlist is open now.
+The mechanical half automates. The judgment half, matching, merging, deciding what counts as VFX, is a skill. A course on doing this solo, with an AI pair carrying the mechanical work, runs live on 3 September.
 <!-- /pillars -->

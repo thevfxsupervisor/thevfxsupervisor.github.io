@@ -11,10 +11,10 @@ get_label: Get the tool
 get_href: https://thevfxsupervisor.github.io/breakdown-studio/
 stats_h2: The numbers
 final_h2: Want this on your show?
-final_p: I run AI-assisted VFX pipelines on real productions. If that is useful to your film, let's talk. Or join the course waitlist for the method behind the tool.
+final_p: I run AI-assisted VFX pipelines on real productions. If that is useful to your film, let's talk. Or book the course for the method behind the tool.
 final_primary_label: Work with me
 final_primary_href: /about/
-final_secondary_label: Join the course waitlist
+final_secondary_label: Book the course, 3 Sept
 final_secondary_href: /course/
 soon: Open source · MIT · on GitHub
 card_title: Breakdown Studio
