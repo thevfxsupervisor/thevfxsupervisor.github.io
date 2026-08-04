@@ -259,11 +259,31 @@ def final_cta(h2, p, primary_label, primary_href, secondary_label, secondary_hre
 # Page renderers
 # --------------------------------------------------------------------------
 
-def render_shell(title, description, content_html, nav_active=None, extra_script=""):
+def write_sitemap(paths, out_dir):
+    """sitemap.xml + robots.txt. Both were 404 before 2026-08-04."""
+    from datetime import date
+    today = date.today().isoformat()
+    urls = "\n".join(
+        f"  <url><loc>{SITE_CANONICAL.rstrip('/')}/{p.lstrip('/')}</loc><lastmod>{today}</lastmod></url>"
+        for p in paths)
+    (out_dir / "sitemap.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
+        f"{urls}\n</urlset>\n", encoding="utf-8")
+    (out_dir / "robots.txt").write_text(
+        f"User-agent: *\nAllow: /\nSitemap: {SITE_CANONICAL.rstrip('/')}/sitemap.xml\n", encoding="utf-8")
+    print("    wrote sitemap.xml + robots.txt")
+
+
+SITE_CANONICAL = "https://thevfxsupervisor.github.io"  # flip to https://thevfxsupervisor.com at cutover
+
+
+def render_shell(title, description, content_html, nav_active=None, extra_script="", canonical_path=""):
     html_out = BASE_TEMPLATE
     html_out = html_out.replace("{{TITLE}}", html.escape(title, quote=False))
     html_out = html_out.replace("{{DESCRIPTION}}", html.escape(description, quote=False))
     html_out = html_out.replace("{{ROOT}}", SITE_ROOT)
+    html_out = html_out.replace("{{CANONICAL}}", SITE_CANONICAL.rstrip("/") + "/" + canonical_path.lstrip("/"))
     for key in ("projects", "course", "notes", "about"):
         cls = " current" if key == nav_active else ""
         html_out = html_out.replace("{{NAV_%s}}" % key.upper(), cls)
@@ -327,7 +347,7 @@ def render_home():
         fm.get("final_secondary_label", "Join the course waitlist"),
         fm.get("final_secondary_href", SITE_ROOT + "course/"),
     )
-    return render_shell(fm.get("title", SITE_NAME), fm.get("description", ""), content, nav_active=None)
+    return render_shell(fm.get("title", SITE_NAME), fm.get("description", ""), content, nav_active=None, canonical_path="")
 
 
 PROJECT_ORDER = ["breakdown-studio", "link-session"]  # flagship first
@@ -403,7 +423,7 @@ def render_project(md_path):
         ("All projects", SITE_ROOT + "projects/"),
     ]
     content += related_section(rel)
-    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="projects"), slug
+    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="projects", canonical_path="projects/"+slug+"/"), slug
 
 
 def render_projects():
@@ -449,7 +469,7 @@ def render_projects():
         ],
         eyebrow="More on the method",
     )
-    return render_shell("Projects | the vfx supervisor", "The tools I built running a feature's VFX department solo, then open-sourced: Breakdown Studio and link-session.", content, nav_active="projects")
+    return render_shell("Projects | the vfx supervisor", "The tools I built running a feature's VFX department solo, then open-sourced: Breakdown Studio and link-session.", content, nav_active="projects", canonical_path="projects/")
 
 
 def render_course():
@@ -580,7 +600,7 @@ const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist
   }});
 }})();
 </script>'''
-    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="course", extra_script=extra_script)
+    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="course", extra_script=extra_script, canonical_path="course/")
 
 
 def render_about():
@@ -616,7 +636,7 @@ def render_about():
             ("Notes", SITE_ROOT + "notes/"),
         ]
     )
-    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="about")
+    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="about", canonical_path="about/")
 
 
 def render_notes():
@@ -656,7 +676,7 @@ def render_notes():
         ],
         eyebrow="The tools behind the writing",
     )
-    return render_shell("Notes | the vfx supervisor", "Notes on pipeline, production and orchestrating AI, from a working VFX supervisor and producer.", content, nav_active="notes")
+    return render_shell("Notes | the vfx supervisor", "Notes on pipeline, production and orchestrating AI, from a working VFX supervisor and producer.", content, nav_active="notes", canonical_path="notes/")
 
 
 def render_note(md_path):
@@ -689,7 +709,8 @@ def render_note(md_path):
         ],
         eyebrow="The tools this method runs on",
     )
-    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="notes"), fm.get("slug", md_path.stem)
+    _slug = fm.get("slug", md_path.stem)
+    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="notes", canonical_path="notes/"+_slug+"/"), _slug
 
 
 # --------------------------------------------------------------------------
@@ -747,6 +768,7 @@ def main():
     (DOCS_DIR / ".nojekyll").write_text("", encoding="utf-8")
     print("  wrote docs/.nojekyll")
 
+    write_sitemap(["", "projects/", "course/", "notes/", "about/"], DOCS_DIR)
     print("Done.")
 
 
