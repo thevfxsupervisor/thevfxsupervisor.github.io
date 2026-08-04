@@ -11,7 +11,7 @@ final_p: Based in Copenhagen, EU work authorisation. Available for freelance VFX
 
 I am a VFX supervisor and producer. I run VFX departments on film and television productions, and I build the tooling that makes that work possible when there is no department to hand it to, just one person and the schedule.
 
-Twenty five years of it. I hold a **VES Award for Changeling**, and a Robert Award for Skammerens datter II. I have supervised visual effects on films directed by Clint Eastwood, the Wachowskis and Ben Affleck: **Changeling, J. Edgar, Invictus, Argo, Cloud Atlas**, along with Twilight, Night at the Museum and Red Dawn. On **Atlantic Crossing** I ran the full VFX lifecycle across vendors in Belgium, Germany and Scandinavia. On **LEGO Ninjago** I art directed seasons coordinating Danish and Chinese teams.
+Twenty five years of it. I hold a **VES Award for Changeling**, and a Robert nomination for Skammerens datter II. I have supervised visual effects on films directed by Clint Eastwood, the Wachowskis and Ben Affleck: **Changeling, J. Edgar, Invictus, Argo, Cloud Atlas**, along with Twilight, Night at the Museum and Red Dawn. On **Atlantic Crossing** I ran the full VFX lifecycle across vendors in Belgium, Germany and Scandinavia. On **LEGO Ninjago** I art directed seasons coordinating Danish and Chinese teams.
 
 Through Wangle Media in Copenhagen I have delivered animation, VFX and real time work for **Pandora, LEGO, Sony, Kia, BRIO and Novo Nordisk**, and collaborated with Larissa Sansour on In Vitro, which won at the Venice Biennale and went to Netflix.
 
