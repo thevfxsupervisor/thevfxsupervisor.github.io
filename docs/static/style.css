@@ -39,6 +39,7 @@ header.top{position:sticky;top:0;z-index:40;backdrop-filter:blur(9px);
 .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em;font-size:15.5px;text-decoration:none}
 .logo{width:28px;height:28px;flex:0 0 auto;
   background:url(logo-icon.png) center/contain no-repeat}
+.top .logo{width:40px;height:40px}
 .top nav{margin-left:auto;display:flex;gap:22px;align-items:center}
 .top nav a{font-family:var(--mono);font-size:12.5px;color:var(--dim);text-decoration:none;letter-spacing:.03em}
 .top nav a:hover{color:var(--txt)}
