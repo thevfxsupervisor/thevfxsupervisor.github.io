@@ -37,10 +37,8 @@ header.top{position:sticky;top:0;z-index:40;backdrop-filter:blur(9px);
   background:rgba(19,22,25,.72);border-bottom:1px solid var(--line)}
 .top .wrap{display:flex;align-items:center;gap:18px;height:60px}
 .brand{display:flex;align-items:center;gap:11px;font-weight:700;letter-spacing:-.01em;font-size:15.5px;text-decoration:none}
-.logo{width:26px;height:26px;border-radius:5px;position:relative;flex:0 0 auto;
-  background:linear-gradient(135deg,#20262c,#12151a);border:1px solid var(--line2);overflow:hidden}
-.logo i{position:absolute;left:4px;top:4px;bottom:4px;width:3px;background:var(--amber);border-radius:1px;
-  box-shadow:6px 0 0 var(--dim),11px 0 0 var(--dim)}
+.logo{width:28px;height:28px;flex:0 0 auto;
+  background:url(logo-icon.png) center/contain no-repeat}
 .top nav{margin-left:auto;display:flex;gap:22px;align-items:center}
 .top nav a{font-family:var(--mono);font-size:12.5px;color:var(--dim);text-decoration:none;letter-spacing:.03em}
 .top nav a:hover{color:var(--txt)}

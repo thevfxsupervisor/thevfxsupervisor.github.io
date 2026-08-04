@@ -5,23 +5,26 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>{{TITLE}}</title>
 <meta name="description" content="{{DESCRIPTION}}">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%23131619'/%3E%3Crect x='6' y='6' width='4' height='20' rx='1.5' fill='%23e6963c'/%3E%3Crect x='14' y='6' width='4' height='20' rx='1.5' fill='%239aa1a8'/%3E%3Crect x='22' y='6' width='4' height='20' rx='1.5' fill='%239aa1a8'/%3E%3C/svg%3E">
+<link rel="icon" type="image/png" href="{{ROOT}}static/logo-icon.png">
+<link rel="apple-touch-icon" href="{{ROOT}}static/apple-touch-icon.png">
 <link rel="canonical" href="{{CANONICAL}}">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="the vfx supervisor">
 <meta property="og:title" content="{{TITLE}}">
 <meta property="og:description" content="{{DESCRIPTION}}">
 <meta property="og:url" content="{{CANONICAL}}">
+<meta property="og:image" content="{{SITE}}/static/logo-icon.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{TITLE}}">
 <meta name="twitter:description" content="{{DESCRIPTION}}">
+<meta name="twitter:image" content="{{SITE}}/static/logo-icon.png">
 <link rel="stylesheet" href="{{ROOT}}static/style.css">
 </head>
 <body>
 
 <header class="top">
   <div class="wrap">
-    <a class="brand" href="{{ROOT}}"><span class="logo"><i></i></span>the vfx supervisor</a>
+    <a class="brand" href="{{ROOT}}"><span class="logo" aria-hidden="true"></span>the vfx supervisor</a>
     <nav>
       <a href="{{ROOT}}projects/" class="{{NAV_PROJECTS}}">Projects</a>
       <a href="{{ROOT}}course/" class="hide-sm{{NAV_COURSE}}">Course</a>
@@ -36,7 +39,7 @@
 
 <footer>
   <div class="wrap">
-    <div class="brand" style="font-size:14px"><span class="logo"><i></i></span>the vfx supervisor</div>
+    <div class="brand" style="font-size:14px"><span class="logo" aria-hidden="true"></span>the vfx supervisor</div>
     <nav>
       <a href="{{ROOT}}projects/">Projects</a>
       <a href="{{ROOT}}course/">Course</a>

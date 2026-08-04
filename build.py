@@ -283,6 +283,7 @@ def render_shell(title, description, content_html, nav_active=None, extra_script
     html_out = html_out.replace("{{TITLE}}", html.escape(title, quote=False))
     html_out = html_out.replace("{{DESCRIPTION}}", html.escape(description, quote=False))
     html_out = html_out.replace("{{ROOT}}", SITE_ROOT)
+    html_out = html_out.replace("{{SITE}}", SITE_CANONICAL.rstrip("/"))
     html_out = html_out.replace("{{CANONICAL}}", SITE_CANONICAL.rstrip("/") + "/" + canonical_path.lstrip("/"))
     for key in ("projects", "course", "notes", "about"):
         cls = " current" if key == nav_active else ""
