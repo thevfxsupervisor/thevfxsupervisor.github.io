@@ -1,39 +1,62 @@
-# Waitlist endpoint setup
+# Booking and the waitlist endpoint
 
-Until this is done, the course waitlist form on `/course/` falls back to a
-`mailto:` link, gracefully, with a status note telling the visitor the form
-isn't wired up yet. Nothing breaks if you skip this step; it just means you
-get emails instead of Sheet rows until you deploy it.
+**CURRENT as of 2026-08-05.** The course page changed from a waitlist into a dated, priced offer
+(Thursday 3 September 2026, 450 USD), so this document changed with it.
 
-## The 5 clicks
+## How booking works right now, and why
 
-1. Go to [script.google.com](https://script.google.com/), click **New project**.
-2. Delete the placeholder code and paste in the contents of `waitlist.gs`
-   (in this folder). Rename the project (top left) to something like
-   `thevfxsupervisor-waitlist`.
-3. Click **Deploy > New deployment**. Click the gear next to "Select type"
-   and choose **Web app**. Set:
-   - Execute as: **Me**
-   - Who has access: **Anyone**
-4. Click **Deploy**, authorize the script when prompted (it's your own
-   script, so this is safe), and copy the **Web app URL** it gives you.
-5. Paste that URL into the `waitlist_endpoint:` field in
-   `content/pages/course.md`'s frontmatter, then run
-   `& "C:\Program Files\Shotgun\Python3\python.exe" build.py` and push.
+**Reservations arrive by email and Geoff invoices from Wangle Media ApS.** There is no card checkout,
+deliberately.
 
-## Where the data lands
+That is not a stopgap to apologise for. This audience is professional: **most attendees expense the
+course**, and a finance department wants a VAT invoice from a real company, not a card receipt. It
+also means no payment rail has to exist before the first seat can be sold, and the Stripe account
+needs Geoff's ID, bank details and UBO information that nobody else can enter.
 
-The script appends rows to whatever spreadsheet the Apps Script project is
-bound to. If you created the project from script.google.com directly (not
-"Extensions > Apps Script" inside a Sheet), it has no bound spreadsheet, and
-`SpreadsheetApp.getActiveSpreadsheet()` will fail. Easiest fix: create a new
-Google Sheet first, then go to **Extensions > Apps Script** from inside that
-Sheet, and paste `waitlist.gs` there instead of starting from
-script.google.com. That binds the script to the Sheet automatically, and
-every waitlist signup appends a row: `timestamp, email, name, note`.
+**The tradeoff, stated honestly:** an invoice is paid on terms, a card is paid on booking. So cash
+lands later than the launch research assumed. If seats start moving, Stripe is the upgrade.
 
-## Re-deploying after an edit
+## What the form does with no endpoint configured
 
-If you change `waitlist.gs` later, use **Deploy > Manage deployments >
-edit (pencil) > New version > Deploy**. A plain save does not push the new
-code to the live web app URL.
+`waitlist_endpoint:` in `content/pages/course.md` is empty, so the form composes a `mailto:` to
+`contact_email` with the subject "Reserve a seat: 3 September workshop" and the details in the body.
+
+**It used to announce "Waitlist form is not wired up yet. Opening an email instead."** That told
+every visitor, at the exact moment they had decided to sign up, that the operation was amateur. Zero
+signups were ever captured. It now confirms confidently and shows a visible fallback link, because
+`window.location.href` to a `mailto:` **silently does nothing** for anyone with no mail client
+configured, and on desktop that is a lot of people who were getting no feedback at all.
+
+## If you later want rows in a Sheet instead of emails
+
+`waitlist.gs` in this folder still works and is unchanged. It needs a browser OAuth consent only
+Geoff can give, which is why it has never been deployed.
+
+1. [script.google.com](https://script.google.com/), then **New project**.
+2. Paste in `waitlist.gs`, rename the project to something like `thevfxsupervisor-booking`.
+3. **Deploy > New deployment**, gear next to "Select type" > **Web app**.
+   Execute as **Me**, Who has access **Anyone**.
+4. **Deploy**, authorize the script (it is your own), copy the **Web app URL**.
+5. Paste it into `waitlist_endpoint:` in `content/pages/course.md`, run `python3 build.py`, push.
+
+**The bound-spreadsheet trap:** if you create the project from script.google.com directly it has no
+bound spreadsheet, and `SpreadsheetApp.getActiveSpreadsheet()` fails. Create the Google Sheet first,
+then **Extensions > Apps Script** from inside it, and paste `waitlist.gs` there. That binds it
+automatically, and each reservation appends `timestamp, email, name, note`.
+
+**Re-deploying after an edit:** **Deploy > Manage deployments > edit (pencil) > New version >
+Deploy**. A plain save does NOT push new code to the live web app URL.
+
+**Deploying this does not change the invoicing.** It only changes reservations from arriving as email
+to arriving as rows. Someone still sends the invoice.
+
+## Open decisions that are Geoff's, not mine
+
+Unanswered on the live page, and a buyer will ask:
+
+- **Is it recorded, and do attendees get the recording?**
+- **Refund, or transfer to a later date, if someone cannot attend?**
+- **What happens if too few seats sell to run it?**
+
+The page promises none of these, which is safer than inventing a policy. Answer them before the first
+invoice goes out, not after.
