@@ -259,6 +259,60 @@ def final_cta(h2, p, primary_label, primary_href, secondary_label, secondary_hre
 # Page renderers
 # --------------------------------------------------------------------------
 
+def write_feed(out_dir):
+    """RSS 2.0 for content/notes/.
+
+    WHY: the site had no feed at all. Without one, every note written for the content push only
+    exists inside whatever platform it was posted to, which is precisely the asset that does NOT
+    accrue to Geoff. A feed is how a note gets syndicated, subscribed to, and picked up by readers
+    and aggregators he does not have to maintain a presence on.
+
+    Deliberately hand-rolled rather than adding a dependency: the site builds with stdlib only.
+    """
+    from email.utils import format_datetime
+    from datetime import datetime, timezone
+    import xml.sax.saxutils as sx
+
+    notes = []
+    for md_path in sorted((CONTENT_DIR / "notes").glob("*.md")):
+        fm, body = parse_frontmatter(md_path.read_text(encoding="utf-8"))
+        if fm.get("draft", "").lower() == "true":
+            continue
+        slug = fm.get("slug", md_path.stem)
+        try:
+            d = datetime.fromisoformat(fm.get("date", "")).replace(tzinfo=timezone.utc)
+        except ValueError:
+            d = datetime.fromtimestamp(md_path.stat().st_mtime, tz=timezone.utc)
+        notes.append((d, fm.get("title", slug), fm.get("description", ""), slug))
+    notes.sort(reverse=True)
+
+    base = SITE_CANONICAL.rstrip("/")
+    items = []
+    for d, title, desc, slug in notes[:30]:
+        items.append(
+            "    <item>\n"
+            f"      <title>{sx.escape(title)}</title>\n"
+            f"      <link>{base}/notes/{slug}/</link>\n"
+            f"      <guid isPermaLink=\"true\">{base}/notes/{slug}/</guid>\n"
+            f"      <pubDate>{format_datetime(d)}</pubDate>\n"
+            f"      <description>{sx.escape(desc)}</description>\n"
+            "    </item>")
+    now = format_datetime(datetime.now(timezone.utc))
+    (out_dir / "feed.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n'
+        "  <channel>\n"
+        f"    <title>{sx.escape(SITE_NAME)}</title>\n"
+        f"    <link>{base}/</link>\n"
+        "    <description>Notes on VFX supervision, breakdowns, budgets and pipeline.</description>\n"
+        "    <language>en</language>\n"
+        f"    <lastBuildDate>{now}</lastBuildDate>\n"
+        f'    <atom:link href="{base}/feed.xml" rel="self" type="application/rss+xml"/>\n'
+        + "\n".join(items) + "\n"
+        "  </channel>\n</rss>\n", encoding="utf-8")
+    print(f"  wrote feed.xml ({len(notes)} notes)")
+
+
 def write_sitemap(paths, out_dir):
     """sitemap.xml + robots.txt. Both were 404 before 2026-08-04."""
     from datetime import date
@@ -769,6 +823,8 @@ def main():
             continue
         note_html, slug = render_note(md_path)
         write_page(f"notes/{slug}", note_html)
+
+    write_feed(DOCS_DIR)
 
     # static assets
     static_out = DOCS_DIR / "static"
