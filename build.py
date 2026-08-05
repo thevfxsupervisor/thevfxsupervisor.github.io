@@ -588,10 +588,9 @@ def render_course():
 <section id="waitlist">
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">Founding cohort &middot; 3 September 2026 &middot; 325 USD</span>
-      <h2>Reserve a seat</h2>
-      <p class="k">It is a working session, so the size is limited by the format rather than by
-        marketing. Reserve below and I will send an invoice from Wangle Media plus the joining
-        details. No spam, no drip sequence.</p></div>
+      <h2>Sign up</h2>
+      <p class="k">It is a working session, so the size is limited by the format. Sign up below and I
+        will send you a payment link and the joining details. No spam, no drip sequence.</p></div>
 
       {buy_block}
     <form class="form-card" id="waitlist-form" style="margin-top:28px">
@@ -599,9 +598,9 @@ def render_course():
       <div class="field"><label for="wl-email">Email</label><input type="email" id="wl-email" name="email" required autocomplete="email"></div>
       <div class="field"><label for="wl-note">What are you breaking down right now? (optional)</label>
         <textarea id="wl-note" name="note" placeholder="e.g. an indie feature, a series pilot, or my first show as supervisor"></textarea></div>
-      <button type="submit" class="btn btn-a" id="wl-submit">Reserve a seat</button>
+      <button type="submit" class="btn btn-a" id="wl-submit">Sign up</button>
       <div id="wl-status"></div>
-      <p class="tiny">Your email is used only to invoice you and send the joining details. Nothing else.</p>
+      <p class="tiny">Your email is used only to send you the payment link and joining details. Nothing else.</p>
     </form>
   </div>
 </section>

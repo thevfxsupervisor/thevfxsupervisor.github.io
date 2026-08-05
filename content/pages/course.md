@@ -53,7 +53,7 @@ So you are early. A few parts will run long while I find where they need more ti
 
 It runs once, live, at this time. No second date yet.
 
-Most people expense this, so I invoice it properly from Wangle Media with a VAT number, which is what a finance department wants anyway. Reserve a seat below and I will send the invoice and the joining details.
+Sign up below and I will send you a payment link and the joining details.
 
 ## Who should not take it
 
