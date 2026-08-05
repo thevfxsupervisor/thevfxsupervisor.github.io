@@ -497,6 +497,20 @@ def render_course():
 
     waitlist_endpoint = fm.get("waitlist_endpoint", "")
     contact_email = fm.get("contact_email", "geoff@wanglemedia.com")
+    # Paste a Stripe Payment Link into buy_url: in course.md and the page switches from "reserve
+    # and I will invoice you" to a real Buy button. Until then the invoice path stands, so the page
+    # is never in a state where a decided buyer cannot act.
+    buy_url = fm.get("buy_url", "").strip()
+    if buy_url:
+        buy_block = (
+            '<div class="cta-row" style="margin-top:28px">'
+            f'<a class="btn btn-a" href="{buy_url}">Book a seat</a>'
+            '</div>'
+            '<p class="tiny" style="margin-top:14px">Card or invoice at checkout, with a VAT invoice'
+            ' issued automatically. Prefer to be invoiced directly? Use the form below.</p>'
+        )
+    else:
+        buy_block = ''
 
     content = f'''
 <section class="hero">
@@ -519,12 +533,13 @@ def render_course():
 
 <section id="waitlist">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Thursday 3 September 2026 &middot; 450 USD</span>
+    <div class="sec-head"><span class="eyebrow">Founding cohort &middot; 3 September 2026 &middot; 325 USD</span>
       <h2>Reserve a seat</h2>
       <p class="k">It is a working session, so the size is limited by the format rather than by
         marketing. Reserve below and I will send an invoice from Wangle Media plus the joining
         details. No spam, no drip sequence.</p></div>
 
+      {buy_block}
     <form class="form-card" id="waitlist-form" style="margin-top:28px">
       <div class="field"><label for="wl-name">Name (optional)</label><input type="text" id="wl-name" name="name" autocomplete="name"></div>
       <div class="field"><label for="wl-email">Email</label><input type="email" id="wl-email" name="email" required autocomplete="email"></div>

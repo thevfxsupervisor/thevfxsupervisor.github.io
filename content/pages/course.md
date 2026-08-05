@@ -2,8 +2,8 @@
 type: page
 slug: course
 title: Breakdown and Budget a Whole Film. Solo. | the vfx supervisor
-description: A live online course for VFX supervisors and producers who have to break down and budget a whole film alone, whether that is an independent running a show solo or a junior handed their first one. Thursday 3 September 2026, 450 USD. Taught by Geoffrey Hancock, VES Award winner, 25 years supervising VFX on Changeling, Argo, Cloud Atlas and Atlantic Crossing.
-eyebrow: Course · Thursday 3 September 2026 · 450 USD
+description: A live online course for VFX supervisors and producers who have to break down and budget a whole film alone, whether that is an independent running a show solo or a junior handed their first one. Thursday 3 September 2026. Founding cohort 325 USD, 450 thereafter. Taught by Geoffrey Hancock, VES Award winner, 25 years supervising VFX on Changeling, Argo, Cloud Atlas and Atlantic Crossing.
+eyebrow: Founding cohort · Thursday 3 September 2026 · 325 USD
 h1: Breakdown and Budget a Whole Film. Solo.
 lede: For VFX supervisors and producers who have to carry the whole breakdown and budget themselves, whether that is running an independent show with no department behind you, or being handed your first show and finding out the department is just you. This is the method behind Breakdown Studio, taught end to end, live, on 3 September.
 included_h2: The method, end to end
@@ -47,7 +47,11 @@ You do not leave with Breakdown Studio itself. What you build the method in afte
 
 **Thursday 3 September 2026, 17:00 to 20:30 Copenhagen time.** That is 08:00 Pacific, 11:00 Eastern, 16:00 London. Three and a half hours, live and online, with two breaks. It is a workshop, so you will be working, not watching.
 
-**450 USD.** It runs once, live, at this time. There is no self-paced version and no second date announced.
+**325 USD for this first cohort.** The price is 450 after it, and I am not going to pretend otherwise: this run is cheaper because it is the first time I have taught it, and because I want the feedback from the people in it.
+
+What you give up for the discount is that you are in the room while I find out which parts need more time. What you get is the same method I use on real shows, and my attention on your actual film during it.
+
+It runs once, live, at this time. There is no self-paced version and no second date announced.
 
 Most people taking this will expense it, so it is invoiced properly from Wangle Media ApS with a VAT number on it, which is usually what a finance department actually wants. Reserve a seat below and I will send an invoice and the joining details.
 
