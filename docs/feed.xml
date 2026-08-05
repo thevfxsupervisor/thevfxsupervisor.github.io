@@ -5,8 +5,15 @@
     <link>https://thevfxsupervisor.github.io/</link>
     <description>Notes on VFX supervision, breakdowns, budgets and pipeline.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 05 Aug 2026 00:12:27 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Aug 2026 00:14:50 +0000</lastBuildDate>
     <atom:link href="https://thevfxsupervisor.github.io/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>What actually breaks when AI agents coordinate over shared files</title>
+      <link>https://thevfxsupervisor.github.io/notes/what-breaks-when-ai-agents-coordinate-over-files/</link>
+      <guid isPermaLink="true">https://thevfxsupervisor.github.io/notes/what-breaks-when-ai-agents-coordinate-over-files/</guid>
+      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
+      <description>Nine failures from running several live AI agents on one production over a shared folder. Duplicate watchers, silent mounts, two writers on one file, and checks that agree with themselves.</description>
+    </item>
     <item>
       <title>How a one-person VFX department orchestrates AI</title>
       <link>https://thevfxsupervisor.github.io/notes/how-a-one-person-vfx-department-orchestrates-ai/</link>

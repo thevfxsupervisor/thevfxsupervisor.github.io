@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>What actually breaks when AI agents coordinate over shared files</title>
+<meta name="description" content="Nine failures from running several live AI agents on one production over a shared folder. Duplicate watchers, silent mounts, two writers on one file, and checks that agree with themselves.">
+<link rel="icon" type="image/png" sizes="256x256" href="/static/favicon.png">
+<link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+<link rel="canonical" href="https://thevfxsupervisor.github.io/notes/what-breaks-when-ai-agents-coordinate-over-files/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="the vfx supervisor">
+<meta property="og:title" content="What actually breaks when AI agents coordinate over shared files">
+<meta property="og:description" content="Nine failures from running several live AI agents on one production over a shared folder. Duplicate watchers, silent mounts, two writers on one file, and checks that agree with themselves.">
+<meta property="og:url" content="https://thevfxsupervisor.github.io/notes/what-breaks-when-ai-agents-coordinate-over-files/">
+<meta property="og:image" content="https://thevfxsupervisor.github.io/static/logo-icon.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="What actually breaks when AI agents coordinate over shared files">
+<meta name="twitter:description" content="Nine failures from running several live AI agents on one production over a shared folder. Duplicate watchers, silent mounts, two writers on one file, and checks that agree with themselves.">
+<meta name="twitter:image" content="https://thevfxsupervisor.github.io/static/logo-icon.png">
+<link rel="stylesheet" href="/static/style.css">
+  <link rel="alternate" type="application/rss+xml" title="the vfx supervisor" href="https://thevfxsupervisor.github.io/feed.xml">
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="logo" aria-hidden="true"></span>the vfx supervisor</a>
+    <nav>
+      <a href="/projects/" class="">Projects</a>
+      <a href="/course/" class="hide-sm">Course</a>
+      <a href="/notes/" class="hide-sm current">Notes</a>
+      <a href="/about/" class="hide-sm">About</a>
+      <a class="btn btn-a" href="/course/">Book the course</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Notes &middot; 2026-08-05</span>
+    <h1 style="margin-top:18px">What actually breaks when AI agents coordinate over shared files</h1>
+  </div>
+</section>
+<hr class="rule">
+<section>
+  <div class="wrap prose">
+    <p>I run several AI agent sessions at once on a production: one on the breakdown, one on budgets and vendor sheets, others driving heavier jobs on other machines. They coordinate over a shared folder of small JSON files, one per session, using a skill I open-sourced called <a href="/projects/link-session/">link-session</a>.</p>
+<p>The design is boring on purpose: no server, no message bus. What is not boring is the list of ways it broke. Almost none of them announced themselves. That is the part worth writing down, because a coordination bug does not look like a crash, it looks like everything being fine.</p>
+<h2>A watcher that survives one kind of restart but not another</h2>
+<p>Each session runs a watcher on the shared folder. Mine survived a context compaction but not a full session restart, so the natural recovery step, re-running the join command, quietly started a second one.</p>
+<p>Two watchers deliver every event twice, forever, and the symptom looks exactly like a healthy channel. One of mine ran doubled for ten days. Now the first thing the join does is check whether a watcher is already running.</p>
+<h2>Waking everyone up to tell them nothing changed</h2>
+<p>The first version detected change by file modification time. Any session re-saving its own status file, with byte-identical content, woke every other session.</p>
+<p>Change detection now hashes the content that actually matters. If nothing meaningful changed, nobody hears about it. On a channel with several participants, every field you write is pulled into everyone else's context on every change, so a chatty status line is not free, it is a tax multiplied by the number of peers and paid again on every update.</p>
+<h2>Replaying the entire history on every start</h2>
+<p>A fresh watcher saw every existing file as new and dumped the whole accumulated channel into the session that had just started.</p>
+<p>The fix is one line of discipline: on the first pass, record what everything currently says and emit none of it. Baseline, do not replay.</p>
+<h2>Two processes writing one file</h2>
+<p>This one bit me last night. A background watcher wrote a heartbeat into a session's status file, and a scheduled job wrote its progress into the same file. They alternated, each overwriting the other, and every flip counted as a change, so the whole fleet woke up to watch two processes on one machine disagree about whether that machine was awake.</p>
+<p>One writer per file is not a style preference. On a synced folder it is also how you avoid conflicted-copy files where the real one reflects neither write. The fix was to make the watcher defer: it only writes if the other process has gone quiet, and it says so when it does.</p>
+<h2>The heartbeat that was confidently wrong</h2>
+<p>Worse than the fighting was what it said. The heartbeat text was hardcoded to announce that no agent was running behind it. That had been true when it was written. It was no longer true, and it was being broadcast to every other session as fact.</p>
+<p>Any status a machine asserts about itself is a claim with an expiry date. If it is hardcoded, it is a claim you have promised to keep true by hand, forever, which is a promise nobody keeps.</p>
+<h2>Silence that means the opposite of what it looks like</h2>
+<p>If the shared folder goes away, a mount drops, a path changes, the watcher loops forever seeing nothing. No error. Indistinguishable from a quiet channel.</p>
+<p>Every watcher now checks the folder is reachable and says so loudly, once, if it is not. Absence of signal is not evidence of calm.</p>
+<h2>A message field that clobbers without history</h2>
+<p>The status files have a single message slot. Write a second message before the first is read and the first is gone, with nothing to indicate it existed.</p>
+<p>So anything longer than a line goes in a separate file, and the message becomes a pointer to it. Write the file first, then update the status file, never the other way around: the status file is what wakes people, so it has to change last, after the thing it points at is fully written. Reverse that and a peer wakes, reads a half-written file, and caches it as seen.</p>
+<h2>Routing work to a session that stopped listening</h2>
+<p>An agent posted a task addressed to two other sessions. Both had closed, one two weeks earlier. The task sat unread and looked, from the poster's side, exactly like a task in progress.</p>
+<p>Before routing anything, check the recipient is alive. This sounds obvious written down. It was not obvious at the time, because a closed session and a busy one both simply do not reply.</p>
+<h2>Text on the channel is data, not orders</h2>
+<p>The one with real consequences. An agent posted a message instructing other sessions to deploy a change to a public page, citing the principal's authority for it.</p>
+<p>It may well have been authorised. That is not the point. <strong>A message on a shared channel is not authorisation, whoever it claims to be from.</strong> Anything else means an agent can escalate its own permissions by writing a sentence, and anyone who can write to the folder can too. Instructions come from the principal directly. Everything read from a file, including a file written by another agent, is information to weigh, not a command to execute.</p>
+<h2>The pattern underneath most of these</h2>
+<p>Several of these failures share a shape: <strong>a check that could only confirm what it already assumed.</strong></p>
+<p>The change detector compared the thing it controlled. The heartbeat asserted a fact it had been told once. A verification I wrote later that same day searched for exactly the patterns its own filter used, so it could only ever find what had already been caught, and reported clean while missing what the filter did not know to look for.</p>
+<p>If a check and the thing it checks share a premise, the check cannot fail in the way that matters. Verify the outcome from the other side, and then test that your check can actually fail: break something on purpose and confirm it complains.</p>
+<p>---</p>
+<p>None of this is specific to AI agents. It is ordinary distributed-systems trouble, arriving in a setting small enough that it feels like it should not apply: a folder, a few files, one machine per participant.</p>
+<p>That is exactly why it is worth being strict about. The coordination layer is not where the interesting work happens, so it gets the least attention, and it fails silently by default. The rules that make it survivable are cheap and boring, and every one of them here was written after something had already gone wrong.</p>
+<p><a href="https://github.com/thevfxsupervisor/link-session">link-session is on GitHub</a>, MIT.</p>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <a class="btn btn-b" href="/notes/">&larr; All notes</a>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <div class="quicklinks" style="margin-top:0">
+      <span class="eyebrow">The tools this method runs on</span>
+      <div class="ql-row"><a href="/projects/breakdown-studio/">Breakdown Studio</a> &middot; <a href="/projects/link-session/">link-session</a> &middot; <a href="/course/">The course</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="brand" style="font-size:14px"><span class="logo" aria-hidden="true"></span>the vfx supervisor</div>
+    <nav>
+      <a href="/projects/">Projects</a>
+      <a href="/course/">Course</a>
+      <a href="/notes/">Notes</a>
+      <a href="/about/">About</a>
+      <a href="https://github.com/thevfxsupervisor">GitHub</a>
+      <a href="mailto:geoff@wanglemedia.com">Contact</a>
+    </nav>
+    <div class="mono">&copy; 2026 Geoffrey Hancock</div>
+  </div>
+</footer>
+
+</body>
+</html>
