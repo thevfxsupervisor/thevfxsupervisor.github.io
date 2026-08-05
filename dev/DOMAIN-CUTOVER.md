@@ -8,6 +8,12 @@ Encrypt. The only cost stays the easyDNS registration already being paid. Do NOT
 web-hosting, URL-forwarding, or parking add-on. Plain DNS records are all this needs, and they are
 included.
 
+**Before executing any step below, run `./check_cutover.sh` from the repo root.** It is the
+automated pre-flight for this runbook (added by the linux seat, same day): it checks what DNS
+actually returns and what the domain actually serves, rather than trusting that a step was done, and
+it refuses to green-light the cutover while the parking record is still live. It prints the rollback
+command on failure. Run it again after each DNS change until it reports Ready.
+
 ## Starting state (verified 2026-08-05)
 
 - `thevfxsupervisor.com` and `www` both resolve to **64.68.200.44**, the easyDNS parking page.

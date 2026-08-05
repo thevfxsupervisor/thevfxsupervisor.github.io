@@ -10,6 +10,10 @@
 # trusting that the steps were followed. Read-only: it changes nothing, it only tells you whether the
 # next step is safe.
 #
+# THE FULL PROCEDURE is dev/DOMAIN-CUTOVER.md (written by another seat). This script is its
+# pre-flight, not a replacement: that file explains WHY the order matters and what to click,
+# this one verifies the world actually matches before you take the irreversible step.
+#
 # Usage:  ./check_cutover.sh
 set -uo pipefail
 
