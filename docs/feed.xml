@@ -5,21 +5,21 @@
     <link>https://thevfxsupervisor.github.io/</link>
     <description>Notes on VFX supervision, breakdowns, budgets and pipeline.</description>
     <language>en</language>
-    <lastBuildDate>Wed, 05 Aug 2026 00:14:50 +0000</lastBuildDate>
+    <lastBuildDate>Wed, 05 Aug 2026 06:53:19 +0000</lastBuildDate>
     <atom:link href="https://thevfxsupervisor.github.io/feed.xml" rel="self" type="application/rss+xml"/>
-    <item>
-      <title>What actually breaks when AI agents coordinate over shared files</title>
-      <link>https://thevfxsupervisor.github.io/notes/what-breaks-when-ai-agents-coordinate-over-files/</link>
-      <guid isPermaLink="true">https://thevfxsupervisor.github.io/notes/what-breaks-when-ai-agents-coordinate-over-files/</guid>
-      <pubDate>Wed, 05 Aug 2026 00:00:00 +0000</pubDate>
-      <description>Nine failures from running several live AI agents on one production over a shared folder. Duplicate watchers, silent mounts, two writers on one file, and checks that agree with themselves.</description>
-    </item>
     <item>
       <title>How a one-person VFX department orchestrates AI</title>
       <link>https://thevfxsupervisor.github.io/notes/how-a-one-person-vfx-department-orchestrates-ai/</link>
       <guid isPermaLink="true">https://thevfxsupervisor.github.io/notes/how-a-one-person-vfx-department-orchestrates-ai/</guid>
       <pubDate>Mon, 13 Jul 2026 00:00:00 +0000</pubDate>
       <description>The mechanical half automates. The judgment half stays with the supervisor. Notes on briefing an AI assistant with guardrails on a live production.</description>
+    </item>
+    <item>
+      <title>Coordinating a fleet of AI agents on one film, and the rules that make it reliable</title>
+      <link>https://thevfxsupervisor.github.io/notes/what-breaks-when-ai-agents-coordinate-over-files/</link>
+      <guid isPermaLink="true">https://thevfxsupervisor.github.io/notes/what-breaks-when-ai-agents-coordinate-over-files/</guid>
+      <pubDate>Sun, 05 Jul 2026 00:00:00 +0000</pubDate>
+      <description>Several AI agents run daily across three operating systems on a live feature, coordinated over plain files. The rules that make that dependable are cheap, specific, and each one was written after something went wrong.</description>
     </item>
   </channel>
 </rss>
