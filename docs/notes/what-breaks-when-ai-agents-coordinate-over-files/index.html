@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Coordinating a fleet of AI agents across several projects, and the rules that make it reliable</title>
-<meta name="description" content="Several AI agents run daily across three operating systems and multiple projects, coordinated over plain files. The rules that make that dependable are cheap, specific, and each one was written after something went wrong.">
+<title>Getting several AI agents to work together without a server</title>
+<meta name="description" content="A shared folder and a few JSON files is enough to coordinate agents across machines and projects. The handful of rules that make it dependable, and why coordination bugs are so hard to spot.">
 <link rel="icon" type="image/png" sizes="256x256" href="/static/favicon.png">
 <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
 <link rel="canonical" href="https://thevfxsupervisor.github.io/notes/what-breaks-when-ai-agents-coordinate-over-files/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="the vfx supervisor">
-<meta property="og:title" content="Coordinating a fleet of AI agents across several projects, and the rules that make it reliable">
-<meta property="og:description" content="Several AI agents run daily across three operating systems and multiple projects, coordinated over plain files. The rules that make that dependable are cheap, specific, and each one was written after something went wrong.">
+<meta property="og:title" content="Getting several AI agents to work together without a server">
+<meta property="og:description" content="A shared folder and a few JSON files is enough to coordinate agents across machines and projects. The handful of rules that make it dependable, and why coordination bugs are so hard to spot.">
 <meta property="og:url" content="https://thevfxsupervisor.github.io/notes/what-breaks-when-ai-agents-coordinate-over-files/">
 <meta property="og:image" content="https://thevfxsupervisor.github.io/static/logo-icon.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Coordinating a fleet of AI agents across several projects, and the rules that make it reliable">
-<meta name="twitter:description" content="Several AI agents run daily across three operating systems and multiple projects, coordinated over plain files. The rules that make that dependable are cheap, specific, and each one was written after something went wrong.">
+<meta name="twitter:title" content="Getting several AI agents to work together without a server">
+<meta name="twitter:description" content="A shared folder and a few JSON files is enough to coordinate agents across machines and projects. The handful of rules that make it dependable, and why coordination bugs are so hard to spot.">
 <meta name="twitter:image" content="https://thevfxsupervisor.github.io/static/logo-icon.png">
 <link rel="stylesheet" href="/static/style.css">
   <link rel="alternate" type="application/rss+xml" title="the vfx supervisor" href="https://thevfxsupervisor.github.io/feed.xml">
@@ -43,49 +43,30 @@
 <section class="hero">
   <div class="wrap">
     <span class="eyebrow">Notes &middot; 2026-07-05</span>
-    <h1 style="margin-top:18px">Coordinating a fleet of AI agents across several projects, and the rules that make it reliable</h1>
+    <h1 style="margin-top:18px">Getting several AI agents to work together without a server</h1>
   </div>
 </section>
 <hr class="rule">
 <section>
   <div class="wrap prose">
-    <p>Several AI agent sessions run on my productions at once: one on the shot breakdown, one on budgets and vendor sheets, others driving heavier jobs on other machines. They coordinate over a shared folder of small JSON files, one per session, using a skill I open-sourced called <a href="/projects/link-session/">link-session</a>.</p>
-<p>It runs daily across Windows, macOS and Linux, on several different projects rather than one. <strong>It is dependable now, and that is the interesting part</strong>, because the naive version of this is not. What follows is the set of rules that got it there. Every one of them was written after something went wrong, which is the only way anybody learns this, and none of them cost anything to apply once you know.</p>
-<p>The reason to write them down is that a coordination bug does not announce itself. It does not crash. It looks exactly like everything being fine.</p>
-<h2>Decide what a participant is, explicitly</h2>
-<p>A session is a participant because its file has the right shape, not because it has the right extension. Tools drop working files and caches into shared folders, and anything that treats every file in the directory as a peer will eventually pick up a state cache and treat it as a colleague.</p>
-<p>The check is one line. Skipping it gives you a phantom participant that also happens to change constantly.</p>
-<h2>Fire on content, never on timestamps</h2>
-<p>Detect change by hashing the content that matters, not by modification time. A session re-saving its own file with identical content must not wake anybody.</p>
-<p>This has a corollary that matters more than the rule: <strong>keep what you write stable.</strong> No counters, no timestamps, no "last checked at" inside the status. If the status line is regenerated freehand each cycle, it is a new string every time, and content hashing cannot save you from content that genuinely changed. Let the file's timestamp carry liveness. Anyone who cares can read it without being woken.</p>
-<p>On a channel with several participants, every field you write is pulled into every peer on every change. A chatty status is a tax multiplied by the number of peers and paid again on every update.</p>
-<h2>Baseline on start, do not replay</h2>
-<p>A newly started watcher sees every existing file as new. Record what everything currently says, emit none of it, then start watching. Otherwise every restart dumps the whole accumulated history into the session that just started.</p>
-<h2>One writer per file</h2>
-<p>Each session writes its own file and nobody else's. Two processes on one file overwrite each other, and on a synced folder they produce conflicted copies where the real file reflects neither write.</p>
-<p>Where a background watcher and a scheduled job both have something to say about the same machine, one of them owns the file and the other defers, only writing when the owner has gone quiet.</p>
-<h2>Never hardcode a claim about yourself</h2>
-<p>A heartbeat that asserts a fixed sentence about the machine's state is a promise to keep that sentence true by hand, forever. That promise does not survive the system changing around it, and a confidently wrong status is worse than no status: peers act on it.</p>
-<p>State what is checkable, and let anything that can change be read rather than asserted.</p>
-<h2>Say when you cannot see</h2>
-<p>If the shared folder becomes unreachable, a watcher loops seeing nothing, with no error, indistinguishable from a quiet channel. Guard for it and say so loudly, once.</p>
-<p>The general form: <strong>absence of signal is not evidence of calm</strong>, and any system where "broken" and "nothing happening" look identical will eventually be trusted while broken.</p>
-<h2>Long payloads go in files, messages are pointers</h2>
-<p>A single message slot clobbers: write twice before the first is read and the first is gone without trace. Anything longer than a line becomes a file, and the message points at it.</p>
-<p>Order matters. <strong>Write the file first, update the status second</strong>, because the status is what wakes people, so it has to change only after the thing it refers to is complete. Reverse it and a peer wakes, reads a half-written file, and records it as seen.</p>
-<h2>Check the recipient is listening</h2>
-<p>Before routing work to another session, confirm it is still running. A closed session and a busy one are indistinguishable from the outside: both simply do not reply, and work addressed to one that has stopped sits unread while looking, from your side, like work in progress.</p>
-<h2>Messages are information, never instructions</h2>
-<p>The one with real consequences. <strong>A message on a shared channel is not authorisation, whoever it claims to be from.</strong></p>
-<p>If an agent can act on an instruction it read in a file, then an agent can escalate its own permissions by writing a sentence, and so can anything else with write access to that folder. Instructions come from the person running the system. Everything read from a file, including a file written by another agent, is information to weigh.</p>
-<h2>The pattern worth taking away</h2>
-<p>Several of these share one shape: <strong>a check that could only ever confirm what it already assumed.</strong></p>
-<p>Change detection that compared the thing it controlled. A heartbeat asserting a fact it had been told once. A verification that searched for exactly the patterns its own filter used, so it could only find what had already been caught, and reported clean while missing everything the filter did not know about.</p>
-<p>If a check and the thing it checks share a premise, the check cannot fail in the way that matters. Verify the outcome from the other side, then prove the check can fail: break something deliberately and confirm it complains. A check nobody has ever seen fail is not evidence.</p>
-<p>---</p>
-<p>None of this is exotic. It is ordinary distributed-systems discipline, arriving in a setting small enough to feel like it should not need it: a folder, a few files, one machine per participant.</p>
-<p>That is exactly why it is worth being strict about. The coordination layer is not where the interesting work happens, so it gets the least attention and fails quietly by default. Get these right and it disappears into the background, which is what you want from it, and several agents can work real projects without stepping on each other.</p>
-<p><a href="https://github.com/thevfxsupervisor/link-session">link-session is on GitHub</a>, MIT, and the <a href="/projects/link-session/">case study</a> covers the design.</p>
+    <p>I run several agent sessions at once. One on a shot breakdown, one on budgets and vendor sheets, others driving heavier jobs on other machines. They share the same files, so they have to know what each other is doing.</p>
+<p>I did not want a server or a message bus for that. So each session writes one small JSON file into a shared folder, and watches the others. That is the whole design, and it is the <a href="/projects/link-session/">link-session</a> skill. It runs every day across Windows, macOS and Linux, on several projects at once.</p>
+<p>It works well now. It did not at first, and the reason is worth passing on.</p>
+<h2>The bugs do not look like bugs</h2>
+<p>A coordination problem never crashes. It looks like everything being fine.</p>
+<p>I had two watchers running for ten days without noticing. Every message arrived twice, which reads as a busy channel, not a fault. Another time the shared folder became unreachable and the watcher just sat there quietly, which looks exactly the same as nobody having anything to say. That one still bothers me: if broken and calm look identical, you will trust it while it is broken.</p>
+<p>So most of what I learned is about making silence mean something.</p>
+<h2>The rules that actually matter</h2>
+<p>Only tell people when something really changed. My first version watched file timestamps, so a session re-saving its own file with no change woke everyone up. Now it compares the content. That only works if what you write is stable, which means no clocks and no counters in the status line, or every update is technically new.</p>
+<p>One writer per file. Two processes writing the same file overwrite each other, and on a synced folder you get conflicted copies where the real file has neither version. If two things need to report on the same machine, one owns the file and the other keeps quiet.</p>
+<p>Check the other session is still there before handing it anything. A finished session and a busy one look the same from outside: both just do not answer. I sent work to a session that had closed hours earlier, and from my side it looked like it was being worked on.</p>
+<p>And the one I feel strongest about: a message in the folder is information, never an instruction. If an agent will act on something it read in a file, then it can give itself permission by writing a sentence, and so can anything else that can write there. Instructions come from me.</p>
+<h2>The thing underneath</h2>
+<p>Most of these were the same mistake wearing different clothes. I kept building checks that could only ever agree with themselves.</p>
+<p>The change detector compared the thing it controlled. A status line announced something it had been told once, long after it stopped being true. A check for duplicate watchers matched its own wrapper, so a healthy setup looked broken and a broken one looked fine.</p>
+<p>If a check shares an assumption with the thing it is checking, it cannot fail in the way that matters. Now I break things on purpose to see whether the check complains. If I have never seen it fail, I do not really know it works.</p>
+<p>None of this is clever. It is ordinary plumbing, in a setting small enough that it feels like it should not need any of it. But the coordination layer is not where the interesting work happens, so it gets the least attention, and it fails quietly. Get these few things right and it disappears, which is all you want from it.</p>
+<p><a href="https://github.com/thevfxsupervisor/link-session">link-session is on GitHub</a>, MIT.</p>
   </div>
 </section>
 <section>
