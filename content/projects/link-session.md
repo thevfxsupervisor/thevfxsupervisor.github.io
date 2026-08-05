@@ -1,12 +1,12 @@
 ---
 type: project
 slug: link-session
-title: Case study: link-session, coordinating a fleet of AI agents on one production | the vfx supervisor
-description: How I coordinate several live AI agents on a single film production over shared files, with no server. A small open-source Claude Code skill.
+title: Case study: link-session, coordinating a fleet of AI agents across projects | the vfx supervisor
+description: How I coordinate several live AI agents across concurrent projects over shared files, with no server. A small open-source Claude Code skill.
 eyebrow: Case study
-h1: How I run a fleet of AI agents on one film, coordinated over shared files, no server
+h1: How I run a fleet of AI agents across projects, coordinated over shared files, no server
 lede: A small utility that does one job well: let several live AI sessions coordinate on the same production, hand off work, and stay out of each other's way. Open source, MIT.
-cred: Designed and shipped solo, running daily across three operating systems on a live feature.
+cred: Designed and shipped solo, running daily across three operating systems and multiple projects.
 get_label: Get the skill
 get_href: https://github.com/thevfxsupervisor/link-session
 final_h2: Want AI-assisted pipeline work on your show?
@@ -18,7 +18,7 @@ final_secondary_href: /course/
 soon: Open source · MIT · on GitHub
 card_title: link-session
 card_eyebrow: Agent coordination · open source
-card_summary: A file-based protocol for coordinating several live AI agents on one production. No server, no message bus.
+card_summary: A file-based protocol for coordinating several live AI agents across projects. No server, no message bus.
 ---
 
 ## The problem
@@ -31,7 +31,7 @@ I did not want a server, a message bus, or an orchestration framework to babysit
 
 ## In production
 
-It runs daily across Windows, macOS and Linux machines on a live feature film, coordinating the agents that drive [Breakdown Studio](/projects/breakdown-studio/), the finance and vendor sheets, and heavier GPU work farmed out to other machines. The rules that keep it safe are the point: one writer per file, long payloads as files rather than single-slot messages, a clean stop protocol, and a hard line that coordination carries metadata, never client or show content. No client names, no show names, ever.
+It runs daily across Windows, macOS and Linux machines and across several concurrent projects, coordinating the agents that drive [Breakdown Studio](/projects/breakdown-studio/), the finance and vendor sheets, and heavier GPU work farmed out to other machines. The rules that keep it safe are the point: one writer per file, long payloads as files rather than single-slot messages, a clean stop protocol, and a hard line that coordination carries metadata, never client or show content. No client names, no show names, ever.
 
 ## What it proves
 

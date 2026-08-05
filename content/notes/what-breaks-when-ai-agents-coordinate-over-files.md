@@ -1,8 +1,8 @@
 ---
 type: note
 slug: what-breaks-when-ai-agents-coordinate-over-files
-title: Coordinating a fleet of AI agents on one film, and the rules that make it reliable
-description: Several AI agents run daily across three operating systems on a live feature, coordinated over plain files. The rules that make that dependable are cheap, specific, and each one was written after something went wrong.
+title: Coordinating a fleet of AI agents across several projects, and the rules that make it reliable
+description: Several AI agents run daily across three operating systems and multiple projects, coordinated over plain files. The rules that make that dependable are cheap, specific, and each one was written after something went wrong.
 date: 2026-07-05
 tags: agents, coordination, pipeline, link-session
 draft: false
@@ -10,7 +10,7 @@ draft: false
 
 Several AI agent sessions run on my productions at once: one on the shot breakdown, one on budgets and vendor sheets, others driving heavier jobs on other machines. They coordinate over a shared folder of small JSON files, one per session, using a skill I open-sourced called [link-session](/projects/link-session/).
 
-It runs daily across Windows, macOS and Linux on a live feature. **It is dependable now, and that is the interesting part**, because the naive version of this is not. What follows is the set of rules that got it there. Every one of them was written after something went wrong, which is the only way anybody learns this, and none of them cost anything to apply once you know.
+It runs daily across Windows, macOS and Linux, on several different projects rather than one. **It is dependable now, and that is the interesting part**, because the naive version of this is not. What follows is the set of rules that got it there. Every one of them was written after something went wrong, which is the only way anybody learns this, and none of them cost anything to apply once you know.
 
 The reason to write them down is that a coordination bug does not announce itself. It does not crash. It looks exactly like everything being fine.
 
@@ -78,6 +78,6 @@ If a check and the thing it checks share a premise, the check cannot fail in the
 
 None of this is exotic. It is ordinary distributed-systems discipline, arriving in a setting small enough to feel like it should not need it: a folder, a few files, one machine per participant.
 
-That is exactly why it is worth being strict about. The coordination layer is not where the interesting work happens, so it gets the least attention and fails quietly by default. Get these right and it disappears into the background, which is what you want from it, and several agents can work a real production without stepping on each other.
+That is exactly why it is worth being strict about. The coordination layer is not where the interesting work happens, so it gets the least attention and fails quietly by default. Get these right and it disappears into the background, which is what you want from it, and several agents can work real projects without stepping on each other.
 
 [link-session is on GitHub](https://github.com/thevfxsupervisor/link-session), MIT, and the [case study](/projects/link-session/) covers the design.

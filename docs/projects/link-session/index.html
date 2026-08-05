@@ -3,20 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Case study: link-session, coordinating a fleet of AI agents on one production | the vfx supervisor</title>
-<meta name="description" content="How I coordinate several live AI agents on a single film production over shared files, with no server. A small open-source Claude Code skill.">
+<title>Case study: link-session, coordinating a fleet of AI agents across projects | the vfx supervisor</title>
+<meta name="description" content="How I coordinate several live AI agents across concurrent projects over shared files, with no server. A small open-source Claude Code skill.">
 <link rel="icon" type="image/png" sizes="256x256" href="/static/favicon.png">
 <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
 <link rel="canonical" href="https://thevfxsupervisor.github.io/projects/link-session/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="the vfx supervisor">
-<meta property="og:title" content="Case study: link-session, coordinating a fleet of AI agents on one production | the vfx supervisor">
-<meta property="og:description" content="How I coordinate several live AI agents on a single film production over shared files, with no server. A small open-source Claude Code skill.">
+<meta property="og:title" content="Case study: link-session, coordinating a fleet of AI agents across projects | the vfx supervisor">
+<meta property="og:description" content="How I coordinate several live AI agents across concurrent projects over shared files, with no server. A small open-source Claude Code skill.">
 <meta property="og:url" content="https://thevfxsupervisor.github.io/projects/link-session/">
 <meta property="og:image" content="https://thevfxsupervisor.github.io/static/logo-icon.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Case study: link-session, coordinating a fleet of AI agents on one production | the vfx supervisor">
-<meta name="twitter:description" content="How I coordinate several live AI agents on a single film production over shared files, with no server. A small open-source Claude Code skill.">
+<meta name="twitter:title" content="Case study: link-session, coordinating a fleet of AI agents across projects | the vfx supervisor">
+<meta name="twitter:description" content="How I coordinate several live AI agents across concurrent projects over shared files, with no server. A small open-source Claude Code skill.">
 <meta name="twitter:image" content="https://thevfxsupervisor.github.io/static/logo-icon.png">
 <link rel="stylesheet" href="/static/style.css">
   <link rel="alternate" type="application/rss+xml" title="the vfx supervisor" href="https://thevfxsupervisor.github.io/feed.xml">
@@ -43,10 +43,10 @@
 <section class="hero">
   <div class="wrap">
     <span class="eyebrow">Case study</span>
-    <h1 style="margin-top:18px">How I run a fleet of AI agents on one film, coordinated over shared files, no server</h1>
+    <h1 style="margin-top:18px">How I run a fleet of AI agents across projects, coordinated over shared files, no server</h1>
     <p class="lede">A small utility that does one job well: let several live AI sessions coordinate on the same production, hand off work, and stay out of each other's way. Open source, MIT.</p>
     <div class="cta-row"><a class="btn btn-a" href="https://github.com/thevfxsupervisor/link-session">Get the skill</a><a class="btn btn-b" href="/about/">Work with me</a></div>
-    <div class="cred"><span class="dot"></span><b>Designed and shipped solo, running daily across three operating systems on a live feature.</b></div>
+    <div class="cred"><span class="dot"></span><b>Designed and shipped solo, running daily across three operating systems and multiple projects.</b></div>
   </div>
 </section>
 
@@ -59,7 +59,7 @@
 <h2>The design call</h2>
 <p>I did not want a server, a message bus, or an orchestration framework to babysit a side utility. So link-session coordinates over plain files: each session writes one small JSON outbox into a shared folder, and a lightweight watcher surfaces what every other session is doing, without polling. Files over a service buys three things that matter on a production: zero infrastructure to run or break, a coordination trail you can read by eye, and state that survives a session dying, a restart, or a flaky network mount.</p>
 <h2>In production</h2>
-<p>It runs daily across Windows, macOS and Linux machines on a live feature film, coordinating the agents that drive <a href="/projects/breakdown-studio/">Breakdown Studio</a>, the finance and vendor sheets, and heavier GPU work farmed out to other machines. The rules that keep it safe are the point: one writer per file, long payloads as files rather than single-slot messages, a clean stop protocol, and a hard line that coordination carries metadata, never client or show content. No client names, no show names, ever.</p>
+<p>It runs daily across Windows, macOS and Linux machines and across several concurrent projects, coordinating the agents that drive <a href="/projects/breakdown-studio/">Breakdown Studio</a>, the finance and vendor sheets, and heavier GPU work farmed out to other machines. The rules that keep it safe are the point: one writer per file, long payloads as files rather than single-slot messages, a clean stop protocol, and a hard line that coordination carries metadata, never client or show content. No client names, no show names, ever.</p>
 <h2>What it proves</h2>
 <p>The tool is small on purpose, and I lead with that. The point is not the utility, it is the operating model: I run AI as a coordinated team on real production work, with guardrails, not a single assistant in a tab. That is the hardest half of "a VFX supervisor who orchestrates AI" to demonstrate, and this is the public proof of it.</p>
   </div>
