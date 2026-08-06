@@ -837,7 +837,7 @@ def main():
     # over (parked at easyDNS). Emitting docs/CNAME makes Pages auto-set the custom domain,
     # which 301-redirects github.io into the parked lander = site DOWN. Set True ONLY after
     # the DNS cutover is real (see dev/MAINTAINING.md). .gitignore also excludes docs/CNAME.
-    CUTOVER_DONE = False  # NOT a rollback: the domain is set via the Pages API (cname), and a committed docs/CNAME makes the legacy build fail instantly (duration 0). See dev/DOMAIN-CUTOVER.md.
+    CUTOVER_DONE = True  # cut over 2026-08-06. build.py MUST keep emitting docs/CNAME: it wipes docs/ each build, and GitHub drops the custom domain if the file disappears.
     if CUTOVER_DONE:
         (DOCS_DIR / "CNAME").write_text(DOMAIN + "\n", encoding="utf-8")
         print(f"  wrote docs/CNAME ({DOMAIN})")
