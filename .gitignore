@@ -1,7 +1,6 @@
-# thevfxsupervisor.com is parked at easyDNS and NOT cut over to GitHub Pages.
-# A committed docs/CNAME makes Pages 301-redirect github.io into the parked lander (site down).
-# build.py also gates CNAME emission behind CUTOVER_DONE=False. Remove this line only after real cutover.
-docs/CNAME
+# docs/CNAME is now TRACKED on purpose. thevfxsupervisor.com was cut over to GitHub Pages on
+# 2026-08-06 and build.py emits it (CUTOVER_DONE=True). It must STAY committed: if it disappears
+# from docs/, Pages drops the custom domain on the next build.
 
 # Python build cache
 __pycache__/

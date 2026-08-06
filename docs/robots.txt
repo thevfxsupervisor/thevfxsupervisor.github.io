@@ -1,3 +1,3 @@
 User-agent: *
 Allow: /
-Sitemap: https://thevfxsupervisor.github.io/sitemap.xml
+Sitemap: https://thevfxsupervisor.com/sitemap.xml

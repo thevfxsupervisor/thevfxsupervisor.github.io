@@ -329,7 +329,7 @@ def write_sitemap(paths, out_dir):
     print("    wrote sitemap.xml + robots.txt")
 
 
-SITE_CANONICAL = "https://thevfxsupervisor.github.io"  # flip to https://thevfxsupervisor.com at cutover
+SITE_CANONICAL = "https://thevfxsupervisor.com"  # cut over 2026-08-06; github.io now 301s here
 
 
 def render_shell(title, description, content_html, nav_active=None, extra_script="", canonical_path=""):
@@ -837,7 +837,7 @@ def main():
     # over (parked at easyDNS). Emitting docs/CNAME makes Pages auto-set the custom domain,
     # which 301-redirects github.io into the parked lander = site DOWN. Set True ONLY after
     # the DNS cutover is real (see dev/MAINTAINING.md). .gitignore also excludes docs/CNAME.
-    CUTOVER_DONE = False
+    CUTOVER_DONE = True  # DNS cut over 2026-08-06, apex + www verified resolving to GitHub
     if CUTOVER_DONE:
         (DOCS_DIR / "CNAME").write_text(DOMAIN + "\n", encoding="utf-8")
         print(f"  wrote docs/CNAME ({DOMAIN})")
