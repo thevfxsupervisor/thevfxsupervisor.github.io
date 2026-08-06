@@ -5,3 +5,7 @@
 # Python build cache
 __pycache__/
 *.pyc
+
+# docs/CNAME must NOT be committed: it makes the legacy Pages build fail instantly.
+# The custom domain is configured via the Pages API instead (cname=thevfxsupervisor.com).
+docs/CNAME
