@@ -45,7 +45,7 @@
     <span class="eyebrow">Case study</span>
     <h1 style="margin-top:18px">I was hand-matching hundreds of shots across every re-cut of a feature. So I built the tool that does it.</h1>
     <p class="lede">Breakdown Studio is the shot-breakdown pipeline I built to survive running a feature's VFX department alone. It is open source now, MIT, and it turns weeks of hand-logging a cut into an afternoon.</p>
-    <div class="cta-row"><a class="btn btn-a" href="https://thevfxsupervisor.github.io/breakdown-studio/">Get the tool</a><a class="btn btn-b" href="/about/">Work with me</a></div>
+    <div class="cta-row"><a class="btn btn-a" href="https://thevfxsupervisor.com/breakdown-studio/">Get the tool</a><a class="btn btn-b" href="/about/">Work with me</a></div>
     <div class="cred"><span class="dot"></span><b>Designed, hardened and shipped end to end by one person, on a live feature film.</b></div>
   </div>
 </section>
@@ -57,7 +57,7 @@
     <h2>The problem</h2>
 <p>A production hands you the edit and needs a number. The shot breakdown is what every bid, schedule and vendor package hangs off, and on an evolving cut it used to mean weeks of hand-logging that got half-thrown-away on every re-cut. I was doing that alone, cut after cut, and losing real work to the noise.</p>
 <h2>What it does</h2>
-<p>Breakdown Studio builds that breakdown straight from the edit and keeps it current: it detects every shot offline, reads the burned-in slates and VFX notes, thumbnails it into a live sheet you can bid immediately, and re-matches each new cut back to your master one to one, so a re-cut is a short review instead of a full re-log. <a href="https://thevfxsupervisor.github.io/breakdown-studio/">Get the tool and the full feature list.</a></p>
+<p>Breakdown Studio builds that breakdown straight from the edit and keeps it current: it detects every shot offline, reads the burned-in slates and VFX notes, thumbnails it into a live sheet you can bid immediately, and re-matches each new cut back to your master one to one, so a re-cut is a short review instead of a full re-log. <a href="https://thevfxsupervisor.com/breakdown-studio/">Get the tool and the full feature list.</a></p>
 <h2>Decisions and trade-offs</h2>
 <p>I built it offline-first, running on your own machine and your own Google account, on purpose: a breakdown holds unreleased footage and confidential notes, so nothing leaves the machine and there is no service to trust. The hard part was never detecting shots, it was identity, deciding which master row a drifted shot code belongs to across a re-cut, and keeping that match one to one so a rename never silently collides. It ships with a context pack that briefs an AI assistant on those rules, so the mechanical half runs on its own while the judgment calls, what counts as a real drop versus a protected shot, stay with the supervisor. The agent fleet that actually runs it is coordinated with <a href="/projects/link-session/">link-session</a>.</p>
 <h2>Proof in production</h2>

@@ -26,15 +26,17 @@ Reads `content/` (markdown + YAML-lite frontmatter), renders through `templates/
 static HTML into `docs/`. GitHub Pages serves `main:/docs`, so deploy is just commit and push. Always
 rebuild before committing, or `docs/` drifts from `content/`.
 
-## The one thing that can take the site down
+## docs/CNAME: the rule INVERTED on 2026-08-06
 
-`thevfxsupervisor.com` is **parked at easyDNS and has never been cut over.** If `docs/CNAME` is ever
-committed, Pages auto-sets the custom domain and 301-redirects github.io into the parked lander, so
-the site goes dark. That happened on 2026-07-29.
+The domain was cut over. `thevfxsupervisor.com` now points at GitHub Pages, `build.py` has
+`CUTOVER_DONE = True`, and **`docs/CNAME` is tracked on purpose and must stay committed.** If it
+vanishes from `docs/`, Pages drops the custom domain on the next build and the site falls back to
+github.io.
 
-Two gates prevent it: `build.py` has `CUTOVER_DONE = False` so it does not emit the file, and
-`.gitignore` excludes `docs/CNAME`. **Do not remove either** until DNS actually points at GitHub.
-The full cutover procedure is in `dev/DOMAIN-CUTOVER.md`.
+Historical note so the old warning is not reapplied: before the cutover the opposite was true, a
+committed `docs/CNAME` 301-redirected github.io into the parked easyDNS lander and took the site
+down (2026-07-29). That risk is gone now that DNS resolves to GitHub. `dev/DOMAIN-CUTOVER.md` holds
+the full procedure and the rollback.
 
 ## Brand tokens (shared with the Breakdown Studio site)
 

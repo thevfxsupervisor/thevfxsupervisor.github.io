@@ -3,9 +3,9 @@
 **Read this first.** What is true right now, what is stale, what is unverified.
 Last updated 2026-08-06 by the `windows` seat.
 
-## Status: LIVE and healthy
+## Status: LIVE and healthy, on the custom domain
 
-https://thevfxsupervisor.github.io/ serves from `main:/docs`. All pages, both logo assets,
+**https://thevfxsupervisor.com/** serves from `main:/docs` (cut over 2026-08-06). All pages, both logo assets,
 `sitemap.xml` and `robots.txt` verified 200 on 2026-08-05.
 
 Pages: `/`, `/projects/`, `/projects/breakdown-studio/`, `/projects/link-session/`, `/course/`,
@@ -26,7 +26,7 @@ Pages: `/`, `/projects/`, `/projects/breakdown-studio/`, `/projects/link-session
 
 ## Open items
 
-1. **Domain cutover, NOT started.** `thevfxsupervisor.com` is still parked at easyDNS; apex and www
+1. ~~Domain cutover~~ **DONE 2026-08-06.** Live at https://thevfxsupervisor.com with HTTPS; www 301s to apex and the old github.io 301s to the new domain. Google MX records survived untouched. `dev/DOMAIN-CUTOVER.md` is kept as the record of how it was done and how to roll back.
    both resolve to `64.68.200.44`. Full runbook in `dev/DOMAIN-CUTOVER.md`. Needs Geoff to change the
    easyDNS records first. **Do not flip `CUTOVER_DONE` or remove the `.gitignore` line before DNS
    actually resolves to GitHub**, that takes the site down.

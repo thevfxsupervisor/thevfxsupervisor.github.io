@@ -8,7 +8,7 @@ h1: I was hand-matching hundreds of shots across every re-cut of a feature. So I
 lede: Breakdown Studio is the shot-breakdown pipeline I built to survive running a feature's VFX department alone. It is open source now, MIT, and it turns weeks of hand-logging a cut into an afternoon.
 cred: Designed, hardened and shipped end to end by one person, on a live feature film.
 get_label: Get the tool
-get_href: https://thevfxsupervisor.github.io/breakdown-studio/
+get_href: https://thevfxsupervisor.com/breakdown-studio/
 stats_h2: The numbers
 final_h2: Want this on your show?
 final_p: I run AI-assisted VFX pipelines on real productions. If that is useful to your film, let's talk. Or book the course for the method behind the tool.
@@ -28,7 +28,7 @@ A production hands you the edit and needs a number. The shot breakdown is what e
 
 ## What it does
 
-Breakdown Studio builds that breakdown straight from the edit and keeps it current: it detects every shot offline, reads the burned-in slates and VFX notes, thumbnails it into a live sheet you can bid immediately, and re-matches each new cut back to your master one to one, so a re-cut is a short review instead of a full re-log. [Get the tool and the full feature list.](https://thevfxsupervisor.github.io/breakdown-studio/)
+Breakdown Studio builds that breakdown straight from the edit and keeps it current: it detects every shot offline, reads the burned-in slates and VFX notes, thumbnails it into a live sheet you can bid immediately, and re-matches each new cut back to your master one to one, so a re-cut is a short review instead of a full re-log. [Get the tool and the full feature list.](https://thevfxsupervisor.com/breakdown-studio/)
 
 ## Decisions and trade-offs
 
