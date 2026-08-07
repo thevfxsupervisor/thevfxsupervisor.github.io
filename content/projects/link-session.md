@@ -33,6 +33,10 @@ I did not want a server, a message bus, or an orchestration framework to babysit
 
 It runs daily across Windows, macOS and Linux machines and across several concurrent projects, coordinating the agents that drive [Breakdown Studio](/projects/breakdown-studio/), the finance and vendor sheets, and heavier GPU work farmed out to other machines. The rules that keep it safe are the point: one writer per file, long payloads as files rather than single-slot messages, a clean stop protocol, and a hard line that coordination carries metadata, never client or show content. No client names, no show names, ever.
 
+## Hardened by running it
+
+The recent work on it is the tell that it is real and not a demo. A coordination layer fails quietly, so most of that effort went into making silence mean something: it reports only genuine changes rather than every re-save, keeps idle sessions quiet so what does arrive is worth reading, counts its own watchers so nothing is delivered twice, and runs identically across all three operating systems, down to the older shells. It also grew a clean way to rename and re-identify a session without losing the thread, which is what you hit the moment a one-machine setup becomes a fleet. Every one of those was a real failure caught by running it daily, not a feature I imagined, and the skill is smaller now than it was while doing more.
+
 ## What it proves
 
 The tool is small on purpose, and I lead with that. The point is not the utility, it is the operating model: I run AI as a coordinated team on real production work, with guardrails, not a single assistant in a tab. That is the hardest half of "a VFX supervisor who orchestrates AI" to demonstrate, and this is the public proof of it.
