@@ -179,7 +179,7 @@ const WAITLIST_ENDPOINT = "https://script.google.com/macros/s/AKfycbzFVLT4Sl7ZfA
       .then(function(r){ return r.json(); })
       .then(function(data){
         if (data && data.ok) {
-          setStatus("You're on the list. I'll send one note when it launches.", 'ok');
+          setStatus("You're in. I'll email you the invoice and how to join.", 'ok');
           form.reset();
         } else {
           throw new Error('bad response');

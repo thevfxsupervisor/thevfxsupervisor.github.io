@@ -1,7 +1,10 @@
 # Booking and the waitlist endpoint
 
-**CURRENT as of 2026-08-05.** The course page changed from a waitlist into a dated, priced offer
-(Thursday 3 September 2026, 450 USD), so this document changed with it.
+**CURRENT as of 2026-08-07.** The course page is a dated, priced offer (Thursday 3 September 2026,
+founding cohort 325 USD). **The waitlist form is now LIVE:** it posts to a deployed Google Apps Script
+web app that appends each signup to a private Google Sheet in Geoff's Drive. The `mailto:` is now only
+a fallback for when that POST fails. Endpoint URL lives in `waitlist_endpoint:` in
+`content/pages/course.md`.
 
 ## How booking works right now, and why
 
@@ -16,39 +19,28 @@ needs Geoff's ID, bank details and UBO information that nobody else can enter.
 **The tradeoff, stated honestly:** an invoice is paid on terms, a card is paid on booking. So cash
 lands later than the launch research assumed. If seats start moving, Stripe is the upgrade.
 
-## What the form does with no endpoint configured
+## What the form does (endpoint configured)
 
-`waitlist_endpoint:` in `content/pages/course.md` is empty, so the form composes a `mailto:` to
-`contact_email` with the subject "Reserve a seat: 3 September workshop" and the details in the body.
-
-**It used to announce "Waitlist form is not wired up yet. Opening an email instead."** That told
-every visitor, at the exact moment they had decided to sign up, that the operation was amateur. Zero
-signups were ever captured. It now confirms confidently and shows a visible fallback link, because
+`waitlist_endpoint:` in `content/pages/course.md` holds the deployed web-app URL, so on submit the
+form POSTs `{email, name, note}` as `text/plain` (a "simple" request, so no CORS preflight) and the
+script appends a row to the bound Sheet. On success it shows a confirmation; if the POST fails it
+falls back to composing a `mailto:` to `contact_email` and shows a visible fallback link, because
 `window.location.href` to a `mailto:` **silently does nothing** for anyone with no mail client
-configured, and on desktop that is a lot of people who were getting no feedback at all.
+configured. Verified end to end 2026-08-07: a cross-origin POST returned `{"ok":true}` and a row
+landed in the Sheet.
 
-## If you later want rows in a Sheet instead of emails
+## The deployment (LIVE, 2026-08-07)
 
-`waitlist.gs` in this folder still works and is unchanged. It needs a browser OAuth consent only
-Geoff can give, which is why it has never been deployed.
+`waitlist.gs` is deployed as a **bound** Apps Script web app (Extensions > Apps Script from inside the
+Sheet, so `getActiveSpreadsheet()` resolves), Execute as **Me**, Who has access **Anyone**. Each
+reservation appends `timestamp, email, name, note`. The Sheet is private to Geoff; the web app writes
+to it under his authorization. Reservations still turn into invoices by hand: deploying this only
+changed HOW they arrive (rows, not email), not the invoicing.
 
-1. [script.google.com](https://script.google.com/), then **New project**.
-2. Paste in `waitlist.gs`, rename the project to something like `thevfxsupervisor-booking`.
-3. **Deploy > New deployment**, gear next to "Select type" > **Web app**.
-   Execute as **Me**, Who has access **Anyone**.
-4. **Deploy**, authorize the script (it is your own), copy the **Web app URL**.
-5. Paste it into `waitlist_endpoint:` in `content/pages/course.md`, run `python3 build.py`, push.
-
-**The bound-spreadsheet trap:** if you create the project from script.google.com directly it has no
-bound spreadsheet, and `SpreadsheetApp.getActiveSpreadsheet()` fails. Create the Google Sheet first,
-then **Extensions > Apps Script** from inside it, and paste `waitlist.gs` there. That binds it
-automatically, and each reservation appends `timestamp, email, name, note`.
-
-**Re-deploying after an edit:** **Deploy > Manage deployments > edit (pencil) > New version >
-Deploy**. A plain save does NOT push new code to the live web app URL.
-
-**Deploying this does not change the invoicing.** It only changes reservations from arriving as email
-to arriving as rows. Someone still sends the invoice.
+**Re-deploying after editing `waitlist.gs`:** in the Apps Script editor, **Deploy > Manage
+deployments > edit (pencil) > New version > Deploy**. A plain save does NOT push new code to the live
+URL. If you ever create a NEW deployment instead, its URL changes, so update `waitlist_endpoint:` in
+`content/pages/course.md`, rebuild, and push.
 
 ## Open decisions that are Geoff's, not mine
 

@@ -663,7 +663,7 @@ const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist
       .then(function(r){{ return r.json(); }})
       .then(function(data){{
         if (data && data.ok) {{
-          setStatus("You're on the list. I'll send one note when it launches.", 'ok');
+          setStatus("You're in. I'll email you the invoice and how to join.", 'ok');
           form.reset();
         }} else {{
           throw new Error('bad response');
