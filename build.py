@@ -590,7 +590,8 @@ def render_course():
     <div class="sec-head"><span class="eyebrow">Founding cohort &middot; 3 September 2026 &middot; 325 USD</span>
       <h2>Sign up</h2>
       <p class="k">It is a working session, so the size is limited by the format. Sign up below and I
-        will send you a payment link and the joining details. No spam, no drip sequence.</p></div>
+        will email you an invoice and how to join. Most people expense it, so it comes as a proper
+        invoice from my company, not a card receipt. No spam, no drip sequence.</p></div>
 
       {buy_block}
     <form class="form-card" id="waitlist-form" style="margin-top:28px">
@@ -600,7 +601,7 @@ def render_course():
         <textarea id="wl-note" name="note" placeholder="e.g. an indie feature, a series pilot, or my first show as supervisor"></textarea></div>
       <button type="submit" class="btn btn-a" id="wl-submit">Sign up</button>
       <div id="wl-status"></div>
-      <p class="tiny">Your email is used only to send you the payment link and joining details. Nothing else.</p>
+      <p class="tiny">Your email is used only to send you the invoice and joining details. Nothing else.</p>
     </form>
   </div>
 </section>

@@ -74,7 +74,7 @@
 <p><strong>325 USD for this first cohort. It goes to 450 after that.</strong> This one is cheaper because it is the first time I am running it, and I want the feedback from the people in the room.</p>
 <p>So you are early. A few parts will run long while I find where they need more time. In return you get the method I actually use on shows, and my eyes on your film while we are in it.</p>
 <p>It runs once, live, at this time. No second date yet.</p>
-<p>Sign up below and I will send you a payment link and the joining details.</p>
+<p>Sign up below and I will email you an invoice and how to join. It comes as a proper invoice from my company, Wangle Media, so it is easy to expense.</p>
 <h2>Who should not take it</h2>
 <p>If you want a tool you install and press go, this is not it. It is a method, and it assumes you are the one making the calls, not looking to hand the job off.</p>
 <p>If you have never broken down a cut or built a bid, it will move fast.</p>
@@ -89,7 +89,8 @@
     <div class="sec-head"><span class="eyebrow">Founding cohort &middot; 3 September 2026 &middot; 325 USD</span>
       <h2>Sign up</h2>
       <p class="k">It is a working session, so the size is limited by the format. Sign up below and I
-        will send you a payment link and the joining details. No spam, no drip sequence.</p></div>
+        will email you an invoice and how to join. Most people expense it, so it comes as a proper
+        invoice from my company, not a card receipt. No spam, no drip sequence.</p></div>
 
       
     <form class="form-card" id="waitlist-form" style="margin-top:28px">
@@ -99,7 +100,7 @@
         <textarea id="wl-note" name="note" placeholder="e.g. an indie feature, a series pilot, or my first show as supervisor"></textarea></div>
       <button type="submit" class="btn btn-a" id="wl-submit">Sign up</button>
       <div id="wl-status"></div>
-      <p class="tiny">Your email is used only to send you the payment link and joining details. Nothing else.</p>
+      <p class="tiny">Your email is used only to send you the invoice and joining details. Nothing else.</p>
     </form>
   </div>
 </section>
@@ -132,7 +133,7 @@
 </footer>
 
 <script>
-const WAITLIST_ENDPOINT = ""; // set after deploying waitlist.gs (see WAITLIST_SETUP.md)
+const WAITLIST_ENDPOINT = "https://script.google.com/macros/s/AKfycbzFVLT4Sl7ZfAQg2lHtqQWRCUpdyOOAxdawdl99HZPofHH8a8_1oYfxF05wf56Zq57z/exec"; // set after deploying waitlist.gs (see WAITLIST_SETUP.md)
 (function(){
   var form = document.getElementById('waitlist-form');
   var status = document.getElementById('wl-status');

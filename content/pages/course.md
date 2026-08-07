@@ -7,7 +7,7 @@ eyebrow: Founding cohort · Thursday 3 September 2026 · 325 USD
 h1: Breakdown and Budget a Whole Film. Solo.
 lede: For VFX supervisors and producers who have to carry the whole breakdown and budget themselves, whether that is running an independent show with no department behind you, or being handed your first show and finding out the department is just you. This is the method behind Breakdown Studio, taught end to end, live, on 3 September.
 included_h2: The method, end to end
-waitlist_endpoint:
+waitlist_endpoint: https://script.google.com/macros/s/AKfycbzFVLT4Sl7ZfAQg2lHtqQWRCUpdyOOAxdawdl99HZPofHH8a8_1oYfxF05wf56Zq57z/exec
 contact_email: geoff@wanglemedia.com
 ---
 
@@ -53,7 +53,7 @@ So you are early. A few parts will run long while I find where they need more ti
 
 It runs once, live, at this time. No second date yet.
 
-Sign up below and I will send you a payment link and the joining details.
+Sign up below and I will email you an invoice and how to join. It comes as a proper invoice from my company, Wangle Media, so it is easy to expense.
 
 ## Who should not take it
 
