@@ -33,9 +33,14 @@ landed in the Sheet.
 
 `waitlist.gs` is deployed as a **bound** Apps Script web app (Extensions > Apps Script from inside the
 Sheet, so `getActiveSpreadsheet()` resolves), Execute as **Me**, Who has access **Anyone**. Each
-reservation appends `timestamp, email, name, note`. The Sheet is private to Geoff; the web app writes
-to it under his authorization. Reservations still turn into invoices by hand: deploying this only
-changed HOW they arrive (rows, not email), not the invoicing.
+reservation appends `timestamp, email, name, note` AND emails geoff@wanglemedia.com a notification
+(`MailApp.sendEmail`, isolated in its own try so a mail failure never loses the row). The Sheet is
+private to Geoff; the web app writes to it under his authorization. Reservations still turn into
+invoices by hand: this only changed HOW they arrive (a row plus an email), not the invoicing.
+
+The `MailApp` line adds a "send email as you" scope, so editing it in requires re-authorizing the
+project (run any function once, click through consent) and then redeploying a new version. Verified
+end to end 2026-08-07: a test signup landed a row and delivered the notification email.
 
 **Re-deploying after editing `waitlist.gs`:** in the Apps Script editor, **Deploy > Manage
 deployments > edit (pencil) > New version > Deploy**. A plain save does NOT push new code to the live

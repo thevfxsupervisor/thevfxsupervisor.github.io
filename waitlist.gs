@@ -26,6 +26,21 @@ function doPost(e) {
     }
     sheet.appendRow([new Date(), email, name, note]);
 
+    // Email the owner on each signup. Isolated in its own try so a mail
+    // failure never loses the row (already saved) or breaks the response.
+    try {
+      MailApp.sendEmail(
+        "geoff@wanglemedia.com",
+        "New course signup: " + email,
+        "Email: " + email +
+          "\nName: " + (name || "(none)") +
+          "\nBreaking down: " + (note || "(none)") +
+          "\n\nRow added to the Course waitlist sheet."
+      );
+    } catch (mailErr) {
+      // swallow: the signup is captured regardless
+    }
+
     result.ok = true;
   } catch (err) {
     result.ok = false;
