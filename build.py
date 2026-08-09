@@ -379,6 +379,13 @@ def render_home():
         f'<p>Break down and budget a whole film solo, with an AI pair doing the grunt work. Founding cohort 325 USD.</p>'
         f'<span class="proj-more mono">See the course &rarr;</span></a>'
     )
+    cards.append(
+        f'<a class="proj-card" href="{SITE_ROOT}about/">'
+        f'<span class="eyebrow">About &middot; 25 years</span>'
+        f'<h2>Twenty five years, and a VES Award</h2>'
+        f'<p>VFX for Eastwood, the Wachowskis and Affleck: Changeling (VES Award), J. Edgar, Invictus, Argo, Cloud Atlas. Work for Netflix, Pandora, LEGO, Sony. Copenhagen.</p>'
+        f'<span class="proj-more mono">More about me &rarr;</span></a>'
+    )
     cards_html = "".join(cards)
 
     utility = [
@@ -410,15 +417,6 @@ def render_home():
     <span class="eyebrow">Projects &amp; links</span>
     <div class="proj-grid">{cards_html}</div>
     <div class="ql-row" style="margin-top:22px">{util_html}</div>
-  </div>
-</section>
-
-<hr class="rule">
-
-<section id="proof">
-  <div class="wrap">
-    {proof_head}
-    {pillars_html(pillars)}
   </div>
 </section>
 '''
