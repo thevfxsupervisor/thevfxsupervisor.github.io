@@ -25,9 +25,4 @@ final_secondary_href: /projects/breakdown-studio/
 ### Twenty five years, and a VES Award
 I have supervised visual effects for Clint Eastwood, the Wachowskis and Ben Affleck: Changeling, which won me the VES Award for Outstanding Supporting Visual Effects, then J. Edgar, Invictus, Argo and Cloud Atlas. Atlantic Crossing across vendors in three countries. LEGO Ninjago art directed across Danish and Chinese teams. Work for Netflix, Pandora, LEGO, Sony, Kia, Novo Nordisk, Mint Copenhagen and M2.
 
-### Built and open-sourced Breakdown Studio
-The shot-breakdown pipeline I built to survive that job now ships free, MIT licensed. Detects every shot from the edit, reads the burned-in slates and notes, and builds a live, re-matchable breakdown. Validated on a real production, not a toy demo.
-
-### A course teaching the method
-Breakdown Studio does the mechanical half of a breakdown. The judgment half, deciding what counts as a VFX shot, matching it, merging revisions, is the skill, and it stays with you. That is what I teach: how to break down and budget a whole film solo, with an AI pair doing the grunt work. Live, 3 September.
 <!-- /pillars -->

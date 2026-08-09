@@ -17,8 +17,8 @@ final_secondary_label: Book the course, 3 Sept
 final_secondary_href: /course/
 soon: Open source · MIT · on GitHub
 card_title: link-session
-card_eyebrow: Agent coordination · open source
-card_summary: A file-based protocol for coordinating several live AI agents across projects. No server, no message bus.
+card_eyebrow: Claude Agent Skill · open source
+card_summary: A Claude Code skill for coordinating several live AI agent sessions over shared files. No server, no message bus.
 ---
 
 ## The problem
