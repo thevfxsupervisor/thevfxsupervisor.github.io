@@ -356,15 +356,40 @@ def render_home():
     if accent:
         h1 = h1.replace(html.escape(accent, quote=False), f"<span>{html.escape(accent, quote=False)}</span>")
 
-    quicklinks = [
-        ("Breakdown Studio", SITE_ROOT + "projects/breakdown-studio/"),
-        ("link-session (agent coordination)", SITE_ROOT + "projects/link-session/"),
-        ("Course, 3 Sept", SITE_ROOT + "course/"),
+    # Projects & links, promoted from a text row to prominent cards. Each project's tagline is its
+    # own card_summary, so the deep-dive copy stays in one place.
+    cards = []
+    for i, slug in enumerate(PROJECT_ORDER):   # flagship first: breakdown-studio, link-session
+        p = CONTENT_DIR / "projects" / f"{slug}.md"
+        if not p.exists():
+            continue
+        pfm, _ = parse_frontmatter(p.read_text(encoding="utf-8"))
+        cls = "proj-card flagship" if i == 0 else "proj-card"
+        cards.append(
+            f'<a class="{cls}" href="{SITE_ROOT}projects/{slug}/">'
+            f'<span class="eyebrow">{html.escape(pfm.get("card_eyebrow", pfm.get("eyebrow","Case study")), quote=False)}</span>'
+            f'<h2>{html.escape(pfm.get("card_title", pfm.get("h1","")), quote=False)}</h2>'
+            f'<p>{html.escape(pfm.get("card_summary", pfm.get("description","")), quote=False)}</p>'
+            f'<span class="proj-more mono">Read the case study &rarr;</span></a>'
+        )
+    cards.append(
+        f'<a class="proj-card" href="{SITE_ROOT}course/">'
+        f'<span class="eyebrow">Course &middot; 3 Sept</span>'
+        f'<h2>A course teaching the method</h2>'
+        f'<p>Break down and budget a whole film solo, with an AI pair doing the grunt work. Founding cohort 325 USD.</p>'
+        f'<span class="proj-more mono">See the course &rarr;</span></a>'
+    )
+    cards_html = "".join(cards)
+
+    utility = [
         ("Notes", SITE_ROOT + "notes/"),
         ("GitHub", "https://github.com/thevfxsupervisor"),
         ("Contact", "mailto:geoff@wanglemedia.com"),
     ]
-    ql_html = " &middot; ".join(f'<a href="{href}">{label}</a>' for label, href in quicklinks)
+    util_html = " &middot; ".join(f'<a href="{href}">{label}</a>' for label, href in utility)
+
+    proof_h2 = fm.get("proof_h2", "").strip()
+    proof_head = f'<div class="sec-head"><h2>{html.escape(proof_h2, quote=False)}</h2></div>' if proof_h2 else ""
 
     content = f'''
 <section class="hero">
@@ -377,10 +402,14 @@ def render_home():
       <a class="btn btn-b" href="{fm.get("cta_secondary_href","")}">{html.escape(fm.get("cta_secondary_label",""), quote=False)}</a>
     </div>
     <div class="cred"><span class="dot"></span><b>{html.escape(fm.get("cred",""), quote=False)}</b></div>
-    <div class="quicklinks">
-      <span class="eyebrow">Projects &amp; links</span>
-      <div class="ql-row">{ql_html}</div>
-    </div>
+  </div>
+</section>
+
+<section id="projects-links">
+  <div class="wrap">
+    <span class="eyebrow">Projects &amp; links</span>
+    <div class="proj-grid">{cards_html}</div>
+    <div class="ql-row" style="margin-top:22px">{util_html}</div>
   </div>
 </section>
 
@@ -388,8 +417,7 @@ def render_home():
 
 <section id="proof">
   <div class="wrap">
-    <div class="sec-head">
-      <h2>{html.escape(fm.get("proof_h2","What I've actually done"), quote=False)}</h2></div>
+    {proof_head}
     {pillars_html(pillars)}
   </div>
 </section>

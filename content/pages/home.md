@@ -12,7 +12,7 @@ cta_primary_label: See Breakdown Studio
 cta_secondary_href: /course/
 cta_secondary_label: Book the course, 3 Sept
 cred: VES Award for Changeling. Argo, Cloud Atlas, J. Edgar, Invictus, Atlantic Crossing, LEGO Ninjago. Twenty five years. Copenhagen.
-proof_h2: What I've actually done
+proof_h2:
 final_h2: Learn to do it yourself
 final_p: Breakdown Studio is free and live now, go use it. If you want the whole method, breaking down and budgeting a film solo with an AI pair, I'm teaching it live on 3 September. Founding cohort is 325 USD (450 after), with a proper Wangle Media invoice so it is easy to expense.
 final_primary_label: Book the course, 3 Sept
