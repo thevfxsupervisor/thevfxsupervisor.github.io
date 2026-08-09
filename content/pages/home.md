@@ -12,9 +12,9 @@ cta_primary_label: See Breakdown Studio
 cta_secondary_href: /course/
 cta_secondary_label: Book the course, 3 Sept
 cred: VES Award for Changeling. Argo, Cloud Atlas, J. Edgar, Invictus, Atlantic Crossing, LEGO Ninjago. Twenty five years. Copenhagen.
-proof_h2: What the work has actually done
-final_h2: Get the launch notice
-final_p: Breakdown Studio is open source and live now. The course runs live on 3 September, 450 USD. One note when either moves.
+proof_h2: What I've actually done
+final_h2: Learn to do it yourself
+final_p: Breakdown Studio is free and live now, go use it. If you want the whole method, breaking down and budgeting a film solo with an AI pair, I'm teaching it live on 3 September. Founding cohort is 325 USD (450 after), with a proper Wangle Media invoice so it is easy to expense.
 final_primary_label: Book the course, 3 Sept
 final_primary_href: /course/
 final_secondary_label: See Breakdown Studio
@@ -25,12 +25,9 @@ final_secondary_href: /projects/breakdown-studio/
 ### Twenty five years, and a VES Award
 I have supervised visual effects for Clint Eastwood, the Wachowskis and Ben Affleck: Changeling, which won me the VES Award for Outstanding Supporting Visual Effects, then J. Edgar, Invictus, Argo and Cloud Atlas. Atlantic Crossing across vendors in three countries. LEGO Ninjago art directed across Danish and Chinese teams. Work for Netflix, Pandora, LEGO, Sony, Kia, Novo Nordisk, Mint Copenhagen and M2.
 
-### Ran a whole feature's VFX department solo
-On an independent feature film in production, I carried the VFX department alone: bidding, scheduling, vendor management, the shot breakdown, and delivery. No coordinator, no second supervisor. The pipeline had to hold, cut after cut, or the schedule slipped.
-
 ### Built and open-sourced Breakdown Studio
 The shot-breakdown pipeline I built to survive that job now ships free, MIT licensed. Detects every shot from the edit, reads the burned-in slates and notes, and builds a live, re-matchable breakdown. Validated on a real production, not a toy demo.
 
-### Teaches the method
-The mechanical half automates. The judgment half, matching, merging, deciding what counts as VFX, is a skill. A course on doing this solo, with an AI pair carrying the mechanical work, runs live on 3 September.
+### A course teaching the method
+Breakdown Studio does the mechanical half of a breakdown. The judgment half, deciding what counts as a VFX shot, matching it, merging revisions, is the skill, and it stays with you. That is what I teach: how to break down and budget a whole film solo, with an AI pair doing the grunt work. Live, 3 September.
 <!-- /pillars -->

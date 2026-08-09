@@ -388,8 +388,8 @@ def render_home():
 
 <section id="proof">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Proof, not promises</span>
-      <h2>{html.escape(fm.get("proof_h2","What the work has actually done"), quote=False)}</h2></div>
+    <div class="sec-head">
+      <h2>{html.escape(fm.get("proof_h2","What I've actually done"), quote=False)}</h2></div>
     {pillars_html(pillars)}
   </div>
 </section>
