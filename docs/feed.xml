@@ -5,7 +5,7 @@
     <link>https://thevfxsupervisor.com/</link>
     <description>Notes on VFX supervision, breakdowns, budgets and pipeline.</description>
     <language>en</language>
-    <lastBuildDate>Sun, 09 Aug 2026 14:32:03 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 13 Aug 2026 22:17:56 +0000</lastBuildDate>
     <atom:link href="https://thevfxsupervisor.com/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>How a one-person VFX department orchestrates AI</title>
@@ -20,6 +20,13 @@
       <guid isPermaLink="true">https://thevfxsupervisor.com/notes/running-ai-agents-as-a-coordinated-team/</guid>
       <pubDate>Sun, 05 Jul 2026 00:00:00 +0000</pubDate>
       <description>A shared folder and a few JSON files let a fleet of AI agents work the same production together: hand off work, stay out of each other's way, and keep going across machines and restarts. What that makes possible, and the discipline that keeps it dependable as the fleet grows.</description>
+    </item>
+    <item>
+      <title>Keeping a long-running AI agent in sync with its own rules</title>
+      <link>https://thevfxsupervisor.com/notes/keeping-a-long-running-ai-agent-in-sync/</link>
+      <guid isPermaLink="true">https://thevfxsupervisor.com/notes/keeping-a-long-running-ai-agent-in-sync/</guid>
+      <pubDate>Sat, 04 Jul 2026 00:00:00 +0000</pubDate>
+      <description>An AI agent that runs for days is working from the rulebook it read on the first morning. When that rulebook keeps improving, how do you update the agent without restarting it or drowning it? Notify always, load on demand, and never call a change handled until it has actually been read.</description>
     </item>
   </channel>
 </rss>
