@@ -5,7 +5,10 @@ title: Breakdown and Budget a Whole Film. Solo. | the vfx supervisor
 description: A live online course for VFX supervisors and producers who have to break down and budget a whole film alone, whether that is an independent running a show solo or a junior handed their first one. Thursday 3 September 2026. Founding cohort 325 USD, 450 thereafter. Taught by Geoffrey Hancock, VES Award winner, 25 years supervising VFX on Changeling, Argo, Cloud Atlas and Atlantic Crossing.
 eyebrow: Founding cohort · Thursday 3 September 2026 · 325 USD
 h1: Breakdown and Budget a Whole Film. Solo.
-lede: For VFX supervisors and producers who have to carry the whole breakdown and budget themselves, whether that is running an independent show with no department behind you, or being handed your first show and finding out the department is just you. This is the method behind Breakdown Studio, taught end to end, live, on 3 September.
+lede: The method for carrying a whole film's breakdown and budget when the department is just you. Taught live, end to end, in one working session on 3 September.
+cred_line: VES Award winner · 25 years supervising VFX on Changeling, Argo, Cloud Atlas and Atlantic Crossing
+seats_note: It runs once, live, and it is a working session, so seats are limited.
+hero_cta: Reserve your seat
 included_h2: The method, end to end
 waitlist_endpoint: https://script.google.com/macros/s/AKfycbzFVLT4Sl7ZfAQg2lHtqQWRCUpdyOOAxdawdl99HZPofHH8a8_1oYfxF05wf56Zq57z/exec
 contact_email: geoff@wanglemedia.com

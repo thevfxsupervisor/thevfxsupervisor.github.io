@@ -166,10 +166,20 @@ section{padding:clamp(46px,7vw,80px) 0}
   color:var(--txt);font-family:var(--sans);font-size:14.5px;padding:11px 13px}
 .field input:focus,.field textarea:focus{outline:2px solid var(--amber);outline-offset:1px;border-color:var(--amber)}
 .field textarea{resize:vertical;min-height:70px}
-#wl-status{margin-top:14px;font-family:var(--mono);font-size:13px}
-#wl-status.ok{color:var(--green)}
-#wl-status.err{color:var(--red)}
-#wl-status.info{color:var(--dim)}
+#wl-status,.wl-status{margin-top:14px;font-family:var(--mono);font-size:13px}
+#wl-status.ok,.wl-status.ok{color:var(--green)}
+#wl-status.err,.wl-status.err{color:var(--red)}
+#wl-status.info,.wl-status.info{color:var(--dim)}
+/* course hero: credibility band (the honest "legends" strip) + above-the-fold opt-in */
+.cred-band{margin-top:26px;font-family:var(--mono);font-size:13px;letter-spacing:.03em;color:var(--dim);
+  border-left:2px solid var(--amber);padding:7px 0 7px 16px;max-width:66ch;line-height:1.75}
+.hero-form{max-width:560px}
+.hero-form-row{display:flex;gap:12px;flex-wrap:wrap}
+.hero-form-row input{flex:1 1 220px;min-width:0;background:#0e1115;border:1px solid var(--line2);border-radius:8px;
+  color:var(--txt);font-family:var(--sans);font-size:16px;padding:13px 15px}
+.hero-form-row input:focus{outline:2px solid var(--amber);outline-offset:1px;border-color:var(--amber)}
+.hero-form-row .btn{flex:0 0 auto;padding:13px 22px;white-space:nowrap;font-size:14px}
+@media(max-width:520px){.hero-form-row .btn{width:100%;justify-content:center}}
 .tiny{font-size:12px;color:var(--mute);margin-top:12px}
 
 footer{border-top:1px solid var(--line);padding:30px 0;color:var(--mute);font-size:12.5px}

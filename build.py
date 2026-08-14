@@ -592,12 +592,27 @@ def render_course():
     else:
         buy_block = ''
 
+    cred_line = fm.get("cred_line", "")
+    seats_note = fm.get("seats_note", "")
+    hero_cta = fm.get("hero_cta", "Reserve your seat")
+    cred_html = f'<div class="cred-band">{html.escape(cred_line, quote=False)}</div>' if cred_line else ""
+    reassure = (html.escape(seats_note, quote=False) + " ") if seats_note else ""
+
     content = f'''
-<section class="hero">
+<section class="hero course-hero">
   <div class="wrap">
     <span class="eyebrow">{html.escape(fm.get("eyebrow","Course · 3 September 2026"), quote=False)}</span>
     <h1 style="margin-top:18px">{html.escape(fm["h1"], quote=False)}</h1>
     <p class="lede">{html.escape(fm.get("lede",""), quote=False)}</p>
+    {cred_html}
+    <form class="form-card waitlist-form hero-form" style="margin-top:30px">
+      <div class="hero-form-row">
+        <input type="email" name="email" required autocomplete="email" placeholder="Your email" aria-label="Your email">
+        <button type="submit" class="btn btn-a">{html.escape(hero_cta, quote=False)} &rarr;</button>
+      </div>
+      <div class="wl-status"></div>
+      <p class="tiny" style="margin-top:12px">{reassure}325 USD founding rate, invoiced from Wangle Media so it is easy to expense. No spam.</p>
+    </form>
   </div>
 </section>
 
@@ -620,13 +635,13 @@ def render_course():
         invoice from my company, not a card receipt. No spam, no drip sequence.</p></div>
 
       {buy_block}
-    <form class="form-card" id="waitlist-form" style="margin-top:28px">
+    <form class="form-card waitlist-form" style="margin-top:28px">
       <div class="field"><label for="wl-name">Name (optional)</label><input type="text" id="wl-name" name="name" autocomplete="name"></div>
       <div class="field"><label for="wl-email">Email</label><input type="email" id="wl-email" name="email" required autocomplete="email"></div>
       <div class="field"><label for="wl-note">What are you breaking down right now? (optional)</label>
         <textarea id="wl-note" name="note" placeholder="e.g. an indie feature, a series pilot, or my first show as supervisor"></textarea></div>
-      <button type="submit" class="btn btn-a" id="wl-submit">Sign up</button>
-      <div id="wl-status"></div>
+      <button type="submit" class="btn btn-a">Sign up</button>
+      <div class="wl-status"></div>
       <p class="tiny">Your email is used only to send you the invoice and joining details. Nothing else.</p>
     </form>
   </div>
@@ -645,61 +660,65 @@ def render_course():
 <script>
 const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist.gs (see WAITLIST_SETUP.md)
 (function(){{
-  var form = document.getElementById('waitlist-form');
-  var status = document.getElementById('wl-status');
-  var submit = document.getElementById('wl-submit');
   var CONTACT_EMAIL = "{contact_email}";
+  var forms = document.querySelectorAll('.waitlist-form');
+  Array.prototype.forEach.call(forms, function(form){{
+    var status = form.querySelector('.wl-status');
+    var submit = form.querySelector('[type=submit]');
 
-  function setStatus(msg, cls){{
-    status.textContent = msg;
-    status.className = cls || '';
-  }}
-
-  form.addEventListener('submit', function(e){{
-    e.preventDefault();
-    var email = document.getElementById('wl-email').value.trim();
-    var name = document.getElementById('wl-name').value.trim();
-    var note = document.getElementById('wl-note').value.trim();
-    if (!email) return;
-
-    if (!WAITLIST_ENDPOINT) {{
-      var subject = encodeURIComponent('Reserve a seat: 3 September workshop');
-      var bodyLines = ['Email: ' + email];
-      if (name) bodyLines.push('Name: ' + name);
-      if (note) bodyLines.push('Film: ' + note);
-      var mailto = 'mailto:' + CONTACT_EMAIL + '?subject=' + subject + '&body=' + encodeURIComponent(bodyLines.join('\\n'));
-        // No backend yet: the mailto is the signup path.
-        setStatus('Almost there: send the email that just opened and you are on the list.', 'ok');
-        // Visible link too, for anyone without a mail client configured.
-        status.innerHTML = 'Almost there: send the email that just opened and you are on the list.'
-          + '<br><span class="tiny">Nothing happened? <a href="' + mailto + '">Click here</a>'
-          + ' or email <a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + '</a>'
-          + ' with the subject "Reserve a seat".</span>';
-      window.location.href = mailto;
-      return;
+    function setStatus(msg, cls){{
+      if (!status) return;
+      status.textContent = msg;
+      status.className = 'wl-status ' + (cls || '');
     }}
+    function val(sel){{ var el = form.querySelector(sel); return el ? el.value.trim() : ''; }}
 
-    submit.disabled = true;
-    setStatus('Sending...', 'info');
-    fetch(WAITLIST_ENDPOINT, {{
-      method: 'POST',
-      headers: {{'Content-Type': 'text/plain;charset=utf-8'}},
-      body: JSON.stringify({{email: email, name: name, note: note}})
-    }})
-      .then(function(r){{ return r.json(); }})
-      .then(function(data){{
-        if (data && data.ok) {{
-          setStatus("You're in. I'll email you the invoice and how to join.", 'ok');
-          form.reset();
-        }} else {{
-          throw new Error('bad response');
+    form.addEventListener('submit', function(e){{
+      e.preventDefault();
+      var email = val('[name=email]');
+      var name = val('[name=name]');
+      var note = val('[name=note]');
+      if (!email) return;
+
+      if (!WAITLIST_ENDPOINT) {{
+        var subject = encodeURIComponent('Reserve a seat: 3 September workshop');
+        var bodyLines = ['Email: ' + email];
+        if (name) bodyLines.push('Name: ' + name);
+        if (note) bodyLines.push('Film: ' + note);
+        var mailto = 'mailto:' + CONTACT_EMAIL + '?subject=' + subject + '&body=' + encodeURIComponent(bodyLines.join('\\n'));
+        if (status) {{
+          status.className = 'wl-status ok';
+          status.innerHTML = 'Almost there: send the email that just opened and you are on the list.'
+            + '<br><span class="tiny">Nothing happened? <a href="' + mailto + '">Click here</a>'
+            + ' or email <a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + '</a>'
+            + ' with the subject "Reserve a seat".</span>';
         }}
+        window.location.href = mailto;
+        return;
+      }}
+
+      if (submit) submit.disabled = true;
+      setStatus('Sending...', 'info');
+      fetch(WAITLIST_ENDPOINT, {{
+        method: 'POST',
+        headers: {{'Content-Type': 'text/plain;charset=utf-8'}},
+        body: JSON.stringify({{email: email, name: name, note: note}})
       }})
-      .catch(function(){{
-        setStatus('Something went wrong. Emailing you instead: ', 'err');
-        window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('Reserve a seat: 3 September workshop') + '&body=' + encodeURIComponent('Email: ' + email + (name ? ('\\nName: ' + name) : '') + (note ? ('\\nFilm: ' + note) : ''));
-      }})
-      .finally(function(){{ submit.disabled = false; }});
+        .then(function(r){{ return r.json(); }})
+        .then(function(data){{
+          if (data && data.ok) {{
+            setStatus("You're in. I'll email you the invoice and how to join.", 'ok');
+            form.reset();
+          }} else {{
+            throw new Error('bad response');
+          }}
+        }})
+        .catch(function(){{
+          setStatus('Something went wrong. Emailing you instead: ', 'err');
+          window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('Reserve a seat: 3 September workshop') + '&body=' + encodeURIComponent('Email: ' + email + (name ? ('\\nName: ' + name) : '') + (note ? ('\\nFilm: ' + note) : ''));
+        }})
+        .finally(function(){{ if (submit) submit.disabled = false; }});
+    }});
   }});
 }})();
 </script>'''
