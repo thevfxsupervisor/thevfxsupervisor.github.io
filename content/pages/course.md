@@ -2,7 +2,7 @@
 type: page
 slug: course
 title: Breakdown and Budget a Whole Film. Solo. | the vfx supervisor
-description: A live online course for VFX supervisors and producers who have to break down and budget a whole film alone, whether that is an independent running a show solo or a junior handed their first one. Thursday 3 September 2026. Founding cohort 325 USD, 450 thereafter. Taught by Geoffrey Hancock, VES Award winner, 25 years supervising VFX on Changeling, Argo, Cloud Atlas and Atlantic Crossing.
+description: A live course for film producers and VFX supervisors going independent, on how to break down, budget and bid a whole film in the AI era: what to automate, what to trust, and the legal lines (chain of title) not to cross. Thursday 3 September 2026, founding cohort 325 USD. Taught by Geoffrey Hancock, VES Award winner, 25 years supervising VFX on Changeling, Argo, Cloud Atlas and Atlantic Crossing.
 eyebrow: Founding cohort · Thursday 3 September 2026 · 325 USD
 h1: Breakdown and Budget a Whole Film. Solo.
 lede: The method for carrying a whole film's breakdown and budget when the department is just you. Taught live, end to end, in one working session on 3 September.
@@ -16,13 +16,26 @@ contact_email: geoff@wanglemedia.com
 
 ## Who it is for
 
-Two people end up in this seat. The independent supervisor or producer who takes a film with no coordinator, no second supervisor, and a budget and a schedule that still have to be right. And the junior, on staff or newly freelance, handed a whole show for the first time and finding out the department is just them.
+Two people, one problem.
 
-Different stage, same problem. The breakdown and the budget have to hold up, and there is nobody else to catch what you miss. I built this from doing that job, not from teaching around it.
+The **producer** greenlighting or running a show with real VFX, maybe for the first time, or the first time without a big facility holding your hand. You can read a budget. What you cannot yet read is a VFX bid: whether the number is right, where it will move, and which "we will do it with AI" promise is real and which one sinks your schedule in week six.
+
+The **supervisor going independent**. You have run shots inside a facility for years. Now you are the whole department for a production, and the parts the facility used to absorb, the breakdown, the bid, the change orders, the client asking for 30% off "because AI", are suddenly yours alone.
+
+Different seat, same problem: the breakdown and the budget have to hold up, and there is nobody behind you to catch what you miss. I built this from doing that job, not from teaching around it.
+
+## What you are actually afraid of
+
+You do not have to say these out loud. The course is built around them.
+
+- **"I will get talked into an AI discount I cannot deliver."** Clients are asking for around 30% off bids because "AI makes it faster." There is no button that removes 30% of the labour. Say yes blindly and you have promised a number you cannot hit. You will learn how to price the AI era honestly, and how to answer the rebate ask without either lying or losing the job.
+- **"I will spend the budget on AI that fails halfway."** The expensive failure today is not "no AI", it is AI slop that collapses in week six and gets redone in Nuke and Maya at a higher total cost under a tighter deadline. You will learn what to trust (the settled machine-learning tools) versus what is still a slot machine (generative AI for final pixels).
+- **"I will hand over a deliverable I do not actually own."** Fully AI-generated pixels cannot be copyrighted, and a model trained on footage you do not own can make the output legally radioactive. This is chain of title, and it is the biggest single reason high-end studios still block generative AI for final frames. You will learn the guardrails, so what you deliver is clean.
+- **"I do not know the words, so I cannot tell if I am being sold."** You will get the working vocabulary: what a breakdown, a complexity band, a change order, a plate, a 16-bit linear deliverable actually are, and why each one shows up on a bid.
 
 ## What it is
 
-Not a tutorial on one tool. It is a way to carry a whole film's breakdown and budget on your own: what to automate, what stays your call, and how to put an AI assistant on the mechanical half without losing your grip on the numbers. [Breakdown Studio](/projects/breakdown-studio/) is the version of this I built and used on real shows, including a Swedish Netflix feature. The course is the method behind it. You can run it with the tool or without.
+Not a tutorial on one tool. It is how to carry a whole film's breakdown and budget on your own in 2026: what to automate, what stays your call, how to put an AI assistant on the mechanical half without losing your grip on the numbers, and how to tell a real AI efficiency from a promise that will cost you. [Breakdown Studio](/projects/breakdown-studio/) is the version of this I built and used on real shows, including a Swedish Netflix feature. The course is the method behind it. You can run it with the tool or without.
 
 <!-- included -->
 ### Reading a cut like a budget
@@ -36,13 +49,16 @@ Where to let a tool run unattended, and where a supervisor's eye has to stay in 
 
 ### Briefing an AI pair with guardrails
 Getting real leverage from an AI assistant on a live production without handing it the master file, even when you are the only one who would catch it if something went wrong.
+
+### Bidding and buying in the AI era
+What "use AI" actually saves and what it does not, how to answer the 30% rebate ask, the machine-learning tools that are safe today (roto, tracking, depth, upres, cleanup) versus generative AI for final pixels, and the chain-of-title line you do not cross. So you bid a number you can hit and deliver something you own.
 <!-- /included -->
 
 ## What you leave with
 
-A way to turn a cut into a shot count and a VFX subset you can defend. A breakdown that updates through a re-cut instead of being rebuilt. And a clear line, yours, between where a tool can run on its own and where you have to stay in the loop.
+A way to turn a cut into a shot count and a VFX subset you can defend. A breakdown that updates through a re-cut instead of being rebuilt. A clear line between where a tool can run on its own and where you have to stay in the loop. And a straight answer to "can we do this cheaper with AI", so the next time a client says it, you are the most informed person in the room.
 
-You also take the working templates: the breakdown sheet, the bid comparison, the change-order log, and the complexity band rubric we use on the day.
+You also take the working templates: the breakdown sheet, the bid comparison, the change-order log, the complexity band rubric, and a one-page "AI in the bid" checklist (what is safe, what is a promise, and what is a legal risk).
 
 You do not take Breakdown Studio itself. What you build the method in after that is up to you.
 
