@@ -52,7 +52,7 @@
         <button type="submit" class="btn btn-a">Join the free waitlist &rarr;</button>
       </div>
       <div class="wl-status"></div>
-      <p class="tiny" style="margin-top:12px">Free to join. You get my VFX and AI gotchas list straight away, and the next date first. No spam, unsubscribe anytime.</p>
+      <p class="tiny" style="margin-top:12px">Free to join. You get my VFX and AI gotchas list straight away, and the next date first. By joining you agree to the <a href="/privacy/">privacy note</a>. Unsubscribe anytime.</p>
     </form>
   </div>
 </section>
@@ -110,7 +110,7 @@
         <textarea id="wl-note" name="note" placeholder="Anything about breaking down, budgeting or bidding VFX, or using AI on a show"></textarea></div>
       <button type="submit" class="btn btn-a">Join the waitlist</button>
       <div class="wl-status"></div>
-      <p class="tiny">Your email is used to send you the gotchas list and the next course date. Nothing else. Unsubscribe anytime.</p>
+      <p class="tiny">Your email sends you the gotchas list and the next course date, nothing else. By joining you agree to the <a href="/privacy/">privacy note</a>. Unsubscribe anytime.</p>
     </form>
   </div>
 </section>
@@ -136,6 +136,7 @@
       <a href="/notes/">Notes</a>
       <a href="/about/">About</a>
       <a href="https://github.com/thevfxsupervisor">GitHub</a>
+      <a href="/privacy/">Privacy</a>
       <a href="mailto:geoff@wanglemedia.com">Contact</a>
     </nav>
     <div class="mono">&copy; 2026 Geoffrey Hancock</div>
@@ -192,8 +193,7 @@ const WAITLIST_ENDPOINT = "https://script.google.com/macros/s/AKfycbzFVLT4Sl7ZfA
         .then(function(r){ return r.json(); })
         .then(function(data){
           if (data && data.ok) {
-            setStatus("You're on the list. Check your inbox, the gotchas list is on its way.", 'ok');
-            form.reset();
+            window.location.href = '/thanks/';
           } else {
             throw new Error('bad response');
           }

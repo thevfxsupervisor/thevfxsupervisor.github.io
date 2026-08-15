@@ -646,7 +646,7 @@ def render_course():
         <button type="submit" class="btn btn-a">{html.escape(hero_cta, quote=False)} &rarr;</button>
       </div>
       <div class="wl-status"></div>
-      <p class="tiny" style="margin-top:12px">{reassure}No spam, unsubscribe anytime.</p>
+      <p class="tiny" style="margin-top:12px">{reassure}By joining you agree to the <a href="/privacy/">privacy note</a>. Unsubscribe anytime.</p>
     </form>
   </div>
 </section>
@@ -674,7 +674,7 @@ def render_course():
         <textarea id="wl-note" name="note" placeholder="Anything about breaking down, budgeting or bidding VFX, or using AI on a show"></textarea></div>
       <button type="submit" class="btn btn-a">Join the waitlist</button>
       <div class="wl-status"></div>
-      <p class="tiny">Your email is used to send you the gotchas list and the next course date. Nothing else. Unsubscribe anytime.</p>
+      <p class="tiny">Your email sends you the gotchas list and the next course date, nothing else. By joining you agree to the <a href="/privacy/">privacy note</a>. Unsubscribe anytime.</p>
     </form>
   </div>
 </section>
@@ -739,8 +739,7 @@ const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist
         .then(function(r){{ return r.json(); }})
         .then(function(data){{
           if (data && data.ok) {{
-            setStatus("You're on the list. Check your inbox, the gotchas list is on its way.", 'ok');
-            form.reset();
+            window.location.href = '/thanks/';
           }} else {{
             throw new Error('bad response');
           }}
@@ -829,6 +828,27 @@ def render_about():
         ]
     )
     return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="about", canonical_path="about/")
+
+
+def render_simple_page(slug, nav_active=None):
+    """A plain page: eyebrow + h1 hero, then prose. Used for thanks, privacy, etc."""
+    fm, body = parse_frontmatter((CONTENT_DIR / "pages" / (slug + ".md")).read_text(encoding="utf-8"))
+    prose_html = markdown_to_html(body)
+    content = f'''
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">{html.escape(fm.get("eyebrow",""), quote=False)}</span>
+    <h1 style="margin-top:18px">{html.escape(fm["h1"], quote=False)}</h1>
+  </div>
+</section>
+<hr class="rule">
+<section>
+  <div class="wrap prose">
+    {prose_html}
+  </div>
+</section>
+'''
+    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active=nav_active, canonical_path=slug + "/")
 
 
 def render_notes():
@@ -930,6 +950,8 @@ def main():
     write_page("projects", render_projects())
     write_page("course", render_course())
     write_page("about", render_about())
+    write_page("thanks", render_simple_page("thanks"))
+    write_page("privacy", render_simple_page("privacy"))
     write_page("notes", render_notes())
 
     for md_path in sorted((CONTENT_DIR / "notes").glob("*.md")):

@@ -95,5 +95,6 @@ function leadMagnetHtml() {
   return '<div style="font-family:Arial,Helvetica,sans-serif;line-height:1.55;color:#17202a">' +
     '<p>Thanks for joining the waitlist. Your resource is on its way shortly.</p>' +
     '<p>Geoff Hancock<br><span style="color:#888">the vfx supervisor &middot; thevfxsupervisor.com</span></p>' +
+    '<p style="color:#8a929b;font-size:12px;margin-top:18px">You joined the waitlist at thevfxsupervisor.com. Reply to unsubscribe or have your details deleted. Wangle Media ApS.</p>' +
     '</div>';
 }
