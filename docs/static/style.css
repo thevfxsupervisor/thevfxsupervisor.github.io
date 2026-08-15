@@ -180,8 +180,8 @@ section{padding:clamp(46px,7vw,80px) 0}
 .credit-track{display:flex;width:max-content;animation:credit-slide 70s linear infinite}
 .credit-carousel:hover .credit-track{animation-play-state:paused}
 @keyframes credit-slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.credit-item{flex:0 0 auto;padding:2px 40px;border-right:1px solid var(--line);
-  display:flex;flex-direction:column;justify-content:center;min-height:98px}
+.credit-item{flex:0 0 auto;padding:2px 46px;border-right:1px solid var(--line);
+  display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:98px}
 .credit-item .film{color:var(--amber);font-weight:800;font-size:22px;letter-spacing:.4px;text-transform:uppercase;line-height:1.08}
 .credit-item .dir{color:var(--txt);font-weight:700;font-size:16px;margin-top:6px}
 .credit-item .role{color:var(--dim);font-family:var(--mono);font-size:12.5px;letter-spacing:.02em;margin-top:5px}

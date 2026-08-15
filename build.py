@@ -599,16 +599,16 @@ def render_course():
     # IMDb (nm0995883) and web-confirmed directors. ONLY his confirmed supervisor/producer credits.
     # Permafrost is deliberately OMITTED until publicly announced (NDA). Do not add unverified credits.
     _CREDITS = [
-        ("Changeling", "Clint Eastwood", "VFX Supervisor · 2008"),
-        ("Vantage Point", "Pete Travis", "VFX Supervisor · 2008"),
-        ("Invictus", "Clint Eastwood", "VFX Supervisor · 2009"),
-        ("J. Edgar", "Clint Eastwood", "VFX Supervisor · 2011"),
-        ("Argo", "Ben Affleck", "VFX Supervisor · 2012"),
-        ("Cloud Atlas", "The Wachowskis", "VFX Supervisor · 2012"),
-        ("Red Dawn", "Dan Bradley", "VFX Supervisor · 2012"),
-        ("Skammerens datter II", "Ask Hasselbalch", "VFX Supervisor · 2019"),
-        ("Atlantic Crossing", "Alexander Eik", "VFX Supervisor & Producer · 2020"),
-        ("Barzakh", "Asim Abbasi", "VFX Producer · 2024"),
+        ("Changeling", "Clint Eastwood", "VFX Supervisor"),
+        ("Vantage Point", "Pete Travis", "VFX Supervisor"),
+        ("Invictus", "Clint Eastwood", "VFX Supervisor"),
+        ("J. Edgar", "Clint Eastwood", "VFX Supervisor"),
+        ("Argo", "Ben Affleck", "VFX Supervisor"),
+        ("Cloud Atlas", "The Wachowskis", "VFX Supervisor"),
+        ("Red Dawn", "Dan Bradley", "VFX Supervisor"),
+        ("Skammerens datter II", "Ask Hasselbalch", "VFX Supervisor"),
+        ("Atlantic Crossing", "Alexander Eik", "VFX Supervisor & Producer"),
+        ("Barzakh", "Asim Abbasi", "VFX Producer"),
     ]
     _cards = "".join(
         f'<div class="credit-item"><span class="film">{html.escape(f, quote=False)}</span>'
