@@ -17,6 +17,7 @@ Editing workflow:
 No pip installs. Stdlib only.
 """
 import html
+import hashlib
 import re
 import shutil
 from pathlib import Path
@@ -32,6 +33,9 @@ SITE_NAME = "the vfx supervisor"
 DOMAIN = "thevfxsupervisor.com"
 
 BASE_TEMPLATE = (TEMPLATES_DIR / "base.html").read_text(encoding="utf-8")
+# Content-hash of the stylesheet, appended to its URL so browsers refetch it whenever it changes
+# (otherwise a cached style.css shows stale styling, e.g. an old text alignment, after a deploy).
+CSS_VERSION = hashlib.md5((STATIC_DIR / "style.css").read_bytes()).hexdigest()[:8]
 
 
 # --------------------------------------------------------------------------
@@ -337,6 +341,7 @@ def render_shell(title, description, content_html, nav_active=None, extra_script
     html_out = html_out.replace("{{TITLE}}", html.escape(title, quote=False))
     html_out = html_out.replace("{{DESCRIPTION}}", html.escape(description, quote=False))
     html_out = html_out.replace("{{ROOT}}", SITE_ROOT)
+    html_out = html_out.replace("{{CSSVER}}", CSS_VERSION)
     html_out = html_out.replace("{{SITE}}", SITE_CANONICAL.rstrip("/"))
     html_out = html_out.replace("{{CANONICAL}}", SITE_CANONICAL.rstrip("/") + "/" + canonical_path.lstrip("/"))
     for key in ("projects", "course", "notes", "about"):
