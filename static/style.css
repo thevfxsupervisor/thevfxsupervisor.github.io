@@ -187,6 +187,12 @@ section{padding:clamp(46px,7vw,80px) 0}
 .credit-item .role{color:var(--dim);font-family:var(--mono);font-size:12.5px;letter-spacing:.02em;margin-top:5px}
 @media (prefers-reduced-motion:reduce){.credit-track{animation:none}}
 @media (max-width:600px){.credit-item{padding:2px 26px}.credit-item .film{font-size:19px}.credit-item .dir{font-size:15px}}
+/* method modules: prominent title + description below, no bullets, no panel */
+.method-list{margin-top:30px;max-width:760px;display:grid;gap:26px}
+.method-title{color:var(--txt);font-size:17.5px;font-weight:700;line-height:1.25}
+/* eyebrow-title alternative (swap the .method-title rule above for this to try it):
+   .method-title{font-family:var(--mono);font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);font-weight:600} */
+.method-desc{margin-top:9px;color:var(--dim);font-size:14px;line-height:1.6;max-width:66ch}
 .hero-form{max-width:560px}
 .hero-form-row{display:flex;gap:12px;flex-wrap:wrap}
 .hero-form-row input{flex:1 1 220px;min-width:0;background:#0e1115;border:1px solid var(--line2);border-radius:8px;

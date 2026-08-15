@@ -566,8 +566,10 @@ def render_course():
     included_html = ""
     if included:
         rows = "".join(
-            f'<li>{html.escape(it["title"], quote=False)}'
-            f'<br><span style="color:var(--dim);font-size:13.5px">{markdown_to_html(it["body"]).replace("<p>","").replace("</p>","")}</span></li>'
+            f'<div class="method-item">'
+            f'<h3 class="method-title">{html.escape(it["title"], quote=False)}</h3>'
+            f'<p class="method-desc">{markdown_to_html(it["body"]).replace("<p>","").replace("</p>","")}</p>'
+            f'</div>'
             for it in included
         )
         included_html = f'''
@@ -575,7 +577,7 @@ def render_course():
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">What the course covers</span>
       <h2>{html.escape(fm.get("included_h2","The method, end to end"), quote=False)}</h2></div>
-    <div class="rd now" style="margin-top:26px;max-width:820px"><ul style="list-style:none;padding:0;display:grid;gap:14px">{rows}</ul></div>
+    <div class="method-list">{rows}</div>
   </div>
 </section>
 <hr class="rule">'''
