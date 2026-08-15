@@ -559,9 +559,17 @@ def render_projects():
 
 
 def render_course():
-    fm, body = parse_frontmatter((CONTENT_DIR / "pages" / "course.md").read_text(encoding="utf-8"))
-    included, body = extract_block(body, "included")
-    prose_html = markdown_to_html(body)
+    fm, raw_body = parse_frontmatter((CONTENT_DIR / "pages" / "course.md").read_text(encoding="utf-8"))
+    included, _ = extract_block(raw_body, "included")
+    # Render the method section IN PLACE (at the <!-- included --> marker), so the copy above the
+    # marker ("Who it is for", the FAQ, "What it is") stays ABOVE the method, and "What you leave
+    # with" etc. stay below it. Previously the method was pulled to the top of the page.
+    _before, _s1, _tail = raw_body.partition("<!-- included -->")
+    _blk, _s2, _after = _tail.partition("<!-- /included -->")
+    prose_before = markdown_to_html(_before)
+    prose_after = markdown_to_html(_after)
+    prose_before_sec = f'<section><div class="wrap prose">{prose_before}</div></section>' if _before.strip() else ""
+    prose_after_sec = f'<section><div class="wrap prose">{prose_after}</div></section>' if _after.strip() else ""
 
     included_html = ""
     if included:
@@ -644,12 +652,9 @@ def render_course():
 </section>
 
 <hr class="rule">
+{prose_before_sec}
 {included_html}
-<section>
-  <div class="wrap prose">
-    {prose_html}
-  </div>
-</section>
+{prose_after_sec}
 
 <hr class="rule">
 

@@ -18,9 +18,9 @@ contact_email: geoff@wanglemedia.com
 
 Two people, one problem.
 
-The **producer** greenlighting or running a show with real VFX, maybe for the first time, or the first time without a big facility holding your hand. You can read a budget. What you cannot yet read is a VFX bid: whether the number is right, where it will move, and which "we will do it with AI" promise is real and which one sinks your schedule in week six.
+The **producer or line producer** greenlighting or running a show with real VFX, maybe for the first time, or the first time without a big facility holding your hand. You can read a budget. What you cannot yet read is a VFX bid: whether the number is right, where it will move, and which "we will do it with AI" promise is real and which one sinks your schedule in week six.
 
-The **supervisor going independent**. You have run shots inside a facility for years. Now you are the whole department for a production, and the parts the facility used to absorb, the breakdown, the bid, the change orders, the client asking for 30% off "because AI", are suddenly yours alone.
+The **VFX supervisor or post supervisor going independent**. You have run shots inside a facility for years. Now you are the whole department for a production, and the parts the facility used to absorb, the breakdown, the bid, the change orders, the client asking for 30% off "because AI", are suddenly yours alone.
 
 Different seat, same problem: the breakdown and the budget have to hold up, and there is nobody behind you to catch what you miss. I built this from doing that job, not from teaching around it.
 
@@ -32,7 +32,7 @@ Different seat, same problem: the breakdown and the budget have to hold up, and 
 
 **Will I actually own an AI-assisted deliverable?** This is the one people miss. Fully AI-generated pixels cannot be copyrighted, and a model trained on footage you do not own can make the output legally radioactive. It is called chain of title, and it is the biggest single reason high-end studios still block generative AI for final frames. You will learn the guardrails, so what you hand over is clean.
 
-**I do not know all the VFX vocabulary. Will I keep up?** Yes, and closing that gap is part of the point. You will get the working words: what a breakdown, a bid, a change order, a plate and a 16-bit linear deliverable actually are, and why each one shows up on a budget. Once you can read the bid, you can tell when you are being sold.
+**I do not know all the VFX vocabulary. Will I keep up?** Yes, and closing that gap is part of the point. You will get the working words: what a breakdown, a bid, a change order and a plate actually are, and why each one shows up on a budget. Once you can read the bid, you can tell when you are being sold.
 
 ## What it is
 
