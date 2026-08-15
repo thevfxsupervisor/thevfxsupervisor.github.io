@@ -742,6 +742,21 @@ const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist
   }});
 }})();
 </script>'''
+    # Shuffle the credit carousel per visit so people do not always see the same first few credits.
+    # The track holds the 10 cards twice (for the seamless -50% loop); shuffle the originals, then
+    # re-clone them so both halves stay identical and the loop stays seamless.
+    extra_script += """
+<script>
+(function(){
+  var track=document.querySelector('.credit-track'); if(!track) return;
+  var kids=Array.prototype.slice.call(track.children); var n=Math.floor(kids.length/2);
+  var orig=kids.slice(0,n);
+  for(var i=orig.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=orig[i];orig[i]=orig[j];orig[j]=t;}
+  track.textContent='';
+  for(var k=0;k<orig.length;k++){track.appendChild(orig[k]);}
+  for(var m=0;m<orig.length;m++){track.appendChild(orig[m].cloneNode(true));}
+})();
+</script>"""
     return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="course", extra_script=extra_script, canonical_path="course/")
 
 
