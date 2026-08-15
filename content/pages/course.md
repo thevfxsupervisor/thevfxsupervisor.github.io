@@ -24,14 +24,15 @@ The **supervisor going independent**. You have run shots inside a facility for y
 
 Different seat, same problem: the breakdown and the budget have to hold up, and there is nobody behind you to catch what you miss. I built this from doing that job, not from teaching around it.
 
-## What you are actually afraid of
+## Frequently asked questions
 
-You do not have to say these out loud. The course is built around them.
+**A client wants 30% off "because AI." Do I say yes?** Careful. There is no button that removes 30% of the labour. Machine learning genuinely helps with roto, tracking, depth and cleanup, but generative AI for final pixels is still a gamble, and on a real show it usually gets redone in Nuke and Maya later, at a higher total cost. You will learn how to price the AI era honestly, and how to answer the rebate ask without either lying or losing the job.
 
-- **"I will get talked into an AI discount I cannot deliver."** Clients are asking for around 30% off bids because "AI makes it faster." There is no button that removes 30% of the labour. Say yes blindly and you have promised a number you cannot hit. You will learn how to price the AI era honestly, and how to answer the rebate ask without either lying or losing the job.
-- **"I will spend the budget on AI that fails halfway."** The expensive failure today is not "no AI", it is AI slop that collapses in week six and gets redone in Nuke and Maya at a higher total cost under a tighter deadline. You will learn what to trust (the settled machine-learning tools) versus what is still a slot machine (generative AI for final pixels).
-- **"I will hand over a deliverable I do not actually own."** Fully AI-generated pixels cannot be copyrighted, and a model trained on footage you do not own can make the output legally radioactive. This is chain of title, and it is the biggest single reason high-end studios still block generative AI for final frames. You will learn the guardrails, so what you deliver is clean.
-- **"I do not know the words, so I cannot tell if I am being sold."** You will get the working vocabulary: what a breakdown, a complexity band, a change order, a plate, a 16-bit linear deliverable actually are, and why each one shows up on a bid.
+**Will AI blow my budget halfway through?** It can, and that is the expensive failure today: AI slop that collapses in week six and gets redone traditionally, under a tighter deadline and at a higher total cost. You will learn what to trust (the settled machine-learning tools) versus what is still a gamble (generative AI for final pixels), so the budget holds.
+
+**Will I actually own an AI-assisted deliverable?** This is the one people miss. Fully AI-generated pixels cannot be copyrighted, and a model trained on footage you do not own can make the output legally radioactive. It is called chain of title, and it is the biggest single reason high-end studios still block generative AI for final frames. You will learn the guardrails, so what you hand over is clean.
+
+**I do not know all the VFX vocabulary. Will I keep up?** Yes, and closing that gap is part of the point. You will get the working words: what a breakdown, a bid, a change order, a plate and a 16-bit linear deliverable actually are, and why each one shows up on a budget. Once you can read the bid, you can tell when you are being sold.
 
 ## What it is
 
@@ -58,9 +59,7 @@ What "use AI" actually saves and what it does not, how to answer the 30% rebate 
 
 A way to turn a cut into a shot count and a VFX subset you can defend. A breakdown that updates through a re-cut instead of being rebuilt. A clear line between where a tool can run on its own and where you have to stay in the loop. And a straight answer to "can we do this cheaper with AI", so the next time a client says it, you are the most informed person in the room.
 
-You also take the working templates: the breakdown sheet, the bid comparison, the change-order log, the complexity band rubric, and a one-page "AI in the bid" checklist (what is safe, what is a promise, and what is a legal risk).
-
-You do not take Breakdown Studio itself. What you build the method in after that is up to you.
+You also take the working templates: the breakdown sheet, the bid comparison, the change-order log, and a one-page "AI in the bid" checklist (what is safe, what is a promise, and what is a legal risk).
 
 ## When, and what it costs
 
