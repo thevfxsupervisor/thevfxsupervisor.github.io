@@ -747,9 +747,13 @@ const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist
   }});
 }})();
 </script>'''
-    # Shuffle the credit carousel per visit so people do not always see the same first few credits.
-    # The track holds the 10 cards twice (for the seamless -50% loop); shuffle the originals, then
-    # re-clone them so both halves stay identical and the loop stays seamless.
+    # Credit carousel behaviour:
+    #  1) shuffle per visit so people do not always see the same first few credits (track holds the
+    #     10 cards twice for the seamless loop; shuffle the originals, then re-clone both halves);
+    #  2) JS-drive the slide with a gentle base loop PLUS a scroll-velocity boost that decays, so
+    #     scrolling makes it slide faster and stopping eases it back to the loop. The scroll listener
+    #     is passive and never calls preventDefault, so the PAGE scroll is never hijacked/pinned.
+    #     prefers-reduced-motion users get the CSS static fallback and none of this runs.
     extra_script += """
 <script>
 (function(){
@@ -760,6 +764,25 @@ const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist
   track.textContent='';
   for(var k=0;k<orig.length;k++){track.appendChild(orig[k]);}
   for(var m=0;m<orig.length;m++){track.appendChild(orig[m].cloneNode(true));}
+  if(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  track.style.animation='none';
+  var pos=0, boost=0, half=0, lastY=(window.pageYOffset||0), lastT=0;
+  window.addEventListener('scroll', function(){
+    var y=(window.pageYOffset||0); boost+=Math.abs(y-lastY)*0.006; lastY=y;
+    if(boost>1.4){ boost=1.4; }
+  }, {passive:true});
+  function frame(now){
+    if(!lastT){ lastT=now; }
+    var dt=Math.min(60, now-lastT); lastT=now;
+    if(!half){ half=track.scrollWidth/2; }
+    var base = half ? half/70000 : 0.04;
+    pos += (base+boost)*dt;
+    boost *= Math.pow(0.92, dt/16); if(boost<0.001){ boost=0; }
+    if(half){ while(pos>=half){ pos-=half; } }
+    track.style.transform='translateX('+(-pos)+'px)';
+    requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
 })();
 </script>"""
     return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="course", extra_script=extra_script, canonical_path="course/")
