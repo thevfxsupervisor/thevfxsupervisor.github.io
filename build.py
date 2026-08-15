@@ -379,7 +379,7 @@ def render_home():
         )
     cards.append(
         f'<a class="proj-card" href="{SITE_ROOT}course/">'
-        f'<span class="eyebrow">Course &middot; 3 Sept</span>'
+        f'<span class="eyebrow">Course &middot; free waitlist</span>'
         f'<h2>A course teaching the method</h2>'
         f'<p>Break down and budget a whole film solo, with an AI pair doing the grunt work. Founding cohort 325 USD.</p>'
         f'<span class="proj-more mono">See the course &rarr;</span></a>'
@@ -430,7 +430,7 @@ def render_home():
         fm.get("final_p", ""),
         fm.get("final_primary_label", "See Breakdown Studio"),
         fm.get("final_primary_href", SITE_ROOT + "projects/breakdown-studio/"),
-        fm.get("final_secondary_label", "Book the course, 3 Sept"),
+        fm.get("final_secondary_label", "Join the waitlist"),
         fm.get("final_secondary_href", SITE_ROOT + "course/"),
     )
     return render_shell(fm.get("title", SITE_NAME), fm.get("description", ""), content, nav_active=None, canonical_path="")
@@ -490,7 +490,7 @@ def render_project(md_path):
         fm.get("final_p", ""),
         fm.get("final_primary_label", "Get in touch"),
         fm.get("final_primary_href", SITE_ROOT + "about/"),
-        fm.get("final_secondary_label", "Book the course, 3 Sept"),
+        fm.get("final_secondary_label", "Join the waitlist"),
         fm.get("final_secondary_href", SITE_ROOT + "course/"),
         soon=fm.get("soon"),
     )
@@ -545,7 +545,7 @@ def render_projects():
         "Want this kind of tooling on your show?",
         "I build and run AI-assisted VFX pipelines on real productions. If that is useful to your film, let's talk. Or book the course for the method behind the tools.",
         "Work with me", SITE_ROOT + "about/",
-        "Book the course, 3 Sept", SITE_ROOT + "course/",
+        "Join the waitlist", SITE_ROOT + "course/",
     )
     content += related_section(
         [
@@ -608,7 +608,7 @@ def render_course():
         buy_block = ''
 
     seats_note = fm.get("seats_note", "")
-    hero_cta = fm.get("hero_cta", "Reserve your seat")
+    hero_cta = fm.get("hero_cta", "Join the free waitlist")
     reassure = (html.escape(seats_note, quote=False) + " ") if seats_note else ""
     # Selected-credits carousel (replaces the old static cred-band). Verified 2026-08-15 with Geoff,
     # IMDb (nm0995883) and web-confirmed directors. ONLY his confirmed supervisor/producer credits.
@@ -636,7 +636,7 @@ def render_course():
     content = f'''
 <section class="hero course-hero">
   <div class="wrap">
-    <span class="eyebrow">{html.escape(fm.get("eyebrow","Course · 3 September 2026"), quote=False)}</span>
+    <span class="eyebrow">{html.escape(fm.get("eyebrow","Course"), quote=False)}</span>
     <h1 style="margin-top:18px">{html.escape(fm["h1"], quote=False)}</h1>
     <p class="lede">{html.escape(fm.get("lede",""), quote=False)}</p>
     {cred_html}
@@ -646,7 +646,7 @@ def render_course():
         <button type="submit" class="btn btn-a">{html.escape(hero_cta, quote=False)} &rarr;</button>
       </div>
       <div class="wl-status"></div>
-      <p class="tiny" style="margin-top:12px">{reassure}325 USD founding rate, invoiced from Wangle Media so it is easy to expense. No spam.</p>
+      <p class="tiny" style="margin-top:12px">{reassure}No spam, unsubscribe anytime.</p>
     </form>
   </div>
 </section>
@@ -660,21 +660,21 @@ def render_course():
 
 <section id="waitlist">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Founding cohort &middot; 3 September 2026 &middot; 325 USD</span>
-      <h2>Sign up</h2>
-      <p class="k">It is a working session, so the size is limited by the format. Sign up below and I
-        will email you an invoice and how to join. Most people expense it, so it comes as a proper
-        invoice from my company, not a card receipt. No spam, no drip sequence.</p></div>
+    <div class="sec-head"><span class="eyebrow">Free waitlist &middot; The next date first</span>
+      <h2>Join the free waitlist</h2>
+      <p class="k">No date is set yet, and this is how you hear the next one. Join and I email you my
+        "Shoots You in the Foot" list straight away: the VFX and generative-AI gotchas worth knowing
+        before your next bid. Ask me a question below and I may reply. No spam.</p></div>
 
       {buy_block}
     <form class="form-card waitlist-form" style="margin-top:28px">
       <div class="field"><label for="wl-name">Name (optional)</label><input type="text" id="wl-name" name="name" autocomplete="name"></div>
       <div class="field"><label for="wl-email">Email</label><input type="email" id="wl-email" name="email" required autocomplete="email"></div>
-      <div class="field"><label for="wl-note">What are you breaking down right now? (optional)</label>
-        <textarea id="wl-note" name="note" placeholder="e.g. an indie feature, a series pilot, or my first show as supervisor"></textarea></div>
-      <button type="submit" class="btn btn-a">Sign up</button>
+      <div class="field"><label for="wl-note">Ask me a question (optional)</label>
+        <textarea id="wl-note" name="note" placeholder="Anything about breaking down, budgeting or bidding VFX, or using AI on a show"></textarea></div>
+      <button type="submit" class="btn btn-a">Join the waitlist</button>
       <div class="wl-status"></div>
-      <p class="tiny">Your email is used only to send you the invoice and joining details. Nothing else.</p>
+      <p class="tiny">Your email is used to send you the gotchas list and the next course date. Nothing else. Unsubscribe anytime.</p>
     </form>
   </div>
 </section>
@@ -713,17 +713,17 @@ const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist
       if (!email) return;
 
       if (!WAITLIST_ENDPOINT) {{
-        var subject = encodeURIComponent('Reserve a seat: 3 September workshop');
+        var subject = encodeURIComponent('Join the waitlist');
         var bodyLines = ['Email: ' + email];
         if (name) bodyLines.push('Name: ' + name);
-        if (note) bodyLines.push('Film: ' + note);
+        if (note) bodyLines.push('Question: ' + note);
         var mailto = 'mailto:' + CONTACT_EMAIL + '?subject=' + subject + '&body=' + encodeURIComponent(bodyLines.join('\\n'));
         if (status) {{
           status.className = 'wl-status ok';
           status.innerHTML = 'Almost there: send the email that just opened and you are on the list.'
             + '<br><span class="tiny">Nothing happened? <a href="' + mailto + '">Click here</a>'
             + ' or email <a href="mailto:' + CONTACT_EMAIL + '">' + CONTACT_EMAIL + '</a>'
-            + ' with the subject "Reserve a seat".</span>';
+            + ' with the subject "Join the waitlist".</span>';
         }}
         window.location.href = mailto;
         return;
@@ -739,7 +739,7 @@ const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist
         .then(function(r){{ return r.json(); }})
         .then(function(data){{
           if (data && data.ok) {{
-            setStatus("You're in. I'll email you the invoice and how to join.", 'ok');
+            setStatus("You're on the list. Check your inbox, the gotchas list is on its way.", 'ok');
             form.reset();
           }} else {{
             throw new Error('bad response');
@@ -747,7 +747,7 @@ const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist
         }})
         .catch(function(){{
           setStatus('Something went wrong. Emailing you instead: ', 'err');
-          window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('Reserve a seat: 3 September workshop') + '&body=' + encodeURIComponent('Email: ' + email + (name ? ('\\nName: ' + name) : '') + (note ? ('\\nFilm: ' + note) : ''));
+          window.location.href = 'mailto:' + CONTACT_EMAIL + '?subject=' + encodeURIComponent('Join the waitlist') + '&body=' + encodeURIComponent('Email: ' + email + (name ? ('\\nName: ' + name) : '') + (note ? ('\\nQuestion: ' + note) : ''));
         }})
         .finally(function(){{ if (submit) submit.disabled = false; }});
     }});

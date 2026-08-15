@@ -2,13 +2,13 @@
 type: page
 slug: course
 title: Breakdown and Budget the VFX of a Whole Film. Solo. | the vfx supervisor
-description: A live course for film producers and VFX supervisors going independent, on how to break down, budget and bid a whole film in the AI era: what to automate, what to trust, and the legal lines (chain of title) not to cross. Thursday 3 September 2026, founding cohort 325 USD. Taught by Geoffrey Hancock, VES Award winner, 25 years supervising VFX on Changeling, Argo, Cloud Atlas and Atlantic Crossing.
-eyebrow: Founding cohort · Thursday 3 September 2026 · 325 USD
+description: A live workshop for film producers and VFX supervisors going independent, on how to break down, budget and bid a whole film's VFX in the AI era: what to automate, what to trust, and the legal lines (chain of title) not to cross. Runs about once a month. Join the free waitlist for the next date and get the "Shoots You in the Foot" VFX and AI gotchas list. Taught by Geoffrey Hancock, VES Award winner, 25 years supervising VFX on Changeling, Argo, Cloud Atlas and Atlantic Crossing.
+eyebrow: Live workshop · Runs monthly · Free waitlist
 h1: Breakdown and Budget the VFX of a Whole Film. Solo.
-lede: The method for carrying a whole film's breakdown and budget when the department is just you. Taught live, end to end, in one working session on 3 September.
+lede: The method for carrying a whole film's breakdown and budget when the department is just you. Taught live, end to end, in one working session. It runs about once a month.
 cred_line: VES Award winner · 25 years supervising VFX on Changeling, Argo, Cloud Atlas and Atlantic Crossing
-seats_note: It runs once, live, and it is a working session, so seats are limited.
-hero_cta: Reserve your seat
+seats_note: Free to join. You get my VFX and AI gotchas list straight away, and the next date first.
+hero_cta: Join the free waitlist
 included_h2: The method, end to end
 waitlist_endpoint: https://script.google.com/macros/s/AKfycbzFVLT4Sl7ZfAQg2lHtqQWRCUpdyOOAxdawdl99HZPofHH8a8_1oYfxF05wf56Zq57z/exec
 contact_email: geoff@wanglemedia.com
@@ -63,15 +63,13 @@ You also take the working templates: the breakdown sheet, the bid comparison, th
 
 ## When, and what it costs
 
-**Thursday 3 September 2026, 17:00 to 20:30 Copenhagen time.** That is 08:00 Pacific, 11:00 Eastern, 16:00 London. Three and a half hours, live, with two breaks. It is a workshop, so you will be working, not watching.
+**It runs live, about once a month.** Three and a half hours in one working session, with two breaks, on Copenhagen time. A workshop, so you will be working, not watching. There is no fixed next date yet, and the waitlist is how you hear when there is one.
 
-**325 USD for this first cohort. It goes to 450 after that.** This one is cheaper because it is the first time I am running it, and I want the feedback from the people in the room.
+**Founding rate 325 USD, going to 450.** Early cohorts are cheaper because I want the feedback from the people in the room. When you book a seat I email you an invoice from my company, Wangle Media, so it is easy to expense.
 
-So you are early. A few parts will run long while I find where they need more time. In return you get the method I actually use on shows, and my eyes on your film while we are in it.
+**The waitlist is free, and it gives you something now.** Join and you get, straight away, my "Shoots You in the Foot" list: the VFX and generative-AI gotchas I watch producers and supervisors walk into right now.
 
-It runs once, live, at this time. No second date yet.
-
-Sign up below and I will email you an invoice and how to join. It comes as a proper invoice from my company, Wangle Media, so it is easy to expense.
+And ask me a question when you sign up. I read them, they tell me what to cover, and I may reply. When a date is set, the waitlist hears first.
 
 ## Who should not take it
 

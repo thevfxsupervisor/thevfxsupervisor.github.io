@@ -25,4 +25,4 @@ The thing I actually do, in one line: supervise the shots, engineer the pipeline
 
 - [Breakdown Studio](/projects/breakdown-studio/), open source on GitHub
 - [Notes](/notes/), writing on pipeline and production
-- [the course](/course/), 3 September, on the method
+- [the course](/course/), on the method (free waitlist)
