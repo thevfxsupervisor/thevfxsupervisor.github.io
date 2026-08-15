@@ -592,11 +592,31 @@ def render_course():
     else:
         buy_block = ''
 
-    cred_line = fm.get("cred_line", "")
     seats_note = fm.get("seats_note", "")
     hero_cta = fm.get("hero_cta", "Reserve your seat")
-    cred_html = f'<div class="cred-band">{html.escape(cred_line, quote=False)}</div>' if cred_line else ""
     reassure = (html.escape(seats_note, quote=False) + " ") if seats_note else ""
+    # Selected-credits carousel (replaces the old static cred-band). Verified 2026-08-15 with Geoff,
+    # IMDb (nm0995883) and web-confirmed directors. ONLY his confirmed supervisor/producer credits.
+    # Permafrost is deliberately OMITTED until publicly announced (NDA). Do not add unverified credits.
+    _CREDITS = [
+        ("Changeling", "dir. Clint Eastwood", "VFX Supervisor · 2008"),
+        ("Vantage Point", "dir. Pete Travis", "VFX Supervisor · 2008"),
+        ("Invictus", "dir. Clint Eastwood", "VFX Supervisor · 2009"),
+        ("J. Edgar", "dir. Clint Eastwood", "VFX Supervisor · 2011"),
+        ("Argo", "dir. Ben Affleck", "VFX Supervisor · 2012"),
+        ("Cloud Atlas", "dir. The Wachowskis", "VFX Supervisor · 2012"),
+        ("Red Dawn", "dir. Dan Bradley", "VFX Supervisor · 2012"),
+        ("Skammerens datter II", "dir. Ask Hasselbalch", "VFX Supervisor · 2019"),
+        ("Atlantic Crossing", "dir. Alexander Eik", "VFX Supervisor & Producer · 2020"),
+        ("Barzakh", "dir. Asim Abbasi", "VFX Producer · 2024"),
+    ]
+    _cards = "".join(
+        f'<div class="credit-item"><span class="film">{html.escape(f, quote=False)}</span>'
+        f'<span class="dir">{html.escape(d, quote=False)}</span>'
+        f'<span class="role">{html.escape(r, quote=False)}</span></div>'
+        for f, d, r in _CREDITS)
+    cred_html = ('<div class="credit-carousel" aria-label="Selected credits">'
+                 f'<div class="credit-track">{_cards}{_cards}</div></div>')
 
     content = f'''
 <section class="hero course-hero">
