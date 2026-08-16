@@ -2,11 +2,11 @@
 type: page
 slug: course
 title: Breakdown and Budget the VFX of a Whole Film. Solo. | the vfx supervisor
-description: A live workshop for film producers and VFX supervisors going independent, on how to break down, budget and bid a whole film's VFX in the AI era: what to automate, what to trust, and the legal lines (chain of title) not to cross. Runs about once a month. Join the free waitlist for the next date and get the "Shoots You in the Foot" VFX and AI gotchas list. Taught by Geoffrey Hancock, VES Award winner, 25 years supervising VFX on Changeling, Argo, Cloud Atlas and Atlantic Crossing.
+description: A live workshop for film producers and VFX supervisors going independent, on how to break down, budget and bid a whole film's VFX in the AI era: what to automate, what to trust, and the legal lines (chain of title) not to cross. Runs about once a month. Join the free waitlist for the next date and get the "Shoots You in the Foot" VFX and AI gotchas list. Taught by Geoffrey Hancock, VES Award winner, 20+ years supervising VFX on Changeling, Argo, Cloud Atlas and Atlantic Crossing.
 eyebrow: Live workshop · Runs monthly · Free waitlist
 h1: Breakdown and Budget the VFX of a Whole Film. Solo.
 lede: The method for carrying a whole film's breakdown and budget when the department is just you. Taught live, end to end, in one working session. It runs about once a month.
-cred_line: VES Award winner · 25 years supervising VFX on Changeling, Argo, Cloud Atlas and Atlantic Crossing
+cred_line: VES Award winner · 20+ years supervising VFX on Changeling, Argo, Cloud Atlas and Atlantic Crossing
 seats_note: Free to join.
 hero_cta: Join the free waitlist
 included_h2: The method, end to end
