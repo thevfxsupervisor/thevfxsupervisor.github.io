@@ -614,22 +614,25 @@ def render_course():
     # IMDb (nm0995883) and web-confirmed directors. ONLY his confirmed supervisor/producer credits.
     # Permafrost is deliberately OMITTED until publicly announced (NDA). Do not add unverified credits.
     _CREDITS = [
-        ("Changeling", "Clint Eastwood", "VFX Supervisor"),
-        ("Vantage Point", "Pete Travis", "VFX Supervisor"),
-        ("Invictus", "Clint Eastwood", "VFX Supervisor"),
-        ("J. Edgar", "Clint Eastwood", "VFX Supervisor"),
-        ("Argo", "Ben Affleck", "VFX Supervisor"),
-        ("Cloud Atlas", "The Wachowskis", "VFX Supervisor"),
-        ("Red Dawn", "Dan Bradley", "VFX Supervisor"),
-        ("Skammerens datter II", "Ask Hasselbalch", "VFX Supervisor"),
-        ("Atlantic Crossing", "Alexander Eik", "VFX Supervisor & Producer"),
-        ("Barzakh", "Asim Abbasi", "VFX Producer"),
+        ("Changeling", "Clint Eastwood", "VFX Supervisor", "changeling.jpg"),
+        ("Vantage Point", "Pete Travis", "VFX Supervisor", "vantage_point.jpg"),
+        ("Invictus", "Clint Eastwood", "VFX Supervisor", "invictus.jpg"),
+        ("J. Edgar", "Clint Eastwood", "VFX Supervisor", "j_edgar.jpg"),
+        ("Argo", "Ben Affleck", "VFX Supervisor", "argo.jpg"),
+        ("Cloud Atlas", "The Wachowskis", "VFX Supervisor", "cloud_atlas.jpg"),
+        ("Red Dawn", "Dan Bradley", "VFX Supervisor", "red_dawn.jpg"),
+        ("Skammerens datter II", "Ask Hasselbalch", "VFX Supervisor", "skammerens_datter_ii.jpg"),
+        ("Atlantic Crossing", "Alexander Eik", "VFX Supervisor & Producer", "atlantic_crossing.jpg"),
+        ("Barzakh", "Asim Abbasi", "VFX Producer", ""),
     ]
-    _cards = "".join(
-        f'<div class="credit-item"><span class="film">{html.escape(f, quote=False)}</span>'
-        f'<span class="dir">{html.escape(d, quote=False)}</span>'
-        f'<span class="role">{html.escape(r, quote=False)}</span></div>'
-        for f, d, r in _CREDITS)
+    def _card(f, d, r, img):
+        bg = f' style="background-image:url({SITE_ROOT}static/credits/{img})"' if img else ""
+        cls = "credit-item has-still" if img else "credit-item"
+        return (f'<div class="{cls}"{bg}>'
+                f'<span class="film">{html.escape(f, quote=False)}</span>'
+                f'<span class="dir">{html.escape(d, quote=False)}</span>'
+                f'<span class="role">{html.escape(r, quote=False)}</span></div>')
+    _cards = "".join(_card(*c) for c in _CREDITS)
     cred_html = ('<div class="credit-carousel" aria-label="Selected credits">'
                  f'<div class="credit-track">{_cards}{_cards}</div></div>')
 
@@ -970,6 +973,9 @@ def main():
         if f.is_file():
             shutil.copy2(f, static_out / f.name)
             print(f"  copied static/{f.name}")
+        elif f.is_dir():
+            shutil.copytree(f, static_out / f.name, dirs_exist_ok=True)
+            print(f"  copied static/{f.name}/ (dir)")
 
     # CNAME for a GitHub Pages custom domain. DISABLED: thevfxsupervisor.com is NOT cut
     # over (parked at easyDNS). Emitting docs/CNAME makes Pages auto-set the custom domain,

@@ -185,6 +185,11 @@ section{padding:clamp(46px,7vw,80px) 0}
 .credit-item .film{color:var(--amber);font-weight:800;font-size:22px;letter-spacing:.4px;text-transform:uppercase;line-height:1.08}
 .credit-item .dir{color:var(--txt);font-weight:700;font-size:16px;margin-top:6px}
 .credit-item .role{color:var(--dim);font-family:var(--mono);font-size:12.5px;letter-spacing:.02em;margin-top:5px}
+/* cards with a film still: image behind a dark scrim so the credit text stays readable */
+.credit-item.has-still{position:relative;min-width:280px;background-size:cover;background-position:center;border-right:1px solid rgba(0,0,0,.45)}
+.credit-item.has-still::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(13,16,19,.70),rgba(13,16,19,.85));z-index:0}
+.credit-item.has-still > *{position:relative;z-index:1}
+.credit-item.has-still .role{color:#c7cdd4}
 @media (prefers-reduced-motion:reduce){.credit-track{animation:none}}
 @media (max-width:600px){.credit-item{padding:2px 26px}.credit-item .film{font-size:19px}.credit-item .dir{font-size:15px}}
 /* method modules: prominent title + description below, no bullets, no panel */
