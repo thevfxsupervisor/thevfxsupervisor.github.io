@@ -9,7 +9,7 @@ contact_email: geoff@wanglemedia.com
 final_p: Based in Copenhagen, EU work authorisation. Available for freelance VFX supervision, production or consulting: on site, remote or hybrid. I read everything myself.
 ---
 
-I am a VFX supervisor and producer. I run VFX departments on film and television productions, and I build the tooling that makes that work possible when there is no department to hand it to, just one person and the schedule.
+I am a VFX supervisor and producer. I run VFX departments on film and television productions, and build the tooling that makes that work efficient even when there is no large department to hand it to.
 
 Twenty five years of it. I hold a **VES Award for Changeling**, and a Robert nomination for Skammerens datter II. I have supervised visual effects on films directed by Clint Eastwood, the Wachowskis and Ben Affleck: **Changeling, J. Edgar, Invictus, Argo, Cloud Atlas**, along with Twilight, Night at the Museum and Red Dawn. On **Atlantic Crossing** I ran the full VFX lifecycle across vendors in Belgium, Germany and Scandinavia. On **LEGO Ninjago** I art directed seasons coordinating Danish and Chinese teams.
 
