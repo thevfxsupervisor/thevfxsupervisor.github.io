@@ -624,7 +624,7 @@ def render_course():
         ("Red Dawn", "Dan Bradley", "VFX Supervisor", "red_dawn.jpg"),
         ("Skammerens datter II", "Ask Hasselbalch", "VFX Supervisor", "skammerens_datter_ii.jpg"),
         ("Atlantic Crossing", "Alexander Eik", "VFX Supervisor & Producer", "atlantic_crossing.jpg"),
-        ("Barzakh", "Asim Abbasi", "VFX Producer", ""),
+        ("Barzakh", "Asim Abbasi", "VFX Producer", "barzakh.jpg"),
     ]
     def _card(f, d, r, img):
         bg = f' style="background-image:url({SITE_ROOT}static/credits/{img})"' if img else ""
