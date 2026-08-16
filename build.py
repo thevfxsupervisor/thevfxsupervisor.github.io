@@ -336,8 +336,9 @@ def write_sitemap(paths, out_dir):
 SITE_CANONICAL = "https://thevfxsupervisor.com"  # cut over 2026-08-06; github.io now 301s here
 
 
-def render_shell(title, description, content_html, nav_active=None, extra_script="", canonical_path=""):
+def render_shell(title, description, content_html, nav_active=None, extra_script="", canonical_path="", robots="index, follow"):
     html_out = BASE_TEMPLATE
+    html_out = html_out.replace("{{ROBOTS}}", robots)
     html_out = html_out.replace("{{TITLE}}", html.escape(title, quote=False))
     html_out = html_out.replace("{{DESCRIPTION}}", html.escape(description, quote=False))
     html_out = html_out.replace("{{ROOT}}", SITE_ROOT)
@@ -834,7 +835,7 @@ def render_about():
     return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="about", canonical_path="about/")
 
 
-def render_simple_page(slug, nav_active=None):
+def render_simple_page(slug, nav_active=None, robots="index, follow"):
     """A plain page: eyebrow + h1 hero, then prose. Used for thanks, privacy, etc."""
     fm, body = parse_frontmatter((CONTENT_DIR / "pages" / (slug + ".md")).read_text(encoding="utf-8"))
     prose_html = markdown_to_html(body)
@@ -852,7 +853,7 @@ def render_simple_page(slug, nav_active=None):
   </div>
 </section>
 '''
-    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active=nav_active, canonical_path=slug + "/")
+    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active=nav_active, canonical_path=slug + "/", robots=robots)
 
 
 def render_notes():
@@ -948,22 +949,26 @@ def main():
     print("Building thevfxsupervisor.com ...")
 
     write_page("", render_home())
+    proj_slugs = []
     for md_path in sorted((CONTENT_DIR / "projects").glob("*.md")):
         proj_html, slug = render_project(md_path)
         write_page(f"projects/{slug}", proj_html)
+        proj_slugs.append(slug)
     write_page("projects", render_projects())
     write_page("course", render_course())
     write_page("about", render_about())
-    write_page("thanks", render_simple_page("thanks"))
+    write_page("thanks", render_simple_page("thanks", robots="noindex, follow"))
     write_page("privacy", render_simple_page("privacy"))
     write_page("notes", render_notes())
 
+    note_slugs = []
     for md_path in sorted((CONTENT_DIR / "notes").glob("*.md")):
         fm, _ = parse_frontmatter(md_path.read_text(encoding="utf-8"))
         if fm.get("draft", "").lower() == "true":
             continue
         note_html, slug = render_note(md_path)
         write_page(f"notes/{slug}", note_html)
+        note_slugs.append(slug)
 
     write_feed(DOCS_DIR)
 
@@ -991,7 +996,10 @@ def main():
     (DOCS_DIR / ".nojekyll").write_text("", encoding="utf-8")
     print("  wrote docs/.nojekyll")
 
-    write_sitemap(["", "projects/", "course/", "notes/", "about/"], DOCS_DIR)
+    sitemap_paths = ["", "projects/", "course/", "about/", "notes/", "privacy/"]
+    sitemap_paths += [f"projects/{s}/" for s in proj_slugs]
+    sitemap_paths += [f"notes/{s}/" for s in note_slugs]
+    write_sitemap(sitemap_paths, DOCS_DIR)
     print("Done.")
 
 

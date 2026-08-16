@@ -3,6 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="{{ROBOTS}}">
 <title>{{TITLE}}</title>
 <meta name="description" content="{{DESCRIPTION}}">
 <link rel="icon" type="image/png" sizes="256x256" href="{{ROOT}}static/favicon.png">
@@ -13,13 +14,15 @@
 <meta property="og:title" content="{{TITLE}}">
 <meta property="og:description" content="{{DESCRIPTION}}">
 <meta property="og:url" content="{{CANONICAL}}">
-<meta property="og:image" content="{{SITE}}/static/logo-icon.png">
+<meta property="og:image" content="{{SITE}}/static/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="{{TITLE}}">
 <meta name="twitter:description" content="{{DESCRIPTION}}">
-<meta name="twitter:image" content="{{SITE}}/static/logo-icon.png">
+<meta name="twitter:image" content="{{SITE}}/static/og-image.png">
 <link rel="stylesheet" href="{{ROOT}}static/style.css?v={{CSSVER}}">
   <link rel="alternate" type="application/rss+xml" title="the vfx supervisor" href="{{SITE}}/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"the vfx supervisor","url":"{{SITE}}/"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Geoffrey Hancock","jobTitle":"VFX Supervisor and Producer","url":"{{SITE}}/","sameAs":["https://www.imdb.com/name/nm0995883/","https://github.com/thevfxsupervisor"],"award":"VES Award 2008 for Changeling","knowsAbout":["Visual effects","VFX supervision","VFX bidding and budgeting","AI in visual effects"]}</script>
 </head>
 <body>
 
@@ -44,7 +47,7 @@
 
 <footer>
   <div class="wrap">
-    <div class="brand" style="font-size:14px"><span class="logo" aria-hidden="true"></span>the vfx supervisor</div>
+    <a class="brand" href="{{ROOT}}" style="font-size:14px"><span class="logo" aria-hidden="true"></span>the vfx supervisor</a>
     <nav>
       <a href="{{ROOT}}projects/">Projects</a>
       <a href="{{ROOT}}course/">Course</a>
