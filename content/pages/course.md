@@ -7,7 +7,7 @@ eyebrow: Live workshop · Runs monthly · Free waitlist
 h1: Breakdown and Budget the VFX of a Whole Film. Solo.
 lede: The method for carrying a whole film's breakdown and budget when the department is just you. Taught live, end to end, in one working session. It runs about once a month.
 cred_line: VES Award winner · 25 years supervising VFX on Changeling, Argo, Cloud Atlas and Atlantic Crossing
-seats_note: Free to join. You get my VFX and AI gotchas list straight away, and the next date first.
+seats_note: Free to join.
 hero_cta: Join the free waitlist
 included_h2: The method, end to end
 waitlist_endpoint: https://script.google.com/macros/s/AKfycbzFVLT4Sl7ZfAQg2lHtqQWRCUpdyOOAxdawdl99HZPofHH8a8_1oYfxF05wf56Zq57z/exec

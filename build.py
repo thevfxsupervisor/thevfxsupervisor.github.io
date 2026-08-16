@@ -644,9 +644,10 @@ def render_course():
     <p class="lede">{html.escape(fm.get("lede",""), quote=False)}</p>
     {cred_html}
     <form class="form-card waitlist-form hero-form" style="margin-top:30px">
+      <p class="form-lead">Join the free waitlist and get my VFX + AI gotchas list right away.</p>
       <div class="field"><label for="wl-hname">Name (optional)</label><input type="text" id="wl-hname" name="name" autocomplete="name"></div>
       <div class="field"><label for="wl-hemail">Email</label><input type="email" id="wl-hemail" name="email" required autocomplete="email"></div>
-      <div class="field"><label for="wl-hnote">Ask me a question (optional)</label><textarea id="wl-hnote" name="note" placeholder="e.g. A client wants 30% off because of AI. How do I answer that?"></textarea></div>
+      <div class="field"><label for="wl-hnote">Your project, or a question (optional)</label><textarea id="wl-hnote" name="note" placeholder="e.g. an indie feature I'm bidding, my first show as supervisor, or a bid I'm stuck on"></textarea></div>
       <button type="submit" class="btn btn-a">{html.escape(hero_cta, quote=False)} &rarr;</button>
       <div class="wl-status"></div>
       <p class="tiny" style="margin-top:12px">{reassure}By joining you agree to the <a href="/privacy/">privacy note</a>. Unsubscribe anytime.</p>
@@ -673,8 +674,8 @@ def render_course():
     <form class="form-card waitlist-form" style="margin-top:28px">
       <div class="field"><label for="wl-name">Name (optional)</label><input type="text" id="wl-name" name="name" autocomplete="name"></div>
       <div class="field"><label for="wl-email">Email</label><input type="email" id="wl-email" name="email" required autocomplete="email"></div>
-      <div class="field"><label for="wl-note">Ask me a question (optional)</label>
-        <textarea id="wl-note" name="note" placeholder="e.g. A client wants 30% off because of AI. How do I answer that?"></textarea></div>
+      <div class="field"><label for="wl-note">Your project, or a question (optional)</label>
+        <textarea id="wl-note" name="note" placeholder="e.g. an indie feature I'm bidding, my first show as supervisor, or a bid I'm stuck on"></textarea></div>
       <button type="submit" class="btn btn-a">Join the waitlist</button>
       <div class="wl-status"></div>
       <p class="tiny">Your email sends you the gotchas list and the next course date, nothing else. By joining you agree to the <a href="/privacy/">privacy note</a>. Unsubscribe anytime.</p>
