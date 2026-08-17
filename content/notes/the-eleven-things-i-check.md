@@ -28,4 +28,4 @@ What you actually do is run down a short list of tells. Every one of them is a p
 
 Most come down to one question: does the element sit in the plate the way a real object would, with the same blacks, the same falloff, the same weight. The last one is the tell people forget, and it is really a whole family. A real lens leaves a fingerprint on everything it photographs: the way it renders an out-of-focus point into bokeh, the colour it smears at the edges, the distortion, the halation blooming around a highlight. Match the element and miss the lens, and a flawless composite still reads as pasted on, and nobody can quite tell you why.
 
-None of this is making it real. It is making it unnoticed. The shots people remember as great VFX are usually the ones that failed a little, just enough to be seen. The ones that worked, nobody mentions, because they never became a shot.
+None of this is making it real. It is making it unnoticed. The shots people remember as great VFX are usually the ones that failed a little, just enough to be seen. VFX are done well when nobody mentions them, because they never registered as something that wasn't just in front of the camera.
