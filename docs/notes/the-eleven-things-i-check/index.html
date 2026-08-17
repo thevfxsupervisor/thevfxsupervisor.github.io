@@ -4,20 +4,20 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
-<title>Notes | the vfx supervisor</title>
-<meta name="description" content="Notes on pipeline, production and orchestrating AI, from a working VFX supervisor and producer.">
+<title>The eleven things I check</title>
+<meta name="description" content="A post producer asked how you know a VFX shot looks real. Real is the wrong test. The short list of tells a supervisor actually runs down, from black point to lens characteristics.">
 <link rel="icon" type="image/png" sizes="256x256" href="/static/favicon.png">
 <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
-<link rel="canonical" href="https://thevfxsupervisor.com/notes/">
+<link rel="canonical" href="https://thevfxsupervisor.com/notes/the-eleven-things-i-check/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="the vfx supervisor">
-<meta property="og:title" content="Notes | the vfx supervisor">
-<meta property="og:description" content="Notes on pipeline, production and orchestrating AI, from a working VFX supervisor and producer.">
-<meta property="og:url" content="https://thevfxsupervisor.com/notes/">
+<meta property="og:title" content="The eleven things I check">
+<meta property="og:description" content="A post producer asked how you know a VFX shot looks real. Real is the wrong test. The short list of tells a supervisor actually runs down, from black point to lens characteristics.">
+<meta property="og:url" content="https://thevfxsupervisor.com/notes/the-eleven-things-i-check/">
 <meta property="og:image" content="https://thevfxsupervisor.com/static/og-image.png">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="Notes | the vfx supervisor">
-<meta name="twitter:description" content="Notes on pipeline, production and orchestrating AI, from a working VFX supervisor and producer.">
+<meta name="twitter:title" content="The eleven things I check">
+<meta name="twitter:description" content="A post producer asked how you know a VFX shot looks real. Real is the wrong test. The short list of tells a supervisor actually runs down, from black point to lens characteristics.">
 <meta name="twitter:image" content="https://thevfxsupervisor.com/static/og-image.png">
 <link rel="stylesheet" href="/static/style.css?v=70e87a35">
   <link rel="alternate" type="application/rss+xml" title="the vfx supervisor" href="https://thevfxsupervisor.com/feed.xml">
@@ -45,11 +45,24 @@
 
 <section class="hero">
   <div class="wrap">
-    <span class="eyebrow">Notes</span>
-    <h1 style="margin-top:18px">Writing on pipeline, production, and orchestrating AI</h1>
-    <p class="lede">Short, practical notes from running a one-person VFX department. No client names,
-      no show names, ever.</p>
-    <div class="postlist"><a class="postrow" href="/notes/the-eleven-things-i-check/"><div><h3>The eleven things I check</h3><p>A post producer asked how you know a VFX shot looks real. Real is the wrong test. The short list of tells a supervisor actually runs down, from black point to lens characteristics.</p></div><span class="d mono">2026-08-18</span></a><a class="postrow" href="/notes/how-a-one-person-vfx-department-orchestrates-ai/"><div><h3>How a one-person VFX department orchestrates AI</h3><p>The mechanical half automates. The judgment half stays with the supervisor. Notes on briefing an AI assistant with guardrails on a live production.</p></div><span class="d mono">2026-07-13</span></a><a class="postrow" href="/notes/running-ai-agents-as-a-coordinated-team/"><div><h3>Running several AI agents as one coordinated team</h3><p>A shared folder and a few JSON files let a fleet of AI agents work the same production together: hand off work, stay out of each other's way, and keep going across machines and restarts. What that makes possible, and the discipline that keeps it dependable as the fleet grows.</p></div><span class="d mono">2026-07-05</span></a><a class="postrow" href="/notes/keeping-a-long-running-ai-agent-in-sync/"><div><h3>Keeping a long-running AI agent in sync with its own rules</h3><p>An AI agent that runs for days is working from the rulebook it read on the first morning. When that rulebook keeps improving, how do you update the agent without restarting it or drowning it? Notify always, load on demand, and never call a change handled until it has actually been read.</p></div><span class="d mono">2026-07-04</span></a></div>
+    <span class="eyebrow">Notes &middot; 2026-08-18</span>
+    <h1 style="margin-top:18px">The eleven things I check</h1>
+  </div>
+</section>
+<hr class="rule">
+<section>
+  <div class="wrap prose">
+    <p>A post producer asked me recently how you know when a VFX shot is finished. How do you know when it looks real.</p>
+<p>"Real" is the wrong test. When a shot is working you don't register it as a VFX shot at all, so "does it look real" is a question you can't feel your way to. By the time you are asking it, you are already looking too hard.</p>
+<p>What you actually do is run down a short list of tells. Every one of them is a place the eye can catch and stop believing the frame:</p>
+<ul><li>Black point</li><li>White point</li><li>Saturation</li><li>Contrast</li><li>Edges</li><li>Focus</li><li>Volume</li><li>Light</li><li>Mass</li><li>Grain</li><li>Lens characteristics</li></ul>
+<p>Most come down to one question: does the element sit in the plate the way a real object would, with the same blacks, the same falloff, the same weight. The last one is the tell people forget, and it is really a whole family. A real lens leaves a fingerprint on everything it photographs: the way it renders an out-of-focus point into bokeh, the colour it smears at the edges, the distortion, the halation blooming around a highlight. Match the element and miss the lens, and a flawless composite still reads as pasted on, and nobody can quite tell you why.</p>
+<p>None of this is making it real. It is making it unnoticed. The shots people remember as great VFX are usually the ones that failed a little, just enough to be seen. The ones that worked, nobody mentions, because they never became a shot.</p>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <a class="btn btn-b" href="/notes/">&larr; All notes</a>
   </div>
 </section>
 
@@ -58,7 +71,7 @@
 <section>
   <div class="wrap">
     <div class="quicklinks" style="margin-top:0">
-      <span class="eyebrow">The tools behind the writing</span>
+      <span class="eyebrow">The tools this method runs on</span>
       <div class="ql-row"><a href="/projects/breakdown-studio/">Breakdown Studio</a> &middot; <a href="/projects/link-session/">link-session</a> &middot; <a href="/course/">The course</a></div>
     </div>
   </div>
