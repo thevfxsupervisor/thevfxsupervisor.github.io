@@ -241,10 +241,13 @@ def related_section(items, eyebrow="Keep exploring"):
 </section>'''
 
 
-def final_cta(h2, p, primary_label, primary_href, secondary_label, secondary_href, soon=None):
+def final_cta(h2, p, primary_label, primary_href, secondary_label, secondary_href, soon=None,
+              section_id="get"):
+    """section_id is parameterised because About carries TWO copies of this block (one under the
+    name, one at the foot), and duplicate element ids are invalid HTML."""
     soon_html = f'<span class="soon"><span class="dot"></span>{html.escape(soon, quote=False)}</span>' if soon else ""
     return f'''
-<section id="get">
+<section id="{section_id}">
   <div class="wrap">
     <div class="final">
       {soon_html}
@@ -809,13 +812,26 @@ def render_about():
     <h1 style="margin-top:18px">{html.escape(fm["h1"], quote=False)}</h1>
   </div>
 </section>
+'''
+    # A copy of the contact block directly under the name, so a visitor can act without
+    # scrolling the whole bio. The foot of the page carries the canonical one (id="get").
+    content += final_cta(
+        "Get in touch",
+        fm.get("final_p", "Questions, collaborations, or just say hello."),
+        "Email",
+        f'mailto:{fm.get("contact_email","geoff@wanglemedia.com")}',
+        "See Breakdown Studio",
+        SITE_ROOT + "projects/breakdown-studio/",
+        section_id="get-top",
+    )
+    content += '''
 <hr class="rule">
 <section>
   <div class="wrap prose">
     {prose_html}
   </div>
 </section>
-'''
+'''.replace("{prose_html}", prose_html)
     content += final_cta(
         "Get in touch",
         fm.get("final_p", "Questions, collaborations, or just say hello."),
