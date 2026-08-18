@@ -5,14 +5,14 @@
     <link>https://thevfxsupervisor.com/</link>
     <description>Notes on VFX supervision, breakdowns, budgets and pipeline.</description>
     <language>en</language>
-    <lastBuildDate>Tue, 18 Aug 2026 23:37:34 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 18 Aug 2026 23:41:03 +0000</lastBuildDate>
     <atom:link href="https://thevfxsupervisor.com/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>The cheapest message is the one nobody sends</title>
       <link>https://thevfxsupervisor.com/notes/the-cheapest-message-is-the-one-nobody-sends/</link>
       <guid isPermaLink="true">https://thevfxsupervisor.com/notes/the-cheapest-message-is-the-one-nobody-sends/</guid>
       <pubDate>Wed, 19 Aug 2026 00:00:00 +0000</pubDate>
-      <description>Every production hits a point where the status updates cost more than the work. Running several AI agents as a team, I hit it too, and the fix turned out to be half plumbing and half manners.</description>
+      <description>A fleet of AI agents coordinating on the same work gets noisy fast, and the noise is billed. Notes on signal to noise across a multi-agent channel, why the fix is a systems change rather than better instructions, and the two lessons that cost the most.</description>
     </item>
     <item>
       <title>The eleven things I check</title>
