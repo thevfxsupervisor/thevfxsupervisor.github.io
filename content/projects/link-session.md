@@ -37,6 +37,10 @@ It runs daily across Windows, macOS and Linux machines and across several concur
 
 The recent work on it is the tell that it is real and not a demo. A coordination layer fails quietly, so most of that effort went into making silence mean something: it reports only genuine changes rather than every re-save, keeps idle sessions quiet so what does arrive is worth reading, counts its own watchers so nothing is delivered twice, and runs identically across all three operating systems, down to the older shells. It also grew a clean way to rename and re-identify a session without losing the thread, which is what you hit the moment a one-machine setup becomes a fleet. Every one of those was a real failure caught by running it daily, not a feature I imagined, and the skill is smaller now than it was while doing more.
 
+## Starting a session from a template
+
+The newest addition came from the same place as the rest: doing it by hand too many times. Bringing a new session onto a project meant briefing it from scratch, telling it what its role was, which folders mattered, which tools it needed. Now `/link-session new` points at a repo carrying role templates, lists what is available, and starts the session straight into the one you pick. It loads that role's starting context, writes its instructions file, and checks the folders and tools the role depends on are actually present before you begin. The templates live in whatever repo you name, so the skill stays generic and holds none of their content.
+
 ## Try it, and tell me how it holds up
 
 It is open source and MIT, so clone it and point it at your own sessions. If you are running AI agents on real work, I would genuinely like to know how it behaves for you: what worked, what broke, and what you wish it did. Email me at [geoff@wanglemedia.com](mailto:geoff@wanglemedia.com) and tell me.
