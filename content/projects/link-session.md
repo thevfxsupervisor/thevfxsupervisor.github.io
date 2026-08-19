@@ -5,7 +5,7 @@ title: Case study: link-session, coordinating a fleet of AI agents across projec
 description: How I coordinate several live AI agents across concurrent projects over shared files, with no server. A small open-source Claude Code skill.
 eyebrow: Case study
 h1: How I run a fleet of AI agents across projects, coordinated over shared files, no server
-lede: A small utility that does one job well: let several live AI sessions coordinate on the same production, hand off work, and stay out of each other's way. Open source, MIT.
+lede: A small utility that does one job well: let several live AI sessions coordinate on the same production, hand off work, and stay out of each other's way. It also starts a new session straight into a role from a library of bootstrap templates. Open source, MIT.
 cred: Designed and shipped solo, running daily across three operating systems and multiple projects.
 get_label: Get the skill
 get_href: https://github.com/thevfxsupervisor/link-session
@@ -18,7 +18,7 @@ final_secondary_href: /course/
 soon: Open source · MIT · on GitHub
 card_title: link-session
 card_eyebrow: Claude Agent Skill · open source
-card_summary: A Claude Code skill for coordinating several live AI agent sessions over shared files. No server, no message bus.
+card_summary: A Claude Code skill for coordinating several live AI agent sessions over shared files. No server, no message bus. It now starts a new session straight into a role from a library of bootstrap templates.
 ---
 
 ## The problem
