@@ -5,3 +5,8 @@
 # Python build cache
 __pycache__/
 *.pyc
+
+# macOS cruft arriving via Dropbox sync
+.DS_Store
+._.DS_Store
+._*
