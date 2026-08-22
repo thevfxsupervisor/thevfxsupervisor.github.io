@@ -57,3 +57,46 @@ Unanswered on the live page, and a buyer will ask:
 
 The page promises none of these, which is safer than inventing a policy. Answer them before the first
 invoice goes out, not after.
+
+## Narrowing the permissions (retrofit, 2026-08-23)
+
+By default Apps Script asks for **"see, edit, create and delete all your Google
+Sheets spreadsheets"**. This script only ever touches the sheet it is attached to
+(`SpreadsheetApp.getActiveSpreadsheet`) and sends mail (`MailApp.sendEmail`), so
+that grant is far wider than it needs.
+
+`appsscript.json` in this repo pins it to two scopes:
+
+- `spreadsheets.currentonly` - only the attached sheet, not every spreadsheet
+- `script.send_mail` - unavoidable, mailing the notification is the job
+
+### Applying it, and why the order matters
+
+**This form is live and capturing course signups. A silent failure loses real
+leads, so the test at the end is not optional.**
+
+1. Open the script (Extensions > Apps Script from the waitlist sheet).
+2. Gear icon (Project Settings) > tick **Show "appsscript.json" manifest file**.
+3. Open the manifest that appears and replace it with the one from this repo.
+4. **Deploy > Manage deployments**, edit the existing deployment, set Version to
+   **New version**, Deploy. Editing the existing deployment keeps the SAME URL,
+   so the live page keeps working. Do NOT create a new deployment: that issues a
+   different URL and the site would still be posting to the old one.
+5. Re-authorise if prompted. Reducing scopes usually does not re-prompt, since
+   the existing grant already covers the narrower set.
+
+### Then TEST it, before walking away
+
+Submit a real signup through the live `/course` page and confirm BOTH:
+
+- a row appears in the waitlist sheet
+- the notification email arrives
+
+If either is missing, the change broke it. Revert by restoring the previous
+manifest and deploying a new version of the same deployment.
+
+Delete the test row afterwards.
+
+**Why the test matters more here than on the media kit form:** that one is new
+and unused, so a failure costs nothing. This one is live ahead of the course, and
+a form that silently stops recording looks exactly like a quiet week.
