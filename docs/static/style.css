@@ -225,7 +225,7 @@ footer .mono{font-size:11.5px}
    presses play never touches Vimeo: no third-party request, no cookie, and
    no player payload to look at a still. The iframe replaces the button on
    click, which is also why both share .reel-embed's aspect box. */
-.reel-embed{position:relative;width:100%;max-width:960px;margin:26px 0 0;
+.reel-embed{position:relative;width:100%;margin:26px 0 0;
   aspect-ratio:16/9;background:#000;border:1px solid rgba(233,230,223,.14);
   overflow:hidden}
 .reel-embed iframe,.reel-play{position:absolute;inset:0;width:100%;height:100%}
@@ -250,3 +250,22 @@ footer .mono{font-size:11.5px}
 }
 @media (max-width:560px){.reel-play-btn{width:62px;height:62px}
   .reel-play-btn::after{border-width:12px 0 12px 20px}}
+
+/* The reel page gives the video more room than the text column, because the
+   video is the argument and the prose is a footnote to it. */
+.wrap-wide{max-width:1360px}
+.reel-top{padding:clamp(28px,5vw,54px) 0 0}
+.reel-top h1{margin-top:14px}
+.reel-stage{padding:clamp(18px,3vw,28px) 0 0}
+.reel-stage .reel-embed{margin-top:0}
+.reel-note{padding:clamp(22px,4vw,38px) 0 0}
+.reel-note .prose{max-width:60ch}
+/* the silent local loop that stands in for the poster until someone clicks */
+.reel-loop{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  display:block;z-index:1}
+.reel-play.is-playing img{opacity:0}
+.reel-play-btn,.reel-hint{z-index:2}
+.reel-hint{position:absolute;right:14px;bottom:12px;font-size:12px;letter-spacing:.05em;
+  color:#e9e6df;background:rgba(0,0,0,.55);padding:4px 10px;
+  opacity:0;transition:opacity .2s ease}
+.reel-play:hover .reel-hint,.reel-play:focus-visible .reel-hint{opacity:1}

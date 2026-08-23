@@ -6,7 +6,7 @@ description: Geoffrey Hancock, VFX supervisor and producer. VES Award for Change
 eyebrow: About
 h1: Geoffrey Hancock
 contact_email: geoff@thevfxsupervisor.com
-final_p: Based in Copenhagen, EU work authorisation. Available for freelance VFX supervision, production or consulting: on site, remote or hybrid. I read everything myself.
+final_p: Based in Copenhagen on a Danish work permit. I contract internationally through Wangle Media, so engaging me across borders is a services agreement rather than an immigration question. Available for freelance VFX supervision, production or consulting: on site, remote or hybrid. I read everything myself.
 ---
 
 I am a VFX supervisor and producer. I run VFX departments on film and television productions, and build the tooling that makes that work efficient even when there is no large department to hand it to.
