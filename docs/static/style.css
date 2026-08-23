@@ -243,7 +243,7 @@ footer .mono{font-size:11.5px}
   border-color:transparent transparent transparent #06131d}
 .reel-play:hover .reel-play-btn{transform:translate(-50%,-50%) scale(1.07);background:var(--amber-soft)}
 .reel-play:focus-visible{outline:3px solid var(--amber);outline-offset:3px}
-.reel-alt{margin:12px 0 0;font-size:13px;opacity:.72}
+.reel-alt{margin:14px 0 0;font-size:13px;opacity:.72;letter-spacing:.03em}
 @media (prefers-reduced-motion:reduce){
   .reel-play img,.reel-play-btn{transition:none}
   .reel-play:hover img{transform:none}
@@ -260,10 +260,14 @@ footer .mono{font-size:11.5px}
 .reel-stage{padding:clamp(18px,3vw,28px) 0 0}
 .reel-stage .reel-embed{margin-top:0}
 .reel-note{padding:clamp(22px,4vw,38px) 0 0}
-/* text-wrap:balance evens the lines instead of leaving a short orphan
-   dangling under a full one, which is what made this paragraph look ragged */
-.reel-note .prose{max-width:74ch}
-.reel-note .prose p{text-wrap:balance;font-size:1.06rem;line-height:1.62}
+/* The line breaks existed only because the text column was narrower than the
+   sentence. Given the grid's width the sentence fits on one line, so the cap
+   goes and it reads as a caption under the work rather than a paragraph.
+   On a narrow screen it must still wrap: the phrases in the source are joined
+   with U+00A0, so a break can only land BETWEEN phrases, never inside one. */
+/* do NOT set max-width here: .reel-note .prose is 0-2-0 and would beat
+   .wrap-wide at 0-1-0, detaching the text from the grid's edges */
+.reel-note .prose p{font-size:1.06rem;line-height:1.62;text-wrap:pretty;max-width:none}
 /* the silent local loop that stands in for the poster until someone clicks */
 .reel-play-btn,.reel-hint{z-index:2}
 /* the grid is dark, so lift the still slightly on hover instead of dimming it */

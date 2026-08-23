@@ -527,7 +527,7 @@ def render_reel():
   </div>
 </section>
 <section class="reel-note">
-  <div class="wrap prose">
+  <div class="wrap wrap-wide prose">
     {prose_html}
   </div>
 </section>
@@ -628,15 +628,11 @@ def render_home():
 <hr class="rule">
 
 <section id="reel">
-  <div class="wrap">
-    <span class="eyebrow">Reel 2026</span>
-    <h2 style="margin-top:10px">Seventy-four seconds of the work</h2>
-    <p class="lede" style="max-width:60ch">Feature and television visual effects supervised and
-      produced over twenty years. Changeling, J. Edgar, Invictus, Argo, Cloud Atlas,
-      Atlantic Crossing.</p>
-    {reel_facade('Still from Changeling, from the reel of Geoffrey Hancock')}
-    <p class="reel-alt mono"><a href="{SITE_ROOT}reel/">More about the reel</a> &middot;
-      <a href="{REEL_URL}">Watch on Vimeo</a></p>
+  <div class="wrap wrap-wide">
+    <span class="eyebrow">Reel 2026, 74 seconds</span>
+    <h2 style="margin-top:12px;max-width:20ch">Complex sequences, delivered without the overruns.</h2>
+    {reel_facade('Nine shots from the reel of Geoffrey Hancock, VFX supervisor and producer')}
+    <p class="reel-alt mono">Press play, or <a href="{SITE_ROOT}reel/">open the reel page</a>.</p>
   </div>
 </section>
 '''
