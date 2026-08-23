@@ -514,7 +514,11 @@ def render_reel():
 <section class="reel-top">
   <div class="wrap">
     <span class="eyebrow">{html.escape(fm.get("eyebrow", ""), quote=False)}</span>
-    <h1>{html.escape(fm["h1"], quote=False)}</h1>
+    <!-- The h1 is present but not shown. Geoff's call: no headline, let the work
+         argue and let the contact block be the call to action. Deleting the h1
+         outright would leave the page with no heading for a screen reader and
+         nothing for search to title it against, so it is hidden, not removed. -->
+    <h1 class="sr">{html.escape(fm["h1"], quote=False)}</h1>
   </div>
 </section>
 <section class="reel-stage">
