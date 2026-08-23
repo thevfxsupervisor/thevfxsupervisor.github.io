@@ -177,8 +177,14 @@ section{padding:clamp(46px,7vw,80px) 0}
 .credit-carousel{position:relative;overflow:hidden;width:100%;margin:30px 0 2px;
   -webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);
   mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.credit-track{display:flex;width:max-content;animation:credit-slide 70s linear infinite}
-.credit-carousel:hover .credit-track{animation-play-state:paused}
+/* The CSS animation stays as the floor: with no JS the strip still moves.
+   The script switches it off and drives the transform itself, which is what
+   lets the scroll wheel push it. */
+.credit-track{display:flex;width:max-content;will-change:transform;
+  animation:credit-slide 70s linear infinite}
+.credit-set{display:flex;flex:none}
+/* deliberately no hover pause: it is slow enough to read, and freezing it
+   under the pointer reads as a bug rather than a feature */
 @keyframes credit-slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
 .credit-item{flex:0 0 auto;padding:2px 46px;border-right:1px solid var(--line);
   display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;min-height:98px}
@@ -190,7 +196,11 @@ section{padding:clamp(46px,7vw,80px) 0}
 .credit-item.has-still::before{content:"";position:absolute;inset:0;background:linear-gradient(rgba(13,16,19,.70),rgba(13,16,19,.85));z-index:0}
 .credit-item.has-still > *{position:relative;z-index:1}
 .credit-item.has-still .role{color:#c7cdd4}
-@media (prefers-reduced-motion:reduce){.credit-track{animation:none}}
+@media (prefers-reduced-motion:reduce){
+  /* the script bails before it ever starts; this also flattens any
+     transform left over if the preference changes mid-session */
+  .credit-track{animation:none;transform:none!important}
+}
 @media (max-width:600px){.credit-item{padding:2px 26px}.credit-item .film{font-size:19px}.credit-item .dir{font-size:15px}}
 /* method modules: prominent title + description below, no bullets, no panel */
 .method-list{margin-top:30px;max-width:760px;display:grid;gap:26px}

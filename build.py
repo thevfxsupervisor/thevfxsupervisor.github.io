@@ -552,6 +552,77 @@ def render_reel():
     return render_shell(fm.get("title", ""), fm.get("description", ""), content,
                         nav_active="reel", extra_script=extra, canonical_path="reel/")
 
+CREDIT_SCRIPT = """<script>
+/* Credit strip. Was a CSS animation that paused on hover; it now drifts under
+   rAF so the scroll wheel can push it, and it does NOT pause on hover, because
+   at this speed the text is readable without stopping and stopping it under the
+   pointer just feels broken.
+
+   The set is cloned to cover the viewport rather than assuming two copies is
+   enough: with ten credits the period is about 2800px, which is fine at 1140px
+   wide and would not be if the strip were ever widened. */
+(function () {
+  var box = document.querySelector('.credit-carousel');
+  if (!box) return;
+  var track = box.querySelector('.credit-track');
+  var proto = track.querySelector('.credit-set');
+  if (!proto) return;
+  if (window.matchMedia('(prefers-reduced-motion:reduce)').matches) return;
+
+  /* Hand over from the CSS keyframes only once we are certain we can drive it,
+     so a script that dies here leaves the strip animating rather than frozen. */
+  track.style.animation = 'none';
+
+  var period = 0, x = 0, boost = 0, running = false, raf = 0, last = 0;
+  var lastY = window.pageYOffset, BASE = 42, MAXB = 1800;
+
+  function measure() {
+    period = proto.getBoundingClientRect().width;
+    if (period <= 0) return;
+    var need = Math.ceil((box.getBoundingClientRect().width + period) / period) + 1;
+    for (var i = track.querySelectorAll('.credit-set').length; i < need; i++) {
+      var c = proto.cloneNode(true);
+      c.setAttribute('aria-hidden', 'true');
+      track.appendChild(c);
+    }
+  }
+  function frame(t) {
+    if (!running) { raf = 0; return; }
+    if (!last) last = t;
+    var dt = Math.min(0.05, (t - last) / 1000);
+    last = t;
+    x -= (BASE + boost) * dt;
+    boost *= Math.pow(0.05, dt);
+    if (Math.abs(boost) < 0.5) boost = 0;
+    if (period > 0) {
+      while (x <= -period) x += period;
+      while (x > 0) x -= period;
+    }
+    track.style.transform = 'translate3d(' + x.toFixed(2) + 'px,0,0)';
+    raf = requestAnimationFrame(frame);
+  }
+  function start() { if (!running) { running = true; last = 0; raf = requestAnimationFrame(frame); } }
+  function stop() { running = false; if (raf) { cancelAnimationFrame(raf); raf = 0; } }
+
+  measure();
+  window.addEventListener('resize', measure);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+  window.addEventListener('scroll', function () {
+    var y = window.pageYOffset, dy = y - lastY;
+    lastY = y;
+    boost += dy * 2.6;
+    if (boost > MAXB) boost = MAXB;
+    if (boost < -MAXB) boost = -MAXB;
+  }, { passive: true });
+
+  if ('IntersectionObserver' in window) {
+    new IntersectionObserver(function (es) {
+      if (es[0].isIntersecting) { start(); } else { stop(); }
+    }, { rootMargin: '150px' }).observe(box);
+  } else { start(); }
+})();
+</script>"""
+
 def credit_carousel():
     """Scrolling film / director / role strip.
 
@@ -584,8 +655,11 @@ def credit_carousel():
                 f'<span class="role">{html.escape(r, quote=False)}</span></div>')
 
     cards = "".join(card(*c) for c in credits)
+    # ONE set in the markup. The script clones it until the row is wider than the
+    # viewport plus a full period, which is the only way the wrap point is
+    # guaranteed not to show a gap on a wide screen.
     return ('<div class="credit-carousel" aria-label="Selected credits">'
-            f'<div class="credit-track">{cards}{cards}</div></div>')
+            f'<div class="credit-track"><div class="credit-set">{cards}</div></div></div>')
 
 
 def render_home():
@@ -684,7 +758,7 @@ def render_home():
         fm.get("final_secondary_label", "Join the waitlist"),
         fm.get("final_secondary_href", SITE_ROOT + "course/"),
     )
-    return render_shell(fm.get("title", SITE_NAME), fm.get("description", ""), content, nav_active=None, extra_script=REEL_SCRIPT, canonical_path="")
+    return render_shell(fm.get("title", SITE_NAME), fm.get("description", ""), content, nav_active=None, extra_script=REEL_SCRIPT + CREDIT_SCRIPT, canonical_path="")
 
 
 PROJECT_ORDER = ["breakdown-studio", "link-session"]  # flagship first
@@ -1023,7 +1097,7 @@ const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist
   requestAnimationFrame(frame);
 })();
 </script>"""
-    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="course", extra_script=extra_script, canonical_path="course/")
+    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="course", extra_script=extra_script + CREDIT_SCRIPT, canonical_path="course/")
 
 
 def render_about():
