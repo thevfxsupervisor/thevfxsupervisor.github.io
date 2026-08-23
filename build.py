@@ -443,29 +443,25 @@ REEL_SECONDS = 74
 
 
 def reel_facade(poster_alt, eager=False):
-    """Muted autoplaying preview that upgrades to the real player on click.
+    """A still contact sheet that swaps for the Vimeo player on click.
 
-    Three states, in order of what the visitor actually gets:
-      1. a local poster, always, so there is never an empty box;
-      2. a 10s silent 960x540 loop cut from the reel master, self-hosted and
-         only fetched once the block nears the viewport;
-      3. the Vimeo player with sound, from the top, once they click.
-
-    Autoplay only works muted, which is why the loop carries no audio track at
-    all rather than a muted one. Nothing third-party loads until step 3, so
-    scrolling past still costs no Vimeo request and no cookie. Anyone on
-    reduced-motion or Save-Data stops at step 1 and clicks straight to step 3.
+    This was briefly an autoplaying muted loop cut from the master, and it was
+    the wrong idea for a specific reason: it looked enough like the reel that
+    Geoff mistook it for the reel, and a 542 KB web encode of a VFX reel is
+    soft and blocky. A page selling visual effects cannot show compressed
+    visual effects. A nine-shot grid cannot be mistaken for footage, carries no
+    codec artefacts, and advertises range in a way ten seconds of one sequence
+    never could.
     """
     loading = "" if eager else ' loading="lazy"'
     return f'''<div class="reel-embed">
   <button class="reel-play" type="button"
           data-src="https://player.vimeo.com/video/{REEL_ID}?autoplay=1&amp;dnt=1&amp;title=0&amp;byline=0&amp;portrait=0"
-          data-preview="{SITE_ROOT}static/reel-preview.mp4"
           aria-label="Play the reel with sound, {REEL_SECONDS} seconds">
     <img src="{SITE_ROOT}static/reel-poster.jpg" alt="{html.escape(poster_alt, quote=True)}"
-         width="1280" height="720"{loading}>
+         width="1600" height="900"{loading}>
     <span class="reel-play-btn" aria-hidden="true"></span>
-    <span class="reel-hint mono" aria-hidden="true">Play with sound</span>
+    <span class="reel-hint mono" aria-hidden="true">Play the reel &middot; 1:14</span>
   </button>
   <noscript>
     <p class="mono" style="margin-top:10px"><a href="{REEL_URL}">Watch the reel on Vimeo</a></p>
@@ -474,53 +470,20 @@ def reel_facade(poster_alt, eager=False):
 
 
 REEL_SCRIPT = """<script>
-(function () {
-  var blocks = document.querySelectorAll('.reel-play');
-  if (!blocks.length) return;
-  var slow = (navigator.connection && navigator.connection.saveData) ||
-             window.matchMedia('(prefers-reduced-motion:reduce)').matches;
-
-  /* Click always wins: swap the whole thing for the Vimeo player, with sound. */
-  blocks.forEach(function (b) {
-    b.addEventListener('click', function () {
-      var f = document.createElement('iframe');
-      f.src = b.dataset.src;
-      f.title = 'Geoffrey Hancock, VFX Supervisor and Producer, Reel 2026';
-      f.allow = 'autoplay; fullscreen; picture-in-picture';
-      f.allowFullscreen = true;
-      f.setAttribute('frameborder', '0');
-      b.parentNode.replaceChild(f, b);
-    });
+/* Click swaps the still for the Vimeo player, with sound, from the top.
+   Nothing third-party loads until then, so scrolling past costs no request
+   and no cookie. */
+document.querySelectorAll('.reel-play').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.src = b.dataset.src;
+    f.title = 'Geoffrey Hancock, VFX Supervisor and Producer, Reel 2026';
+    f.allow = 'autoplay; fullscreen; picture-in-picture';
+    f.allowFullscreen = true;
+    f.setAttribute('frameborder', '0');
+    b.parentNode.replaceChild(f, b);
   });
-
-  if (slow || !('IntersectionObserver' in window)) return;
-
-  /* Otherwise start the silent local loop once the block is near the viewport.
-     The <video> is created here rather than in the markup so a visitor who
-     never scrolls to it never requests it at all. */
-  var io = new IntersectionObserver(function (entries) {
-    entries.forEach(function (e) {
-      if (!e.isIntersecting) return;
-      var b = e.target;
-      io.unobserve(b);
-      if (b.querySelector('video')) return;
-      var v = document.createElement('video');
-      v.src = b.dataset.preview;
-      v.muted = true; v.defaultMuted = true;
-      v.autoplay = true; v.loop = true; v.playsInline = true;
-      v.setAttribute('muted', ''); v.setAttribute('playsinline', '');
-      v.setAttribute('aria-hidden', 'true'); v.tabIndex = -1;
-      v.className = 'reel-loop';
-      v.addEventListener('playing', function () { b.classList.add('is-playing'); });
-      b.insertBefore(v, b.firstChild);
-      var pr = v.play();
-      /* If the browser refuses autoplay anyway, drop back to the poster
-         rather than leaving a black rectangle. */
-      if (pr && pr.catch) pr.catch(function () { v.remove(); b.classList.remove('is-playing'); });
-    });
-  }, { rootMargin: '300px' });
-  blocks.forEach(function (b) { io.observe(b); });
-})();
+});
 </script>"""
 
 
@@ -531,7 +494,8 @@ def render_reel():
     these?"). Credits live on About, which already carries the full list."""
     fm, body = parse_frontmatter((CONTENT_DIR / "pages" / "reel.md").read_text(encoding="utf-8"))
     prose_html = markdown_to_html(body)
-    alt = "Opening frames of the 2026 reel of Geoffrey Hancock, VFX supervisor and producer"
+    alt = ("Nine shots from the reel: Changeling, Cloud Atlas, Invictus, Atlantic Crossing, "
+           "J. Edgar, Argo, Night at the Museum, BRIO Flora and Kia EV9")
 
     video_ld = json.dumps({
         "@context": "https://schema.org",
@@ -556,8 +520,6 @@ def render_reel():
 <section class="reel-stage">
   <div class="wrap wrap-wide">
     {reel_facade(alt, eager=True)}
-    <p class="reel-alt mono">{html.escape(fm.get("credits_line", ""), quote=False)}
-      <a href="{REEL_URL}">Watch on Vimeo</a>.</p>
   </div>
 </section>
 <section class="reel-note">

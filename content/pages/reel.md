@@ -2,10 +2,9 @@
 type: page
 slug: reel
 title: Reel 2026 | Geoffrey Hancock, VFX Supervisor and Producer
-description: The 2026 demo reel of Geoffrey Hancock, VFX supervisor and producer. Changeling, J. Edgar, Invictus, Argo, Cloud Atlas, Atlantic Crossing. 74 seconds.
-eyebrow: Reel 2026
-h1: Seventy-four seconds of the work
-credits_line: Changeling, J. Edgar, Invictus, Argo, Cloud Atlas, Atlantic Crossing, LEGO Ninjago. Current work under NDA is not in it.
+description: Demo reel of Geoffrey Hancock, VFX supervisor and producer. Complex sequences delivered on time and on budget. Changeling, J. Edgar, Invictus, Argo, Cloud Atlas, Atlantic Crossing.
+eyebrow: Reel 2026, 74 seconds
+h1: Complex sequences, delivered without the overruns.
 vimeo_id: 1220476123
 vimeo_url: https://vimeo.com/1220476123
 duration_seconds: 74
@@ -19,7 +18,5 @@ final_secondary_label: Full credits
 final_secondary_href: /about/
 ---
 
-A supervisor's reel is not a showreel of shots I personally comped. It is the work I was responsible
-for: what got approved, what got scoped and budgeted, what got delivered on a date that could not
-move, and the calls made when a sequence was not working. **The interesting part of most of these
-shots is the problem that is no longer visible in them.**
+This is work I was responsible for as a supervisor: the problem solving, the hands-on creative
+guidance, the scoping and the budgeting, and the delivery, on time and on budget.
