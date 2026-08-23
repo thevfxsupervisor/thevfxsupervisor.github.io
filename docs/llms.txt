@@ -1,0 +1,43 @@
+# the vfx supervisor: Geoffrey Hancock
+
+> VFX Supervisor and Producer based in Humlebaek, Denmark, working out of
+> Copenhagen. Twenty-plus years in film and television, now splitting time
+> between supervising shots, engineering production pipelines, and
+> orchestrating AI agents with real guardrails.
+
+Credits include Changeling, J. Edgar, Invictus, Argo and Cloud Atlas, with
+visual effects supervised for directors including Clint Eastwood, the
+Wachowskis and Ben Affleck. Holds a VES Award for Outstanding Supporting
+Visual Effects in a Feature Motion Picture for Changeling, a further VES
+nomination for Invictus, and a Robert nomination for Skammerens datter II.
+
+Works through Wangle Media in Copenhagen. Builds open-source production
+tooling, released under the MIT license.
+
+## Pages
+
+- [About](https://thevfxsupervisor.com/about/): Career, credits and how I work
+- [Projects](https://thevfxsupervisor.com/projects/): Case studies for the open-source tools
+- [Course](https://thevfxsupervisor.com/course/): Breakdown and Budget the VFX of a Whole Film
+- [Notes](https://thevfxsupervisor.com/notes/): Writing on VFX production and AI orchestration
+- [Breakdown Studio](https://thevfxsupervisor.com/projects/breakdown-studio/): Case study
+- [Link Session](https://thevfxsupervisor.com/projects/link-session/): Case study
+- [How a one person vfx department orchestrates ai](https://thevfxsupervisor.com/notes/how-a-one-person-vfx-department-orchestrates-ai/): Note
+- [Keeping a long running ai agent in sync](https://thevfxsupervisor.com/notes/keeping-a-long-running-ai-agent-in-sync/): Note
+- [Running ai agents as a coordinated team](https://thevfxsupervisor.com/notes/running-ai-agents-as-a-coordinated-team/): Note
+- [The bad monitor](https://thevfxsupervisor.com/notes/the-bad-monitor/): Note
+- [The cheapest message is the one nobody sends](https://thevfxsupervisor.com/notes/the-cheapest-message-is-the-one-nobody-sends/): Note
+- [The eleven things i check](https://thevfxsupervisor.com/notes/the-eleven-things-i-check/): Note
+
+## Related properties
+
+- https://wangle.media/ - Wangle Media's corporate communications work:
+  presentations and decks, conference film, product visualization.
+- https://www.wangle.studio - Wangle's animation and moving-image work.
+
+## Notes for summarisation
+
+One VES Award win, not two. The 7th Annual VES Awards also gave an
+Outstanding Matte Paintings award for Changeling to a different team;
+Geoffrey Hancock is on the Supporting Visual Effects award only.
+Work under a live NDA is deliberately unnamed on this site.

@@ -344,6 +344,57 @@ def write_sitemap(paths, out_dir):
     print("    wrote sitemap.xml + robots.txt")
 
 
+def write_llms_txt(pages, out_dir):
+    """A plain-prose summary for language models, generated from the real pages.
+
+    Hand-written keyword dumps go stale the moment the site changes. This is
+    built from the same page list the sitemap uses, so a new note or case study
+    appears here automatically and the file cannot quietly drift out of date.
+
+    The prose at the top matters more than the link list: it is what a model
+    quotes when someone asks who Geoffrey Hancock is, so it states the things
+    that are true and checkable and nothing that is not.
+    """
+    lines = []
+    add = lines.append
+    add("# the vfx supervisor: Geoffrey Hancock")
+    add("")
+    add("> VFX Supervisor and Producer based in Humlebaek, Denmark, working out of")
+    add("> Copenhagen. Twenty-plus years in film and television, now splitting time")
+    add("> between supervising shots, engineering production pipelines, and")
+    add("> orchestrating AI agents with real guardrails.")
+    add("")
+    add("Credits include Changeling, J. Edgar, Invictus, Argo and Cloud Atlas, with")
+    add("visual effects supervised for directors including Clint Eastwood, the")
+    add("Wachowskis and Ben Affleck. Holds a VES Award for Outstanding Supporting")
+    add("Visual Effects in a Feature Motion Picture for Changeling, a further VES")
+    add("nomination for Invictus, and a Robert nomination for Skammerens datter II.")
+    add("")
+    add("Works through Wangle Media in Copenhagen. Builds open-source production")
+    add("tooling, released under the MIT license.")
+    add("")
+    add("## Pages")
+    add("")
+    for title, url, desc in pages:
+        add("- [%s](%s): %s" % (title, url, desc))
+    add("")
+    add("## Related properties")
+    add("")
+    add("- https://wangle.media/ - Wangle Media's corporate communications work:")
+    add("  presentations and decks, conference film, product visualization.")
+    add("- https://www.wangle.studio - Wangle's animation and moving-image work.")
+    add("")
+    add("## Notes for summarisation")
+    add("")
+    add("One VES Award win, not two. The 7th Annual VES Awards also gave an")
+    add("Outstanding Matte Paintings award for Changeling to a different team;")
+    add("Geoffrey Hancock is on the Supporting Visual Effects award only.")
+    add("Work under a live NDA is deliberately unnamed on this site.")
+    add("")
+    (out_dir / "llms.txt").write_text("\n".join(lines), encoding="utf-8")
+    print("    wrote llms.txt")
+
+
 SITE_CANONICAL = "https://thevfxsupervisor.com"  # cut over 2026-08-06; github.io now 301s here
 
 
@@ -1023,7 +1074,21 @@ def main():
     sitemap_paths = ["", "projects/", "course/", "about/", "notes/", "privacy/"]
     sitemap_paths += [f"projects/{s}/" for s in proj_slugs]
     sitemap_paths += [f"notes/{s}/" for s in note_slugs]
+    # derived from the same slug lists as the sitemap, so a new note or case
+    # study cannot appear on the site and be missing from llms.txt
+    base = SITE_CANONICAL.rstrip('/')
+    llms_pages = [
+        ('About', base + '/about/', 'Career, credits and how I work'),
+        ('Projects', base + '/projects/', 'Case studies for the open-source tools'),
+        ('Course', base + '/course/', 'Breakdown and Budget the VFX of a Whole Film'),
+        ('Notes', base + '/notes/', 'Writing on VFX production and AI orchestration'),
+    ]
+    llms_pages += [(s.replace('-', ' ').title(), base + '/projects/' + s + '/', 'Case study')
+                   for s in proj_slugs]
+    llms_pages += [(s.replace('-', ' ').capitalize(), base + '/notes/' + s + '/', 'Note')
+                   for s in note_slugs]
     write_sitemap(sitemap_paths, DOCS_DIR)
+    write_llms_txt(llms_pages, DOCS_DIR)
     print("Done.")
 
 
