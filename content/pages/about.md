@@ -11,6 +11,8 @@ final_p: Based in Copenhagen on a Danish work permit. I contract internationally
 
 I am a VFX supervisor and producer. I run VFX departments on film and television productions, and build the tooling that makes that work efficient even when there is no large department to hand it to.
 
+The thing I actually do, in one line: supervise the shots, engineer the pipeline, and orchestrate the AI with the right guardrails, on the same production, at the same time.
+
 Twenty-plus years of it. I hold a **VES Award for Changeling**, a further VES nomination for Invictus, and a Robert nomination for Skammerens datter II. I have supervised visual effects on films directed by Clint Eastwood, the Wachowskis and Ben Affleck: **Changeling, J. Edgar, Invictus, Argo, Cloud Atlas**, along with Twilight, Night at the Museum and Red Dawn. On international productions I have run the full VFX lifecycle across vendors in Belgium, the Czech Republic, Slovakia, Scandinavia, Taiwan and Pakistan. On **LEGO Ninjago** I art directed seasons coordinating Danish and Chinese teams.
 
 Through [Wangle Media](https://wangle.media/) in Copenhagen I have delivered animation, VFX and real time work for **Netflix, Pandora, LEGO, Kia, BRIO, Novo Nordisk, Mint Copenhagen and M2**, and collaborated with Larissa Sansour on In Vitro, which won at the Venice Biennale and went to Netflix.
@@ -18,8 +20,6 @@ Through [Wangle Media](https://wangle.media/) in Copenhagen I have delivered ani
 Work under a live NDA stays unnamed here, so the feature I am on this year is just that: a feature in production.
 
 I work through [Wangle Media](https://wangle.media/), whose corporate communications work (presentations and decks, conference film, product visualization) lives at [wangle.media](https://wangle.media/). I build production tooling as a matter of course, because the tools that exist rarely fit the job in front of me. Breakdown Studio, an open-source shot-breakdown pipeline, is the first of that tooling I've shipped publicly, released under the MIT license.
-
-The thing I actually do, in one line: supervise the shots, engineer the pipeline, and orchestrate the AI with the right guardrails, on the same production, at the same time.
 
 ## Selected press
 

@@ -6,12 +6,12 @@ description: Geoffrey Hancock, VFX supervisor and producer. VES Award for Change
 hero_eyebrow: VFX Supervisor & Producer
 hero_h1: VFX supervision. Pipeline engineering. AI orchestration.
 hero_h1_accent: AI orchestration.
-hero_lede: I supervise and produce visual effects, and I write the tooling that makes one person able to do a department's job. Breakdown Studio is the flagship of the tooling I have shipped in the open. A course on the method is next.
+hero_lede: I supervise and produce visual effects, and I write the tooling that makes one person able to do a department's job. Breakdown Studio is the flagship of the tooling I have shipped in the open, and I teach the whole method as a live course.
 cta_primary_href: /projects/breakdown-studio/
 cta_primary_label: See Breakdown Studio
 cta_secondary_href: /course/
 cta_secondary_label: Join the course waitlist
-cred: VES Award for Changeling. Argo, Cloud Atlas, J. Edgar, Invictus, Atlantic Crossing, LEGO Ninjago. 20+ years. Copenhagen.
+cred: VES Award for Changeling. Two further award nominations. 20+ years supervising features and television. Copenhagen.
 proof_h2:
 final_h2: Learn to do it yourself
 final_p: Breakdown Studio is free and live now, go use it. If you want the whole method, breaking down and budgeting a film's VFX solo with an AI pair, I teach it live about once a month. Join the free waitlist for the next date and you get my VFX and AI gotchas list straight away. Founding rate 325 USD, 450 after.

@@ -552,6 +552,42 @@ def render_reel():
     return render_shell(fm.get("title", ""), fm.get("description", ""), content,
                         nav_active="reel", extra_script=extra, canonical_path="reel/")
 
+def credit_carousel():
+    """Scrolling film / director / role strip.
+
+    Lifted out of the course page because it is the strongest social proof on
+    the site: the director names sell harder than any adjective, and the course
+    page was the only place carrying them.
+    """
+    # IMDb (nm0995883) and web-confirmed directors. ONLY his confirmed
+    # supervisor/producer credits. Permafrost is deliberately OMITTED until
+    # publicly announced (NDA). Do not add unverified credits.
+    credits = [
+        ("Changeling", "Clint Eastwood", "VFX Supervisor", "changeling.jpg"),
+        ("Vantage Point", "Pete Travis", "VFX Supervisor", "vantage_point.jpg"),
+        ("Invictus", "Clint Eastwood", "VFX Supervisor", "invictus.jpg"),
+        ("J. Edgar", "Clint Eastwood", "VFX Supervisor", "j_edgar.jpg"),
+        ("Argo", "Ben Affleck", "VFX Supervisor", "argo.jpg"),
+        ("Cloud Atlas", "The Wachowskis", "VFX Supervisor", "cloud_atlas.jpg"),
+        ("Red Dawn", "Dan Bradley", "VFX Supervisor", "red_dawn.jpg"),
+        ("Skammerens datter II", "Ask Hasselbalch", "VFX Supervisor", "skammerens_datter_ii.jpg"),
+        ("Atlantic Crossing", "Alexander Eik", "VFX Supervisor & Producer", "atlantic_crossing.jpg"),
+        ("Barzakh", "Asim Abbasi", "VFX Producer", "barzakh.jpg"),
+    ]
+
+    def card(f, d, r, img):
+        bg = f' style="background-image:url({SITE_ROOT}static/credits/{img})"' if img else ""
+        cls = "credit-item has-still" if img else "credit-item"
+        return (f'<div class="{cls}"{bg}>'
+                f'<span class="film">{html.escape(f, quote=False)}</span>'
+                f'<span class="dir">{html.escape(d, quote=False)}</span>'
+                f'<span class="role">{html.escape(r, quote=False)}</span></div>')
+
+    cards = "".join(card(*c) for c in credits)
+    return ('<div class="credit-carousel" aria-label="Selected credits">'
+            f'<div class="credit-track">{cards}{cards}</div></div>')
+
+
 def render_home():
     fm, body = parse_frontmatter((CONTENT_DIR / "pages" / "home.md").read_text(encoding="utf-8"))
     pillars, body = extract_block(body, "pillars")
@@ -586,8 +622,8 @@ def render_home():
     )
     cards.append(
         f'<a class="proj-card" href="{SITE_ROOT}about/">'
-        f'<span class="eyebrow">About &middot; 20+ years</span>'
-        f'<h2>20+ years, and a VES Award</h2>'
+        f'<span class="eyebrow">About &middot; Full credits</span>'
+        f'<h2>Credits, awards and how I work</h2>'
         f'<p>VFX for Eastwood, the Wachowskis and Affleck: Changeling (VES Award), J. Edgar, Invictus, Argo, Cloud Atlas. Work for Netflix, Pandora, LEGO, Kia. Copenhagen.</p>'
         f'<span class="proj-more mono">More about me &rarr;</span></a>'
     )
@@ -615,6 +651,10 @@ def render_home():
     </div>
     <div class="cred"><span class="dot"></span><b>{html.escape(fm.get("cred",""), quote=False)}</b></div>
   </div>
+</section>
+
+<section class="home-credits" aria-label="Selected credits">
+  <div class="wrap">{credit_carousel()}</div>
 </section>
 
 <section id="projects-links">
@@ -822,30 +862,7 @@ def render_course():
     hero_cta = fm.get("hero_cta", "Join the free waitlist")
     reassure = (html.escape(seats_note, quote=False) + " ") if seats_note else ""
     # Selected-credits carousel (replaces the old static cred-band). Verified 2026-08-15 with Geoff,
-    # IMDb (nm0995883) and web-confirmed directors. ONLY his confirmed supervisor/producer credits.
-    # Permafrost is deliberately OMITTED until publicly announced (NDA). Do not add unverified credits.
-    _CREDITS = [
-        ("Changeling", "Clint Eastwood", "VFX Supervisor", "changeling.jpg"),
-        ("Vantage Point", "Pete Travis", "VFX Supervisor", "vantage_point.jpg"),
-        ("Invictus", "Clint Eastwood", "VFX Supervisor", "invictus.jpg"),
-        ("J. Edgar", "Clint Eastwood", "VFX Supervisor", "j_edgar.jpg"),
-        ("Argo", "Ben Affleck", "VFX Supervisor", "argo.jpg"),
-        ("Cloud Atlas", "The Wachowskis", "VFX Supervisor", "cloud_atlas.jpg"),
-        ("Red Dawn", "Dan Bradley", "VFX Supervisor", "red_dawn.jpg"),
-        ("Skammerens datter II", "Ask Hasselbalch", "VFX Supervisor", "skammerens_datter_ii.jpg"),
-        ("Atlantic Crossing", "Alexander Eik", "VFX Supervisor & Producer", "atlantic_crossing.jpg"),
-        ("Barzakh", "Asim Abbasi", "VFX Producer", "barzakh.jpg"),
-    ]
-    def _card(f, d, r, img):
-        bg = f' style="background-image:url({SITE_ROOT}static/credits/{img})"' if img else ""
-        cls = "credit-item has-still" if img else "credit-item"
-        return (f'<div class="{cls}"{bg}>'
-                f'<span class="film">{html.escape(f, quote=False)}</span>'
-                f'<span class="dir">{html.escape(d, quote=False)}</span>'
-                f'<span class="role">{html.escape(r, quote=False)}</span></div>')
-    _cards = "".join(_card(*c) for c in _CREDITS)
-    cred_html = ('<div class="credit-carousel" aria-label="Selected credits">'
-                 f'<div class="credit-track">{_cards}{_cards}</div></div>')
+    cred_html = credit_carousel()
 
     content = f'''
 <section class="hero course-hero">
