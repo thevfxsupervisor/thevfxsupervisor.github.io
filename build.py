@@ -331,8 +331,16 @@ def write_sitemap(paths, out_dir):
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
         f"{urls}\n</urlset>\n", encoding="utf-8")
+    # Explicitly welcome the AI crawlers. Default behaviour is ambiguous and some
+    # back off without an explicit Allow. This is a portfolio, so being read and
+    # summarised accurately is the entire point of publishing it.
+    ai_agents = ["GPTBot", "ClaudeBot", "PerplexityBot", "Google-Extended",
+                 "CCBot", "Applebot-Extended"]
+    blocks = "".join("\nUser-agent: %s\nAllow: /\n" % a for a in ai_agents)
     (out_dir / "robots.txt").write_text(
-        f"User-agent: *\nAllow: /\nSitemap: {SITE_CANONICAL.rstrip('/')}/sitemap.xml\n", encoding="utf-8")
+        "User-agent: *\nAllow: /\n" + blocks +
+        "\nSitemap: %s/sitemap.xml\n" % SITE_CANONICAL.rstrip("/"),
+        encoding="utf-8")
     print("    wrote sitemap.xml + robots.txt")
 
 
