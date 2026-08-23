@@ -744,7 +744,7 @@ def render_home():
 <section id="reel">
   <div class="wrap wrap-wide">
     <span class="eyebrow">Reel 2026, 74 seconds</span>
-    <h2 style="margin-top:12px;max-width:20ch">Complex sequences, delivered without the overruns.</h2>
+    <h2 style="margin-top:12px;max-width:22ch">Features, television, and the brands in between.</h2>
     {reel_facade('Nine shots from the reel of Geoffrey Hancock, VFX supervisor and producer')}
     <p class="reel-alt mono">Press play, or <a href="{SITE_ROOT}reel/">open the reel page</a>.</p>
   </div>

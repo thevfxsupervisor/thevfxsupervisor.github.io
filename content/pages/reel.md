@@ -11,7 +11,7 @@ duration_seconds: 74
 upload_date: 2026-08-22
 poster: reel-poster.jpg
 final_h2: Ask me about a shot
-final_p: Pick a sequence and ask what went wrong in it. That is the fastest way to judge me, and I am open to supervision and production work.
+final_p: Pick any shot in it and I will tell you how it was scoped, what it took, and how it got delivered. Available now for supervision and production work.
 final_primary_label: Get in touch
 final_primary_href: mailto:geoff@thevfxsupervisor.com
 final_secondary_label: Full credits
