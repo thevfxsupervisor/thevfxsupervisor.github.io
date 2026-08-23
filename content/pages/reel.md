@@ -18,4 +18,4 @@ final_secondary_label: Full credits
 final_secondary_href: /about/
 ---
 
-This is work I was responsible for as a supervisor: the problem solving, the hands-on creative guidance, the scoping and the budgeting, and the delivery, on time and on budget.
+This is work I was responsible for as a supervisor: the problem solving, the hands-on creative, the scoping and the budgeting, and the delivery, on time and on budget.
