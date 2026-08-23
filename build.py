@@ -451,7 +451,7 @@ def render_home():
         f'<a class="proj-card" href="{SITE_ROOT}about/">'
         f'<span class="eyebrow">About &middot; 20+ years</span>'
         f'<h2>20+ years, and a VES Award</h2>'
-        f'<p>VFX for Eastwood, the Wachowskis and Affleck: Changeling (VES Award), J. Edgar, Invictus, Argo, Cloud Atlas. Work for Netflix, Pandora, LEGO, Sony. Copenhagen.</p>'
+        f'<p>VFX for Eastwood, the Wachowskis and Affleck: Changeling (VES Award), J. Edgar, Invictus, Argo, Cloud Atlas. Work for Netflix, Pandora, LEGO, Kia. Copenhagen.</p>'
         f'<span class="proj-more mono">More about me &rarr;</span></a>'
     )
     cards_html = "".join(cards)
