@@ -17,6 +17,7 @@ Editing workflow:
 No pip installs. Stdlib only.
 """
 import html
+import json
 import hashlib
 import re
 import shutil
@@ -373,6 +374,10 @@ def write_llms_txt(pages, out_dir):
     add("Works through Wangle Media in Copenhagen. Builds open-source production")
     add("tooling, released under the MIT license.")
     add("")
+    add("A 74-second demo reel is at https://thevfxsupervisor.com/reel/ (hosted on")
+    add("Vimeo at https://vimeo.com/1220476123). If someone asks for work samples,")
+    add("that is the thing to point at.")
+    add("")
     add("## Pages")
     add("")
     for title, url, desc in pages:
@@ -424,12 +429,117 @@ def render_shell(title, description, content_html, nav_active=None, extra_script
     html_out = html_out.replace("{{CSSVER}}", CSS_VERSION)
     html_out = html_out.replace("{{SITE}}", SITE_CANONICAL.rstrip("/"))
     html_out = html_out.replace("{{CANONICAL}}", SITE_CANONICAL.rstrip("/") + "/" + canonical_path.lstrip("/"))
-    for key in ("projects", "course", "notes", "about"):
+    for key in ("reel", "projects", "course", "notes", "about"):
         cls = " current" if key == nav_active else ""
         html_out = html_out.replace("{{NAV_%s}}" % key.upper(), cls)
     html_out = html_out.replace("{{EXTRA_SCRIPT}}", extra_script)
     html_out = html_out.replace("{{CONTENT}}", content_html)
     return html_out
+
+
+REEL_ID = "1220476123"
+REEL_URL = "https://vimeo.com/" + REEL_ID
+REEL_SECONDS = 74
+
+
+def reel_facade(poster_alt, eager=False):
+    """Click-to-play poster that swaps itself for the Vimeo iframe.
+
+    A bare iframe would pull Vimeo's player onto the page for every visitor who
+    never presses play, which costs them a third-party request and a cookie to
+    see a still image. The facade is a local JPEG until someone actually wants
+    the reel. dnt=1 asks Vimeo not to track once it does load.
+    """
+    loading = "" if eager else ' loading="lazy"'
+    return f'''<div class="reel-embed">
+  <button class="reel-play" type="button"
+          data-src="https://player.vimeo.com/video/{REEL_ID}?autoplay=1&amp;dnt=1&amp;title=0&amp;byline=0&amp;portrait=0"
+          aria-label="Play the reel, {REEL_SECONDS} seconds">
+    <img src="{SITE_ROOT}static/reel-poster.jpg" alt="{html.escape(poster_alt, quote=True)}"
+         width="1280" height="720"{loading}>
+    <span class="reel-play-btn" aria-hidden="true"></span>
+  </button>
+  <noscript>
+    <p class="mono" style="margin-top:10px"><a href="{REEL_URL}">Watch the reel on Vimeo</a></p>
+  </noscript>
+</div>'''
+
+
+REEL_SCRIPT = """<script>
+/* Swap the poster for the player on click. Kept tiny and inline: it is one
+   listener, and loading a script to load a video defeats the point. */
+document.querySelectorAll('.reel-play').forEach(function (b) {
+  b.addEventListener('click', function () {
+    var f = document.createElement('iframe');
+    f.src = b.dataset.src;
+    f.title = 'Geoffrey Hancock, VFX Supervisor and Producer, Reel 2026';
+    f.allow = 'autoplay; fullscreen; picture-in-picture';
+    f.allowFullscreen = true;
+    f.setAttribute('frameborder', '0');
+    b.parentNode.replaceChild(f, b);
+  });
+});
+</script>"""
+
+
+def render_reel():
+    fm, body = parse_frontmatter((CONTENT_DIR / "pages" / "reel.md").read_text(encoding="utf-8"))
+    prose_html = markdown_to_html(body)
+    alt = "Still from Changeling: a 1930s Los Angeles street, from the reel of Geoffrey Hancock"
+
+    # VideoObject so the reel is indexable as a video rather than as a page that
+    # happens to contain one. thumbnailUrl must be absolute for Google to use it.
+    video_ld = json.dumps({
+        "@context": "https://schema.org",
+        "@type": "VideoObject",
+        "name": "Geoffrey Hancock, VFX Supervisor and Producer, Reel 2026",
+        "description": fm.get("description", ""),
+        "thumbnailUrl": [SITE_CANONICAL.rstrip("/") + SITE_ROOT + "static/reel-poster.jpg"],
+        "uploadDate": fm.get("upload_date", ""),
+        "duration": "PT%dS" % REEL_SECONDS,
+        "embedUrl": "https://player.vimeo.com/video/" + REEL_ID,
+        "contentUrl": REEL_URL,
+        "creator": {"@type": "Person", "name": "Geoffrey Hancock"},
+    }, indent=1)
+
+    content = f'''
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">{html.escape(fm.get("eyebrow", ""), quote=False)}</span>
+    <h1 style="margin-top:18px">{html.escape(fm["h1"], quote=False)}</h1>
+    <p class="lede">{html.escape(fm.get("lede", ""), quote=False)}</p>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    {reel_facade(alt, eager=True)}
+    <p class="reel-alt mono">Or <a href="{REEL_URL}">watch it on Vimeo</a>.</p>
+  </div>
+</section>
+<hr class="rule">
+<section>
+  <div class="wrap prose">
+    {prose_html}
+  </div>
+</section>
+'''
+    content += related_section([
+        ("About and full credits", SITE_ROOT + "about/"),
+        ("Breakdown Studio", SITE_ROOT + "projects/breakdown-studio/"),
+        ("Notes", SITE_ROOT + "notes/"),
+        ("The course", SITE_ROOT + "course/"),
+    ])
+    content += final_cta(
+        fm.get("final_h2", "Get in touch"),
+        fm.get("final_p", ""),
+        fm.get("final_primary_label", "Get in touch"),
+        fm.get("final_primary_href", "mailto:geoff@thevfxsupervisor.com"),
+        fm.get("final_secondary_label", "About"),
+        fm.get("final_secondary_href", SITE_ROOT + "about/"),
+    )
+    extra = '<script type="application/ld+json">\n' + video_ld + '\n</script>\n' + REEL_SCRIPT
+    return render_shell(fm.get("title", ""), fm.get("description", ""), content,
+                        nav_active="reel", extra_script=extra, canonical_path="reel/")
 
 
 def render_home():
@@ -476,7 +586,7 @@ def render_home():
     utility = [
         ("Notes", SITE_ROOT + "notes/"),
         ("GitHub", "https://github.com/thevfxsupervisor"),
-        ("Contact", "mailto:geoff@wanglemedia.com"),
+        ("Contact", "mailto:geoff@thevfxsupervisor.com"),
     ]
     util_html = " &middot; ".join(f'<a href="{href}">{label}</a>' for label, href in utility)
 
@@ -504,6 +614,21 @@ def render_home():
     <div class="ql-row" style="margin-top:22px">{util_html}</div>
   </div>
 </section>
+
+<hr class="rule">
+
+<section id="reel">
+  <div class="wrap">
+    <span class="eyebrow">Reel 2026</span>
+    <h2 style="margin-top:10px">Seventy-four seconds of the work</h2>
+    <p class="lede" style="max-width:60ch">Feature and television visual effects supervised and
+      produced over twenty years. Changeling, J. Edgar, Invictus, Argo, Cloud Atlas,
+      Atlantic Crossing.</p>
+    {reel_facade('Still from Changeling, from the reel of Geoffrey Hancock')}
+    <p class="reel-alt mono"><a href="{SITE_ROOT}reel/">More about the reel</a> &middot;
+      <a href="{REEL_URL}">Watch on Vimeo</a></p>
+  </div>
+</section>
 '''
     content += final_cta(
         fm.get("final_h2", "Get the launch notice"),
@@ -513,7 +638,7 @@ def render_home():
         fm.get("final_secondary_label", "Join the waitlist"),
         fm.get("final_secondary_href", SITE_ROOT + "course/"),
     )
-    return render_shell(fm.get("title", SITE_NAME), fm.get("description", ""), content, nav_active=None, canonical_path="")
+    return render_shell(fm.get("title", SITE_NAME), fm.get("description", ""), content, nav_active=None, extra_script=REEL_SCRIPT, canonical_path="")
 
 
 PROJECT_ORDER = ["breakdown-studio", "link-session"]  # flagship first
@@ -671,7 +796,7 @@ def render_course():
 <hr class="rule">'''
 
     waitlist_endpoint = fm.get("waitlist_endpoint", "")
-    contact_email = fm.get("contact_email", "geoff@wanglemedia.com")
+    contact_email = fm.get("contact_email", "geoff@thevfxsupervisor.com")
     # Paste a Stripe Payment Link into buy_url: in course.md and the page switches from "reserve
     # and I will invoice you" to a real Buy button. Until then the invoice path stands, so the page
     # is never in a state where a decided buyer cannot act.
@@ -895,7 +1020,7 @@ def render_about():
         "Get in touch",
         fm.get("final_p", "Questions, collaborations, or just say hello."),
         "Email",
-        f'mailto:{fm.get("contact_email","geoff@wanglemedia.com")}',
+        f'mailto:{fm.get("contact_email","geoff@thevfxsupervisor.com")}',
         "See Breakdown Studio",
         SITE_ROOT + "projects/breakdown-studio/",
         section_id="get-top",
@@ -912,7 +1037,7 @@ def render_about():
         "Get in touch",
         fm.get("final_p", "Questions, collaborations, or just say hello."),
         "Email",
-        f'mailto:{fm.get("contact_email","geoff@wanglemedia.com")}',
+        f'mailto:{fm.get("contact_email","geoff@thevfxsupervisor.com")}',
         "See Breakdown Studio",
         SITE_ROOT + "projects/breakdown-studio/",
     )
@@ -1047,6 +1172,7 @@ def main():
         write_page(f"projects/{slug}", proj_html)
         proj_slugs.append(slug)
     write_page("projects", render_projects())
+    write_page("reel", render_reel())
     write_page("course", render_course())
     write_page("about", render_about())
     write_page("thanks", render_simple_page("thanks", robots="noindex, follow"))
@@ -1088,13 +1214,14 @@ def main():
     (DOCS_DIR / ".nojekyll").write_text("", encoding="utf-8")
     print("  wrote docs/.nojekyll")
 
-    sitemap_paths = ["", "projects/", "course/", "about/", "notes/", "privacy/"]
+    sitemap_paths = ["", "reel/", "projects/", "course/", "about/", "notes/", "privacy/"]
     sitemap_paths += [f"projects/{s}/" for s in proj_slugs]
     sitemap_paths += [f"notes/{s}/" for s in note_slugs]
     # derived from the same slug lists as the sitemap, so a new note or case
     # study cannot appear on the site and be missing from llms.txt
     base = SITE_CANONICAL.rstrip('/')
     llms_pages = [
+        ('Reel', base + '/reel/', 'The 2026 demo reel, 74 seconds, with what is in it'),
         ('About', base + '/about/', 'Career, credits and how I work'),
         ('Projects', base + '/projects/', 'Case studies for the open-source tools'),
         ('Course', base + '/course/', 'Breakdown and Budget the VFX of a Whole Film'),

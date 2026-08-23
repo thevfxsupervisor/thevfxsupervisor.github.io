@@ -11,7 +11,7 @@ seats_note: Free to join.
 hero_cta: Join the free waitlist
 included_h2: The method, end to end
 waitlist_endpoint: https://script.google.com/macros/s/AKfycbzFVLT4Sl7ZfAQg2lHtqQWRCUpdyOOAxdawdl99HZPofHH8a8_1oYfxF05wf56Zq57z/exec
-contact_email: geoff@wanglemedia.com
+contact_email: geoff@thevfxsupervisor.com
 ---
 
 ## Who it is for

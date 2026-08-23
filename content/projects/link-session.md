@@ -43,4 +43,4 @@ The newest addition came from the same place as the rest: doing it by hand too m
 
 ## Try it, and tell me how it holds up
 
-It is open source and MIT, so clone it and point it at your own sessions. If you are running AI agents on real work, I would genuinely like to know how it behaves for you: what worked, what broke, and what you wish it did. Email me at [geoff@wanglemedia.com](mailto:geoff@wanglemedia.com) and tell me.
+It is open source and MIT, so clone it and point it at your own sessions. If you are running AI agents on real work, I would genuinely like to know how it behaves for you: what worked, what broke, and what you wish it did. Email me at [geoff@thevfxsupervisor.com](mailto:geoff@thevfxsupervisor.com) and tell me.

@@ -6,7 +6,7 @@
  *
  * On each signup it:
  *   1. appends {timestamp, email, name, question} to the active Sheet,
- *   2. emails geoff@wanglemedia.com a notification (with the question),
+ *   2. emails geoff@thevfxsupervisor.com a notification (with the question),
  *   3. auto-emails the SIGNER the lead-magnet resource, whose copy is read
  *      from a PRIVATE Script Property (see leadMagnetHtml). The lead-magnet
  *      copy is Geoff's copyrighted content and is deliberately NOT stored in
@@ -38,7 +38,7 @@ function doPost(e) {
     // 1) Notify the owner. Isolated so a mail failure never loses the row.
     try {
       MailApp.sendEmail(
-        "geoff@wanglemedia.com",
+        "geoff@thevfxsupervisor.com",
         "New waitlist signup: " + email,
         "Email: " + email +
           "\nName: " + (name || "(none)") +
@@ -56,7 +56,7 @@ function doPost(e) {
         subject: "Your VFX + AI gotchas list (and you are on the waitlist)",
         htmlBody: leadMagnetHtml(),
         name: "Geoff Hancock",
-        replyTo: "geoff@wanglemedia.com"
+        replyTo: "geoff@thevfxsupervisor.com"
       });
     } catch (leadErr) {
       // swallow: never fail the request over a mail hiccup

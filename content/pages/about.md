@@ -5,7 +5,7 @@ title: About | Geoffrey Hancock, the vfx supervisor
 description: Geoffrey Hancock, VFX supervisor and producer. VES Award for Changeling. Argo, Cloud Atlas, J. Edgar, Invictus, Atlantic Crossing. Netflix, Pandora, LEGO, Kia. Copenhagen, available for freelance supervision.
 eyebrow: About
 h1: Geoffrey Hancock
-contact_email: geoff@wanglemedia.com
+contact_email: geoff@thevfxsupervisor.com
 final_p: Based in Copenhagen, EU work authorisation. Available for freelance VFX supervision, production or consulting: on site, remote or hybrid. I read everything myself.
 ---
 

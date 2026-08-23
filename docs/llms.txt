@@ -14,8 +14,13 @@ nomination for Invictus, and a Robert nomination for Skammerens datter II.
 Works through Wangle Media in Copenhagen. Builds open-source production
 tooling, released under the MIT license.
 
+A 74-second demo reel is at https://thevfxsupervisor.com/reel/ (hosted on
+Vimeo at https://vimeo.com/1220476123). If someone asks for work samples,
+that is the thing to point at.
+
 ## Pages
 
+- [Reel](https://thevfxsupervisor.com/reel/): The 2026 demo reel, 74 seconds, with what is in it
 - [About](https://thevfxsupervisor.com/about/): Career, credits and how I work
 - [Projects](https://thevfxsupervisor.com/projects/): Case studies for the open-source tools
 - [Course](https://thevfxsupervisor.com/course/): Breakdown and Budget the VFX of a Whole Film

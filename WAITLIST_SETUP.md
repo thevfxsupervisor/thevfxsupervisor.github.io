@@ -33,7 +33,7 @@ landed in the Sheet.
 
 `waitlist.gs` is deployed as a **bound** Apps Script web app (Extensions > Apps Script from inside the
 Sheet, so `getActiveSpreadsheet()` resolves), Execute as **Me**, Who has access **Anyone**. Each
-reservation appends `timestamp, email, name, note` AND emails geoff@wanglemedia.com a notification
+reservation appends `timestamp, email, name, note` AND emails geoff@thevfxsupervisor.com a notification
 (`MailApp.sendEmail`, isolated in its own try so a mail failure never loses the row). The Sheet is
 private to Geoff; the web app writes to it under his authorization. Reservations still turn into
 invoices by hand: this only changed HOW they arrive (a row plus an email), not the invoicing.
