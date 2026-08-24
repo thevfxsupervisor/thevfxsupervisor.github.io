@@ -127,7 +127,16 @@
 <script>
 /* Click swaps the still for the Vimeo player, with sound, from the top.
    Nothing third-party loads until then, so scrolling past costs no request
-   and no cookie. */
+   and no cookie.
+
+   Why the unmute dance: browsers refuse to START playback with sound unless
+   they are sure of a user gesture, and Vimeo's player handles that refusal by
+   quietly retrying MUTED rather than failing. So the click produced a silent
+   reel. Unmuting a video that is ALREADY playing is permitted once a gesture
+   has happened, which it has, so we let it start however it likes and then
+   turn the sound on. player.js is fetched only at this point, when the visitor
+   has already opted into loading Vimeo. If any of it fails the reel still
+   plays, just muted, which is where we were before. */
 document.querySelectorAll('.reel-play').forEach(function (b) {
   b.addEventListener('click', function () {
     var f = document.createElement('iframe');
@@ -137,6 +146,30 @@ document.querySelectorAll('.reel-play').forEach(function (b) {
     f.allowFullscreen = true;
     f.setAttribute('frameborder', '0');
     b.parentNode.replaceChild(f, b);
+
+    var s = document.createElement('script');
+    s.src = 'https://player.vimeo.com/api/player.js';
+    s.onload = function () {
+      if (!window.Vimeo || !window.Vimeo.Player) return;
+      try {
+        var p = new Vimeo.Player(f);
+        p.ready().then(function () {
+          return p.setMuted(false).then(function () { return p.setVolume(1); })
+            .then(function () { return p.getPaused(); })
+            .then(function (paused) {
+              if (!paused) return;
+              /* Turning the sound on can itself get playback rejected, which
+                 would leave someone who just pressed play staring at a frozen
+                 frame. Resume with sound if allowed, and if not, go back to
+                 muted and keep playing: a silent reel beats a stopped one. */
+              return p.play()['catch'](function () {
+                return p.setMuted(true).then(function () { return p.play(); });
+              });
+            });
+        })['catch'](function () { /* stays muted, user can unmute */ });
+      } catch (e) { /* same */ }
+    };
+    document.head.appendChild(s);
   });
 });
 </script><script>
