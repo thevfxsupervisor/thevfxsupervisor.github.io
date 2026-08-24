@@ -135,14 +135,17 @@
    than failing. So we ask for autoplay, let it start however it likes, then
    unmute, which is permitted on a video that is already playing.
 
-   TOUCH: that trick does not survive. A tap on the PAGE does not carry into a
-   cross-origin iframe on iOS, so the autoplay request fails outright and the
-   visitor is left with a paused, muted player needing two more taps. So on
-   touch we do NOT request autoplay at all: without it Vimeo never enters its
-   muted-retry path, and the player appears with its own play control. We still
-   attempt play(), which Android often allows; where it is refused, the next tap
-   lands directly on Vimeo's button, which IS a gesture on the video element and
-   therefore starts it WITH SOUND. Two taps, never a mute to undo. */
+   TOUCH: none of that survives, and trying harder made it worse. Mobile only
+   permits PROGRAMMATIC playback when muted, so calling play() ourselves is the
+   very thing that mutes it: it started on one tap and played silent, with
+   Vimeo hiding the control bar in portrait so there was nothing to unmute with.
+   For a reel whose music is licensed and chosen, silent is failure.
+
+   So on touch we load the player and then stop. No autoplay request, no play()
+   call, no SDK. Vimeo renders its own poster and play button, and the visitor's
+   next tap is a real gesture ON THE VIDEO ELEMENT, which is allowed to start
+   with sound. That is one extra tap in the same spot they just tapped, in
+   exchange for actually hearing the thing. */
 document.querySelectorAll('.reel-play').forEach(function (b) {
   b.addEventListener('click', function () {
     /* hover:none AND pointer:coarse means a phone or tablet, and excludes a
@@ -158,6 +161,10 @@ document.querySelectorAll('.reel-play').forEach(function (b) {
     f.setAttribute('frameborder', '0');
     b.parentNode.replaceChild(f, b);
 
+    /* Touch stops here: Vimeo's own controls take it from the poster, and the
+       SDK is not downloaded at all. */
+    if (touch) return;
+
     var s = document.createElement('script');
     s.src = 'https://player.vimeo.com/api/player.js';
     s.onload = function () {
@@ -168,13 +175,9 @@ document.querySelectorAll('.reel-play').forEach(function (b) {
           return p.setMuted(false).then(function () { return p.setVolume(1); })
             .then(function () { return p.play(); })
             ['catch'](function () {
-              /* Refused. On touch that is expected and fine: the player is
-                 sitting there unmuted with its own play button, so their next
-                 tap starts it with sound. On desktop, turning the sound on can
-                 itself get playback rejected, and leaving someone who just
-                 pressed play looking at a frozen frame is worse than a silent
-                 reel, so fall back to muted and keep moving. */
-              if (touch) return;
+              /* Desktop only. Turning the sound on can itself get playback
+                 rejected, and leaving someone who just pressed play looking at
+                 a frozen frame is worse than a silent reel. */
               return p.setMuted(true).then(function () { return p.play(); });
             });
         })['catch'](function () { /* player never readied; Vimeo's own UI stands */ });
