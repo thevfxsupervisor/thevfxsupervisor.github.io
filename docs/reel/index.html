@@ -58,7 +58,7 @@
   <div class="wrap wrap-wide">
     <div class="reel-embed">
   <button class="reel-play" type="button"
-          data-src="https://player.vimeo.com/video/1220476123?autoplay=1&amp;dnt=1&amp;title=0&amp;byline=0&amp;portrait=0"
+          data-src="https://player.vimeo.com/video/1220476123?dnt=1&amp;title=0&amp;byline=0&amp;portrait=0&amp;playsinline=1"
           aria-label="Play the reel with sound, 74 seconds">
     <img src="/static/reel-poster.jpg" alt="Nine shots from the reel: Changeling, Cloud Atlas, Invictus, Atlantic Crossing, J. Edgar, Argo, Night at the Museum, BRIO Flora and Kia EV9"
          width="1600" height="900">
@@ -139,22 +139,33 @@
 }
 </script>
 <script>
-/* Click swaps the still for the Vimeo player, with sound, from the top.
-   Nothing third-party loads until then, so scrolling past costs no request
-   and no cookie.
+/* Click swaps the still for the Vimeo player. Nothing third-party loads until
+   then, so scrolling past costs no request and no cookie.
 
-   Why the unmute dance: browsers refuse to START playback with sound unless
-   they are sure of a user gesture, and Vimeo's player handles that refusal by
-   quietly retrying MUTED rather than failing. So the click produced a silent
-   reel. Unmuting a video that is ALREADY playing is permitted once a gesture
-   has happened, which it has, so we let it start however it likes and then
-   turn the sound on. player.js is fetched only at this point, when the visitor
-   has already opted into loading Vimeo. If any of it fails the reel still
-   plays, just muted, which is where we were before. */
+   Sound is the whole difficulty, and it splits by device.
+
+   DESKTOP: browsers refuse to START playback with sound without a gesture they
+   are sure of, and Vimeo answers that refusal by quietly retrying MUTED rather
+   than failing. So we ask for autoplay, let it start however it likes, then
+   unmute, which is permitted on a video that is already playing.
+
+   TOUCH: that trick does not survive. A tap on the PAGE does not carry into a
+   cross-origin iframe on iOS, so the autoplay request fails outright and the
+   visitor is left with a paused, muted player needing two more taps. So on
+   touch we do NOT request autoplay at all: without it Vimeo never enters its
+   muted-retry path, and the player appears with its own play control. We still
+   attempt play(), which Android often allows; where it is refused, the next tap
+   lands directly on Vimeo's button, which IS a gesture on the video element and
+   therefore starts it WITH SOUND. Two taps, never a mute to undo. */
 document.querySelectorAll('.reel-play').forEach(function (b) {
   b.addEventListener('click', function () {
+    /* hover:none AND pointer:coarse means a phone or tablet, and excludes a
+       touchscreen laptop, which behaves like desktop here. */
+    var touch = window.matchMedia('(hover: none) and (pointer: coarse)').matches;
+    var src = b.dataset.src + (touch ? '' : '&autoplay=1');
+
     var f = document.createElement('iframe');
-    f.src = b.dataset.src;
+    f.src = src;
     f.title = 'Geoffrey Hancock, VFX Supervisor and Producer, Reel 2026';
     f.allow = 'autoplay; fullscreen; picture-in-picture';
     f.allowFullscreen = true;
@@ -169,18 +180,18 @@ document.querySelectorAll('.reel-play').forEach(function (b) {
         var p = new Vimeo.Player(f);
         p.ready().then(function () {
           return p.setMuted(false).then(function () { return p.setVolume(1); })
-            .then(function () { return p.getPaused(); })
-            .then(function (paused) {
-              if (!paused) return;
-              /* Turning the sound on can itself get playback rejected, which
-                 would leave someone who just pressed play staring at a frozen
-                 frame. Resume with sound if allowed, and if not, go back to
-                 muted and keep playing: a silent reel beats a stopped one. */
-              return p.play()['catch'](function () {
-                return p.setMuted(true).then(function () { return p.play(); });
-              });
+            .then(function () { return p.play(); })
+            ['catch'](function () {
+              /* Refused. On touch that is expected and fine: the player is
+                 sitting there unmuted with its own play button, so their next
+                 tap starts it with sound. On desktop, turning the sound on can
+                 itself get playback rejected, and leaving someone who just
+                 pressed play looking at a frozen frame is worse than a silent
+                 reel, so fall back to muted and keep moving. */
+              if (touch) return;
+              return p.setMuted(true).then(function () { return p.play(); });
             });
-        })['catch'](function () { /* stays muted, user can unmute */ });
+        })['catch'](function () { /* player never readied; Vimeo's own UI stands */ });
       } catch (e) { /* same */ }
     };
     document.head.appendChild(s);
