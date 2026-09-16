@@ -30,9 +30,12 @@ Pages: `/`, `/projects/`, `/projects/breakdown-studio/`, `/projects/link-session
    both resolve to `64.68.200.44`. Full runbook in `dev/DOMAIN-CUTOVER.md`. Needs Geoff to change the
    easyDNS records first. **Do not flip `CUTOVER_DONE` or remove the `.gitignore` line before DNS
    actually resolves to GitHub**, that takes the site down.
-2. **Waitlist endpoint not deployed.** `waitlist.gs` needs deploying as a Google Apps Script web app
-   per `WAITLIST_SETUP.md`, then paste the URL into `content/pages/course.md` `waitlist_endpoint:`,
-   rebuild, push. Until then the form falls back to a mailto. Geoff-gated.
+2. ~~Waitlist endpoint not deployed~~ **DONE, deployed 2026-08-13.** `waitlist.gs` is live as a bound
+   Google Apps Script web app; the course page posts to it and it writes signups to a private Sheet
+   plus emails geoff@wanglemedia.com per signup. No longer a mailto fallback. See
+   `WAITLIST_SETUP.md` for mechanics; the course itself (325 USD founding cohort) launched
+   2026-09-03. (Corrected 2026-09-16 sweep; this file had been stale on this point since before
+   2026-08-13.)
 3. **A Sunsama task for the domain steps was requested but not created**, because the Sunsama MCP
    needs an interactive OAuth click. Content is ready in `dev/DOMAIN-CUTOVER.md`.
 
