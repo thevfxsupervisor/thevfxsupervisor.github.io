@@ -48,7 +48,7 @@
   <div class="wrap">
     <span class="eyebrow">Case study</span>
     <h1 style="margin-top:18px">The tracker already knows what goes in every shot. So SignalBox builds the picture.</h1>
-    <p class="lede">Once the models and LoRAs are settled, the hard part is not making one picture. It is making them across a whole episode without an artist hand-assembling every shot.</p>
+    <p class="lede">The hard part was never making one picture. It was making them across a whole episode without hand-assembling every shot.</p>
     <div class="cta-row"><a class="btn btn-a" href="https://github.com/thevfxsupervisor/signalbox">See the code</a><a class="btn btn-b" href="/about/">Work with me</a></div>
     <div class="cred"><span class="dot"></span><b>Built and run by one person, on one workstation, against a live Autodesk Flow site on an in-development animated short.</b></div>
   </div>
@@ -59,18 +59,15 @@
 <section>
   <div class="wrap prose">
     <h2>The idea</h2>
-<p>Your production tracker already holds the graph: the character and set references, which assets are in which shot, which part of the script makes each action beat, and the prompt fragments on each asset. That is everything you need to build the picture, so SignalBox reads those connections and builds it.</p>
+<p>Your tracker already holds the graph: which assets are in which shot, which part of the script makes each beat, the prompt fragments on each asset. That is enough to build the picture, so SignalBox builds it.</p>
 <h2>What happens</h2>
 <figure><img src="/static/signalbox-loop.svg" alt="How SignalBox works: the tracker holds assets, shots and beats, SignalBox composes the picture, versions publish into the normal review, and a note returns a wedge of variations." loading="lazy"></figure>
-<p>Versions publish themselves into the usual review. A reviewer's note goes to an LLM, which rewrites the beat or the prompt and returns a wedge of variations to choose between: we used eight for still panels, four for shot videos, and it is configurable.</p>
-<p>So the tracker is the interface for iterating. Nobody opens the shot in another application, renders a version, and uploads it back. Revise an upstream asset or an approved panel and everything built from it rebuilds, which they call the cascade. Every trigger is tracker state, so you can ask why any frame exists and get an answer.</p>
-<h3>For the technically minded</h3>
-<p>Autodesk Flow Production Tracking, still widely called ShotGrid. A watcher polls about once a minute, so there is no queue to reconcile and it can be killed mid-render and restarted. Notes are interpreted by <code>claude -p</code>. Every generation step is automatic; every approval is a person's.</p>
+<p>Versions publish into the usual review. A reviewer's note goes to an LLM, which rewrites the beat and returns a wedge of variations to pick from. Revise an upstream asset and everything built from it rebuilds. Nobody opens another application, renders a version, and uploads it back.</p>
+<p>Autodesk Flow Production Tracking, still widely called ShotGrid. Notes are interpreted by <code>claude -p</code>. Every generation step is automatic, and every approval is a person's.</p>
 <h2>Who built it</h2>
-<p>I am Geoffrey Hancock, a VFX supervisor and producer, with a VES award for Changeling, a VES nomination for Invictus and a Robert nomination for Skammerens Datter II. These days I build the production tooling as well as supervise the work.</p>
-<p>I directed a team of AI agents to build SignalBox, and the judgment calls are mine: what had to be deterministic, where a person had to say yes, and which AI component to switch off when it measured badly. If you are wiring a tracker to real work, I am at <a href="mailto:geoff@thevfxsupervisor.com">geoff@thevfxsupervisor.com</a>.</p>
+<p>I am Geoffrey Hancock, a VFX supervisor and producer, with a VES award for Changeling, a VES nomination for Invictus and a Robert nomination for Skammerens Datter II. I directed a team of AI agents to build SignalBox, and the judgment calls are mine. If you are wiring a tracker to real work, I am at <a href="mailto:geoff@thevfxsupervisor.com">geoff@thevfxsupervisor.com</a>.</p>
 <h2>What this is</h2>
-<p>A snapshot of a larger internal system, trimmed to the show-agnostic core and not maintained, so please do not adopt it as a tool. One gap worth naming: change a model or a LoRA and nothing yet notices that existing versions used the old one.</p>
+<p>A snapshot of a larger internal system, not maintained. One gap worth naming: change a model or a LoRA and nothing yet notices that existing versions used the old one.</p>
   </div>
 </section>
 
@@ -79,8 +76,8 @@
 <section id="proof">
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">The shape of it</span>
-      <h2>A few numbers from it</h2></div>
-    <div style="margin-top:26px;max-width:820px"><div class="tiers"><div class="tier win"><span class="n mono">8 and 4</span><div><b>Variations per wedge</b><span>Eight for a still panel, four for a shot video. Configurable.</span></div></div><div class="tier win"><span class="n mono">Switched off</span><div><b>The AI quality check we tried</b><span>It failed too many panels people were happy with. Simpler comparisons did better.</span></div></div><div class="tier win"><span class="n mono">0</span><div><b>New tools to learn</b><span>It all happens in the tracker the crew already uses.</span></div></div><div class="tier win"><span class="n mono">MIT</span><div><b>Licence</b><span>Open source on GitHub. A snapshot, not a product.</span></div></div></div></div>
+      <h2>In short</h2></div>
+    <div style="margin-top:26px;max-width:820px"><div class="tiers"><div class="tier win"><span class="n mono">8 and 4</span><div><b>Variations per wedge</b><span>Stills and videos. Configurable.</span></div></div><div class="tier win"><span class="n mono">Switched off</span><div><b>The AI quality check</b><span>It failed panels people were happy with.</span></div></div><div class="tier win"><span class="n mono">0</span><div><b>New tools to learn</b><span>It happens in the tracker.</span></div></div><div class="tier win"><span class="n mono">MIT</span><div><b>Licence</b><span>On GitHub. A snapshot, not a product.</span></div></div></div></div>
   </div>
 </section>
 
