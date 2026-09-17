@@ -56,6 +56,14 @@ Autodesk Flow Production Tracking, still widely called ShotGrid. A watcher polls
 
 SignalBox is a snapshot of a larger internal system, trimmed to the show-agnostic core and published in case the decisions in it are useful. It is not maintained, so please do not adopt it as a tool. One gap worth naming: change a model or a LoRA and nothing yet notices that existing versions were made with the old one. The repo's `ARCHITECTURE.md` and `METHOD.md` go further, including the parts that did not work.
 
+## Who built it
+
+I am Geoffrey Hancock, a VFX supervisor and producer. I have run visual effects on features and series for a long time, including a VES award for Changeling, a VES nomination for Invictus, and a Robert nomination for Skammerens Datter II. These days I build the production tooling as well as supervise the work.
+
+SignalBox is one piece of that. I directed a team of AI agents to build it, and the judgment calls are mine: which steps had to be deterministic, where a person had to be the one to say yes, and which AI component to switch off when it measured badly.
+
+If you are wiring a tracker to real work, or you want someone who has done this on an actual show, I am at [geoff@thevfxsupervisor.com](mailto:geoff@thevfxsupervisor.com).
+
 <!-- stats -->
 ### 8 and 4::Variations per wedge
 Eight for a still panel, four for a shot video, and the size is configurable. A note comes back as a set to choose between, not one guess.
