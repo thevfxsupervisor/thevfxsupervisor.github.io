@@ -3,7 +3,7 @@ type: project
 slug: signalbox
 title: SignalBox: the tracker builds the picture | the vfx supervisor
 description: Your tracker already knows which assets are in which shot. SignalBox uses that to build the picture, and the revisions, inside the normal review process. MIT.
-eyebrow: Experiment
+eyebrow: Case study
 h1: The tracker already knows what goes in every shot. So SignalBox builds the picture.
 lede: On a repeatable show, once the models and LoRAs are settled, the interesting problem is not generating a picture. It is doing it across a whole episode without an artist hand-assembling every shot. That is what SignalBox is for.
 cred: Built and run by one person, on one workstation, against a live Autodesk Flow site on an in-development animated short.
@@ -22,7 +22,7 @@ final_secondary_label: Join the course waitlist
 final_secondary_href: /course/
 soon: Open source · MIT · on GitHub
 card_title: SignalBox
-card_eyebrow: Experiment · open source
+card_eyebrow: Case study · open source
 card_summary: The tracker already holds the character and set references, which assets are in which shot, and the beats behind each one. SignalBox uses that to build the picture, and the revisions, inside the normal review process. Open source, MIT.
 ---
 
@@ -54,7 +54,7 @@ Autodesk Flow Production Tracking, still widely called ShotGrid. A watcher polls
 
 ## What this is
 
-SignalBox is a bare-bones snapshot of a larger internal system, trimmed to the show-agnostic core and published in case the decisions in it are useful. It is not maintained and was never packaged for anyone else's show, so please do not adopt it as a tool. One gap worth naming: change a model or a LoRA and nothing yet notices that existing versions were made with the old one. The repo's `ARCHITECTURE.md` and `METHOD.md` go further, including the parts that did not work.
+SignalBox is a snapshot of a larger internal system, trimmed to the show-agnostic core and published in case the decisions in it are useful. It is not maintained, so please do not adopt it as a tool. One gap worth naming: change a model or a LoRA and nothing yet notices that existing versions were made with the old one. The repo's `ARCHITECTURE.md` and `METHOD.md` go further, including the parts that did not work.
 
 <!-- stats -->
 ### 8 and 4::Variations per wedge
