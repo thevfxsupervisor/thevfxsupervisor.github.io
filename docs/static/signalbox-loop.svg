@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 580" role="img"
+     aria-labelledby="sbTitle sbDesc" width="100%" height="auto">
+  <title id="sbTitle">The signalbox loop</title>
+  <desc id="sbDesc">A person sets state in the production tracker. A watcher reads it about once a
+  minute and runs the automated step. The result is published with a record of what was actually
+  sent. A person approves it or asks for a revision, and that decision returns to the tracker,
+  closing the loop.</desc>
+
+  <defs>
+    <marker id="sbArrow" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#0585f8"/>
+    </marker>
+    <marker id="sbArrowGreen" viewBox="0 0 10 10" refX="9" refY="5"
+            markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5ad3c0"/>
+    </marker>
+    <style>
+      .sb-box  { fill:#191d21; stroke:#2a3037; stroke-width:1.5; }
+      .sb-gate { fill:#191d21; stroke:#5ad3c0; stroke-width:1.5; }
+      .sb-t    { fill:#e9e6df; font-size:19px; font-weight:600; }
+      .sb-s    { fill:#9aa1a8; font-size:15px; }
+      .sb-lbl  { fill:#5ad3c0; font-size:14px; font-style:italic; }
+      text     { font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif; }
+    </style>
+  </defs>
+
+  <!-- 1. tracker state -->
+  <rect class="sb-box" x="120" y="16"  width="380" height="66" rx="8"/>
+  <text class="sb-t" x="144" y="44">Tracker state</text>
+  <text class="sb-s" x="144" y="67">a person says what needs making</text>
+
+  <!-- 2. watcher -->
+  <rect class="sb-box" x="120" y="146" width="380" height="66" rx="8"/>
+  <text class="sb-t" x="144" y="174">A watcher reads it</text>
+  <text class="sb-s" x="144" y="197">about once a minute, no queue to keep in sync</text>
+
+  <!-- 3. the work -->
+  <rect class="sb-box" x="120" y="276" width="380" height="66" rx="8"/>
+  <text class="sb-t" x="144" y="304">The automated step runs</text>
+  <text class="sb-s" x="144" y="327">the expensive part, AI or not</text>
+
+  <!-- 4. result + provenance -->
+  <rect class="sb-box" x="120" y="406" width="380" height="66" rx="8"/>
+  <text class="sb-t" x="144" y="434">Result published</text>
+  <text class="sb-s" x="144" y="457">with a record of what was actually sent</text>
+
+  <!-- 5. the human gate -->
+  <rect class="sb-gate" x="120" y="500" width="380" height="62" rx="8"/>
+  <text class="sb-t" x="144" y="528">A person approves it</text>
+  <text class="sb-s" x="144" y="550">or asks for a revision. Nothing self-approves</text>
+
+  <!-- flow arrows -->
+  <path d="M 310 82  L 310 140" stroke="#0585f8" stroke-width="2" fill="none" marker-end="url(#sbArrow)"/>
+  <path d="M 310 212 L 310 270" stroke="#0585f8" stroke-width="2" fill="none" marker-end="url(#sbArrow)"/>
+  <path d="M 310 342 L 310 400" stroke="#0585f8" stroke-width="2" fill="none" marker-end="url(#sbArrow)"/>
+  <path d="M 310 472 L 310 494" stroke="#5ad3c0" stroke-width="2" fill="none" marker-end="url(#sbArrowGreen)"/>
+
+  <!-- return path: the decision goes back to the tracker -->
+  <path d="M 120 531 L 76 531 Q 56 531 56 511 L 56 69 Q 56 49 76 49 L 114 49"
+        stroke="#5ad3c0" stroke-width="2" fill="none" stroke-dasharray="5 4"
+        marker-end="url(#sbArrowGreen)"/>
+</svg>

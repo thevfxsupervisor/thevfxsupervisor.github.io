@@ -27,6 +27,7 @@ that is the thing to point at.
 - [Notes](https://thevfxsupervisor.com/notes/): Writing on VFX production and AI orchestration
 - [Breakdown Studio](https://thevfxsupervisor.com/projects/breakdown-studio/): Case study
 - [Link Session](https://thevfxsupervisor.com/projects/link-session/): Case study
+- [Signalbox](https://thevfxsupervisor.com/projects/signalbox/): Case study
 - [How a one person vfx department orchestrates ai](https://thevfxsupervisor.com/notes/how-a-one-person-vfx-department-orchestrates-ai/): Note
 - [Keeping a long running ai agent in sync](https://thevfxsupervisor.com/notes/keeping-a-long-running-ai-agent-in-sync/): Note
 - [Running ai agents as a coordinated team](https://thevfxsupervisor.com/notes/running-ai-agents-as-a-coordinated-team/): Note

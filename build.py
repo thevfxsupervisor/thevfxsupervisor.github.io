@@ -808,7 +808,7 @@ def render_home():
     return render_shell(fm.get("title", SITE_NAME), fm.get("description", ""), content, nav_active=None, extra_script=REEL_SCRIPT + CREDIT_SCRIPT, canonical_path="")
 
 
-PROJECT_ORDER = ["breakdown-studio", "link-session"]  # flagship first
+PROJECT_ORDER = ["breakdown-studio", "signalbox", "link-session"]  # flagship first
 
 
 def render_project(md_path):
@@ -881,7 +881,28 @@ def render_project(md_path):
         ("All projects", SITE_ROOT + "projects/"),
     ]
     content += related_section(rel)
-    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="projects", canonical_path="projects/"+slug+"/"), slug
+
+    # Optional SoftwareSourceCode JSON-LD, opt-in per project via `code_repo`
+    # in frontmatter. Absent that key, extra_script stays "" and the page
+    # renders exactly as it always has (render_shell's own default).
+    extra_script = ""
+    if fm.get("code_repo"):
+        code_ld_obj = {
+            "@context": "https://schema.org",
+            "@type": "SoftwareSourceCode",
+            "name": fm.get("card_title", fm.get("title", fm.get("h1", ""))),
+            "description": fm.get("description", ""),
+            "codeRepository": fm["code_repo"],
+            "url": SITE_CANONICAL.rstrip("/") + "/projects/" + slug + "/",
+        }
+        if fm.get("license"):
+            code_ld_obj["license"] = fm["license"]
+        if fm.get("programming_language"):
+            code_ld_obj["programmingLanguage"] = fm["programming_language"]
+        code_ld = json.dumps(code_ld_obj, indent=1)
+        extra_script = '<script type="application/ld+json">\n' + code_ld + '\n</script>'
+
+    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="projects", extra_script=extra_script, canonical_path="projects/"+slug+"/"), slug
 
 
 def render_projects():
