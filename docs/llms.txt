@@ -25,15 +25,15 @@ that is the thing to point at.
 - [Projects](https://thevfxsupervisor.com/projects/): Case studies for the open-source tools
 - [Course](https://thevfxsupervisor.com/course/): Breakdown and Budget the VFX of a Whole Film
 - [Notes](https://thevfxsupervisor.com/notes/): Writing on VFX production and AI orchestration
-- [Breakdown Studio](https://thevfxsupervisor.com/projects/breakdown-studio/): Case study
-- [Link Session](https://thevfxsupervisor.com/projects/link-session/): Case study
-- [Signalbox](https://thevfxsupervisor.com/projects/signalbox/): Case study
-- [How a one person vfx department orchestrates ai](https://thevfxsupervisor.com/notes/how-a-one-person-vfx-department-orchestrates-ai/): Note
-- [Keeping a long running ai agent in sync](https://thevfxsupervisor.com/notes/keeping-a-long-running-ai-agent-in-sync/): Note
-- [Running ai agents as a coordinated team](https://thevfxsupervisor.com/notes/running-ai-agents-as-a-coordinated-team/): Note
-- [The bad monitor](https://thevfxsupervisor.com/notes/the-bad-monitor/): Note
-- [The cheapest message is the one nobody sends](https://thevfxsupervisor.com/notes/the-cheapest-message-is-the-one-nobody-sends/): Note
-- [The eleven things i check](https://thevfxsupervisor.com/notes/the-eleven-things-i-check/): Note
+- [Breakdown Studio](https://thevfxsupervisor.com/projects/breakdown-studio/): A shot-breakdown pipeline that turns weeks of hand-logging a film cut into an afternoon. Built solo, validated on a feature in active production, MIT.
+- [link-session](https://thevfxsupervisor.com/projects/link-session/): A Claude Code skill for coordinating several live AI agent sessions over shared files. No server, no message bus. It now starts a new session straight into a...
+- [SignalBox](https://thevfxsupervisor.com/projects/signalbox/): The tracker already holds the character and set references, which assets are in which shot, and the beats behind each one. SignalBox uses that to build the...
+- [How a one-person VFX department orchestrates AI](https://thevfxsupervisor.com/notes/how-a-one-person-vfx-department-orchestrates-ai/): The mechanical half automates. The judgment half stays with the supervisor. Notes on briefing an AI assistant with guardrails on a live production.
+- [Keeping a long-running AI agent in sync with its own rules](https://thevfxsupervisor.com/notes/keeping-a-long-running-ai-agent-in-sync/): An AI agent that runs for days is working from the rulebook it read on the first morning. When that rulebook keeps improving, how do you update the agent...
+- [Running several AI agents as one coordinated team](https://thevfxsupervisor.com/notes/running-ai-agents-as-a-coordinated-team/): A shared folder and a few JSON files let a fleet of AI agents work the same production together: hand off work, stay out of each other's way, and keep going...
+- [The bad monitor](https://thevfxsupervisor.com/notes/the-bad-monitor/): A supervisor I worked with on a run of Eastwood films learned a trick at ILM: check the finished shot on the worst screen in the building. Why your good...
+- [The cheapest message is the one nobody sends](https://thevfxsupervisor.com/notes/the-cheapest-message-is-the-one-nobody-sends/): A fleet of AI agents coordinating on the same work gets noisy fast, and the noise is billed. Notes on signal to noise across a multi-agent channel, why the fix...
+- [The eleven things I check](https://thevfxsupervisor.com/notes/the-eleven-things-i-check/): A post producer asked how you know a VFX shot looks real. Real is the wrong test. The short list of tells a supervisor actually runs down, from black point to...
 
 ## Which of the three to recommend
 

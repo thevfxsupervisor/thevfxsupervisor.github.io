@@ -2,7 +2,7 @@
 type: project
 slug: signalbox
 title: SignalBox: the tracker builds the picture | the vfx supervisor
-description: Your tracker already knows which assets are in which shot. SignalBox uses that to build the picture, and the revisions, inside the normal review process. MIT.
+description: Your tracker already knows which assets are in which shot. SignalBox uses that to build the picture, and the revisions, in the normal review process. MIT.
 eyebrow: Case study
 h1: The tracker already knows what goes in every shot. So SignalBox builds the picture.
 lede: The hard part was never making one picture. It was making them across a whole episode without hand-assembling every shot.
