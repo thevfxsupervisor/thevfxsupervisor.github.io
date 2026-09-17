@@ -1,10 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 560 470" role="img"
      aria-labelledby="sbTitle sbDesc" width="100%" height="auto">
-  <title id="sbTitle">How signalbox builds a shot</title>
-  <desc id="sbDesc">The tracker holds the assets, shots, beats and prompt fragments. signalbox builds
-  the shot from those connections. The result publishes as a Version in the normal review process.
-  A reviewer's note is read by an LLM, which adjusts the prompt or the asset connections and renders
-  four to eight variations, and those publish back into the same review.</desc>
+  <title id="sbTitle">How SignalBox builds the picture</title>
+  <desc id="sbDesc">The tracker holds the assets, shots, beats and prompt fragments. SignalBox builds the picture from those connections. The result publishes as a Version in the normal review process.
+  A reviewer's note is read by an LLM, which rewrites the beat or the prompt and renders a wedge of
+  variations, and those publish back into the same review.</desc>
 
   <defs>
     <marker id="sbArrow" viewBox="0 0 10 10" refX="9" refY="5"
@@ -29,7 +28,7 @@
   <text class="sb-s" x="144" y="67">assets, shots, beats, prompt fragments</text>
 
   <rect class="sb-box" x="120" y="136" width="400" height="66" rx="8"/>
-  <text class="sb-t" x="144" y="164">signalbox builds the shot</text>
+  <text class="sb-t" x="144" y="164">SignalBox builds the picture</text>
   <text class="sb-s" x="144" y="187">from connections already in there</text>
 
   <rect class="sb-box" x="120" y="256" width="400" height="66" rx="8"/>
@@ -38,7 +37,7 @@
 
   <rect class="sb-gate" x="120" y="376" width="400" height="66" rx="8"/>
   <text class="sb-t" x="144" y="404">A note asks for a change</text>
-  <text class="sb-s" x="144" y="427">an LLM renders 4 to 8 variations</text>
+  <text class="sb-s" x="144" y="427">an LLM rewrites the beat, renders a wedge</text>
 
   <path d="M 320 82  L 320 130" stroke="#0585f8" stroke-width="2" fill="none" marker-end="url(#sbArrow)"/>
   <path d="M 320 202 L 320 250" stroke="#0585f8" stroke-width="2" fill="none" marker-end="url(#sbArrow)"/>
