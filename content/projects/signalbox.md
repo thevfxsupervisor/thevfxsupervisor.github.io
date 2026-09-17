@@ -5,8 +5,8 @@ title: SignalBox: the tracker builds the picture | the vfx supervisor
 description: Your tracker already knows which assets are in which shot. SignalBox uses that to build the picture, and the revisions, inside the normal review process. MIT.
 eyebrow: Experiment
 h1: The tracker already knows what goes in every shot. So SignalBox builds the picture.
-lede: On a repeatable show, once the models and LoRAs are settled, the interesting problem is not generating a picture. It is doing it for a few hundred shots without an artist hand-assembling each one. That is what SignalBox is for.
-cred: Built and run on one workstation against a live Autodesk Flow site, on an in-development animated short.
+lede: On a repeatable show, once the models and LoRAs are settled, the interesting problem is not generating a picture. It is doing it across a whole episode without an artist hand-assembling every shot. That is what SignalBox is for.
+cred: Built and run by one person, on one workstation, against a live Autodesk Flow site on an in-development animated short.
 get_label: See the code
 get_href: https://github.com/thevfxsupervisor/signalbox
 code_repo: https://github.com/thevfxsupervisor/signalbox
