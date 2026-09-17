@@ -38,7 +38,7 @@ That is everything you need to build a shot. So rather than an artist opening a 
 
 SignalBox builds each shot's still and then its video from what the tracker already knows, and the results publish themselves as Versions, ready in the usual review process.
 
-When a reviewer leaves a note asking for a change, an LLM reads it, rewrites the beat or the prompt, and renders a wedge of variations. Those publish for review too. The reviewer picks one.
+When a reviewer leaves a note asking for a change, an LLM reads it, rewrites the beat or the prompt, and renders a wedge of variations. Those publish for review too, and the reviewer picks one. Wedge size is configurable; we used eight for the still panels and four for the shot videos.
 
 So the tracker becomes the interface for iterating revisions. Nobody opens the shot in another application, renders a new version, and uploads it back to the tracker for review. That round trip does not happen.
 
@@ -57,8 +57,8 @@ Autodesk Flow Production Tracking, still widely called ShotGrid. A watcher polls
 SignalBox is a bare-bones snapshot of a larger internal system, trimmed to the show-agnostic core and published in case the decisions in it are useful. It is not maintained and was never packaged for anyone else's show, so please do not adopt it as a tool. One gap worth naming: change a model or a LoRA and nothing yet notices that existing versions were made with the old one. The repo's `ARCHITECTURE.md` and `METHOD.md` go further, including the parts that did not work.
 
 <!-- stats -->
-### A wedge::Not a single guess
-A reviewer's note comes back as a batch of variations to choose between, generated from the rewritten beat.
+### 8 and 4::Variations per wedge
+Eight for a still panel, four for a shot video, and the size is configurable. A note comes back as a set to choose between, not one guess.
 
 ### Switched off::The AI quality check we tried
 It graded rendered panels against the approved design and failed too many that people were happy with. Simpler comparisons did better.
