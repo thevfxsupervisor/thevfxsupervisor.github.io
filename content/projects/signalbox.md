@@ -12,6 +12,7 @@ get_href: https://github.com/thevfxsupervisor/signalbox
 code_repo: https://github.com/thevfxsupervisor/signalbox
 license: https://opensource.org/licenses/MIT
 programming_language: Python
+stats_eyebrow: The shape of it
 stats_h2: A few numbers from it
 final_h2: Doing something similar?
 final_p: If you are wiring a tracker to real work and want to compare notes, I am always happy to. The course covers the same ground in more depth.
@@ -47,7 +48,7 @@ A watcher loop polls tracker state about once a minute and acts on it. There is 
 
 The thing that surprised us: asking a vision model to check another model's output did not work. We built a gate to grade each rendered panel against its approved design, and it failed a lot of panels a person had already been happy with. We switched it off rather than tune it. Plain comparisons against the approved reference did the job instead, and they are cheaper and easier to trust.
 
-The thing that caught us out: a state nobody can see is a state nobody acts on. One stage used a field that did not show up on the pages people actually look at, and a batch of shots quietly sat in it until someone opened one and asked why. A queue would at least have looked empty. This looked like nothing at all.
+The thing that caught us out: a batch of shots sat waiting and nobody noticed, until someone opened one and asked why. The stage holding them used a field that did not appear on any of the pages people actually look at. A queue would at least have looked full. This looked like nothing at all. A state nobody can see is a state nobody acts on.
 
 Everything expensive is automatic. Every approval is a person. That split is the whole design.
 
@@ -62,8 +63,8 @@ A bare-bones snapshot of a larger internal system, trimmed to the show-agnostic 
 The repo's `ARCHITECTURE.md` and `METHOD.md` go further, including the parts that did not work.
 
 <!-- stats -->
-### 1 min::How often it looks
-A polling loop rather than a queue, so there is no second system to keep in sync with the tracker.
+### Switched off::The AI quality check we tried
+It graded each rendered panel against the approved design, and failed too many that people were perfectly happy with. Simpler comparisons did the job better.
 
 ### 1 GPU::What it ran on
 A single 12 GB consumer card against a hosted tracker, producing an in-development animated short.

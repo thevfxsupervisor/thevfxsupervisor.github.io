@@ -831,7 +831,7 @@ def render_project(md_path):
 
 <section id="proof">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Validated, not vibes</span>
+    <div class="sec-head"><span class="eyebrow">{html.escape(fm.get("stats_eyebrow","Validated, not vibes"), quote=False)}</span>
       <h2>{html.escape(fm.get("stats_h2","The numbers"), quote=False)}</h2></div>
     <div style="margin-top:26px;max-width:820px">{tiers_html(stats, win_all=True)}</div>
   </div>
