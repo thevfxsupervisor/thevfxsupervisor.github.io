@@ -36,9 +36,11 @@ That is everything you need to build a shot. So rather than an artist opening a 
 
 ![The SignalBox loop: the tracker holds assets, shots and beats, SignalBox composes the picture from those connections, versions publish into the normal review, and a note sends back a wedge of variations.](/static/signalbox-loop.svg)
 
-SignalBox builds each shot's still and then its video from what the tracker already knows, and the results publish themselves as Versions, ready in the usual review process. Nobody learns a new tool.
+SignalBox builds each shot's still and then its video from what the tracker already knows, and the results publish themselves as Versions, ready in the usual review process.
 
 When a reviewer leaves a note asking for a change, an LLM reads it, rewrites the beat or the prompt, and renders a wedge of variations. Those publish for review too. The reviewer picks one.
+
+So the tracker becomes the interface for iterating revisions. Nobody opens the shot in another application, renders a new version, and uploads it back to the tracker for review. That round trip does not happen.
 
 They call the next part the cascade. Revise an upstream asset design or an approved panel, and everything built from it is invalidated and rebuilt instead of quietly going stale.
 

@@ -63,8 +63,9 @@
 <p>That is everything you need to build a shot. So rather than an artist opening a template, hunting down the references and writing a prompt for every shot, SignalBox reads those connections and composes the picture from them.</p>
 <h2>What happens</h2>
 <figure><img src="/static/signalbox-loop.svg" alt="The SignalBox loop: the tracker holds assets, shots and beats, SignalBox composes the picture from those connections, versions publish into the normal review, and a note sends back a wedge of variations." loading="lazy"></figure>
-<p>SignalBox builds each shot's still and then its video from what the tracker already knows, and the results publish themselves as Versions, ready in the usual review process. Nobody learns a new tool.</p>
+<p>SignalBox builds each shot's still and then its video from what the tracker already knows, and the results publish themselves as Versions, ready in the usual review process.</p>
 <p>When a reviewer leaves a note asking for a change, an LLM reads it, rewrites the beat or the prompt, and renders a wedge of variations. Those publish for review too. The reviewer picks one.</p>
+<p>So the tracker becomes the interface for iterating revisions. Nobody opens the shot in another application, renders a new version, and uploads it back to the tracker for review. That round trip does not happen.</p>
 <p>They call the next part the cascade. Revise an upstream asset design or an approved panel, and everything built from it is invalidated and rebuilt instead of quietly going stale.</p>
 <p>Because every trigger is a piece of tracker state, you can ask why any frame exists and get an answer you can act on: the note that caused it, and who approved it.</p>
 <p>Models, LoRAs and workflow templates swap out without touching any of SignalBox. The part that matters is not the generator, it is that all of it happens inside the review process a crew already runs.</p>
