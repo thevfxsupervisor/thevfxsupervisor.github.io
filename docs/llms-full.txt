@@ -283,11 +283,11 @@ None of this is making it real. It is making it unnoticed. The shots people reme
 https://thevfxsupervisor.com/notes/
 
 How a one-person VFX department orchestrates AI: The mechanical half automates. The judgment half stays with the supervisor. Notes on briefing an AI assistant with guardrails on a live production.
-Keeping a long-running AI agent in sync with its own rules: An AI agent that runs for days is working from the rulebook it read on the first morning. When that rulebook keeps improving, how do you update the agent without restarting it or drowning it? Notify always, load on demand, and never call a change handled until it has actually been read.
-Running several AI agents as one coordinated team: A shared folder and a few JSON files let a fleet of AI agents work the same production together: hand off work, stay out of each other's way, and keep going across machines and restarts. What that makes possible, and the discipline that keeps it dependable as the fleet grows.
-The bad monitor: A supervisor I worked with on a run of Eastwood films learned a trick at ILM: check the finished shot on the worst screen in the building. Why your good viewing conditions are hiding things from you, and why comparison beats memory.
-The cheapest message is the one nobody sends: A fleet of AI agents coordinating on the same work gets noisy fast, and the noise is billed. Notes on signal to noise across a multi-agent channel, why the fix is a systems change rather than better instructions, and the two lessons that cost the most.
-The eleven things I check: A post producer asked how you know a VFX shot looks real. Real is the wrong test. The short list of tells a supervisor actually runs down, from black point to lens characteristics.
+Keeping a long-running AI agent in sync with its own rules: An AI agent that runs for days works from the rulebook it read on day one. Updating it without restarting or drowning it: notify always, load on demand.
+Running several AI agents as one coordinated team: A shared folder and a few JSON files let a fleet of AI agents work one production: handing off work, staying out of each other's way, across restarts.
+The bad monitor: A supervisor on Eastwood films learned a trick at ILM: check the finished shot on the worst screen in the building. Why comparison beats memory.
+The cheapest message is the one nobody sends: A fleet of AI agents coordinating on the same work gets noisy fast, and the noise is billed. Why the fix is a systems change, not better instructions.
+The eleven things I check: A post producer asked how you know a VFX shot looks real. Real is the wrong test. The tells a supervisor checks, from black point to lens characteristics.
 
 ---
 # Privacy | the vfx supervisor

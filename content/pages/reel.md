@@ -2,7 +2,7 @@
 type: page
 slug: reel
 title: Reel 2026 | Geoffrey Hancock, VFX Supervisor and Producer
-description: Demo reel of Geoffrey Hancock, VFX supervisor and producer. Complex sequences delivered on time and on budget. Changeling, J. Edgar, Invictus, Argo, Cloud Atlas, Atlantic Crossing.
+description: Demo reel: Changeling, J. Edgar, Invictus, Argo, Cloud Atlas. Complex VFX sequences delivered on time and on budget, by supervisor Geoffrey Hancock.
 eyebrow: Reel 2026, 74 seconds
 h1: Reel 2026, Geoffrey Hancock, VFX supervisor and producer
 vimeo_id: 1220476123

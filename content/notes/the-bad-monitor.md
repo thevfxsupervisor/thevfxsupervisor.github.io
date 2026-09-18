@@ -2,7 +2,7 @@
 type: note
 slug: the-bad-monitor
 title: The bad monitor
-description: A supervisor I worked with on a run of Eastwood films learned a trick at ILM: check the finished shot on the worst screen in the building. Why your good viewing conditions are hiding things from you, and why comparison beats memory.
+description: A supervisor on Eastwood films learned a trick at ILM: check the finished shot on the worst screen in the building. Why comparison beats memory.
 date: 2026-08-18
 tags: vfx, supervision, craft, review
 draft: false

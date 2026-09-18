@@ -2,7 +2,7 @@
 type: project
 slug: breakdown-studio
 title: Case study: Breakdown Studio, a shot-breakdown pipeline for solo VFX supervisors | the vfx supervisor
-description: How I built Breakdown Studio, a shot-breakdown pipeline that turns weeks of hand-logging a film cut into an afternoon, solo, on a feature in active production, then open-sourced it.
+description: How I built Breakdown Studio: a shot-breakdown pipeline turning weeks of hand-logging a film cut into an afternoon, built solo, now open source.
 eyebrow: Case study
 h1: I was hand-matching hundreds of shots across every re-cut of a feature. So I built the tool that does it.
 lede: Breakdown Studio is the shot-breakdown pipeline I built to survive running a feature's VFX department alone. It is open source now, MIT, and it turns weeks of hand-logging a cut into an afternoon.

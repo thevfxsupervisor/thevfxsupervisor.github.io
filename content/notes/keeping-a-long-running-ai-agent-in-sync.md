@@ -2,7 +2,7 @@
 type: note
 slug: keeping-a-long-running-ai-agent-in-sync
 title: Keeping a long-running AI agent in sync with its own rules
-description: An AI agent that runs for days is working from the rulebook it read on the first morning. When that rulebook keeps improving, how do you update the agent without restarting it or drowning it? Notify always, load on demand, and never call a change handled until it has actually been read.
+description: An AI agent that runs for days works from the rulebook it read on day one. Updating it without restarting or drowning it: notify always, load on demand.
 date: 2026-07-04
 tags: agents, coordination, pipeline
 draft: false

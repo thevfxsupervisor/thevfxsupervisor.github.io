@@ -2,7 +2,7 @@
 type: note
 slug: the-eleven-things-i-check
 title: The eleven things I check
-description: A post producer asked how you know a VFX shot looks real. Real is the wrong test. The short list of tells a supervisor actually runs down, from black point to lens characteristics.
+description: A post producer asked how you know a VFX shot looks real. Real is the wrong test. The tells a supervisor checks, from black point to lens characteristics.
 date: 2026-08-18
 tags: vfx, supervision, craft
 draft: false

@@ -2,7 +2,7 @@
 type: note
 slug: the-cheapest-message-is-the-one-nobody-sends
 title: The cheapest message is the one nobody sends
-description: A fleet of AI agents coordinating on the same work gets noisy fast, and the noise is billed. Notes on signal to noise across a multi-agent channel, why the fix is a systems change rather than better instructions, and the two lessons that cost the most.
+description: A fleet of AI agents coordinating on the same work gets noisy fast, and the noise is billed. Why the fix is a systems change, not better instructions.
 date: 2026-08-19
 tags: agents, coordination, pipeline, link-session
 draft: false

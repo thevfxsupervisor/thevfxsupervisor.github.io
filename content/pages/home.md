@@ -2,7 +2,7 @@
 type: page
 slug: home
 title: the vfx supervisor | Geoffrey Hancock, VFX Supervisor and Producer
-description: Geoffrey Hancock, VFX supervisor and producer. VES Award for Changeling. Argo, Cloud Atlas, J. Edgar, Invictus. 20+ years, Copenhagen. Maker of Breakdown Studio.
+description: Geoffrey Hancock, VFX supervisor and producer: VES Award for Changeling, Argo, Cloud Atlas, Invictus. 20+ years, Copenhagen. Maker of Breakdown Studio.
 hero_eyebrow: VFX Supervisor & Producer
 hero_h1: VFX supervision. Pipeline engineering. AI orchestration.
 hero_h1_accent: AI orchestration.

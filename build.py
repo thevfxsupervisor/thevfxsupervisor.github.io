@@ -21,6 +21,8 @@ import json
 import hashlib
 import re
 import shutil
+import subprocess
+from datetime import date, datetime
 from pathlib import Path
 
 ROOT_DIR = Path(__file__).resolve().parent
@@ -37,6 +39,80 @@ BASE_TEMPLATE = (TEMPLATES_DIR / "base.html").read_text(encoding="utf-8")
 # Content-hash of the stylesheet, appended to its URL so browsers refetch it whenever it changes
 # (otherwise a cached style.css shows stale styling, e.g. an old text alignment, after a deploy).
 CSS_VERSION = hashlib.md5((STATIC_DIR / "style.css").read_bytes()).hexdigest()[:8]
+
+
+# --------------------------------------------------------------------------
+# Source-file lastmod (git commit date, falling back to mtime, then today)
+# --------------------------------------------------------------------------
+
+_GIT_DATE_CACHE = {}
+
+
+def _git_commit_date(path):
+    """Committer date (YYYY-MM-DD) of the last commit touching `path`, or
+    None if git has no record of it (untracked, uncommitted, or git itself
+    unavailable). Cached per path since several pages can share a source and
+    this shells out.
+    """
+    key = str(path)
+    if key in _GIT_DATE_CACHE:
+        return _GIT_DATE_CACHE[key]
+    result = None
+    try:
+        proc = subprocess.run(
+            ["git", "log", "-1", "--format=%cI", "--", str(path)],
+            cwd=ROOT_DIR, capture_output=True, text=True, check=False,
+        )
+        out = proc.stdout.strip()
+        if proc.returncode == 0 and out:
+            result = out[:10]  # %cI e.g. "2026-08-06T19:56:00+02:00"; date part only
+    except (OSError, subprocess.SubprocessError):
+        result = None
+    _GIT_DATE_CACHE[key] = result
+    return result
+
+
+def _source_lastmod(path):
+    """W3C date a single source file last changed: prefer the git commit
+    date, fall back to the file's own mtime (uncommitted/untracked), fall
+    back to today only if both fail. Always returns a value, for the
+    sitemap, which needs one whether or not git has a record."""
+    g = _git_commit_date(path)
+    if g:
+        return g
+    try:
+        return datetime.fromtimestamp(Path(path).stat().st_mtime).date().isoformat()
+    except OSError:
+        return date.today().isoformat()
+
+
+def _pages_lastmod(paths):
+    """Most recent lastmod among several source files: a page built from
+    multiple inputs (an index listing many notes or projects) takes the
+    newest of them, not an arbitrary one."""
+    if not paths:
+        return date.today().isoformat()
+    return max(_source_lastmod(p) for p in paths)
+
+
+def _ld_script(obj):
+    """One <script type="application/ld+json"> element for a single JSON-LD
+    object. Multiple calls concatenate into distinct elements, never merged
+    into one array, matching how render_reel/render_course already combine
+    extra_script pieces."""
+    return '<script type="application/ld+json">\n' + json.dumps(obj, indent=1) + '\n</script>'
+
+
+def _breadcrumb_ld(crumbs):
+    """crumbs: [(name, url), ...] from Home down to the current page."""
+    return {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {"@type": "ListItem", "position": i + 1, "name": name, "item": url}
+            for i, (name, url) in enumerate(crumbs)
+        ],
+    }
 
 
 # --------------------------------------------------------------------------
@@ -321,13 +397,18 @@ def write_feed(out_dir):
     print(f"  wrote feed.xml ({len(notes)} notes)")
 
 
-def write_sitemap(paths, out_dir):
-    """sitemap.xml + robots.txt. Both were 404 before 2026-08-04."""
-    from datetime import date
-    today = date.today().isoformat()
+def write_sitemap(entries, out_dir):
+    """sitemap.xml + robots.txt. Both were 404 before 2026-08-04.
+
+    `entries` is a list of (url_path, [source_paths]): each URL's lastmod is
+    derived from when its OWN source file(s) actually last changed (see
+    _pages_lastmod), not from build time, so the sitemap stops stamping every
+    URL with today's date on every build.
+    """
     urls = "\n".join(
-        f"  <url><loc>{SITE_CANONICAL.rstrip('/')}/{p.lstrip('/')}</loc><lastmod>{today}</lastmod></url>"
-        for p in paths)
+        f"  <url><loc>{SITE_CANONICAL.rstrip('/')}/{p.lstrip('/')}</loc>"
+        f"<lastmod>{_pages_lastmod(sources)}</lastmod></url>"
+        for p, sources in entries)
     (out_dir / "sitemap.xml").write_text(
         '<?xml version="1.0" encoding="UTF-8"?>\n'
         '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
@@ -589,6 +670,25 @@ def write_llms_full_txt(out_dir):
 SITE_CANONICAL = "https://thevfxsupervisor.com"  # cut over 2026-08-06; github.io now 301s here
 
 
+def _og_image_for(canonical_path):
+    """Absolute URL of this page's own Open Graph card.
+
+    One shared og-image.png meant every social preview of this site looked the
+    same, so a case study, a note and the homepage were indistinguishable. The
+    cards are generated per page by dev/make_og.py.
+
+    Derived from the canonical path so no renderer has to pass anything, and a
+    page whose card has not been generated falls back rather than 404ing: a
+    broken og:image is worse than a generic one.
+    """
+    base = SITE_CANONICAL.rstrip("/")
+    slug = (canonical_path or "").strip("/").split("/")[-1] or "home"
+    for candidate in (slug, "default"):
+        if (STATIC_DIR / "og" / (candidate + ".png")).exists():
+            return "%s/static/og/%s.png" % (base, candidate)
+    return base + "/static/og-image.png"
+
+
 def render_shell(title, description, content_html, nav_active=None, extra_script="", canonical_path="", robots="index, follow"):
     html_out = BASE_TEMPLATE
     html_out = html_out.replace("{{ROBOTS}}", robots)
@@ -598,6 +698,7 @@ def render_shell(title, description, content_html, nav_active=None, extra_script
     html_out = html_out.replace("{{CSSVER}}", CSS_VERSION)
     html_out = html_out.replace("{{SITE}}", SITE_CANONICAL.rstrip("/"))
     html_out = html_out.replace("{{CANONICAL}}", SITE_CANONICAL.rstrip("/") + "/" + canonical_path.lstrip("/"))
+    html_out = html_out.replace("{{OG_IMAGE}}", _og_image_for(canonical_path))
     for key in ("reel", "projects", "course", "notes", "about"):
         cls = " current" if key == nav_active else ""
         html_out = html_out.replace("{{NAV_%s}}" % key.upper(), cls)
@@ -1052,25 +1153,30 @@ def render_project(md_path):
     content += related_section(rel)
 
     # Optional SoftwareSourceCode JSON-LD, opt-in per project via `code_repo`
-    # in frontmatter. Absent that key, extra_script stays "" and the page
-    # renders exactly as it always has (render_shell's own default).
-    extra_script = ""
+    # in frontmatter, plus a BreadcrumbList every case study gets unconditionally.
+    base = SITE_CANONICAL.rstrip("/")
+    proj_url = base + "/projects/" + slug + "/"
+    proj_title = fm.get("card_title", fm.get("title", fm.get("h1", "")))
+    ld_scripts = []
     if fm.get("code_repo"):
         code_ld_obj = {
             "@context": "https://schema.org",
             "@type": "SoftwareSourceCode",
-            "name": fm.get("card_title", fm.get("title", fm.get("h1", ""))),
+            "name": proj_title,
             "description": fm.get("description", ""),
             "codeRepository": fm["code_repo"],
-            "url": SITE_CANONICAL.rstrip("/") + "/projects/" + slug + "/",
-            "author": {"@type": "Person", "name": "Geoffrey Hancock", "url": SITE_CANONICAL.rstrip("/") + "/about/"},
+            "url": proj_url,
+            "author": {"@type": "Person", "name": "Geoffrey Hancock", "url": base + "/about/"},
         }
         if fm.get("license"):
             code_ld_obj["license"] = fm["license"]
         if fm.get("programming_language"):
             code_ld_obj["programmingLanguage"] = fm["programming_language"]
-        code_ld = json.dumps(code_ld_obj, indent=1)
-        extra_script = '<script type="application/ld+json">\n' + code_ld + '\n</script>'
+        ld_scripts.append(_ld_script(code_ld_obj))
+
+    crumbs = [("Home", base + "/"), ("Projects", base + "/projects/"), (proj_title, proj_url)]
+    ld_scripts.append(_ld_script(_breadcrumb_ld(crumbs)))
+    extra_script = "\n".join(ld_scripts)
 
     return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="projects", extra_script=extra_script, canonical_path="projects/"+slug+"/"), slug, fm
 
@@ -1479,7 +1585,29 @@ def render_note(md_path):
         eyebrow="The tools this method runs on",
     )
     _slug = fm.get("slug", md_path.stem)
-    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="notes", canonical_path="notes/"+_slug+"/"), _slug
+    base = SITE_CANONICAL.rstrip("/")
+    note_url = base + SITE_ROOT + "notes/" + _slug + "/"
+
+    post_ld = {
+        "@context": "https://schema.org",
+        "@type": "BlogPosting",
+        "headline": fm.get("title", ""),
+        "description": fm.get("description", ""),
+        "url": note_url,
+        "datePublished": fm.get("date", ""),
+        "author": {"@type": "Person", "name": "Geoffrey Hancock", "url": base + "/about/"},
+        "publisher": {"@type": "Person", "name": "Geoffrey Hancock", "url": base + "/about/"},
+        "mainEntityOfPage": {"@type": "WebPage", "@id": note_url},
+    }
+    date_modified = _git_commit_date(md_path)
+    if date_modified:
+        post_ld["dateModified"] = date_modified
+
+    crumbs = [("Home", base + "/"), ("Notes", base + "/notes/"), (fm.get("title", _slug), note_url)]
+    extra_script = _ld_script(post_ld) + "\n" + _ld_script(_breadcrumb_ld(crumbs))
+
+    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="notes",
+                        extra_script=extra_script, canonical_path="notes/"+_slug+"/"), _slug
 
 
 # --------------------------------------------------------------------------
@@ -1553,9 +1681,23 @@ def main():
     (DOCS_DIR / ".nojekyll").write_text("", encoding="utf-8")
     print("  wrote docs/.nojekyll")
 
-    sitemap_paths = ["", "reel/", "projects/", "course/", "about/", "notes/", "privacy/"]
-    sitemap_paths += [f"projects/{s}/" for s in proj_slugs]
-    sitemap_paths += [f"notes/{s}/" for s in note_slugs]
+    # Each URL paired with the source file(s) it was built from, so
+    # write_sitemap can stamp a real lastmod instead of the build date. An
+    # index page (projects/, notes/) takes the most recent of everything it
+    # lists.
+    proj_paths = {s: CONTENT_DIR / "projects" / f"{s}.md" for s in proj_slugs}
+    note_paths = {s: CONTENT_DIR / "notes" / f"{s}.md" for s in note_slugs}
+    sitemap_entries = [
+        ("", [CONTENT_DIR / "pages" / "home.md"]),
+        ("reel/", [CONTENT_DIR / "pages" / "reel.md"]),
+        ("projects/", list(proj_paths.values())),
+        ("course/", [CONTENT_DIR / "pages" / "course.md"]),
+        ("about/", [CONTENT_DIR / "pages" / "about.md"]),
+        ("notes/", list(note_paths.values())),
+        ("privacy/", [CONTENT_DIR / "pages" / "privacy.md"]),
+    ]
+    sitemap_entries += [(f"projects/{s}/", [proj_paths[s]]) for s in proj_slugs]
+    sitemap_entries += [(f"notes/{s}/", [note_paths[s]]) for s in note_slugs]
     # derived from the same slug lists as the sitemap, so a new note or case
     # study cannot appear on the site and be missing from llms.txt
     base = SITE_CANONICAL.rstrip('/')
@@ -1585,7 +1727,7 @@ def main():
         )
         for s, nfm in zip(note_slugs, note_fms)
     ]
-    write_sitemap(sitemap_paths, DOCS_DIR)
+    write_sitemap(sitemap_entries, DOCS_DIR)
     write_llms_txt(llms_pages, DOCS_DIR)
     write_llms_full_txt(DOCS_DIR)
     print("Done.")

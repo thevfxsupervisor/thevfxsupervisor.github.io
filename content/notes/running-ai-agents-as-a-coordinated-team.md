@@ -2,7 +2,7 @@
 type: note
 slug: running-ai-agents-as-a-coordinated-team
 title: Running several AI agents as one coordinated team
-description: A shared folder and a few JSON files let a fleet of AI agents work the same production together: hand off work, stay out of each other's way, and keep going across machines and restarts. What that makes possible, and the discipline that keeps it dependable as the fleet grows.
+description: A shared folder and a few JSON files let a fleet of AI agents work one production: handing off work, staying out of each other's way, across restarts.
 date: 2026-07-05
 tags: agents, coordination, pipeline, link-session
 draft: false
