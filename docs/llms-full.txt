@@ -85,10 +85,10 @@ Validated, not simulated (1 production): Every module regression-tested against 
 Open source, live now (MIT): Running today, with a roadmap folding the cross-cut intelligence proven on that production into the public tool.
 
 ---
-# SignalBox: the tracker builds the picture | the vfx supervisor
+# SignalBox: a whole episode at a time | the vfx supervisor
 https://thevfxsupervisor.com/projects/signalbox/
 
-The hard part was never making one picture. It was making them across a whole episode without hand-assembling every shot.
+SignalBox reads the connections already sitting in your production tracker, builds the shot from them, and takes revision notes back through the same review.
 
 The idea
 Your tracker already holds the graph: which assets are in which shot, which part of the script makes each beat, the prompt fragments on each asset. That is enough to build the picture, so SignalBox builds it.
@@ -130,7 +130,7 @@ It is open source and MIT, so clone it and point it at your own sessions. If you
 https://thevfxsupervisor.com/projects/
 
 Breakdown Studio: A shot-breakdown pipeline that turns weeks of hand-logging a film cut into an afternoon. Built solo, validated on a feature in active production, MIT.
-SignalBox: The tracker already holds the character and set references, which assets are in which shot, and the beats behind each one. SignalBox uses that to build the picture, and the revisions, inside the normal review process. Open source, MIT.
+SignalBox: The slow part was never making one video. SignalBox builds a whole episode from the connections already in your tracker, revisions included, inside the review a crew already runs.
 link-session: A Claude Code skill for coordinating several live AI agent sessions over shared files. No server, no message bus. It now starts a new session straight into a role from a library of bootstrap templates.
 
 ---

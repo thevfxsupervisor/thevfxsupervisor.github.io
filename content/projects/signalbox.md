@@ -1,11 +1,11 @@
 ---
 type: project
 slug: signalbox
-title: SignalBox: the tracker builds the picture | the vfx supervisor
-description: Your tracker already knows which assets are in which shot. SignalBox uses that to build the picture, and the revisions, in the normal review process. MIT.
+title: SignalBox: a whole episode at a time | the vfx supervisor
+description: The slow part was never one video. SignalBox builds a whole episode from what your tracker already knows, revisions included, in the normal review. MIT.
 eyebrow: Case study
-h1: The tracker already knows what goes in every shot. So SignalBox builds the picture.
-lede: The hard part was never making one picture. It was making them across a whole episode without hand-assembling every shot.
+h1: The slow part was never making one video. It was making a whole episode without hand-assembling every shot.
+lede: SignalBox reads the connections already sitting in your production tracker, builds the shot from them, and takes revision notes back through the same review.
 cred: Built and run by one person, on one workstation, against a live Autodesk Flow site on an in-development animated short.
 get_label: See the code
 get_href: https://github.com/thevfxsupervisor/signalbox
@@ -23,7 +23,7 @@ final_secondary_href: /course/
 soon: Open source · MIT · on GitHub
 card_title: SignalBox
 card_eyebrow: Case study · open source
-card_summary: The tracker already holds the character and set references, which assets are in which shot, and the beats behind each one. SignalBox uses that to build the picture, and the revisions, inside the normal review process. Open source, MIT.
+card_summary: The slow part was never making one video. SignalBox builds a whole episode from the connections already in your tracker, revisions included, inside the review a crew already runs.
 ---
 
 ## The idea
