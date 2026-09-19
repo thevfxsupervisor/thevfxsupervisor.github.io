@@ -10,7 +10,7 @@ draft: false
 
 I have written here before about [the shared folder the agents coordinate through](/notes/running-ai-agents-as-a-coordinated-team/) and about [keeping a long-running agent current with its own rules](/notes/keeping-a-long-running-ai-agent-in-sync/). Both of those describe one half. This is what the two halves look like together, and the thing that only becomes obvious when you draw it.
 
-![A multi-agent fleet: a pull task keeps every clone current, one shared config directory feeds every seat on a box, and each seat also has its own clone, cursor and hook. On the right, the seats coordinate through four separate channel surfaces.](/static/fleet-architecture.png)
+![A multi-agent fleet: a pull task keeps every clone current, one shared config directory feeds every seat on a box, and each seat also has its own clone, cursor and hook. On the right, the seats coordinate through four separate channel surfaces.](/static/fleet-architecture.svg)
 
 ## The mistake the picture exists to prevent
 

@@ -332,4 +332,4 @@ footer .mono{font-size:11.5px}
 @keyframes lbin{from{opacity:0;transform:scale(.985)}to{opacity:1;transform:none}}
 /* The loop SVG is authored for a narrow column; let the wide raster diagrams
    use the full breakout but keep it at a sane size, centred. */
-.prose figure.diagram a.zoom[href$=".svg"]{max-width:860px; margin:0 auto}
+.prose figure.diagram a.zoom[href$="signalbox-loop.svg"]{max-width:860px; margin:0 auto}
