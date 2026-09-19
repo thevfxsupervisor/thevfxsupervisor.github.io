@@ -206,7 +206,8 @@ def _inline(text):
             '<iframe src="%s" title="%s" loading="lazy" '
             'referrerpolicy="no-referrer"></iframe>'
             '<p class="diagram-open">'
-            '<a href="%s">Open this diagram full screen</a></p>'
+            '<a class="btn btn-b" href="%s" target="_blank" rel="noopener">'
+            'Open the full-screen diagram</a></p>'
             '</figure>' % (src, alt, src)
         )
 
@@ -565,6 +566,11 @@ def _html_to_text(html_fragment):
     # model reading this dump is exactly the reader it was written for; dropping
     # it silently loses the only description of the picture.
     stripped = re.sub(r'(?is)<img\b[^>]*?\balt="([^"]*)"[^>]*>', r" \1 ", stripped)
+    # Same for a live diagram's iframe title. When a diagram moved from <img> to
+    # an embedded interactive artifact, its description silently vanished from
+    # this dump: the picture was still on the page and no longer described
+    # anywhere a model could read. Extract the title for the same reason as alt.
+    stripped = re.sub(r'(?is)<iframe\b[^>]*?\btitle="([^"]*)"[^>]*>', r" \1 ", stripped)
     text = re.sub(r"(?s)<[^>]+>", " ", stripped)
     text = html.unescape(text)
     text = re.sub(r"[ \t]+", " ", text)

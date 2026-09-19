@@ -341,9 +341,13 @@ footer .mono{font-size:11.5px}
   display:block; width:100%; height:min(80vh,860px); min-height:520px;
   border:1px solid var(--line); border-radius:12px; background:var(--panel);
 }
-.prose figure.diagram.live .diagram-open{
-  margin:10px 0 0; font-family:var(--mono,monospace); font-size:13px; color:var(--dim)
+.prose figure.diagram.live .diagram-open{margin:14px 0 0; text-align:right}
+.prose figure.diagram.live .diagram-open a{
+  border-color:var(--line2); color:var(--txt); background:var(--raise)
 }
+.prose figure.diagram.live .diagram-open a:hover{background:var(--line); border-color:var(--amber)}
+.prose figure.diagram.live .diagram-open a::after{content:" 97"; font-size:15px; line-height:1}
+@media(max-width:720px){.prose figure.diagram.live .diagram-open{text-align:left}}
 @media(max-width:720px){
   .prose figure.diagram.live iframe{height:70vh; min-height:420px}
 }

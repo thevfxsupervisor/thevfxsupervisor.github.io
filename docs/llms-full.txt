@@ -97,7 +97,7 @@ How SignalBox works: the tracker holds assets, shots and beats, SignalBox compos
 Versions publish into the usual review. A reviewer's note goes to an LLM, which rewrites the beat and returns a wedge of variations to pick from. Revise an upstream asset and everything built from it rebuilds. Nobody opens another application, renders a version, and uploads it back.
 Autodesk Flow Production Tracking, still widely called ShotGrid. Notes are interpreted by claude -p . Every generation step is automatic, and every approval is a person's.
 For the technically minded
-Open this diagram full screen
+SignalBox architecture: the tracker is the state machine, a standing service polls it and runs twelve watchers, and the deterministic check can only refuse, never approve. Open the full-screen diagram
 Nothing in there holds state except the tracker. The check in the middle has one arrow out and it is not an approval: it can park work and say why, and the yes always comes from a person. More in Every gate is a person .
 Who built it
 I am Geoffrey Hancock, a VFX supervisor and producer, with a VES award for Changeling, a VES nomination for Invictus and a Robert nomination for Skammerens Datter II. I directed a team of AI agents to build SignalBox, and the judgment calls are mine. If you are wiring a tracker to real work, I am at geoff@thevfxsupervisor.com .
@@ -194,7 +194,7 @@ Breakdown Studio , open source on GitHub Notes , writing on pipeline and product
 https://thevfxsupervisor.com/notes/config-in-coordination-out/
 
 I have written here before about the shared folder the agents coordinate through and about keeping a long-running agent current with its own rules . Both of those describe one half. This is what the two halves look like together, and the thing that only becomes obvious when you draw it.
-Open this diagram full screen
+A multi-agent fleet: a pull task keeps every clone current, one shared config directory feeds every seat on a box, and each seat also has its own clone, cursor and hook. On the right, the seats coordinate through four separate channel surfaces. Open the full-screen diagram
 The mistake the picture exists to prevent
 My first attempt at this diagram was wrong, and wrong in an instructive way. I drew the shared machinery, the config directory, the installed commands, the rulebook imports, as a single arrow into one agent. And I drew the one genuinely per-agent mechanism as a single arrow too.
 Read back, that says something false: it says one agent is the hub and the other ten are downstream of it. The label on the arrow said "every seat". The topology said "this seat". When a label and a topology disagree, a reader believes the topology , because the topology is the part they can trace with a finger.
@@ -220,7 +220,7 @@ https://thevfxsupervisor.com/notes/every-gate-is-a-person/
 
 Most pipelines built around a generative model do one of two things. They skip review and ship whatever came out, or they bolt on a separate admin tool that nobody on the actual production ever opens. Neither survives contact with a real show.
 SignalBox takes the third option: make the tool the production already lives in, the tracker, be the trigger and the record.
-Open this diagram full screen
+SignalBox architecture: an operator writes a note and sets a status, a standing service polls the tracker and runs twelve watchers, automatic steps compose and generate, and results publish back as versions awaiting a person. Open the full-screen diagram
 The tracker is the state machine
 There is no queue and no job file. Every arrow in that picture reads or writes a field in the production tracker. The service polls it rather than being pushed to, runs its watchers in a fixed order, and publishes results back as versions.
 That sounds like a limitation and is actually the whole point. The record of what ran, and of who asked for it, lands in the tool the production already uses. Nobody has to open a second thing, and nobody can quietly run something that leaves no trace where people look.
