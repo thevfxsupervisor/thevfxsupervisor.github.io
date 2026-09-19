@@ -45,3 +45,5 @@ Note that it reports rather than blocks. A provenance mismatch is a reporting de
 Every automatic step in this system is automatic. Every gate is a person. The gates are not friction left over from a system that could not be fully automated, they are the product, and the record of who passed which one is the thing a production is actually paying for.
 
 The code is [public, MIT](https://github.com/thevfxsupervisor/signalbox), including the architecture notes on what each decision cost.
+
+The team of agents that built it runs on the same principle, drawn out in [config in, coordination out](/notes/config-in-coordination-out/).

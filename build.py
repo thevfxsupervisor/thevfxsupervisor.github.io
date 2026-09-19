@@ -195,9 +195,14 @@ def extract_block(body, name):
 def _inline(text):
     """Apply inline markdown formatting to already-HTML-escaped text."""
     # images: ![alt](src)
+    # Wrapped in a figure so a diagram can break out of the 70ch measure, and
+    # in an anchor to the full-size file so "see it bigger" works with no JS at
+    # all. The lightbox in base.html enhances that click; it does not enable it.
     text = re.sub(
         r"!\[([^\]]*)\]\(([^)]+)\)",
-        r'<img src="\2" alt="\1" loading="lazy">',
+        r'<figure class="diagram"><a class="zoom" href="\2" '
+        r'aria-label="Open the full-size diagram">'
+        r'<img src="\2" alt="\1" loading="lazy"></a></figure>',
         text,
     )
     # links: [text](url)
@@ -947,9 +952,10 @@ def credit_carousel():
     the site: the director names sell harder than any adjective, and the course
     page was the only place carrying them.
     """
-    # IMDb (nm0995883) and web-confirmed directors. ONLY his confirmed
-    # supervisor/producer credits. Permafrost is deliberately OMITTED until
-    # publicly announced (NDA). Do not add unverified credits.
+    # IMDb (nm0995883) and web-confirmed directors. ONLY confirmed, publicly
+    # announced supervisor/producer credits belong here. Unannounced work is
+    # omitted until it is announced. Do not add unverified credits, and do not
+    # name an unannounced project in this file: it is a PUBLIC repo.
     credits = [
         ("Changeling", "Clint Eastwood", "VFX Supervisor", "changeling.jpg"),
         ("Vantage Point", "Pete Travis", "VFX Supervisor", "vantage_point.jpg"),

@@ -46,3 +46,5 @@ That is not a permissions bug to route around. It is the topology, and it stays 
 Draw it, and then have someone else read the drawing back to you without your commentary. Not to check the facts, which you already believe, but to find out what the shape says. Three quiet errors in mine were only visible that way: the arity lie above, a machine connected to a drive it cannot mount, and a coordination channel with eight arrows in and none out, which is a strange thing to call a channel.
 
 The diagram is not the system. It is a claim about the system, and claims are worth testing.
+
+The same discipline applied to a production pipeline rather than a fleet: [every gate is a person](/notes/every-gate-is-a-person/), on why nothing in [SignalBox](/projects/signalbox/) ever self-approves.
