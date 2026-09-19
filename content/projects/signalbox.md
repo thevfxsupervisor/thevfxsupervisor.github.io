@@ -40,7 +40,7 @@ Autodesk Flow Production Tracking, still widely called ShotGrid. Notes are inter
 
 ## For the technically minded
 
-![SignalBox architecture: the tracker is the state machine, a standing service polls it and runs twelve watchers, and the deterministic check can only refuse, never approve.](/static/signalbox-architecture.svg)
+![SignalBox architecture: the tracker is the state machine, a standing service polls it and runs twelve watchers, and the deterministic check can only refuse, never approve.](/static/signalbox-architecture.html)
 
 Nothing in there holds state except the tracker. The check in the middle has one arrow out and it is not an approval: it can park work and say why, and the yes always comes from a person. More in [Every gate is a person](/notes/every-gate-is-a-person/).
 

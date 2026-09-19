@@ -194,6 +194,23 @@ def extract_block(body, name):
 
 def _inline(text):
     """Apply inline markdown formatting to already-HTML-escaped text."""
+    # Live diagrams: ![alt](/static/x.html) embeds the interactive artifact in
+    # an iframe, which is the only way the trace animation, pan/zoom and search
+    # survive onto the page. A static export cannot animate. The link beneath is
+    # not decoration: it is the fallback when the frame is blocked, and the way
+    # to open the thing full screen.
+    def _live(m):
+        alt, src = m.group(1), m.group(2)
+        return (
+            '<figure class="diagram live">'
+            '<iframe src="%s" title="%s" loading="lazy" '
+            'referrerpolicy="no-referrer"></iframe>'
+            '<p class="diagram-open">'
+            '<a href="%s">Open this diagram full screen</a></p>'
+            '</figure>' % (src, alt, src)
+        )
+
+    text = re.sub(r"!\[([^\]]*)\]\(([^)]+\.html)\)", _live, text)
     # images: ![alt](src)
     # Wrapped in a figure so a diagram can break out of the 70ch measure, and
     # in an anchor to the full-size file so "see it bigger" works with no JS at

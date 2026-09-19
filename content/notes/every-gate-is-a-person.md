@@ -12,7 +12,7 @@ Most pipelines built around a generative model do one of two things. They skip r
 
 [SignalBox](/projects/signalbox/) takes the third option: make the tool the production already lives in, the tracker, be the trigger and the record.
 
-![SignalBox architecture: an operator writes a note and sets a status, a standing service polls the tracker and runs twelve watchers, automatic steps compose and generate, and results publish back as versions awaiting a person.](/static/signalbox-architecture.svg)
+![SignalBox architecture: an operator writes a note and sets a status, a standing service polls the tracker and runs twelve watchers, automatic steps compose and generate, and results publish back as versions awaiting a person.](/static/signalbox-architecture.html)
 
 ## The tracker is the state machine
 
