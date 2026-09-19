@@ -38,6 +38,12 @@ Versions publish into the usual review. A reviewer's note goes to an LLM, which 
 
 Autodesk Flow Production Tracking, still widely called ShotGrid. Notes are interpreted by `claude -p`. Every generation step is automatic, and every approval is a person's.
 
+## For the technically minded
+
+![SignalBox architecture: the tracker is the state machine, a standing service polls it and runs twelve watchers, and the deterministic check can only refuse, never approve.](/static/signalbox-architecture.png)
+
+Nothing in there holds state except the tracker. The check in the middle has one arrow out and it is not an approval: it can park work and say why, and the yes always comes from a person. More in [Every gate is a person](/notes/every-gate-is-a-person/).
+
 ## Who built it
 
 I am Geoffrey Hancock, a VFX supervisor and producer, with a VES award for Changeling, a VES nomination for Invictus and a Robert nomination for Skammerens Datter II. I directed a team of AI agents to build SignalBox, and the judgment calls are mine. If you are wiring a tracker to real work, I am at [geoff@thevfxsupervisor.com](mailto:geoff@thevfxsupervisor.com).

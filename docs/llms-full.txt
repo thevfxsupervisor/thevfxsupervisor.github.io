@@ -96,6 +96,9 @@ What happens
 How SignalBox works: the tracker holds assets, shots and beats, SignalBox composes the picture, versions publish into the normal review, and a note returns a wedge of variations.
 Versions publish into the usual review. A reviewer's note goes to an LLM, which rewrites the beat and returns a wedge of variations to pick from. Revise an upstream asset and everything built from it rebuilds. Nobody opens another application, renders a version, and uploads it back.
 Autodesk Flow Production Tracking, still widely called ShotGrid. Notes are interpreted by claude -p . Every generation step is automatic, and every approval is a person's.
+For the technically minded
+SignalBox architecture: the tracker is the state machine, a standing service polls it and runs twelve watchers, and the deterministic check can only refuse, never approve.
+Nothing in there holds state except the tracker. The check in the middle has one arrow out and it is not an approval: it can park work and say why, and the yes always comes from a person. More in Every gate is a person .
 Who built it
 I am Geoffrey Hancock, a VFX supervisor and producer, with a VES award for Changeling, a VES nomination for Invictus and a Robert nomination for Skammerens Datter II. I directed a team of AI agents to build SignalBox, and the judgment calls are mine. If you are wiring a tracker to real work, I am at geoff@thevfxsupervisor.com .
 What this is
@@ -185,6 +188,54 @@ Selected press
 J. Edgar: motorcades and marching bands , fxguide Subtle manipulation: the making of J. Edgar , Flickering Myth Invictus draws a crowd , fxguide
 Elsewhere
 Breakdown Studio , open source on GitHub Notes , writing on pipeline and production the course , on the method (free waitlist)
+
+---
+# Config in, coordination out: the shape of an agent fleet
+https://thevfxsupervisor.com/notes/config-in-coordination-out/
+
+I have written here before about the shared folder the agents coordinate through and about keeping a long-running agent current with its own rules . Both of those describe one half. This is what the two halves look like together, and the thing that only becomes obvious when you draw it.
+A multi-agent fleet: a pull task keeps every clone current, one shared config directory feeds every seat on a box, and each seat also has its own clone, cursor and hook. On the right, the seats coordinate through four separate channel surfaces.
+The mistake the picture exists to prevent
+My first attempt at this diagram was wrong, and wrong in an instructive way. I drew the shared machinery, the config directory, the installed commands, the rulebook imports, as a single arrow into one agent. And I drew the one genuinely per-agent mechanism as a single arrow too.
+Read back, that says something false: it says one agent is the hub and the other ten are downstream of it. The label on the arrow said "every seat". The topology said "this seat". When a label and a topology disagree, a reader believes the topology , because the topology is the part they can trace with a finger.
+So the correction is not cosmetic. It is the difference between a peer system and a star.
+Two layers, and they are not the same layer
+Git moves bytes to disk on a schedule. That is one thing, and it is the easy one.
+Getting those bytes into a running agent's head is a completely different thing, and it happens twice, by two different routes:
+Per box. One config directory holds the rulebook imports, the installed commands, and the shared skill. Every agent running on that machine reads the same files at session start. Nobody owns them. If one agent edits those import lines, every other agent on the box silently loses its rulebook, and nothing says so. Per agent. Its own clone, its own read-cursor, its own hook. That is the half that tracks what this particular agent has and has not read.
+Get those two backwards and you will confidently explain a system that does not exist. A pulled clone is not a rule anyone has read.
+There is a sharp edge worth knowing here. My delta checker compares an agent's cursor against its clone's local head, and never fetches. That is deliberate: it reports what the agent has not read, not what the remote has. The consequence is that a clone nobody pulls has a head that never moves, so it reports "nothing new" forever while sitting behind. The thing that tells you about new rules is not a staleness check on your copy , and reading it as one is the trap.
+A channel is only a channel for the machines that can mount it
+The right half of the picture is coordination, and its load-bearing fact is unglamorous: two agents sharing a channel's name do not necessarily share a surface.
+There are four channel surfaces across three different stores. One GPU machine cannot mount the main shared drive at all. The always-on box cannot see the company store. Those two therefore have no common ground whatever, and no amount of correctly addressing a message changes it. Exactly one machine mounts both, which quietly makes it the only relay in the system.
+That is not a permissions bug to route around. It is the topology, and it stays true whether or not the diagram admits it. A request that lands on a surface the recipient cannot reach looks, from the sender's side, exactly like a busy colleague.
+What I would tell someone building this
+Draw it, and then have someone else read the drawing back to you without your commentary. Not to check the facts, which you already believe, but to find out what the shape says. Three quiet errors in mine were only visible that way: the arity lie above, a machine connected to a drive it cannot mount, and a coordination channel with eight arrows in and none out, which is a strange thing to call a channel.
+The diagram is not the system. It is a claim about the system, and claims are worth testing.
+
+---
+# Every gate is a person, and that is the product
+https://thevfxsupervisor.com/notes/every-gate-is-a-person/
+
+Most pipelines built around a generative model do one of two things. They skip review and ship whatever came out, or they bolt on a separate admin tool that nobody on the actual production ever opens. Neither survives contact with a real show.
+SignalBox takes the third option: make the tool the production already lives in, the tracker, be the trigger and the record.
+SignalBox architecture: an operator writes a note and sets a status, a standing service polls the tracker and runs twelve watchers, automatic steps compose and generate, and results publish back as versions awaiting a person.
+The tracker is the state machine
+There is no queue and no job file. Every arrow in that picture reads or writes a field in the production tracker. The service polls it rather than being pushed to, runs its watchers in a fixed order, and publishes results back as versions.
+That sounds like a limitation and is actually the whole point. The record of what ran, and of who asked for it, lands in the tool the production already uses. Nobody has to open a second thing, and nobody can quietly run something that leaves no trace where people look.
+A deterministic check can only refuse
+Look at the check in the middle of the diagram. It has one arrow out, and it is not an approval.
+It can park the work and say why. It cannot pass anything. Approval only ever comes from a person, at a gate above it. That asymmetry is deliberate: a check that can approve is a check that will eventually approve something wrong, and then you have automation that signed off on itself.
+This replaced a vision model doing quality control. That model measured 38% pass on panels that were correct, because attribute checklists conflate identity with pose and a legitimate close-up crops something out of frame. It got switched off rather than tuned, and what replaced it compares against a reference instead of asking a model for an opinion. The same discipline a VFX pipeline already applies to every other automated step.
+The expensive step re-reads the approval
+One step in that pipeline costs real GPU time. It does not trust the link it was handed. It goes back to the tracker and re-reads the approval on the way in, and refuses before spending anything if it is not a real one.
+That is a small piece of paranoia that has paid for itself. A pipeline that regenerated without asking would be worth less, not more.
+Provenance reports, it does not block
+The stored record of what was sent for a shot gets compared against what the model actually received. A disagreement is posted as a note on the version, where a human will see it, rather than into a log nobody reads.
+Note that it reports rather than blocks. A provenance mismatch is a reporting defect, not a reason to throw away a rendered frame. And the record is written by the code that did the sending, because "the record says we sent it" is not evidence that it was sent.
+What a production actually buys
+Every automatic step in this system is automatic. Every gate is a person. The gates are not friction left over from a system that could not be fully automated, they are the product, and the record of who passed which one is the thing a production is actually paying for.
+The code is public, MIT , including the architecture notes on what each decision cost.
 
 ---
 # How a one-person VFX department orchestrates AI
@@ -282,6 +333,8 @@ None of this is making it real. It is making it unnoticed. The shots people reme
 # Notes
 https://thevfxsupervisor.com/notes/
 
+Config in, coordination out: the shape of an agent fleet: Two separate paths carry a rulebook into an AI agent's session, and confusing them is the mistake. What a working multi-agent setup actually looks like, drawn.
+Every gate is a person, and that is the product: A generative video pipeline where the production tracker is the state machine, a deterministic check can only refuse, and nothing ever self-approves. Drawn.
 How a one-person VFX department orchestrates AI: The mechanical half automates. The judgment half stays with the supervisor. Notes on briefing an AI assistant with guardrails on a live production.
 Keeping a long-running AI agent in sync with its own rules: An AI agent that runs for days works from the rulebook it read on day one. Updating it without restarting or drowning it: notify always, load on demand.
 Running several AI agents as one coordinated team: A shared folder and a few JSON files let a fleet of AI agents work one production: handing off work, staying out of each other's way, across restarts.

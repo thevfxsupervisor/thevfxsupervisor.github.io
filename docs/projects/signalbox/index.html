@@ -67,6 +67,9 @@
 <figure><img src="/static/signalbox-loop.svg" alt="How SignalBox works: the tracker holds assets, shots and beats, SignalBox composes the picture, versions publish into the normal review, and a note returns a wedge of variations." loading="lazy"></figure>
 <p>Versions publish into the usual review. A reviewer's note goes to an LLM, which rewrites the beat and returns a wedge of variations to pick from. Revise an upstream asset and everything built from it rebuilds. Nobody opens another application, renders a version, and uploads it back.</p>
 <p>Autodesk Flow Production Tracking, still widely called ShotGrid. Notes are interpreted by <code>claude -p</code>. Every generation step is automatic, and every approval is a person's.</p>
+<h2>For the technically minded</h2>
+<figure><img src="/static/signalbox-architecture.png" alt="SignalBox architecture: the tracker is the state machine, a standing service polls it and runs twelve watchers, and the deterministic check can only refuse, never approve." loading="lazy"></figure>
+<p>Nothing in there holds state except the tracker. The check in the middle has one arrow out and it is not an approval: it can park work and say why, and the yes always comes from a person. More in <a href="/notes/every-gate-is-a-person/">Every gate is a person</a>.</p>
 <h2>Who built it</h2>
 <p>I am Geoffrey Hancock, a VFX supervisor and producer, with a VES award for Changeling, a VES nomination for Invictus and a Robert nomination for Skammerens Datter II. I directed a team of AI agents to build SignalBox, and the judgment calls are mine. If you are wiring a tracker to real work, I am at <a href="mailto:geoff@thevfxsupervisor.com">geoff@thevfxsupervisor.com</a>.</p>
 <h2>What this is</h2>

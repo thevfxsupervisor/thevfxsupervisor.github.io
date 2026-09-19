@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<title>Every gate is a person, and that is the product</title>
+<meta name="description" content="A generative video pipeline where the production tracker is the state machine, a deterministic check can only refuse, and nothing ever self-approves. Drawn.">
+<link rel="icon" type="image/png" sizes="256x256" href="/static/favicon.png">
+<link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+<link rel="canonical" href="https://thevfxsupervisor.com/notes/every-gate-is-a-person/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="the vfx supervisor">
+<meta property="og:title" content="Every gate is a person, and that is the product">
+<meta property="og:description" content="A generative video pipeline where the production tracker is the state machine, a deterministic check can only refuse, and nothing ever self-approves. Drawn.">
+<meta property="og:url" content="https://thevfxsupervisor.com/notes/every-gate-is-a-person/">
+<meta property="og:image" content="https://thevfxsupervisor.com/static/og/default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Every gate is a person, and that is the product">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Every gate is a person, and that is the product">
+<meta name="twitter:description" content="A generative video pipeline where the production tracker is the state machine, a deterministic check can only refuse, and nothing ever self-approves. Drawn.">
+<meta name="twitter:image" content="https://thevfxsupervisor.com/static/og/default.png">
+<link rel="stylesheet" href="/static/style.css?v=d10b6e72">
+  <link rel="alternate" type="application/rss+xml" title="the vfx supervisor" href="https://thevfxsupervisor.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"the vfx supervisor","url":"https://thevfxsupervisor.com/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "@id": "https://thevfxsupervisor.com/#person", "name": "Geoffrey Hancock", "jobTitle": "VFX Supervisor and Producer", "url": "https://thevfxsupervisor.com/", "sameAs": ["https://www.imdb.com/name/nm0995883/", "https://github.com/thevfxsupervisor", "https://wangle.media/", "https://www.wangle.studio"], "award": ["VES Award, Outstanding Supporting Visual Effects in a Feature Motion Picture, Changeling (7th Annual VES Awards)", "VES nomination, Invictus (8th Annual VES Awards)", "Robert nomination, Skammerens datter II"], "worksFor": {"@type": "Organization", "name": "Wangle Media", "url": "https://wangle.media/"}, "homeLocation": {"@type": "Place", "address": {"@type": "PostalAddress", "addressLocality": "Humlebaek", "addressCountry": "DK"}}, "knowsAbout": ["Visual effects", "VFX supervision", "VFX production", "VFX bidding and budgeting", "Shot breakdown", "Pipeline engineering", "Real-time and Unreal Engine production", "AI in visual effects", "Multi-vendor VFX delivery"], "knowsLanguage": ["en", "da"]}</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="logo" aria-hidden="true"></span>the vfx supervisor</a>
+    <nav>
+      <a href="/projects/" class="">Projects</a>
+      <a href="/course/" class="hide-sm">Course</a>
+      <a href="/notes/" class="hide-sm current">Notes</a>
+      <a href="/reel/" class="">Reel</a>
+      <a href="/about/" class="hide-sm">About</a>
+      <a class="btn btn-a" href="/course/">Join the waitlist</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Notes &middot; 2026-09-19</span>
+    <h1 style="margin-top:18px">Every gate is a person, and that is the product</h1>
+  </div>
+</section>
+<hr class="rule">
+<section>
+  <div class="wrap prose">
+    <p>Most pipelines built around a generative model do one of two things. They skip review and ship whatever came out, or they bolt on a separate admin tool that nobody on the actual production ever opens. Neither survives contact with a real show.</p>
+<p><a href="/projects/signalbox/">SignalBox</a> takes the third option: make the tool the production already lives in, the tracker, be the trigger and the record.</p>
+<figure><img src="/static/signalbox-architecture.png" alt="SignalBox architecture: an operator writes a note and sets a status, a standing service polls the tracker and runs twelve watchers, automatic steps compose and generate, and results publish back as versions awaiting a person." loading="lazy"></figure>
+<h2>The tracker is the state machine</h2>
+<p>There is no queue and no job file. Every arrow in that picture reads or writes a field in the production tracker. The service polls it rather than being pushed to, runs its watchers in a fixed order, and publishes results back as versions.</p>
+<p>That sounds like a limitation and is actually the whole point. The record of what ran, and of who asked for it, lands in the tool the production already uses. Nobody has to open a second thing, and nobody can quietly run something that leaves no trace where people look.</p>
+<h2>A deterministic check can only refuse</h2>
+<p>Look at the check in the middle of the diagram. It has one arrow out, and it is not an approval.</p>
+<p>It can park the work and say why. It cannot pass anything. Approval only ever comes from a person, at a gate above it. That asymmetry is deliberate: a check that can approve is a check that will eventually approve something wrong, and then you have automation that signed off on itself.</p>
+<p>This replaced a vision model doing quality control. That model measured 38% pass on panels that were correct, because attribute checklists conflate identity with pose and a legitimate close-up crops something out of frame. It got switched off rather than tuned, and what replaced it compares against a reference instead of asking a model for an opinion. <strong>The same discipline a VFX pipeline already applies to every other automated step.</strong></p>
+<h2>The expensive step re-reads the approval</h2>
+<p>One step in that pipeline costs real GPU time. It does not trust the link it was handed. It goes back to the tracker and re-reads the approval on the way in, and refuses before spending anything if it is not a real one.</p>
+<p>That is a small piece of paranoia that has paid for itself. A pipeline that regenerated without asking would be worth less, not more.</p>
+<h2>Provenance reports, it does not block</h2>
+<p>The stored record of what was sent for a shot gets compared against what the model actually received. A disagreement is posted as a note on the version, where a human will see it, rather than into a log nobody reads.</p>
+<p>Note that it reports rather than blocks. A provenance mismatch is a reporting defect, not a reason to throw away a rendered frame. And the record is written by the code that did the sending, because <strong>"the record says we sent it" is not evidence that it was sent.</strong></p>
+<h2>What a production actually buys</h2>
+<p>Every automatic step in this system is automatic. Every gate is a person. The gates are not friction left over from a system that could not be fully automated, they are the product, and the record of who passed which one is the thing a production is actually paying for.</p>
+<p>The code is <a href="https://github.com/thevfxsupervisor/signalbox">public, MIT</a>, including the architecture notes on what each decision cost.</p>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <a class="btn btn-b" href="/notes/">&larr; All notes</a>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <div class="quicklinks" style="margin-top:0">
+      <span class="eyebrow">The tools this method runs on</span>
+      <div class="ql-row"><a href="/projects/breakdown-studio/">Breakdown Studio</a> &middot; <a href="/projects/link-session/">link-session</a> &middot; <a href="/course/">The course</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="/" style="font-size:14px"><span class="logo" aria-hidden="true"></span>the vfx supervisor</a>
+    <nav>
+      <a href="/projects/">Projects</a>
+      <a href="/course/">Course</a>
+      <a href="/notes/">Notes</a>
+      <a href="/reel/">Reel</a>
+      <a href="/about/">About</a>
+      <a href="https://wangle.media/">Wangle Media</a>
+      <a href="https://github.com/thevfxsupervisor">GitHub</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="mailto:geoff@thevfxsupervisor.com">Contact</a>
+    </nav>
+    <div class="mono">&copy; 2026 Geoffrey Hancock. All rights reserved. Open-source tools (Breakdown Studio, link-session) are MIT.</div>
+  </div>
+</footer>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BlogPosting",
+ "headline": "Every gate is a person, and that is the product",
+ "description": "A generative video pipeline where the production tracker is the state machine, a deterministic check can only refuse, and nothing ever self-approves. Drawn.",
+ "url": "https://thevfxsupervisor.com/notes/every-gate-is-a-person/",
+ "datePublished": "2026-09-19",
+ "author": {
+  "@type": "Person",
+  "name": "Geoffrey Hancock",
+  "url": "https://thevfxsupervisor.com/about/"
+ },
+ "publisher": {
+  "@type": "Person",
+  "name": "Geoffrey Hancock",
+  "url": "https://thevfxsupervisor.com/about/"
+ },
+ "mainEntityOfPage": {
+  "@type": "WebPage",
+  "@id": "https://thevfxsupervisor.com/notes/every-gate-is-a-person/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://thevfxsupervisor.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Notes",
+   "item": "https://thevfxsupervisor.com/notes/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Every gate is a person, and that is the product",
+   "item": "https://thevfxsupervisor.com/notes/every-gate-is-a-person/"
+  }
+ ]
+}
+</script>
+</body>
+</html>
