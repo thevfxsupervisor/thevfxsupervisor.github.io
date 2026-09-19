@@ -5,21 +5,21 @@
     <link>https://thevfxsupervisor.com/</link>
     <description>Notes on VFX supervision, breakdowns, budgets and pipeline.</description>
     <language>en</language>
-    <lastBuildDate>Sat, 19 Sep 2026 01:58:42 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 19 Sep 2026 02:02:03 +0000</lastBuildDate>
     <atom:link href="https://thevfxsupervisor.com/feed.xml" rel="self" type="application/rss+xml"/>
     <item>
       <title>Every gate is a person, and that is the product</title>
       <link>https://thevfxsupervisor.com/notes/every-gate-is-a-person/</link>
       <guid isPermaLink="true">https://thevfxsupervisor.com/notes/every-gate-is-a-person/</guid>
       <pubDate>Sat, 19 Sep 2026 00:00:00 +0000</pubDate>
-      <description>A generative video pipeline where the production tracker is the state machine, a deterministic check can only refuse, and nothing ever self-approves. Drawn.</description>
+      <description>A generative video pipeline where the tracker is the state machine, a deterministic check can only refuse, and nothing ever self-approves. Drawn.</description>
     </item>
     <item>
       <title>Config in, coordination out: the shape of an agent fleet</title>
       <link>https://thevfxsupervisor.com/notes/config-in-coordination-out/</link>
       <guid isPermaLink="true">https://thevfxsupervisor.com/notes/config-in-coordination-out/</guid>
       <pubDate>Sat, 19 Sep 2026 00:00:00 +0000</pubDate>
-      <description>Two separate paths carry a rulebook into an AI agent's session, and confusing them is the mistake. What a working multi-agent setup actually looks like, drawn.</description>
+      <description>Two separate paths carry a rulebook into an AI agent's session, and confusing them is the mistake. What a working multi-agent fleet looks like, drawn.</description>
     </item>
     <item>
       <title>The cheapest message is the one nobody sends</title>

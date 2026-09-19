@@ -2,7 +2,7 @@
 type: note
 slug: config-in-coordination-out
 title: Config in, coordination out: the shape of an agent fleet
-description: Two separate paths carry a rulebook into an AI agent's session, and confusing them is the mistake. What a working multi-agent setup actually looks like, drawn.
+description: Two separate paths carry a rulebook into an AI agent's session, and confusing them is the mistake. What a working multi-agent fleet looks like, drawn.
 date: 2026-09-19
 tags: agents, coordination, pipeline, architecture
 draft: false

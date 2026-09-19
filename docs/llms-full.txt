@@ -335,8 +335,8 @@ None of this is making it real. It is making it unnoticed. The shots people reme
 # Notes
 https://thevfxsupervisor.com/notes/
 
-Config in, coordination out: the shape of an agent fleet: Two separate paths carry a rulebook into an AI agent's session, and confusing them is the mistake. What a working multi-agent setup actually looks like, drawn.
-Every gate is a person, and that is the product: A generative video pipeline where the production tracker is the state machine, a deterministic check can only refuse, and nothing ever self-approves. Drawn.
+Config in, coordination out: the shape of an agent fleet: Two separate paths carry a rulebook into an AI agent's session, and confusing them is the mistake. What a working multi-agent fleet looks like, drawn.
+Every gate is a person, and that is the product: A generative video pipeline where the tracker is the state machine, a deterministic check can only refuse, and nothing ever self-approves. Drawn.
 How a one-person VFX department orchestrates AI: The mechanical half automates. The judgment half stays with the supervisor. Notes on briefing an AI assistant with guardrails on a live production.
 Keeping a long-running AI agent in sync with its own rules: An AI agent that runs for days works from the rulebook it read on day one. Updating it without restarting or drowning it: notify always, load on demand.
 Running several AI agents as one coordinated team: A shared folder and a few JSON files let a fleet of AI agents work one production: handing off work, staying out of each other's way, across restarts.

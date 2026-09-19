@@ -2,7 +2,7 @@
 type: note
 slug: every-gate-is-a-person
 title: Every gate is a person, and that is the product
-description: A generative video pipeline where the production tracker is the state machine, a deterministic check can only refuse, and nothing ever self-approves. Drawn.
+description: A generative video pipeline where the tracker is the state machine, a deterministic check can only refuse, and nothing ever self-approves. Drawn.
 date: 2026-09-19
 tags: ai, pipeline, production, generative, signalbox
 draft: false
