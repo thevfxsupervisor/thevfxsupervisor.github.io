@@ -1,0 +1,30 @@
+.daily{max-width:720px;margin:0 auto;padding:36px 16px 64px}
+.daily-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px 28px}
+.daily-head{text-align:center;padding-bottom:20px;border-bottom:2px solid var(--line)}
+.daily-head .eyebrow{display:block;margin-bottom:12px}
+.daily-head h1{font-family:Georgia,"Source Serif 4","Times New Roman",serif;font-size:32px;line-height:1.25;font-weight:600;letter-spacing:-.01em}
+.daily-head .daily-date{margin-top:8px;color:var(--mute);font-size:14px}
+.daily .prose{max-width:none;font-size:16px;line-height:1.6}
+.daily .prose>p:first-child{margin:20px 0 4px;font-size:17px;line-height:1.6;color:var(--dim)}
+.daily .prose h2{font-family:Georgia,"Source Serif 4","Times New Roman",serif;font-size:26px;line-height:1.25;font-weight:600;margin:36px 0 12px}
+.daily .prose h2+p{background:var(--raise);border-radius:10px;padding:14px 16px;margin:0 0 8px;font-size:15px;line-height:1.55;color:var(--txt)}
+.daily .prose h2+p::before{content:"So what: ";font-weight:700;color:var(--amber-soft)}
+.daily .prose ul{list-style:none;padding:0;margin:4px 0 0}
+.daily .prose li{margin:0;padding:12px 2px;border-bottom:1px solid var(--line);line-height:1.5;color:var(--mute);font-size:14px}
+.daily .prose li:last-child{border-bottom:0}
+.daily .prose li a{color:var(--txt);font-size:16px;font-weight:600;text-decoration:none;overflow-wrap:anywhere}
+.daily .prose li a:hover{color:var(--amber-soft);text-decoration:underline}
+.daily .prose li em{display:block;font-style:normal;color:var(--dim);font-size:15px;margin-top:4px}
+.daily .prose>p:last-child:has(>em:only-child){margin-top:24px;font-size:13px;color:var(--mute)}
+.daily-nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px;font-family:var(--mono);font-size:13px}
+.daily-nav a{color:var(--dim);text-decoration:none}
+.daily-nav a:hover{color:var(--amber-soft)}
+.daily-foot{margin-top:28px;text-align:center;font-size:13px;color:var(--mute)}
+.daily-foot a{color:var(--mute)}
+.daily-list{list-style:none;padding:0;margin:24px 0 0}
+.daily-list li{border-bottom:1px solid var(--line)}
+.daily-list a{display:flex;gap:14px;align-items:baseline;padding:14px 2px;text-decoration:none}
+.daily-list .n{font-family:var(--mono);color:var(--amber-soft);min-width:3.2em}
+.daily-list .t{color:var(--txt);font-weight:600}
+.daily-list .d{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--mute);white-space:nowrap}
+@media(max-width:600px){.daily-card{padding:22px 16px}.daily-head h1{font-size:26px}.daily .prose h2{font-size:22px;margin-top:28px}.daily-list a{flex-wrap:wrap}.daily-list .d{margin-left:0}}
