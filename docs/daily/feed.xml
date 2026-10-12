@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>The VFX Supervisor Daily</title>
+    <link>https://thevfxsupervisor.com/daily/</link>
+    <description>What the day's VFX news means, in a few lines, with a link to every story.</description>
+    <language>en</language>
+    <atom:link href="https://thevfxsupervisor.com/daily/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>#7: A new studio landing a major horror feature shows where mid-size work is going</title>
+      <link>https://thevfxsupervisor.com/daily/7/</link>
+      <guid isPermaLink="true">https://thevfxsupervisor.com/daily/7/</guid>
+      <pubDate>Mon, 12 Oct 2026 00:00:00 +0000</pubDate>
+      <description>&lt;p&gt;A start-up studio taking a full-CG environment role and an associate VFX supervisor credit on a feature is a useful signal for anyone bidding mid-size work.&lt;/p&gt;
+&lt;h2&gt;Small studios taking on feature-scale work&lt;/h2&gt;
+&lt;p&gt;Roxel Creative's first major project was a full feature, with its founder also serving as associate VFX supervisor on the film. That suggests newer, leaner studios can compete for sizeable scope. Worth watching as a possible partner or rival on future bids, especially for CG environment extensions of practical sets.&lt;/p&gt;
+&lt;ul&gt;&lt;li&gt;&lt;a href="https://www.cgchannel.com/2026/10/check-out-roxel-creatives-eerie-vfx-breakdown-for-backrooms/"&gt;Check out Roxel Creative’s eerie VFX breakdown for Backrooms&lt;/a&gt; · cgchannel.com &lt;em&gt;A start-up won full-CG environments plus an associate VFX supervisor credit on a feature, so expect similar lean outfits as rivals or vendor partners on bids&lt;/em&gt;&lt;/li&gt;&lt;li&gt;&lt;a href="https://beforesandafters.com/2026/10/12/creating-the-spinosaurus-for-the-end-of-oak-street/"&gt;Creating the Spinosaurus for ‘The End of Oak Street’&lt;/a&gt; · befores &amp;amp; afters&lt;/li&gt;&lt;/ul&gt;
+&lt;p&gt;&lt;em&gt;2 links checked when this went out, 0 dead.&lt;/em&gt;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -23,6 +23,7 @@ form_k: I read every message myself and reply from geoff@thevfxsupervisor.com to
 form_message_label: What would you send, and to whom?
 form_placeholder: We are a heating firm. A weekly note to our customers on rules, prices and new kit.
 byline: Overscan is built by Geoff Hancock.
+sold_by: Overscan is sold by Wangle Media ApS, Copenhagen.
 ---
 
 <!-- steps -->

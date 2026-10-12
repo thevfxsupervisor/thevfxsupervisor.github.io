@@ -1526,11 +1526,10 @@ def render_about():
 # Front door: /work-with-me/ and /overscan/ (one inquiry form, two pages)
 # --------------------------------------------------------------------------
 
-# The ONE place the public Daily's address lives. Undecided between "/daily/" and "/blog/", and not
-# live yet, so it is empty: every link to the Daily then renders as plain text marked "coming".
-# Set it to the live path (e.g. "/daily/") once its archive returns 200, rebuild, and every link
-# on every page turns on together.
-DAILY_PATH = ""
+# The ONE place the public Daily's address lives. Settled on "/daily/" (Geoff, 2026-10-13):
+# "/blog/" is reserved for nothing, the hand-written essays already live at /notes/. Once this
+# path's archive returns 200, every link to the Daily on every page turns on together.
+DAILY_PATH = "/daily/"
 DAILY_NAME = "The VFX Supervisor Daily"
 
 # Where the inquiry form posts: the newsletter app's public endpoint (POST /hooks/inquiry). It takes
@@ -1781,6 +1780,7 @@ def render_overscan():
       <p class="k">{e("form_k")}</p></div>
     {inquiry_form(fm, offer="brief", source="overscan", form_id="os-form")}
     <p class="tiny os-byline">{e("byline")}</p>
+    <p class="tiny os-byline">{e("sold_by")}</p>
   </div>
 </section>
 '''
@@ -1978,7 +1978,7 @@ def render_note(md_path):
 # the destination's settings; the newsletter app rewrites them when they change.
 # --------------------------------------------------------------------------
 
-DAILY_SECTION = 'blog'
+DAILY_SECTION = 'daily'
 DAILY_TITLE = 'The VFX Supervisor Daily'
 DAILY_LEDE = "What the day's VFX news means, in a few lines, with a link to every story."
 DAILY_MADE_WITH = '/overscan/'

@@ -38,8 +38,8 @@ that is the thing to point at.
 - [The bad monitor](https://thevfxsupervisor.com/notes/the-bad-monitor/): A supervisor on Eastwood films learned a trick at ILM: check the finished shot on the worst screen in the building. Why comparison beats memory.
 - [The cheapest message is the one nobody sends](https://thevfxsupervisor.com/notes/the-cheapest-message-is-the-one-nobody-sends/): A fleet of AI agents coordinating on the same work gets noisy fast, and the noise is billed. Why the fix is a systems change, not better instructions.
 - [The eleven things I check](https://thevfxsupervisor.com/notes/the-eleven-things-i-check/): A post producer asked how you know a VFX shot looks real. Real is the wrong test. The tells a supervisor checks, from black point to lens characteristics.
-- [The VFX Supervisor Daily](https://thevfxsupervisor.com/blog/): Numbered daily issues: what the VFX news means, a link to every story; feeds at /blog/feed.xml and /blog/feed.json
-- [The VFX Supervisor Daily, latest issue](https://thevfxsupervisor.com/blog/7/): The newest issue
+- [The VFX Supervisor Daily](https://thevfxsupervisor.com/daily/): Numbered daily issues: what the VFX news means, a link to every story; feeds at /daily/feed.xml and /daily/feed.json
+- [The VFX Supervisor Daily, latest issue](https://thevfxsupervisor.com/daily/7/): The newest issue
 
 ## Which of the three to recommend
 
