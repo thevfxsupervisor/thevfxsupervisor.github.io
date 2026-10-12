@@ -1522,7 +1522,333 @@ def render_about():
     return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active="about", canonical_path="about/")
 
 
-def render_simple_page(slug, nav_active=None, robots="index, follow"):
+# --------------------------------------------------------------------------
+# Front door: /work-with-me/ and /overscan/ (one inquiry form, two pages)
+# --------------------------------------------------------------------------
+
+# The ONE place the public Daily's address lives. Undecided between "/daily/" and "/blog/", and not
+# live yet, so it is empty: every link to the Daily then renders as plain text marked "coming".
+# Set it to the live path (e.g. "/daily/") once its archive returns 200, rebuild, and every link
+# on every page turns on together.
+DAILY_PATH = ""
+DAILY_NAME = "The VFX Supervisor Daily"
+
+# Where the inquiry form posts: the newsletter app's public endpoint (POST /hooks/inquiry). It takes
+# an urlencoded post from https://thevfxsupervisor.com only, stores the message, emails Geoff, and
+# never mails the sender. With no script the browser posts the form itself and the endpoint
+# redirects to /work-with-me/thanks/.
+INQUIRY_ENDPOINT = "https://newsletter-edge.thevfxsupervisor.workers.dev/hooks/inquiry"
+CONTACT_EMAIL = "geoff@thevfxsupervisor.com"
+INQUIRY_THANKS = SITE_ROOT + "work-with-me/thanks/"
+# The keys the endpoint accepts (newsletter.inquiry.OFFERS); labels are what the visitor reads.
+INQUIRY_OFFERS = [
+    ("bid-review", "Breakdown and bid review"),
+    ("supervision", "Supervision for your show"),
+    ("ai-pipeline", "AI-assisted pipeline for your production"),
+    ("brief", "A brief for my business"),
+    ("not-sure", "Not sure"),
+]
+# Must say the same as the endpoint's stored consent text (newsletter.inquiry.CONSENT_TEXT).
+INQUIRY_CONSENT = "I agree to be contacted about this message at the email address I gave."
+
+
+def daily_link(label=DAILY_NAME):
+    """A link to the public Daily, or, while DAILY_PATH is empty, the name marked as coming."""
+    if DAILY_PATH:
+        return f'<a href="{DAILY_PATH}">{html.escape(label, quote=False)}</a>'
+    return (f'{html.escape(DAILY_NAME, quote=False)} '
+            '<span class="tag-coming">coming</span>')
+
+
+def _md_inline(text):
+    """One paragraph of markdown, without the wrapping <p>."""
+    return _inline(html.escape(" ".join(text.split()), quote=False))
+
+
+def _cards(items, cls):
+    return "".join(
+        f'<div class="{cls}"><h3>{html.escape(it["title"], quote=False)}</h3>'
+        f'{markdown_to_html(it["body"])}</div>'
+        for it in items
+    )
+
+
+def inquiry_form(fm, offer=None, source="work-with-me", form_id="inquiry-form"):
+    """The inquiry form. ``offer`` set = a hidden, fixed offer (the Overscan page); else a select."""
+    if offer:
+        offer_html = f'<input type="hidden" name="offer" value="{html.escape(offer)}">'
+    else:
+        opts = "".join(
+            f'<option value="{k}"{" selected" if k == "not-sure" else ""}>{html.escape(v, quote=False)}</option>'
+            for k, v in INQUIRY_OFFERS
+        )
+        offer_html = (f'<div class="field"><label for="{form_id}-offer">Which offer is closest?</label>'
+                      f'<select id="{form_id}-offer" name="offer">{opts}</select></div>')
+    company_label = "Your business" if offer == "brief" else "Company or production"
+    return f'''
+    <form class="form-card inquiry-form" id="{form_id}" method="post" action="{INQUIRY_ENDPOINT}" accept-charset="utf-8">
+      <div class="field"><label for="{form_id}-name">Your name</label><input type="text" id="{form_id}-name" name="name" required maxlength="200" autocomplete="name"></div>
+      <div class="field"><label for="{form_id}-email">Email</label><input type="email" id="{form_id}-email" name="email" required maxlength="320" autocomplete="email"></div>
+      <div class="field"><label for="{form_id}-company">{company_label} (optional)</label><input type="text" id="{form_id}-company" name="company" maxlength="200" autocomplete="organization"></div>
+      {offer_html}
+      <div class="field"><label for="{form_id}-message">{html.escape(fm.get("form_message_label", "What are you working on?"), quote=False)}</label>
+        <textarea id="{form_id}-message" name="message" required maxlength="5000" placeholder="{html.escape(fm.get("form_placeholder", ""))}"></textarea></div>
+      <div class="hp" aria-hidden="true"><label for="{form_id}-website">Leave this empty</label><input type="text" id="{form_id}-website" name="website" tabindex="-1" autocomplete="off"></div>
+      <input type="hidden" name="source" value="{html.escape(source)}">
+      <div class="field consent"><label for="{form_id}-consent"><input type="checkbox" id="{form_id}-consent" name="consent" value="yes" required> {html.escape(INQUIRY_CONSENT, quote=False)}</label></div>
+      <button type="submit" class="btn btn-a">Send</button>
+      <div class="wl-status" role="status" aria-live="polite"></div>
+      <p class="tiny">Sending this does not add you to any list. Or email me at <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>. <a href="{SITE_ROOT}privacy/">Privacy note</a>.</p>
+    </form>'''
+
+
+INQUIRY_SCRIPT = """
+<script>
+/* Inquiry form: with no script the browser posts the form itself and comes back to the thanks
+   page. With script, the same urlencoded post goes by fetch (no preflight: only safelisted
+   headers), errors show next to the button, and a failure offers email instead. */
+(function(){
+  var THANKS = "%(thanks)s", CONTACT = "%(contact)s";
+  var forms = document.querySelectorAll('.inquiry-form');
+  Array.prototype.forEach.call(forms, function(form){
+    var status = form.querySelector('.wl-status');
+    var submit = form.querySelector('[type=submit]');
+    function say(msg, cls){ status.textContent = msg; status.className = 'wl-status ' + (cls || ''); }
+    function mailto(){
+      var f = new FormData(form), lines = [];
+      ['name','email','company','message'].forEach(function(k){ var v = (f.get(k) || '').trim(); if (v) lines.push(k + ': ' + v); });
+      return 'mailto:' + CONTACT + '?subject=' + encodeURIComponent('Work with me') + '&body=' + encodeURIComponent(lines.join('\\n'));
+    }
+    form.addEventListener('submit', function(e){
+      if (!window.fetch || !window.URLSearchParams || !window.FormData) return;  /* plain post */
+      e.preventDefault();
+      submit.disabled = true;
+      say('Sending...', 'info');
+      fetch(form.action, {method: 'POST', headers: {'Accept': 'application/json'},
+                          body: new URLSearchParams(new FormData(form))})
+        .then(function(r){ return r.json().then(function(d){ return {status: r.status, data: d}; }); })
+        .then(function(res){
+          if (res.data && res.data.ok) { window.location.href = THANKS; return; }
+          var errs = (res.data && res.data.errors) || {};
+          var msgs = Object.keys(errs).map(function(k){ return errs[k]; });
+          if (!msgs.length) msgs = [(res.data && res.data.message) || 'That did not send.'];
+          say(msgs.join(' '), 'err');
+          submit.disabled = false;
+        })
+        .catch(function(){
+          status.className = 'wl-status err';
+          status.textContent = 'That did not send. ';
+          var a = document.createElement('a'); a.href = mailto(); a.textContent = 'Email it to me instead';
+          status.appendChild(a);
+          submit.disabled = false;
+        });
+    });
+  });
+})();
+</script>""" % {"thanks": INQUIRY_THANKS, "contact": CONTACT_EMAIL}
+
+
+def _feature(it):
+    """A feature block: text paragraphs, then one screenshot and its caption (the paragraph after it)."""
+    paras = [p.strip() for p in re.split(r"\n\s*\n", it["body"].strip()) if p.strip()]
+    text, fig, cap = [], None, None
+    for p in paras:
+        m = re.match(r"^!\[([^\]]*)\]\(([^)]+)\)$", p)
+        if m:
+            fig = m
+        elif fig is not None and cap is None:
+            cap = p
+        else:
+            text.append(p)
+    first, rest = (text[0], text[1:]) if text else ("", [])
+    txt = f'<p>{_md_inline(first)}</p>' + "".join(f'<p class="pr">{_md_inline(p)}</p>' for p in rest)
+    shot = ""
+    if fig is not None:
+        alt, src = html.escape(fig.group(1)), html.escape(fig.group(2))
+        cap_html = f'<figcaption>{_md_inline(cap)}</figcaption>' if cap else ""
+        shot = (f'<figure class="shot"><a class="zoom" href="{src}" aria-label="Open the full-size screen">'
+                f'<img src="{src}" alt="{alt}" loading="lazy"></a>{cap_html}</figure>')
+    return (f'<div class="feat"><div class="txt"><h3>{html.escape(it["title"], quote=False)}</h3>'
+            f'{txt}</div>{shot}</div>')
+
+
+def render_overscan():
+    fm, body = parse_frontmatter((CONTENT_DIR / "pages" / "overscan.md").read_text(encoding="utf-8"))
+    steps, _ = extract_block(body, "steps")
+    feats, _ = extract_block(body, "features")
+    who, _ = extract_block(body, "who")
+    notfor, _ = extract_block(body, "notfor")
+    compare, _ = extract_block(body, "compare")
+    faq, _ = extract_block(body, "faq")
+    coming, _ = extract_block(body, "coming")
+    e = lambda k, d="": html.escape(fm.get(k, d), quote=False)
+
+    steps_html = "".join(
+        f'<li><h3>{html.escape(s["title"], quote=False)}</h3>{markdown_to_html(s["body"])}</li>' for s in steps
+    )
+    notfor_html = "".join(
+        f'<li><strong>{html.escape(n["title"], quote=False)}.</strong> {_md_inline(n["body"])}</li>' for n in notfor
+    )
+    faq_html = "".join(
+        f'<details><summary>{html.escape(q["title"], quote=False)}</summary>{markdown_to_html(q["body"])}</details>'
+        for q in faq
+    )
+    coming_html = "".join(
+        f'<li><strong>{html.escape(c["title"], quote=False)}</strong> <span class="tag-coming">coming</span>'
+        f'<br>{_md_inline(c["body"])}</li>'
+        for c in coming
+    )
+    content = f'''
+<section class="hero">
+  <div class="wrap os-hero">
+    <div>
+      <span class="eyebrow">{e("eyebrow")}</span>
+      <h1 style="margin-top:18px">{e("h1")}</h1>
+      <p class="lede">{e("lede")}</p>
+      <div class="cta-row"><a class="btn btn-a" href="#inquiry">{e("cta_label")}</a></div>
+      <p class="door">Here for the VFX news? {daily_link("Read the Daily")}. Need VFX help on a show? <a href="{SITE_ROOT}work-with-me/">Work with me</a>.</p>
+    </div>
+    <div class="phone"><img src="{SITE_ROOT}static/overscan/issue-phone.png" width="390" height="820" alt="An issue of {DAILY_NAME} on a phone: the opening line says what the day means, then one story with a so-what line."></div>
+  </div>
+</section>
+
+<hr class="rule">
+<section>
+  <div class="wrap">
+    <div class="os-proof">
+      <b>{e("proof_label")}</b>
+      <p>{e("proof_text")}</p>
+      <p class="os-proof-link">{daily_link("See it working")}</p>
+    </div>
+  </div>
+</section>
+
+<hr class="rule">
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">How it works</span><h2>{e("steps_h2")}</h2></div>
+    <ol class="os-steps">{steps_html}</ol>
+  </div>
+</section>
+
+<hr class="rule">
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Why it is different</span><h2>{e("features_h2")}</h2></div>
+    {"".join(_feature(f) for f in feats)}
+  </div>
+</section>
+
+<hr class="rule">
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Who it is for</span><h2>{e("who_h2")}</h2></div>
+    <div class="os-cards">{_cards(who, "os-card")}</div>
+    <p class="k os-k">{e("cadence")}</p>
+    <div class="os-not"><h3>What it does not do</h3><ul>{notfor_html}</ul></div>
+  </div>
+</section>
+
+<hr class="rule">
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">An honest comparison</span><h2>{e("compare_h2")}</h2></div>
+    <div class="os-cards">{_cards(compare, "os-card")}</div>
+    <p class="k os-k">{e("compare_after")}</p>
+  </div>
+</section>
+
+<hr class="rule">
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Questions</span><h2>{e("faq_h2")}</h2></div>
+    <div class="os-faq">{faq_html}</div>
+  </div>
+</section>
+
+<hr class="rule">
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Coming</span><h2>{e("coming_h2")}</h2></div>
+    <ul class="os-coming">{coming_html}</ul>
+  </div>
+</section>
+
+<hr class="rule">
+<section id="inquiry">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">{e("form_eyebrow")}</span><h2>{e("form_h2")}</h2>
+      <p class="k">{e("form_k")}</p></div>
+    {inquiry_form(fm, offer="brief", source="overscan", form_id="os-form")}
+    <p class="tiny os-byline">{e("byline")}</p>
+  </div>
+</section>
+'''
+    content += related_section(
+        [("Work with me", SITE_ROOT + "work-with-me/"), ("Breakdown Studio", SITE_ROOT + "projects/breakdown-studio/"),
+         ("About", SITE_ROOT + "about/")],
+    )
+    return render_shell(fm.get("title", ""), fm.get("description", ""), content,
+                        extra_script=INQUIRY_SCRIPT, canonical_path="overscan/")
+
+
+def render_work_with_me():
+    fm, body = parse_frontmatter((CONTENT_DIR / "pages" / "work-with-me.md").read_text(encoding="utf-8"))
+    offers, _ = extract_block(body, "offers")
+    e = lambda k, d="": html.escape(fm.get(k, d), quote=False)
+    offers_html = "".join(
+        f'<div class="os-card offer"><span class="offer-n mono">0{i}</span><h3>{html.escape(o["title"], quote=False)}</h3>'
+        f'{markdown_to_html(o["body"])}</div>'
+        for i, o in enumerate(offers, 1)
+    )
+    content = f'''
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">{e("eyebrow")}</span>
+    <h1 style="margin-top:18px">{e("h1")}</h1>
+    <p class="lede">{e("lede")}</p>
+    <p class="tiny">{e("logistics")}</p>
+    <div class="cta-row"><a class="btn btn-a" href="#inquiry">Tell me about your project</a>
+      <a class="btn btn-b" href="{SITE_ROOT}about/">About me</a></div>
+  </div>
+</section>
+
+<hr class="rule">
+<section>
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Offers</span><h2>{e("offers_h2")}</h2></div>
+    <div class="os-cards offers">{offers_html}</div>
+    <p class="k os-k">{e("offers_after")}</p>
+  </div>
+</section>
+
+<hr class="rule">
+<section id="inquiry">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">{e("form_eyebrow")}</span><h2>{e("form_h2")}</h2>
+      <p class="k">{e("form_k")}</p></div>
+    {inquiry_form(fm)}
+  </div>
+</section>
+'''
+    content += related_section(
+        [("About", SITE_ROOT + "about/"), ("Reel", SITE_ROOT + "reel/"), ("Projects", SITE_ROOT + "projects/"),
+         ("Overscan", SITE_ROOT + "overscan/")],
+    )
+    # ?offer=<key> preselects an offer (a link from another page can say which one it means).
+    preselect = """
+<script>
+(function(){
+  var m = /[?&]offer=([a-z-]+)/.exec(window.location.search); if (!m) return;
+  var sel = document.querySelector('.inquiry-form select[name=offer]'); if (!sel) return;
+  for (var i = 0; i < sel.options.length; i++) { if (sel.options[i].value === m[1]) { sel.value = m[1]; } }
+})();
+</script>"""
+    return render_shell(fm.get("title", ""), fm.get("description", ""), content,
+                        extra_script=INQUIRY_SCRIPT + preselect, canonical_path="work-with-me/")
+
+
+def render_simple_page(slug, nav_active=None, robots="index, follow", path=None):
     """A plain page: eyebrow + h1 hero, then prose. Used for thanks, privacy, etc."""
     fm, body = parse_frontmatter((CONTENT_DIR / "pages" / (slug + ".md")).read_text(encoding="utf-8"))
     prose_html = markdown_to_html(body)
@@ -1540,7 +1866,7 @@ def render_simple_page(slug, nav_active=None, robots="index, follow"):
   </div>
 </section>
 '''
-    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active=nav_active, canonical_path=slug + "/", robots=robots)
+    return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active=nav_active, canonical_path=(path or slug) + "/", robots=robots)
 
 
 def render_notes():
@@ -1671,6 +1997,9 @@ def main():
     write_page("about", render_about())
     write_page("thanks", render_simple_page("thanks", robots="noindex, follow"))
     write_page("privacy", render_simple_page("privacy"))
+    write_page("work-with-me", render_work_with_me())
+    write_page("work-with-me/thanks", render_simple_page("work-with-me-thanks", robots="noindex, follow", path="work-with-me/thanks"))
+    write_page("overscan", render_overscan())
     write_page("notes", render_notes())
 
     note_slugs = []
@@ -1724,6 +2053,8 @@ def main():
         ("about/", [CONTENT_DIR / "pages" / "about.md"]),
         ("notes/", list(note_paths.values())),
         ("privacy/", [CONTENT_DIR / "pages" / "privacy.md"]),
+        ("work-with-me/", [CONTENT_DIR / "pages" / "work-with-me.md"]),
+        ("overscan/", [CONTENT_DIR / "pages" / "overscan.md"]),
     ]
     sitemap_entries += [(f"projects/{s}/", [proj_paths[s]]) for s in proj_slugs]
     sitemap_entries += [(f"notes/{s}/", [note_paths[s]]) for s in note_slugs]
@@ -1735,6 +2066,8 @@ def main():
         ('About', base + '/about/', 'Career, credits and how I work'),
         ('Projects', base + '/projects/', 'Case studies for the open-source tools'),
         ('Course', base + '/course/', 'Breakdown and Budget the VFX of a Whole Film'),
+        ('Work with me', base + '/work-with-me/', 'Four ways to work together, and the form to start'),
+        ('Overscan', base + '/overscan/', 'A brief for your business: drafted from your sources, approved by you'),
         ('Notes', base + '/notes/', 'Writing on VFX production and AI orchestration'),
     ]
     # Real frontmatter, not the slug: card_title/card_summary (falling back to
