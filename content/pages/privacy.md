@@ -2,12 +2,14 @@
 type: page
 slug: privacy
 title: Privacy | the vfx supervisor
-description: What I collect when you join the waitlist, why, and your rights.
+description: What I collect when you join the waitlist or send the work-with-me form, why, how long I keep it, and your rights.
 eyebrow: Privacy
 h1: What I do with your details.
 ---
 
-Short version: I use your email to send you the resource you asked for and, now and then, news about the course. Nothing else. Never sold, never shared.
+Short version: I use your details only for what you asked for. Nothing else. Never sold, never shared.
+
+## The course waitlist
 
 **What I collect.** Your email, your name if you give it, and any question you send. That is all.
 
@@ -15,6 +17,20 @@ Short version: I use your email to send you the resource you asked for and, now 
 
 **How long.** Until you unsubscribe or ask me to delete it.
 
-**Your rights.** You can ask me what I hold, correct it, or have it deleted, at any time. Every email includes how to unsubscribe. To exercise any of this, just reply to one of my emails or write to geoff@thevfxsupervisor.com.
+## The work-with-me form
 
-**Who runs this.** Geoffrey Hancock, Wangle Media ApS. Signups are stored in a private Google Sheet and emails are sent through Google Workspace. That is the whole stack.
+This is the form on [Work with me](/work-with-me/) and [Overscan](/overscan/).
+
+**What I collect.** Your name, your email, your company if you give it, which offer you picked, your message, which page you sent it from, and when you ticked the box agreeing that I may contact you. To stop spam, the form also keeps a scrambled, one-way code made from your internet address, used only to count how many messages come from one place. It cannot be turned back into the address.
+
+**Why.** To read your message and reply to it, because you asked me to. Nothing is sent to you automatically, and sending the form does not add you to any list or newsletter. Your message is not given to any AI service.
+
+**Where.** Your message is stored in a private database on a server I run, reached through Cloudflare, and a copy is emailed to my own Google Workspace mailbox so I see it.
+
+**How long.** The stored message is deleted automatically two years after you send it, or sooner if you ask. If we end up working together, what we agree is kept as business records for as long as the law requires.
+
+## Your rights
+
+You can ask me what I hold, correct it, or have it deleted, at any time. Every waitlist email includes how to unsubscribe. To exercise any of this, reply to one of my emails or write to geoff@thevfxsupervisor.com, and I will delete both the stored message and the copy in my mailbox.
+
+**Who runs this.** Geoffrey Hancock, Wangle Media ApS. Waitlist signups are stored in a private Google Sheet, work-with-me messages in a private database on a server I run, and emails are sent through Google Workspace. That is the whole stack.
