@@ -5,7 +5,7 @@ title: Work with me | the vfx supervisor
 description: VFX supervision, breakdown and bid review, AI-assisted pipelines, and a weekly brief for your business. Tell me what you are working on.
 eyebrow: Work with me
 h1: VFX that holds up on the day, and in the budget.
-lede: I am a VFX supervisor and producer. I run VFX on film and television, and I build the tools that let a small department do the work of a big one. Most of the people I work with are producers with real VFX in their show, often for the first time without a large facility behind them. I help you see the shots clearly, bid them properly, and get them made.
+lede: I am a VFX supervisor and producer. I run VFX on film and television, and I build the tools that let a small department do the work of a big one. I help you see the shots clearly, bid them properly, and get them made.
 logistics: Based in Copenhagen. On site, remote or hybrid.
 offers_h2: Four ways to work together
 offers_after: Not sure which fits? Tell me what you are working on and I will say so.
