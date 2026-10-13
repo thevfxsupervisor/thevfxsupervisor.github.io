@@ -2,11 +2,11 @@
 type: page
 slug: overscan
 title: Overscan | the vfx supervisor
-description: Be the one your customers trust to know what's happening and what it means. From you, every morning. Each of them reads it, hears it or watches it.
+description: Be the one your customers trust to know what's happening and what it means. From you, every morning, to read, hear, watch, flip or see at a glance.
 eyebrow: Overscan
 h1: Be the one they trust to know what's happening, and what it means.
-lede: Every morning or every week, Overscan turns what changed in your trade into a briefing your customers open: what happened and why it matters to them, under your name. Not a link dump, not a sales email, not silence. Each of them reads it, hears it, watches it, flips the slides or takes the one picture. Tell Overscan what to change, in plain words, and the next issue changes.
-hero_coming: Email straight to your customers from your own address. Today each issue comes to you with a web page that carries all five, ready to send through the tool you already use.
+lede: Every morning or every week, Overscan turns what changed in your trade into a briefing your customers open: what happened and why it matters to them, under your name. Not a link dump, not a sales email, not silence. Every issue comes five ways: read it, hear it, watch it, flip the slides or take the one picture. Tell Overscan what to change, in plain words, and the next issue changes.
+hero_coming: Email straight to your customers from your own address, each in the way they pick. Today all five come to you, and you send the issue through the tool you already use.
 cta_label: Make your expertise unmissable
 proof_label: The proof, every morning
 proof_text: The VFX Supervisor Daily is Geoff's own morning VFX briefing, crafted with Overscan. Read it, hear it, watch it. That is how one VFX supervisor shows what he knows to the people who hire one.
@@ -38,7 +38,7 @@ Pick the one that leads your own email: read it, skim it, listen, watch, slides 
 Real explainer video from one issue of a daily VFX update, as it plays on the issue page.
 
 ### Noticed by the right people
-Your name, your branding and your issue number on something your customers open every morning. The one who never reads an email hears you in the van; the one who skims gets the picture; the one who runs the Monday meeting flips your slides in front of the room. The same expertise, in the form each person already consumes, with your name on it every time.
+Your name and your issue number on something your customers open every morning. The one who never reads an email hears you in the van; the one who skims gets the picture; the one who runs the Monday meeting flips your slides in front of the room. The same expertise, in the form each person already consumes, with your name on it every time. Coming: each customer picks theirs straight from your email.
 
 Issue #41 is the proof you were right in issue #12.
 

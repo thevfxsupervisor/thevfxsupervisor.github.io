@@ -1526,11 +1526,10 @@ def render_about():
 # Front door: /work-with-me/ and /overscan/ (one inquiry form, two pages)
 # --------------------------------------------------------------------------
 
-# The ONE place the public Daily's address lives. Undecided between "/daily/" and "/blog/", and not
-# live yet, so it is empty: every link to the Daily then renders as plain text marked "coming".
-# Set it to the live path (e.g. "/daily/") once its archive returns 200, rebuild, and every link
-# on every page turns on together.
-DAILY_PATH = ""
+# The ONE place the public Daily's address lives. Settled on "/daily/" (Geoff, 2026-10-13):
+# "/blog/" is reserved for nothing, the hand-written essays already live at /notes/. Once this
+# path's archive returns 200, every link to the Daily on every page turns on together.
+DAILY_PATH = "/daily/"
 DAILY_NAME = "The VFX Supervisor Daily"
 
 # Where the inquiry form posts: the newsletter app's public endpoint (POST /hooks/inquiry). It takes
@@ -1700,7 +1699,7 @@ def format_strip():
     <div class="fmt-strip" aria-label="The same issue, five ways">
       <div class="fmt-card"><div class="fmt-media"><img src="{m}phone-read.png" width="390" height="700" loading="lazy" alt="The 13 Oct 2026 issue as an email on a phone."></div>
         <div class="fmt-txt"><b>Read it</b><p>Two minutes with coffee. Only what is new, and why it matters to them.</p></div></div>
-      <div class="fmt-card"><div class="fmt-media"><img src="{m}phone-listen.png" width="390" height="700" loading="lazy" alt="The same issue as it reaches a reader who picked Listen: the play button on top, the letter below."></div>
+      <div class="fmt-card"><div class="fmt-media"><img src="{m}phone-listen.png" width="390" height="700" loading="lazy" alt="The same issue as it arrives when you pick Listen: the play button on top, the letter below."></div>
         <div class="fmt-txt"><b>Hear it</b><p>The whole issue as a conversation, for the van.</p>
         <audio controls preload="none" src="{m}issue-audio.m4a" aria-label="Audio overview of the issue"></audio></div></div>
       <div class="fmt-card"><div class="fmt-media wide"><video class="fmt-video" muted loop playsinline preload="none" poster="{m}issue-video-poster.jpg" width="1280" height="720" aria-label="The explainer video of the issue, silent; click to pause or play"><source src="{m}issue-video.mp4" type="video/mp4"></video></div>
@@ -1710,7 +1709,7 @@ def format_strip():
       <div class="fmt-card"><div class="fmt-media"><img src="{m}issue-infographic.png" width="800" height="1130" loading="lazy" alt="Placeholder for the issue infographic."></div>
         <div class="fmt-txt"><b>The one picture</b><p>The whole issue on one screen, for the person who will not read.</p></div></div>
     </div>
-    <p class="fmt-hint">The 13 Oct 2026 issue, five ways. The audio and video here are short clips: the full versions run about 19 and 7 minutes.</p>'''
+    <p class="fmt-hint">The 13 Oct 2026 issue as the letter, the audio, the video and the slides; its picture joins with the next issue. The audio and video here are short clips of the full 19 and 7 minutes.</p>'''
 
 
 FMT_SCRIPT = """
@@ -2030,6 +2029,231 @@ def render_note(md_path):
 # Build
 # --------------------------------------------------------------------------
 
+
+# --------------------------------------------------------------------------
+# The Daily: numbered public issues, one file each in content/<DAILY_SECTION>/
+# (added by the newsletter product, Overscan). Kept apart from notes/ so the
+# hand-written essays are not buried. Each page is styled like the app's
+# issue page via docs/static/daily.css (written below). The four constants are
+# the destination's settings; the newsletter app rewrites them when they change.
+# --------------------------------------------------------------------------
+
+DAILY_SECTION = 'daily'
+DAILY_TITLE = 'The VFX Supervisor Daily'
+DAILY_LEDE = "What the day's VFX news means, in a few lines, with a link to every story."
+DAILY_MADE_WITH = '/overscan/'
+DAILY_CSS = """
+.daily{max-width:720px;margin:0 auto;padding:36px 16px 64px}
+.daily-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px 28px}
+.daily-head{text-align:center;padding-bottom:20px;border-bottom:2px solid var(--line)}
+.daily-head .eyebrow{display:block;margin-bottom:12px}
+.daily-head h1{font-family:Georgia,"Source Serif 4","Times New Roman",serif;font-size:32px;line-height:1.25;font-weight:600;letter-spacing:-.01em}
+.daily-head .daily-date{margin-top:8px;color:var(--mute);font-size:14px}
+.daily .prose{max-width:none;font-size:16px;line-height:1.6}
+.daily .prose>p:first-child{margin:20px 0 4px;font-size:17px;line-height:1.6;color:var(--dim)}
+.daily .prose h2{font-family:Georgia,"Source Serif 4","Times New Roman",serif;font-size:26px;line-height:1.25;font-weight:600;margin:36px 0 12px}
+.daily .prose h2+p{background:var(--raise);border-radius:10px;padding:14px 16px;margin:0 0 8px;font-size:15px;line-height:1.55;color:var(--txt)}
+.daily .prose h2+p::before{content:"So what: ";font-weight:700;color:var(--amber-soft)}
+.daily .prose ul{list-style:none;padding:0;margin:4px 0 0}
+.daily .prose li{margin:0;padding:12px 2px;border-bottom:1px solid var(--line);line-height:1.5;color:var(--mute);font-size:14px}
+.daily .prose li:last-child{border-bottom:0}
+.daily .prose li a{color:var(--txt);font-size:16px;font-weight:600;text-decoration:none;overflow-wrap:anywhere}
+.daily .prose li a:hover{color:var(--amber-soft);text-decoration:underline}
+.daily .prose li em{display:block;font-style:normal;color:var(--dim);font-size:15px;margin-top:4px}
+.daily .prose>p:last-child:has(>em:only-child){margin-top:24px;font-size:13px;color:var(--mute)}
+.daily-nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px;font-family:var(--mono);font-size:13px}
+.daily-nav a{color:var(--dim);text-decoration:none}
+.daily-nav a:hover{color:var(--amber-soft)}
+.daily-foot{margin-top:28px;text-align:center;font-size:13px;color:var(--mute)}
+.daily-foot a{color:var(--mute)}
+.daily-list{list-style:none;padding:0;margin:24px 0 0}
+.daily-list li{border-bottom:1px solid var(--line)}
+.daily-list a{display:flex;gap:14px;align-items:baseline;padding:14px 2px;text-decoration:none}
+.daily-list .n{font-family:var(--mono);color:var(--amber-soft);min-width:3.2em}
+.daily-list .t{color:var(--txt);font-weight:600}
+.daily-list .d{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--mute);white-space:nowrap}
+@media(max-width:600px){.daily-card{padding:22px 16px}.daily-head h1{font-size:26px}.daily .prose h2{font-size:22px;margin-top:28px}.daily-list a{flex-wrap:wrap}.daily-list .d{margin-left:0}}
+"""
+
+
+def _daily_posts():
+    posts = []
+    folder = CONTENT_DIR / DAILY_SECTION
+    for md_path in sorted(folder.glob("*.md")) if folder.exists() else []:
+        fm, body = parse_frontmatter(md_path.read_text(encoding="utf-8"))
+        if fm.get("draft", "").lower() == "true":
+            continue
+        posts.append((fm, body, fm.get("slug", md_path.stem)))
+
+    def order(p):
+        n = p[0].get("number", "")
+        return (p[0].get("date", ""), int(n) if n.isdigit() else 0)
+
+    posts.sort(key=order, reverse=True)
+    return posts
+
+
+def _daily_css_link():
+    return f'<link rel="stylesheet" href="{SITE_ROOT}static/daily.css">'
+
+
+def _daily_foot():
+    made = ""
+    if DAILY_MADE_WITH:
+        made = (f' &middot; Made with <a href="{html.escape(DAILY_MADE_WITH)}">'
+                "Overscan</a>")
+    return (f'<p class="daily-foot"><a href="{SITE_ROOT}{DAILY_SECTION}/feed.xml">RSS</a>'
+            f' &middot; <a href="{SITE_ROOT}{DAILY_SECTION}/feed.json">JSON Feed</a>{made}</p>')
+
+
+def render_daily_post(fm, body, slug, newer=None, older=None):
+    esc = lambda s: html.escape(s, quote=False)  # noqa: E731
+    number = fm.get("number", "")
+    eyebrow = f"{esc(DAILY_TITLE)} &middot; #{esc(number)}" if number else esc(DAILY_TITLE)
+    links = [f'<a href="{SITE_ROOT}{DAILY_SECTION}/{older}/">&larr; Earlier</a>' if older else "",
+             f'<a href="{SITE_ROOT}{DAILY_SECTION}/">All issues</a>',
+             f'<a href="{SITE_ROOT}{DAILY_SECTION}/{newer}/">Later &rarr;</a>' if newer else ""]
+    nav = ('<nav class="daily-nav" aria-label="More issues">'
+           + "".join(f"<span>{x}</span>" for x in links) + "</nav>")
+    content = f"""{_daily_css_link()}
+<main class="daily">
+  <article class="daily-card">
+    <header class="daily-head">
+      <span class="eyebrow">{eyebrow}</span>
+      <h1>{esc(fm.get("headline") or fm.get("title", ""))}</h1>
+      <p class="daily-date"><time datetime="{esc(fm.get("date", ""))}">{esc(fm.get("date_text") or fm.get("date", ""))}</time></p>
+    </header>
+    <div class="prose">
+{markdown_to_html(body)}
+    </div>
+  </article>
+  {nav}
+  {_daily_foot()}
+</main>
+"""
+    # render_shell escapes without quotes, so a quote mark would end the meta attributes.
+    plain = lambda s: s.replace('"', "\u201d")  # noqa: E731
+    page = render_shell(plain(fm.get("title", "")), plain(fm.get("description", "")), content,
+                        canonical_path=f"{DAILY_SECTION}/{slug}/")
+    canonical = fm.get("canonical", "")
+    if canonical.startswith("https://"):
+        page = re.sub(r'(<link rel="canonical" href=")[^"]*(")',
+                      lambda m: m.group(1) + html.escape(canonical) + m.group(2), page, count=1)
+    return page
+
+
+def render_daily_index(posts):
+    rows = []
+    for fm, _body, slug in posts:
+        n = fm.get("number", "")
+        rows.append(
+            f'<li><a href="{SITE_ROOT}{DAILY_SECTION}/{slug}/">'
+            f'<span class="n">{"#" + html.escape(n) if n else ""}</span>'
+            f'<span class="t">{html.escape(fm.get("headline") or fm.get("title", ""), quote=False)}</span>'
+            f'<span class="d">{html.escape(fm.get("date", ""), quote=False)}</span></a></li>'
+        )
+    empty = "" if rows else "<p>The first issue is on its way.</p>"
+    content = f"""{_daily_css_link()}
+<main class="daily">
+  <header class="daily-head">
+    <span class="eyebrow">Every morning</span>
+    <h1>{html.escape(DAILY_TITLE, quote=False)}</h1>
+    <p class="daily-date">{html.escape(DAILY_LEDE, quote=False)}</p>
+  </header>
+  <ul class="daily-list">{"".join(rows)}</ul>{empty}
+  {_daily_foot()}
+</main>
+"""
+    return render_shell(f"{DAILY_TITLE} | {SITE_NAME}", DAILY_LEDE, content,
+                        canonical_path=f"{DAILY_SECTION}/")
+
+
+def _daily_date(fm):
+    from datetime import datetime, timezone
+
+    try:
+        return datetime.fromisoformat(fm.get("date", "")).replace(tzinfo=timezone.utc)
+    except ValueError:
+        return datetime(2026, 1, 1, tzinfo=timezone.utc)
+
+
+def write_daily_feeds(posts, out_dir):
+    """RSS 2.0 and JSON Feed 1.1 for the Daily, full body in each entry."""
+    import json
+    import xml.sax.saxutils as sx
+    from email.utils import format_datetime
+
+    base = SITE_CANONICAL.rstrip("/")
+    home = f"{base}/{DAILY_SECTION}/"
+    items, entries = [], []
+    for fm, body, slug in posts[:30]:
+        url = f"{base}/{DAILY_SECTION}/{slug}/"
+        body_html = markdown_to_html(body)
+        d = _daily_date(fm)
+        items.append(
+            "    <item>\n"
+            f"      <title>{sx.escape(fm.get('title', slug))}</title>\n"
+            f"      <link>{url}</link>\n"
+            f'      <guid isPermaLink="true">{url}</guid>\n'
+            f"      <pubDate>{format_datetime(d)}</pubDate>\n"
+            f"      <description>{sx.escape(body_html)}</description>\n"
+            "    </item>")
+        entries.append({"id": url, "url": url, "title": fm.get("title", slug),
+                        "summary": fm.get("description", ""), "content_html": body_html,
+                        "date_published": d.isoformat()})
+    out = out_dir / DAILY_SECTION
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "feed.xml").write_text(
+        '<?xml version="1.0" encoding="UTF-8"?>\n'
+        '<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">\n'
+        "  <channel>\n"
+        f"    <title>{sx.escape(DAILY_TITLE)}</title>\n"
+        f"    <link>{home}</link>\n"
+        f"    <description>{sx.escape(DAILY_LEDE)}</description>\n"
+        "    <language>en</language>\n"
+        f'    <atom:link href="{home}feed.xml" rel="self" type="application/rss+xml"/>\n'
+        + "\n".join(items) + ("\n" if items else "")
+        + "  </channel>\n</rss>\n", encoding="utf-8")
+    (out / "feed.json").write_text(json.dumps({
+        "version": "https://jsonfeed.org/version/1.1", "title": DAILY_TITLE,
+        "home_page_url": home, "feed_url": f"{home}feed.json", "description": DAILY_LEDE,
+        "language": "en", "items": entries,
+    }, ensure_ascii=False, indent=1) + "\n", encoding="utf-8")
+    print(f"  wrote {DAILY_SECTION}/feed.xml and feed.json ({len(posts)} issues)")
+
+
+def build_daily():
+    posts = _daily_posts()
+    static_out = DOCS_DIR / "static"
+    static_out.mkdir(parents=True, exist_ok=True)
+    (static_out / "daily.css").write_text(DAILY_CSS.lstrip(), encoding="utf-8")
+    write_page(DAILY_SECTION, render_daily_index(posts))
+    slugs = [slug for _fm, _body, slug in posts]
+    for i, (fm, body, slug) in enumerate(posts):
+        newer = slugs[i - 1] if i > 0 else None
+        older = slugs[i + 1] if i + 1 < len(slugs) else None
+        write_page(f"{DAILY_SECTION}/{slug}", render_daily_post(fm, body, slug, newer, older))
+    write_daily_feeds(posts, DOCS_DIR)
+    return slugs
+
+
+def daily_sitemap_entries(slugs):
+    paths = {s: CONTENT_DIR / DAILY_SECTION / f"{s}.md" for s in slugs}
+    return ([(f"{DAILY_SECTION}/", list(paths.values()))]
+            + [(f"{DAILY_SECTION}/{s}/", [paths[s]]) for s in slugs])
+
+
+def daily_llms_pages(slugs):
+    base = SITE_CANONICAL.rstrip("/")
+    out = [(DAILY_TITLE, f"{base}/{DAILY_SECTION}/",
+            "Numbered daily issues: what the VFX news means, a link to every story; "
+            f"feeds at /{DAILY_SECTION}/feed.xml and /{DAILY_SECTION}/feed.json")]
+    if slugs:
+        out.append((f"{DAILY_TITLE}, latest issue", f"{base}/{DAILY_SECTION}/{slugs[0]}/",
+                    "The newest issue"))
+    return out
+
+
 def write_page(rel_dir, html_out):
     out_dir = DOCS_DIR / rel_dir
     out_dir.mkdir(parents=True, exist_ok=True)
@@ -2075,6 +2299,7 @@ def main():
         note_fms.append(fm)
 
     write_feed(DOCS_DIR)
+    daily_slugs = build_daily()
 
     # static assets
     static_out = DOCS_DIR / "static"
@@ -2119,6 +2344,7 @@ def main():
     ]
     sitemap_entries += [(f"projects/{s}/", [proj_paths[s]]) for s in proj_slugs]
     sitemap_entries += [(f"notes/{s}/", [note_paths[s]]) for s in note_slugs]
+    sitemap_entries += daily_sitemap_entries(daily_slugs)
     # derived from the same slug lists as the sitemap, so a new note or case
     # study cannot appear on the site and be missing from llms.txt
     base = SITE_CANONICAL.rstrip('/')
@@ -2151,6 +2377,7 @@ def main():
         for s, nfm in zip(note_slugs, note_fms)
     ]
     write_sitemap(sitemap_entries, DOCS_DIR)
+    llms_pages += daily_llms_pages(daily_slugs)
     write_llms_txt(llms_pages, DOCS_DIR)
     write_llms_full_txt(DOCS_DIR)
     print("Done.")

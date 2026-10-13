@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<title>The VFX Supervisor Daily | the vfx supervisor</title>
+<meta name="description" content="What the day's VFX news means, in a few lines, with a link to every story.">
+<link rel="icon" type="image/png" sizes="256x256" href="/static/favicon.png">
+<link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+<link rel="canonical" href="https://thevfxsupervisor.com/daily/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="the vfx supervisor">
+<meta property="og:title" content="The VFX Supervisor Daily | the vfx supervisor">
+<meta property="og:description" content="What the day's VFX news means, in a few lines, with a link to every story.">
+<meta property="og:url" content="https://thevfxsupervisor.com/daily/">
+<meta property="og:image" content="https://thevfxsupervisor.com/static/og/default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The VFX Supervisor Daily | the vfx supervisor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="The VFX Supervisor Daily | the vfx supervisor">
+<meta name="twitter:description" content="What the day's VFX news means, in a few lines, with a link to every story.">
+<meta name="twitter:image" content="https://thevfxsupervisor.com/static/og/default.png">
+<link rel="stylesheet" href="/static/style.css?v=724f1580">
+  <link rel="alternate" type="application/rss+xml" title="the vfx supervisor" href="https://thevfxsupervisor.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"the vfx supervisor","url":"https://thevfxsupervisor.com/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "@id": "https://thevfxsupervisor.com/#person", "name": "Geoffrey Hancock", "jobTitle": "VFX Supervisor and Producer", "url": "https://thevfxsupervisor.com/", "sameAs": ["https://www.imdb.com/name/nm0995883/", "https://github.com/thevfxsupervisor", "https://wangle.media/", "https://www.wangle.studio"], "award": ["VES Award, Outstanding Supporting Visual Effects in a Feature Motion Picture, Changeling (7th Annual VES Awards)", "VES nomination, Invictus (8th Annual VES Awards)", "Robert nomination, Skammerens datter II"], "worksFor": {"@type": "Organization", "name": "Wangle Media", "url": "https://wangle.media/"}, "homeLocation": {"@type": "Place", "address": {"@type": "PostalAddress", "addressLocality": "Humlebaek", "addressCountry": "DK"}}, "knowsAbout": ["Visual effects", "VFX supervision", "VFX production", "VFX bidding and budgeting", "Shot breakdown", "Pipeline engineering", "Real-time and Unreal Engine production", "AI in visual effects", "Multi-vendor VFX delivery"], "knowsLanguage": ["en", "da"]}</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="logo" aria-hidden="true"></span>the vfx supervisor</a>
+    <nav>
+      <a href="/projects/" class="">Projects</a>
+      <a href="/course/" class="hide-sm">Course</a>
+      <a href="/notes/" class="hide-sm">Notes</a>
+      <a href="/reel/" class="">Reel</a>
+      <a href="/about/" class="hide-sm">About</a>
+      <a class="btn btn-a" href="/course/">Join the waitlist</a>
+    </nav>
+  </div>
+</header>
+
+<main id="main">
+<link rel="stylesheet" href="/static/daily.css">
+<main class="daily">
+  <header class="daily-head">
+    <span class="eyebrow">Every morning</span>
+    <h1>The VFX Supervisor Daily</h1>
+    <p class="daily-date">What the day's VFX news means, in a few lines, with a link to every story.</p>
+  </header>
+  <ul class="daily-list"><li><a href="/daily/7/"><span class="n">#7</span><span class="t">A new studio landing a horror feature shows where mid-size work is going</span><span class="d">2026-10-12</span></a></li></ul>
+  <p class="daily-foot"><a href="/daily/feed.xml">RSS</a> &middot; <a href="/daily/feed.json">JSON Feed</a> &middot; Made with <a href="/overscan/">Overscan</a></p>
+</main>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="/" style="font-size:14px"><span class="logo" aria-hidden="true"></span>the vfx supervisor</a>
+    <nav>
+      <a href="/projects/">Projects</a>
+      <a href="/course/">Course</a>
+      <a href="/notes/">Notes</a>
+      <a href="/reel/">Reel</a>
+      <a href="/about/">About</a>
+      <a href="/work-with-me/">Work with me</a>
+      <a href="https://wangle.media/">Wangle Media</a>
+      <a href="https://github.com/thevfxsupervisor">GitHub</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="mailto:geoff@thevfxsupervisor.com">Contact</a>
+    </nav>
+    <div class="mono">&copy; 2026 Geoffrey Hancock. All rights reserved. Open-source tools (Breakdown Studio, link-session) are MIT.</div>
+  </div>
+</footer>
+
+<script>
+/* Diagram lightbox. The anchor already opens the full-size file on its own,
+   so this only enhances the click; with JS off nothing is lost. */
+(function(){
+  var links = document.querySelectorAll('figure.diagram a.zoom');
+  if (!links.length) return;
+  var box = document.createElement('div');
+  box.className = 'lb';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.innerHTML = '<button class="lb-x" type="button" aria-label="Close">&times;</button><img alt="">';
+  document.body.appendChild(box);
+  var img = box.querySelector('img'), last = null;
+  function open(src, alt, from){
+    img.src = src; img.alt = alt || '';
+    box.classList.add('on');
+    document.documentElement.style.overflow = 'hidden';
+    last = from; box.querySelector('.lb-x').focus();
+  }
+  function close(){
+    box.classList.remove('on');
+    document.documentElement.style.overflow = '';
+    img.removeAttribute('src');
+    if (last) { last.focus(); last = null; }
+  }
+  for (var i = 0; i < links.length; i++) {
+    links[i].addEventListener('click', function(e){
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+      e.preventDefault();
+      var im = this.querySelector('img');
+      open(this.getAttribute('href'), im ? im.getAttribute('alt') : '', this);
+    });
+  }
+  box.addEventListener('click', function(e){ if (e.target !== img || e.target === img) close(); });
+  document.addEventListener('keydown', function(e){
+    if (e.key === 'Escape' && box.classList.contains('on')) close();
+  });
+})();
+</script>
+</body>
+</html>
