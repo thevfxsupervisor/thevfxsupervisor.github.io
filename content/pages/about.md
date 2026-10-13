@@ -2,7 +2,7 @@
 type: page
 slug: about
 title: About | Geoffrey Hancock, the vfx supervisor
-description: Geoffrey Hancock, VFX supervisor and producer: VES Award for Changeling, Argo, Cloud Atlas, Invictus. 20+ years, Copenhagen, freelance VFX supervision.
+description: Geoffrey Hancock, VFX supervisor and producer: VES Award for Changeling. Argo, Cloud Atlas, Invictus. 20+ years, Copenhagen, freelance VFX supervision.
 eyebrow: About
 h1: Geoffrey Hancock
 contact_email: geoff@thevfxsupervisor.com

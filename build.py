@@ -1120,7 +1120,7 @@ def render_project(md_path):
     ctas = []
     if fm.get("get_href"):
         ctas.append(f'<a class="btn btn-a" href="{fm["get_href"]}">{html.escape(fm.get("get_label","Get the tool"), quote=False)}</a>')
-    ctas.append(f'<a class="btn btn-b" href="{SITE_ROOT}about/">Work with me</a>')
+    ctas.append(f'<a class="btn btn-b" href="{SITE_ROOT}work-with-me/">Put me on your show</a>')
     cta_row = f'<div class="cta-row">{"".join(ctas)}</div>'
 
     stats_section = ""
@@ -1157,10 +1157,10 @@ def render_project(md_path):
 </section>
 {stats_section}'''
     content += final_cta(
-        fm.get("final_h2", "Work with me"),
+        fm.get("final_h2", "Don't learn the hard lessons the expensive way"),
         fm.get("final_p", ""),
-        fm.get("final_primary_label", "Get in touch"),
-        fm.get("final_primary_href", SITE_ROOT + "about/"),
+        fm.get("final_primary_label", "Skip the expensive lessons"),
+        fm.get("final_primary_href", SITE_ROOT + "work-with-me/"),
         fm.get("final_secondary_label", "Join the waitlist"),
         fm.get("final_secondary_href", SITE_ROOT + "course/"),
         soon=fm.get("soon"),
@@ -1240,9 +1240,9 @@ def render_projects():
 </section>
 '''
     content += final_cta(
-        "Want this kind of tooling on your show?",
-        "I build and run AI-assisted VFX pipelines on real productions. If that is useful to your film, let's talk. Or book the course for the method behind the tools.",
-        "Work with me", SITE_ROOT + "about/",
+        "Want this kind of tooling on your show, without the expensive lessons?",
+        "I build and run AI-assisted VFX pipelines on real productions, built to land on budget and on time. Get me in before the shoot, not after the overrun. Or book the course for the method behind the tools.",
+        "Skip the expensive lessons", SITE_ROOT + "work-with-me/",
         "Join the waitlist", SITE_ROOT + "course/",
     )
     content += related_section(
@@ -1363,7 +1363,7 @@ def render_course():
             ("Breakdown Studio", SITE_ROOT + "projects/breakdown-studio/"),
             ("link-session", SITE_ROOT + "projects/link-session/"),
             (NOTE_LABEL, NOTE_HREF),
-            ("Work with me", SITE_ROOT + "about/"),
+            ("Work with me", SITE_ROOT + "work-with-me/"),
         ],
         eyebrow="The tools and writing behind the method",
     )
@@ -1491,8 +1491,8 @@ def render_about():
         fm.get("final_p", "Questions, collaborations, or just say hello."),
         "Email",
         f'mailto:{fm.get("contact_email","geoff@thevfxsupervisor.com")}',
-        "See Breakdown Studio",
-        SITE_ROOT + "projects/breakdown-studio/",
+        "Skip the expensive lessons",
+        SITE_ROOT + "work-with-me/",
         section_id="get-top",
     )
     content += '''
@@ -1508,8 +1508,8 @@ def render_about():
         fm.get("final_p", "Questions, collaborations, or just say hello."),
         "Email",
         f'mailto:{fm.get("contact_email","geoff@thevfxsupervisor.com")}',
-        "See Breakdown Studio",
-        SITE_ROOT + "projects/breakdown-studio/",
+        "Skip the expensive lessons",
+        SITE_ROOT + "work-with-me/",
     )
     content += related_section(
         [
@@ -1596,7 +1596,7 @@ def inquiry_form(fm, offer=None, source="work-with-me", form_id="inquiry-form"):
       <div class="hp" aria-hidden="true"><label for="{form_id}-website">Leave this empty</label><input type="text" id="{form_id}-website" name="website" tabindex="-1" autocomplete="off"></div>
       <input type="hidden" name="source" value="{html.escape(source)}">
       <div class="field consent"><label for="{form_id}-consent"><input type="checkbox" id="{form_id}-consent" name="consent" value="yes" required> {html.escape(INQUIRY_CONSENT, quote=False)}</label></div>
-      <button type="submit" class="btn btn-a">Send</button>
+      <button type="submit" class="btn btn-a">{html.escape(fm.get("form_submit", "Send"), quote=False)}</button>
       <div class="wl-status" role="status" aria-live="polite"></div>
       <p class="tiny">Sending this does not add you to any list. Or email me at <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>. <a href="{SITE_ROOT}privacy/">Privacy note</a>.</p>
     </form>'''
@@ -1686,6 +1686,52 @@ def _hero_coming(fm):
     return f'<p class="tiny os-hero-coming"><span class="tag-coming">coming</span> {_md_inline(text)}</p>'
 
 
+MEDIA = SITE_ROOT + "static/overscan/media/"
+
+
+def format_strip():
+    """One issue, five ways: the same issue as a phone email, an audio overview, a muted video
+    loop, a slide and the infographic. Every file is a stable name under static/overscan/media/,
+    so swapping in a new issue's media is a file copy, not a page edit. Nothing autoplays with
+    sound, nothing loads until it is needed (lazy images, preload=none), and the video plays only
+    while it is on screen (see FMT_SCRIPT)."""
+    m = MEDIA
+    return f'''
+    <div class="fmt-strip" aria-label="The same issue, five ways">
+      <div class="fmt-card"><div class="fmt-media"><img src="{m}phone-read.png" width="390" height="700" loading="lazy" alt="The issue as an email on a phone."></div>
+        <div class="fmt-txt"><b>Read it</b><p>Two minutes with coffee. Only what is new, and why it matters to them.</p></div></div>
+      <div class="fmt-card"><div class="fmt-media"><img src="{m}phone-listen.png" width="390" height="700" loading="lazy" alt="The same issue as an audio overview on a phone."></div>
+        <div class="fmt-txt"><b>Hear it</b><p>The whole issue as a conversation, for the van.</p>
+        <audio controls preload="none" src="{m}issue-audio.m4a" aria-label="Audio overview of the issue"></audio></div></div>
+      <div class="fmt-card"><div class="fmt-media"><video class="fmt-video" muted loop playsinline preload="none" poster="{m}issue-video-poster.jpg" width="640" height="360" aria-label="The explainer video of the issue, silent; click to pause or play"><source src="{m}issue-video.mp4" type="video/mp4"></video></div>
+        <div class="fmt-txt"><b>Watch it</b><p>A short explainer, crafted from the same words.</p></div></div>
+      <div class="fmt-card"><div class="fmt-media wide"><img src="{m}issue-slide-1.png" width="1280" height="720" loading="lazy" alt="The first slide of the issue as a slide deck."></div>
+        <div class="fmt-txt"><b>Flip the slides</b><p>For the Monday meeting, one story a slide.</p></div></div>
+      <div class="fmt-card"><div class="fmt-media"><img src="{m}issue-infographic.png" width="800" height="1130" loading="lazy" alt="The issue as one infographic."></div>
+        <div class="fmt-txt"><b>The one picture</b><p>The whole issue on one screen, for the person who will not read.</p></div></div>
+    </div>
+    <p class="fmt-hint">Swipe: one issue, five ways.</p>'''
+
+
+FMT_SCRIPT = """
+<script>
+/* The format strip's video: a muted loop that plays only while it is on screen, so the page
+   stays light and nothing moves behind the reader's back. A click pauses or resumes it, a reader
+   who asked for reduced motion gets the poster only, and with no script the poster stands alone. */
+(function(){
+  var v = document.querySelector('.fmt-video'); if (!v) return;
+  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var held = false;
+  function go(){ if (held || still) return; var p = v.play(); if (p && p.catch) p.catch(function(){}); }
+  v.addEventListener('click', function(){ held = !v.paused; if (held) { v.pause(); } else { still = false; go(); } });
+  v.style.cursor = 'pointer';
+  if (!('IntersectionObserver' in window)) { go(); return; }
+  new IntersectionObserver(function(es){ es.forEach(function(en){ if (en.isIntersecting) { go(); } else { v.pause(); } }); },
+    {threshold: 0.4}).observe(v);
+})();
+</script>"""
+
+
 def render_overscan():
     fm, body = parse_frontmatter((CONTENT_DIR / "pages" / "overscan.md").read_text(encoding="utf-8"))
     steps, _ = extract_block(body, "steps")
@@ -1712,18 +1758,19 @@ def render_overscan():
         f'<br>{_md_inline(c["body"])}</li>'
         for c in coming
     )
+    # The steps block is optional: with no <!-- steps --> block the page has no "How it works".
+    steps_section = (f'<hr class="rule">\n<section>\n  <div class="wrap">\n    <div class="sec-head"><span class="eyebrow">How it works</span>'
+                     f'<h2>{e("steps_h2")}</h2></div>\n    <ol class="os-steps">{steps_html}</ol>\n  </div>\n</section>\n') if steps else ""
     content = f'''
 <section class="hero">
-  <div class="wrap os-hero">
-    <div>
-      <span class="eyebrow">{e("eyebrow")}</span>
-      <h1 style="margin-top:18px">{e("h1")}</h1>
-      <p class="lede">{e("lede")}</p>
-      {_hero_coming(fm)}
-      <div class="cta-row"><a class="btn btn-a" href="#inquiry">{e("cta_label")}</a></div>
-      <p class="door">Here for the VFX news? {daily_link("Read the Daily")}. Need VFX help on a show? <a href="{SITE_ROOT}work-with-me/">Work with me</a>.</p>
-    </div>
-    <div class="phone"><img src="{SITE_ROOT}static/overscan/formats-phone.png" width="386" height="508" alt="One real issue on a phone, Listen and watch: a 17 minute audio overview, the slides as a PDF and an 8 minute explainer video, all made from the same issue."></div>
+  <div class="wrap">
+    <span class="eyebrow">{e("eyebrow")}</span>
+    <h1 style="margin-top:18px">{e("h1")}</h1>
+    <p class="lede">{e("lede")}</p>
+    {_hero_coming(fm)}
+    <div class="cta-row"><a class="btn btn-a" href="#inquiry">{e("cta_label")}</a></div>
+    {format_strip()}
+    <p class="door">Here for the VFX news? {daily_link("Read the Daily")}. Shooting VFX? Don't learn the hard lessons the expensive way: <a href="{SITE_ROOT}work-with-me/">work with me</a>.</p>
   </div>
 </section>
 
@@ -1738,14 +1785,7 @@ def render_overscan():
   </div>
 </section>
 
-<hr class="rule">
-<section>
-  <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">How it works</span><h2>{e("steps_h2")}</h2></div>
-    <ol class="os-steps">{steps_html}</ol>
-  </div>
-</section>
-
+{steps_section}
 <hr class="rule">
 <section>
   <div class="wrap">
@@ -1805,7 +1845,7 @@ def render_overscan():
          ("About", SITE_ROOT + "about/")],
     )
     return render_shell(fm.get("title", ""), fm.get("description", ""), content,
-                        extra_script=INQUIRY_SCRIPT, canonical_path="overscan/")
+                        extra_script=INQUIRY_SCRIPT + FMT_SCRIPT, canonical_path="overscan/")
 
 
 def render_work_with_me():
@@ -1824,8 +1864,8 @@ def render_work_with_me():
     <h1 style="margin-top:18px">{e("h1")}</h1>
     <p class="lede">{e("lede")}</p>
     <p class="tiny">{e("logistics")}</p>
-    <div class="cta-row"><a class="btn btn-a" href="#inquiry">Tell me about your project</a>
-      <a class="btn btn-b" href="{SITE_ROOT}about/">About me</a></div>
+    <div class="cta-row"><a class="btn btn-a" href="#inquiry">{e("cta_label", "Tell me about your show")}</a>
+      <a class="btn btn-b" href="{SITE_ROOT}reel/">Watch the reel</a></div>
   </div>
 </section>
 
@@ -1945,6 +1985,11 @@ def render_note(md_path):
   <div class="wrap">
     <a class="btn btn-b" href="{SITE_ROOT}notes/">&larr; All notes</a>
   </div>
+</section>
+'''
+    content += f'''
+<section>
+  <div class="wrap"><p class="k note-cta">Is this the problem on your show? Don't learn it the expensive way: <a href="{SITE_ROOT}work-with-me/">work with me</a>.</p></div>
 </section>
 '''
     content += related_section(
@@ -2082,8 +2127,8 @@ def main():
         ('About', base + '/about/', 'Career, credits and how I work'),
         ('Projects', base + '/projects/', 'Case studies for the open-source tools'),
         ('Course', base + '/course/', 'Breakdown and Budget the VFX of a Whole Film'),
-        ('Work with me', base + '/work-with-me/', 'Four ways to work together, and the form to start'),
-        ('Overscan', base + '/overscan/', 'Content for your business: news your customers care about, drafted from your sources, approved by you'),
+        ('Work with me', base + '/work-with-me/', 'VES Award-winning VFX supervisor and producer: bid review, supervision and AI-assisted pipelines, built to land on budget and on time'),
+        ('Overscan', base + '/overscan/', 'Prove what you know, every morning: what changed in your trade and what it means, from you, to read, hear or watch; you shape it by replying'),
         ('Notes', base + '/notes/', 'Writing on VFX production and AI orchestration'),
     ]
     # Real frontmatter, not the slug: card_title/card_summary (falling back to

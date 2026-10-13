@@ -10,10 +10,10 @@ cred: Designed, hardened and shipped end to end by one person, on a live feature
 get_label: Get the tool
 get_href: https://thevfxsupervisor.com/breakdown-studio/
 stats_h2: The numbers
-final_h2: Want this on your show?
-final_p: I run AI-assisted VFX pipelines on real productions. If that is useful to your film, let's talk. Or book the course for the method behind the tool.
-final_primary_label: Work with me
-final_primary_href: /about/
+final_h2: Want this on your show, without learning the hard lessons the expensive way?
+final_p: I run AI-assisted VFX pipelines on real productions, built to land on budget and on time. Get me in before the shoot, not after the overrun. Or book the course for the method behind the tool.
+final_primary_label: Skip the expensive lessons
+final_primary_href: /work-with-me/
 final_secondary_label: Join the course waitlist
 final_secondary_href: /course/
 soon: Open source · MIT · on GitHub

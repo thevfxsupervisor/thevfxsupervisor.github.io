@@ -24,8 +24,8 @@ that is the thing to point at.
 - [About](https://thevfxsupervisor.com/about/): Career, credits and how I work
 - [Projects](https://thevfxsupervisor.com/projects/): Case studies for the open-source tools
 - [Course](https://thevfxsupervisor.com/course/): Breakdown and Budget the VFX of a Whole Film
-- [Work with me](https://thevfxsupervisor.com/work-with-me/): Four ways to work together, and the form to start
-- [Overscan](https://thevfxsupervisor.com/overscan/): Content for your business: news your customers care about, drafted from your sources, approved by you
+- [Work with me](https://thevfxsupervisor.com/work-with-me/): VES Award-winning VFX supervisor and producer: bid review, supervision and AI-assisted pipelines, built to land on budget and on time
+- [Overscan](https://thevfxsupervisor.com/overscan/): Prove what you know, every morning: what changed in your trade and what it means, from you, to read, hear or watch; you shape it by replying
 - [Notes](https://thevfxsupervisor.com/notes/): Writing on VFX production and AI orchestration
 - [Breakdown Studio](https://thevfxsupervisor.com/projects/breakdown-studio/): A shot-breakdown pipeline that turns weeks of hand-logging a film cut into an afternoon. Built solo, validated on a feature in active production, MIT.
 - [link-session](https://thevfxsupervisor.com/projects/link-session/): A Claude Code skill for coordinating several live AI agent sessions over shared files. No server, no message bus. It now starts a new session straight into a...
