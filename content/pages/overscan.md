@@ -44,9 +44,9 @@ Every issue can come as the written letter, an audio overview, a short explainer
 
 Coming: each reader picks the one that leads their email: read it, skim it, listen, watch, slides or the infographic. If their piece is not ready when the issue goes out, they get the full letter. It feels made for each reader, and it is made once per issue, however many readers you have.
 
-![The infographic of one real issue: the day's stories as one picture, with the key figures pulled out.](/static/overscan/formats-infographic.png)
+![The explainer video of one real issue, paused on a frame that reads: A human touch is essential. Generative AI needs artists' judgment.](/static/overscan/formats-video.png)
 
-Real infographic from one issue of a daily VFX brief, as it shows on the issue page.
+Real explainer video from one issue of a daily VFX brief, as it plays on the issue page.
 
 ### Change it by replying in plain words
 Shorter. More on one topic, less on another. Drop a source, or paste a link to add one. Reply to the issue in your own words and the next one changes. You get a note back saying what changed, and replying UNDO takes it back.

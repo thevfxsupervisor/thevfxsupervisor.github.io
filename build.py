@@ -1723,7 +1723,7 @@ def render_overscan():
       <div class="cta-row"><a class="btn btn-a" href="#inquiry">{e("cta_label")}</a></div>
       <p class="door">Here for the VFX news? {daily_link("Read the Daily")}. Need VFX help on a show? <a href="{SITE_ROOT}work-with-me/">Work with me</a>.</p>
     </div>
-    <div class="phone"><img src="{SITE_ROOT}static/overscan/formats-phone.png" width="386" height="811" alt="One real issue on a phone, Listen and watch: a 17 minute audio overview, the slides as a PDF, an 8 minute explainer video and an infographic, all made from the same issue."></div>
+    <div class="phone"><img src="{SITE_ROOT}static/overscan/formats-phone.png" width="386" height="508" alt="One real issue on a phone, Listen and watch: a 17 minute audio overview, the slides as a PDF and an 8 minute explainer video, all made from the same issue."></div>
   </div>
 </section>
 
