@@ -5,7 +5,7 @@ title: Work with me | the vfx supervisor
 description: VES Award-winning VFX supervisor and producer. Bid review, supervision and AI-assisted pipelines built to land on budget and on time.
 eyebrow: Work with me
 h1: Don't learn the hard lessons the expensive way.
-lede: I am a VES Award-winning VFX supervisor and producer. Twenty-plus years on features and television taught me where the money leaks, which bids will move, and which "we will do it with AI" promises are real. Get me in before the shoot and the surprises in post stop being surprises: VFX built to land on budget and on time, with one person who owns it.
+lede: I am a VES Award-winning VFX supervisor and producer. Twenty-plus years on features and television taught me where the money leaks, which bids will move, and which "we will do it with AI" promises are real. Get me in before the shoot, while the surprises are still cheap to fix: VFX built to land on budget and on time, with one person who owns it.
 logistics: Copenhagen-based. On set, remote or hybrid.
 cta_label: Skip the expensive lessons
 offers_h2: Four ways to skip the expensive lessons
@@ -27,7 +27,7 @@ Know where the number is right, where it will move, and which "we will do it wit
 **How it starts:** send the script or cut and the bids you have. I reply with what I need and when you will have it.
 
 ### One person owns your VFX, script to delivery
-The shot everyone planned to "fix in post" gets fixed on the day, because one name owns your VFX from breakdown through bidding, the shoot, review and delivery. On set when it matters, remote when it does not.
+The shot everyone planned to "fix in post" gets caught on the day, because one name owns your VFX from breakdown through bidding, the shoot, review and delivery. On set when it matters, remote when it does not.
 
 **For:** a feature or series with VFX that needs one name on it.
 
@@ -40,7 +40,7 @@ Weeks of breakdown and bidding in days, with a person still in charge of every s
 
 **How it starts:** a call about where your time goes today. We pick the one step that costs you the most and start there.
 
-### Content for your business
+### Your customers hear it from you first
 Be the one your customers trust to know what changed in your trade and what it means: every morning or every week, from you, to read, hear or watch. You shape it by replying in plain words, and your name is on every issue. My own morning VFX briefing is crafted this way. More on [Overscan](/overscan/).
 
 **For:** a business whose customers should hear it from the person who knows it best.

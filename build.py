@@ -1698,19 +1698,19 @@ def format_strip():
     m = MEDIA
     return f'''
     <div class="fmt-strip" aria-label="The same issue, five ways">
-      <div class="fmt-card"><div class="fmt-media"><img src="{m}phone-read.png" width="390" height="700" loading="lazy" alt="The issue as an email on a phone."></div>
+      <div class="fmt-card"><div class="fmt-media"><img src="{m}phone-read.png" width="390" height="700" loading="lazy" alt="The 13 Oct 2026 issue as an email on a phone."></div>
         <div class="fmt-txt"><b>Read it</b><p>Two minutes with coffee. Only what is new, and why it matters to them.</p></div></div>
-      <div class="fmt-card"><div class="fmt-media"><img src="{m}phone-listen.png" width="390" height="700" loading="lazy" alt="The same issue as an audio overview on a phone."></div>
+      <div class="fmt-card"><div class="fmt-media"><img src="{m}phone-listen.png" width="390" height="700" loading="lazy" alt="The same issue as it reaches a reader who picked Listen: the play button on top, the letter below."></div>
         <div class="fmt-txt"><b>Hear it</b><p>The whole issue as a conversation, for the van.</p>
         <audio controls preload="none" src="{m}issue-audio.m4a" aria-label="Audio overview of the issue"></audio></div></div>
-      <div class="fmt-card"><div class="fmt-media"><video class="fmt-video" muted loop playsinline preload="none" poster="{m}issue-video-poster.jpg" width="640" height="360" aria-label="The explainer video of the issue, silent; click to pause or play"><source src="{m}issue-video.mp4" type="video/mp4"></video></div>
+      <div class="fmt-card"><div class="fmt-media wide"><video class="fmt-video" muted loop playsinline preload="none" poster="{m}issue-video-poster.jpg" width="1280" height="720" aria-label="The explainer video of the issue, silent; click to pause or play"><source src="{m}issue-video.mp4" type="video/mp4"></video></div>
         <div class="fmt-txt"><b>Watch it</b><p>A short explainer, crafted from the same words.</p></div></div>
-      <div class="fmt-card"><div class="fmt-media wide"><img src="{m}issue-slide-1.png" width="1280" height="720" loading="lazy" alt="The first slide of the issue as a slide deck."></div>
+      <div class="fmt-card"><div class="fmt-media wide"><img src="{m}issue-slide-1.png" width="1280" height="720" loading="lazy" alt="The title slide of the same issue: Defending margins in an AI-augmented production reality."></div>
         <div class="fmt-txt"><b>Flip the slides</b><p>For the Monday meeting, one story a slide.</p></div></div>
-      <div class="fmt-card"><div class="fmt-media"><img src="{m}issue-infographic.png" width="800" height="1130" loading="lazy" alt="The issue as one infographic."></div>
+      <div class="fmt-card"><div class="fmt-media"><img src="{m}issue-infographic.png" width="800" height="1130" loading="lazy" alt="Placeholder for the issue infographic."></div>
         <div class="fmt-txt"><b>The one picture</b><p>The whole issue on one screen, for the person who will not read.</p></div></div>
     </div>
-    <p class="fmt-hint">Swipe: one issue, five ways.</p>'''
+    <p class="fmt-hint">The 13 Oct 2026 issue, five ways. The audio and video here are short clips: the full versions run about 19 and 7 minutes.</p>'''
 
 
 FMT_SCRIPT = """
@@ -1770,7 +1770,7 @@ def render_overscan():
     {_hero_coming(fm)}
     <div class="cta-row"><a class="btn btn-a" href="#inquiry">{e("cta_label")}</a></div>
     {format_strip()}
-    <p class="door">Here for the VFX news? {daily_link("Read the Daily")}. Shooting VFX? Don't learn the hard lessons the expensive way: <a href="{SITE_ROOT}work-with-me/">work with me</a>.</p>
+    <p class="door">The VFX news, every morning: {daily_link("Read the Daily")}. Shooting VFX: skip the expensive lessons and <a href="{SITE_ROOT}work-with-me/">put me on your show</a>.</p>
   </div>
 </section>
 
@@ -1800,7 +1800,7 @@ def render_overscan():
     <div class="sec-head"><span class="eyebrow">Who it is for</span><h2>{e("who_h2")}</h2></div>
     <div class="os-cards">{_cards(who, "os-card")}</div>
     <p class="k os-k">{e("cadence")}</p>
-    <div class="os-not"><h3>What it does not do</h3><ul>{notfor_html}</ul></div>
+    <div class="os-not"><h3>What Overscan does not do</h3><ul>{notfor_html}</ul></div>
   </div>
 </section>
 

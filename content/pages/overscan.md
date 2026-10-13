@@ -6,7 +6,7 @@ description: Be the one your customers trust to know what's happening and what i
 eyebrow: Overscan
 h1: Be the one they trust to know what's happening, and what it means.
 lede: Every morning or every week, Overscan turns what changed in your trade into a briefing your customers open: what happened and why it matters to them, under your name. Not a link dump, not a sales email, not silence. Each of them reads it, hears it, watches it, flips the slides or takes the one picture. Tell Overscan what to change, in plain words, and the next issue changes.
-hero_coming: Each customer picking their own way. Today every issue already comes as the letter, an audio overview, a video, slides and an infographic, and you shape it by replying.
+hero_coming: Email straight to your customers from your own address. Today each issue comes to you with a web page that carries all five, ready to send through the tool you already use.
 cta_label: Make your expertise unmissable
 proof_label: The proof, every morning
 proof_text: The VFX Supervisor Daily is Geoff's own morning VFX briefing, crafted with Overscan. Read it, hear it, watch it. That is how one VFX supervisor shows what he knows to the people who hire one.
@@ -31,9 +31,9 @@ sold_by: Overscan is sold by Wangle Media ApS, Copenhagen.
 ### More valuable content than you could make alone, every day
 One morning of your trade's news becomes a letter, an audio overview, a short explainer video, a slide deck and an infographic, all saying the same thing, all under your name. The plumber listens in the van. The office manager reads on the train. The owner wants the one picture. You could not make five pieces a day by hand. Now you do not have to.
 
-Coming: each customer picks the one that leads their email: read it, skim it, listen, watch, slides or the picture. Each of them feels it was written for them, and Overscan crafts it once, however many customers you have.
+Pick the one that leads your own email: read it, skim it, listen, watch, slides or the picture, and your copy arrives with it on top. Coming: email straight to your customers, each picking their own. Overscan still crafts each piece once, however many customers you have.
 
-![The explainer video of one real issue, paused on a frame that reads: A human touch is essential. Generative AI needs artists' judgment.](/static/overscan/formats-video.png)
+![The explainer video of one real issue, paused on a frame that reads: A human touch is absolutely essential.](/static/overscan/formats-video.png)
 
 Real explainer video from one issue of a daily VFX update, as it plays on the issue page.
 
@@ -93,10 +93,10 @@ Fast, often free, and fine for keeping yourself informed. It is written for you.
 A short call, then we point Overscan at the websites, forums, videos and newsletters you trust, and describe your customers in your words. You see a week of real issues before anyone else does. Email straight to your customers from your own address is coming; until then each issue comes to you first, and you send it through the tool you already use.
 
 ### Does Overscan make a separate video for every customer?
-No. Overscan crafts each piece once per issue, whether ten people read it or ten thousand. That is why letting each customer pick their own, which is coming, will not grow the cost with your list.
+No. Overscan crafts each piece once per issue, whether ten people read it or ten thousand. That is why each customer picking their own will not grow the cost with your list.
 
 ### Is AI writing it?
-Overscan writes it, you decide what carries your name, and you change anything by replying. Every story links to the original. If you would not say it yourself, do not send it.
+Overscan crafts it, you decide what carries your name, and you change anything by replying. Every story links to the original. If you would not say it yourself, do not send it.
 
 ### Who owns what Overscan makes?
 You do. Every issue, every website you chose, every lesson you taught Overscan.
@@ -107,10 +107,7 @@ A paid setup, quoted after one call. No tiers to decode, no self-serve plan, no 
 
 <!-- coming -->
 ### Email straight to your customers
-Issues sent from your own address (for example news@yourbusiness.com), with a dated record of each customer's yes and one-click unsubscribe.
-
-### Customers pick their own way
-Built, going live. Each customer chooses read it, skim it, listen, watch, slides or the picture, from a link in any issue. Their own topics, length and send time come after that.
+Issues sent from your own address (for example news@yourbusiness.com), each customer in the format they picked, with a dated record of each customer's yes and one-click unsubscribe.
 
 ### Sign up on your own
 Today we set it up with you.

@@ -9,8 +9,8 @@ lede: A small utility that does one job well: let several live AI sessions coord
 cred: Designed and shipped solo, running daily across three operating systems and multiple projects.
 get_label: Get the skill
 get_href: https://github.com/thevfxsupervisor/link-session
-final_h2: Want this running on your show, with the hard lessons already paid for?
-final_p: I run AI as a coordinated team on real film productions, with the guardrails that keep a person in charge of every shot. Get me in before the shoot and the surprises in post stop being surprises. Or book the course for the method.
+final_h2: Run this on your show, with the hard lessons already paid for.
+final_p: I run AI as a coordinated team on real film productions, with the guardrails that keep a person in charge of every shot. Get me in before the shoot, while the surprises are still cheap to fix. Or book the course for the method.
 final_primary_label: Skip the expensive lessons
 final_primary_href: /work-with-me/
 final_secondary_label: Join the course waitlist
