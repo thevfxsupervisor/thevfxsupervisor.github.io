@@ -2,7 +2,7 @@
 type: page
 slug: work-with-me
 title: Work with me | the vfx supervisor
-description: VFX supervision, breakdown and bid review, AI-assisted pipelines, and a weekly brief for your business. Tell me what you are working on.
+description: VFX supervision, breakdown and bid review, AI-assisted pipelines, and news your customers care about, sent under your name. Tell me what you are working on.
 eyebrow: Work with me
 h1: VFX that holds up on the day, and in the budget.
 lede: I am a VFX supervisor and producer. I run VFX on film and television, and I build the tools that let a small department do the work of a big one. I help you see the shots clearly, bid them properly, and get them made.
@@ -38,7 +38,7 @@ form_placeholder: A feature with about 100 VFX shots, shooting in spring. We hav
 
 **How it starts:** a call about where your time goes today. We pick the one step that costs you the most and start there.
 
-### A brief for your business
+### Content for your business
 **For:** a business that has to publish to be noticed, and wants a regular note to its customers on what changed in its trade, under its own name.
 
 **What it is:** I set up [Overscan](/overscan/) with you: your sources, your readers described in your words, a draft every morning that waits for your approval. You see a week of real drafts before anyone else does. Sending by email to your readers is coming; until then the approved issue comes to you, to send through the tool you already use.

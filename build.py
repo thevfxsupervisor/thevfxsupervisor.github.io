@@ -1545,7 +1545,7 @@ INQUIRY_OFFERS = [
     ("bid-review", "Breakdown and bid review"),
     ("supervision", "Supervision for your show"),
     ("ai-pipeline", "AI-assisted pipeline for your production"),
-    ("brief", "A brief for my business"),
+    ("brief", "Content for my business"),
     ("not-sure", "Not sure"),
 ]
 # Must say the same as the endpoint's stored consent text (newsletter.inquiry.CONSENT_TEXT).
@@ -2083,7 +2083,7 @@ def main():
         ('Projects', base + '/projects/', 'Case studies for the open-source tools'),
         ('Course', base + '/course/', 'Breakdown and Budget the VFX of a Whole Film'),
         ('Work with me', base + '/work-with-me/', 'Four ways to work together, and the form to start'),
-        ('Overscan', base + '/overscan/', 'A brief for your business: drafted from your sources, approved by you'),
+        ('Overscan', base + '/overscan/', 'Content for your business: news your customers care about, drafted from your sources, approved by you'),
         ('Notes', base + '/notes/', 'Writing on VFX production and AI orchestration'),
     ]
     # Real frontmatter, not the slug: card_title/card_summary (falling back to

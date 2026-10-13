@@ -9,7 +9,7 @@ lede: You publish once. Each reader picks how it reaches them: read it, skim it,
 hero_coming: Each reader picking their own format. Today every issue can already come as the letter, an audio overview, a video, slides and an infographic, and you change it by replying.
 cta_label: Want this for your business?
 proof_label: Made with Overscan
-proof_text: Geoff's own daily VFX brief is made this way: public sources in, one editor approving each morning. Its public edition is The VFX Supervisor Daily.
+proof_text: The VFX Supervisor Daily is made this way: public sources in, one editor approving each morning, a daily update for people who work in visual effects.
 steps_h2: One morning, three steps
 features_h2: Made once. Taken in five ways.
 who_h2: For any business that has to publish to be noticed
@@ -46,7 +46,7 @@ Coming: each reader picks the one that leads their email: read it, skim it, list
 
 ![The explainer video of one real issue, paused on a frame that reads: A human touch is essential. Generative AI needs artists' judgment.](/static/overscan/formats-video.png)
 
-Real explainer video from one issue of a daily VFX brief, as it plays on the issue page.
+Real explainer video from one issue of a daily VFX update, as it plays on the issue page.
 
 ### Change it by replying in plain words
 Shorter. More on one topic, less on another. Drop a source, or paste a link to add one. Reply to the issue in your own words and the next one changes. You get a note back saying what changed, and replying UNDO takes it back.
@@ -58,7 +58,7 @@ Each approved issue is printed with "Reviewed by" and your name.
 
 ![The review screen: Review before it goes out, the email as it will look, and an Approve button.](/static/overscan/approve.png)
 
-Real screen from a demo brief with made-up readers.
+Real screen from a demo newsletter with made-up readers.
 
 ### Careful by default
 It opens every link before the issue goes out and leaves out a story whose only link is dead. It remembers what your readers have already seen and keeps a story out unless something changed; when it has, the story comes back marked as an update.
@@ -111,7 +111,7 @@ No. Each piece is made once per issue, and every reader chooses which one reache
 It drafts. You approve. Every story links to its original source, and nothing goes out until you approve it. If you would not sign it, do not send it.
 
 ### Who owns what it makes?
-You do: your sources, your brief and every issue. Today the approved issue comes to you, and you send it to your own list through the tool you already use.
+You do: your sources, what you asked for and every issue. Today the approved issue comes to you, and you send it to your own list through the tool you already use.
 
 ### What does it cost?
 We set it up with you as a paid engagement, quoted after a short call. There is no self-serve plan or public price yet.
