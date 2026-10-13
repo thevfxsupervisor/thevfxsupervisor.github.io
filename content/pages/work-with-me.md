@@ -39,9 +39,9 @@ form_placeholder: A feature with about 100 VFX shots, shooting in spring. We hav
 **How it starts:** a call about where your time goes today. We pick the one step that costs you the most and start there.
 
 ### Content for your business
-**For:** a business that has to publish to be noticed, and wants a regular note to its customers on what changed in its trade, under its own name.
+**For:** a business whose customers want to know what changed in its trade, and would rather hear it from you.
 
-**What it is:** I set up [Overscan](/overscan/) with you: your sources, your readers described in your words, a draft every morning that waits for your approval. You see a week of real drafts before anyone else does. Sending by email to your readers is coming; until then the approved issue comes to you, to send through the tool you already use.
+**What it is:** something your customers actually open. Every morning or every week, what changed in your trade and what it means for them, from you, to read, hear or watch. You approve every issue before it goes. More on [Overscan](/overscan/).
 
 **How it starts:** a short call about what you would send and to whom. Setup is a paid engagement, quoted after the call.
 <!-- /offers -->

@@ -2,56 +2,56 @@
 type: page
 slug: overscan
 title: Overscan | the vfx supervisor
-description: One issue, every reader gets it their way. Overscan turns your trade's news into a letter, an audio overview, a video, slides and an infographic, changes when you reply in plain words, and waits for your approval.
+description: Something your customers actually open. What changed in your trade and what it means for them, from you, to read, hear or watch. You approve every issue.
 eyebrow: Overscan
-h1: One issue. Every reader gets it their way.
-lede: You publish once. Each reader picks how it reaches them: read it, skim it, listen to it, watch it, flip through the slides or take it in as one infographic. Want it different? Reply in plain words and the next issue changes. Nothing goes out under your name until you approve it.
-hero_coming: Each reader picking their own format. Today every issue can already come as the letter, an audio overview, a video, slides and an infographic, and you change it by replying.
+h1: Something your customers actually open. Their way: read it, hear it, watch it.
+lede: What changed in your trade and what it means for them, from you, every morning or every week. Each customer takes it in the way they like: read it, skim it, listen, watch, flip through the slides or see it in one picture. Want it different? Reply in plain words. Nothing goes out under your name until you approve it.
+hero_coming: Each customer picking their own way. Today every issue can already come as the letter, an audio overview, a video, slides and an infographic, and you change it by replying.
 cta_label: Want this for your business?
 proof_label: Made with Overscan
-proof_text: The VFX Supervisor Daily is made this way: public sources in, one editor approving each morning, a daily update for people who work in visual effects.
-steps_h2: One morning, three steps
-features_h2: Made once. Taken in five ways.
-who_h2: For any business that has to publish to be noticed
-cadence: Daily for a fast field, weekly for everyone else. Both work today.
+proof_text: The VFX Supervisor Daily is made this way: a daily update for people who work in visual effects, from public sources, approved by one editor each morning.
+steps_h2: Worth opening, every time
+features_h2: What your customers get, and what you keep
+who_h2: For any business whose customers want to know what changed
+cadence: Daily for a fast-moving trade, weekly for everyone else. Both work today.
 compare_h2: Three other ways to do this
-compare_after: Overscan does the reading and the first draft. You keep the approval and the name.
+compare_after: Overscan does the reading and the first draft. You keep the approval, the name and the customers.
 faq_h2: Before you ask
 coming_h2: Not built yet, and we say so
 form_eyebrow: Want this for your business?
-form_h2: Tell me what you would send, and to whom.
+form_h2: Tell me who your customers are and what they would want to know.
 form_k: I read every message myself and reply from geoff@thevfxsupervisor.com to set up a short call.
-form_message_label: What would you send, and to whom?
-form_placeholder: We are a heating firm. A weekly note to our customers on rules, prices and new kit.
+form_message_label: Who are your customers, and what would they want to know?
+form_placeholder: We are a heating firm. Our customers want to hear about new rules, prices and kit before their neighbours do.
 byline: Overscan is built by Geoff Hancock.
 sold_by: Overscan is sold by Wangle Media ApS, Copenhagen.
 ---
 
 <!-- steps -->
-### You pick the sources
-Websites, RSS feeds, forum threads, YouTube channels, keywords, or a page saved with a browser button. Say in your own words who reads you and what they care about.
+### News that is about them
+New rules, prices, products and moves in your trade, picked from the websites, feeds, forums, videos and keywords you choose. Only what is new, each story with one line on why it matters to your customers.
 
-### It reads and drafts
-Every morning it checks each source, keeps only what is new, and writes one line per story on why it matters. Every link points back to the original.
+### Taken in their way
+Every issue can be a letter to read, an audio overview for the van, a short video, a slide deck or one infographic. All made from the same issue, so they say the same thing.
 
-### You approve
-You read the draft and approve it, or skip the day and nothing goes out. The approved issue comes to you, ready to send through the tool you already use.
+### From you, approved by you
+Your name on it, and nothing goes out until you approve it. Skip a day and nothing goes out. Every story links back to where it came from.
 <!-- /steps -->
 
 <!-- features -->
-### One issue, five ways in
-Every issue can come as the written letter, an audio overview, a short explainer video, a slide deck and an infographic. All five are made once, from the same issue, so they say the same thing however it is taken in.
+### Each customer gets it their way
+Some read on the train, some listen in the van, some just want the picture. Every issue can come as the written letter, an audio overview, a short explainer video, a slide deck and an infographic, all made once from the same issue.
 
-Coming: each reader picks the one that leads their email: read it, skim it, listen, watch, slides or the infographic. If their piece is not ready when the issue goes out, they get the full letter. It feels made for each reader, and it is made once per issue, however many readers you have.
+Coming: each customer picks the one that leads their email: read it, skim it, listen, watch, slides or the infographic. If their piece is not ready when the issue goes out, they get the full letter. It feels made for each of them, and it is made once per issue, however many customers you have.
 
 ![The explainer video of one real issue, paused on a frame that reads: A human touch is essential. Generative AI needs artists' judgment.](/static/overscan/formats-video.png)
 
 Real explainer video from one issue of a daily VFX update, as it plays on the issue page.
 
-### Change it by replying in plain words
+### Tune it by replying in plain words
 Shorter. More on one topic, less on another. Drop a source, or paste a link to add one. Reply to the issue in your own words and the next one changes. You get a note back saying what changed, and replying UNDO takes it back.
 
-### Nothing goes out until you say so
+### Your name only goes on what you would sign
 Overscan drafts. You decide. An issue waits for your approval, and once you approve it, it is locked: nothing changes after that except your name on it.
 
 Each approved issue is printed with "Reviewed by" and your name.
@@ -60,8 +60,8 @@ Each approved issue is printed with "Reviewed by" and your name.
 
 Real screen from a demo newsletter with made-up readers.
 
-### Careful by default
-It opens every link before the issue goes out and leaves out a story whose only link is dead. It remembers what your readers have already seen and keeps a story out unless something changed; when it has, the story comes back marked as an update.
+### No dead links, no reruns
+It opens every link before the issue goes out and leaves out a story whose only link is dead. It remembers what your customers have already seen and keeps a story out unless something changed; when it has, the story comes back marked as an update.
 
 The last line of every issue says how many links were checked.
 
@@ -72,13 +72,13 @@ Real web issue, last lines.
 
 <!-- who -->
 ### A local trade
-A plumber, an electrician, a builder: a short weekly note to your customers on what changed in the trade (rules, prices, products), with your name on it.
+A plumber, an electrician, a builder: your customers hear about new rules, prices and products from you first, with your name on it.
 
 ### Advisers and consultancies
 Your clients and contacts get something useful from you each week, not a sales email. A reply is a warm conversation.
 
 ### Trade bodies and brands
-One editor keeps a whole field or customer base up to date, and approves every issue before it goes.
+A whole field or customer base stays up to date, from one source they trust, approved by a person every time.
 <!-- /who -->
 
 <!-- notfor -->
@@ -99,30 +99,33 @@ You read the trade press every morning and write it up. Full control. It costs t
 ### A newsletter platform
 Good for sending and for growing a list. You still find the news and write every word yourself.
 
-### A personal AI briefing
+### A personal AI news summary
 Fast and often free, and a fine way to keep yourself informed. It is written for you, not for your customers under your name, with your approval on every issue.
 <!-- /compare -->
 
 <!-- faq -->
-### Does it make a separate video for every reader?
-No. Each piece is made once per issue, and every reader chooses which one reaches them. That is why it can feel personal without the cost growing with your list.
+### How does it start, and how does it reach my customers?
+We set it up with you after a short call: your sources, your customers described in your words. You see a week of real drafts before anyone else does. Sending by email straight to your customers is coming; until then each approved issue comes to you, and you send it through the tool you already use.
+
+### Does it make a separate video for every customer?
+No. Each piece is made once per issue, and every customer chooses which one reaches them. That is why it can feel personal without the cost growing with your list.
 
 ### Is AI writing it?
 It drafts. You approve. Every story links to its original source, and nothing goes out until you approve it. If you would not sign it, do not send it.
 
 ### Who owns what it makes?
-You do: your sources, what you asked for and every issue. Today the approved issue comes to you, and you send it to your own list through the tool you already use.
+You do: your sources, what you asked for and every issue.
 
 ### What does it cost?
-We set it up with you as a paid engagement, quoted after a short call. There is no self-serve plan or public price yet.
+A paid setup, quoted after a short call. There is no self-serve plan or public price yet.
 <!-- /faq -->
 
 <!-- coming -->
-### Email to your readers
-Issues sent by email to your readers from your own domain (for example news.yourbusiness.com), with a dated consent record for each reader and one-click unsubscribe.
+### Email straight to your customers
+Issues sent by email from your own domain (for example news.yourbusiness.com), with a dated consent record for each customer and one-click unsubscribe.
 
-### Readers pick their own format
-Each reader chooses read it, skim it, listen, watch, slides or the infographic, from a link in any issue, and confirms the change by email. Their own topics, length and time come after that.
+### Customers pick their own way
+Each customer chooses read it, skim it, listen, watch, slides or the infographic, from a link in any issue, and confirms the change by email. Their own topics, length and time come after that.
 
 ### Sign up on your own
 Today we set it up with you.
