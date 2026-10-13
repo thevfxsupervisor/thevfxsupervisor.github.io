@@ -2,15 +2,16 @@
 type: page
 slug: overscan
 title: Overscan | the vfx supervisor
-description: Overscan reads the sources a business picks, drafts what changed in its trade and why it matters, and waits for approval before anything goes out under its name.
+description: One issue, every reader gets it their way. Overscan turns your trade's news into a letter, an audio overview, a video, slides and an infographic, changes when you reply in plain words, and waits for your approval.
 eyebrow: Overscan
-h1: Be the business that knows what changed in your trade.
-lede: Every business has to publish to be noticed now. Overscan reads the sources you choose, writes what is new and why it matters to your customers, and waits for your OK. Nothing goes out under your name until you approve it.
+h1: One issue. Every reader gets it their way.
+lede: You publish once. Each reader picks how it reaches them: read it, skim it, listen to it, watch it, flip through the slides or take it in as one infographic. Want it different? Reply in plain words and the next issue changes. Nothing goes out under your name until you approve it.
+hero_coming: Each reader picking their own format. Today every issue can already come as the letter, an audio overview, a video, slides and an infographic, and you change it by replying.
 cta_label: Want this for your business?
 proof_label: Made with Overscan
 proof_text: Geoff's own daily VFX brief is made this way: public sources in, one editor approving each morning. Its public edition is The VFX Supervisor Daily.
 steps_h2: One morning, three steps
-features_h2: Your name, your OK on every issue
+features_h2: Made once. Taken in five ways.
 who_h2: For any business that has to publish to be noticed
 cadence: Daily for a fast field, weekly for everyone else. Both work today.
 compare_h2: Three other ways to do this
@@ -23,6 +24,7 @@ form_k: I read every message myself and reply from geoff@thevfxsupervisor.com to
 form_message_label: What would you send, and to whom?
 form_placeholder: We are a heating firm. A weekly note to our customers on rules, prices and new kit.
 byline: Overscan is built by Geoff Hancock.
+sold_by: Overscan is sold by Wangle Media ApS, Copenhagen.
 ---
 
 <!-- steps -->
@@ -37,6 +39,18 @@ You read the draft and approve it, or skip the day and nothing goes out. The app
 <!-- /steps -->
 
 <!-- features -->
+### One issue, five ways in
+Every issue can come as the written letter, an audio overview, a short explainer video, a slide deck and an infographic. All five are made once, from the same issue, so they say the same thing however it is taken in.
+
+Coming: each reader picks the one that leads their email: read it, skim it, listen, watch, slides or the infographic. If their piece is not ready when the issue goes out, they get the full letter. It feels made for each reader, and it is made once per issue, however many readers you have.
+
+![The infographic of one real issue: the day's stories as one picture, with the key figures pulled out.](/static/overscan/formats-infographic.png)
+
+Real infographic from one issue of a daily VFX brief, as it shows on the issue page.
+
+### Change it by replying in plain words
+Shorter. More on one topic, less on another. Drop a source, or paste a link to add one. Reply to the issue in your own words and the next one changes. You get a note back saying what changed, and replying UNDO takes it back.
+
 ### Nothing goes out until you say so
 Overscan drafts. You decide. An issue waits for your approval, and once you approve it, it is locked: nothing changes after that except your name on it.
 
@@ -90,6 +104,9 @@ Fast and often free, and a fine way to keep yourself informed. It is written for
 <!-- /compare -->
 
 <!-- faq -->
+### Does it make a separate video for every reader?
+No. Each piece is made once per issue, and every reader chooses which one reaches them. That is why it can feel personal without the cost growing with your list.
+
 ### Is AI writing it?
 It drafts. You approve. Every story links to its original source, and nothing goes out until you approve it. If you would not sign it, do not send it.
 
@@ -104,8 +121,8 @@ We set it up with you as a paid engagement, quoted after a short call. There is 
 ### Email to your readers
 Issues sent by email to your readers from your own domain (for example news.yourbusiness.com), with a dated consent record for each reader and one-click unsubscribe.
 
-### Readers choose their own version
-Each reader picks their topics, length, time and format.
+### Readers pick their own format
+Each reader chooses read it, skim it, listen, watch, slides or the infographic, from a link in any issue, and confirms the change by email. Their own topics, length and time come after that.
 
 ### Sign up on your own
 Today we set it up with you.

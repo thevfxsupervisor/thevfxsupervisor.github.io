@@ -367,6 +367,7 @@ footer .mono{font-size:11.5px}
 .tag-coming{font-family:var(--mono);font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--cyan);
   border:1px solid var(--line2);border-radius:20px;padding:2px 8px;white-space:nowrap}
 .os-hero{display:grid;gap:36px}
+.os-hero-coming{margin:14px 0 0;color:var(--dim)}
 .os-hero>*{min-width:0}
 @media(min-width:900px){.os-hero{grid-template-columns:1.15fr .85fr;align-items:center}}
 .phone{border:1px solid var(--line2);border-radius:28px;padding:10px;background:#0d1013;max-width:330px;

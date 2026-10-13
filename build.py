@@ -1661,7 +1661,12 @@ def _feature(it):
         else:
             text.append(p)
     first, rest = (text[0], text[1:]) if text else ("", [])
-    txt = f'<p>{_md_inline(first)}</p>' + "".join(f'<p class="pr">{_md_inline(p)}</p>' for p in rest)
+    def _para(p):
+        # "Coming: ..." marks a line that is not live yet; delete the prefix when it ships.
+        if p.startswith("Coming:"):
+            return f'<p><span class="tag-coming">coming</span> {_md_inline(p[len("Coming:"):].strip())}</p>'
+        return f'<p class="pr">{_md_inline(p)}</p>'
+    txt = f'<p>{_md_inline(first)}</p>' + "".join(_para(p) for p in rest)
     shot = ""
     if fig is not None:
         alt, src = html.escape(fig.group(1)), html.escape(fig.group(2))
@@ -1670,6 +1675,15 @@ def _feature(it):
                 f'<img src="{src}" alt="{alt}" loading="lazy"></a>{cap_html}</figure>')
     return (f'<div class="feat"><div class="txt"><h3>{html.escape(it["title"], quote=False)}</h3>'
             f'{txt}</div>{shot}</div>')
+
+
+def _hero_coming(fm):
+    """One small line under the hero lede naming what in the headline is not live yet, with the
+    coming tag. Empty ``hero_coming`` (delete the field) once it ships: the hero then stands alone."""
+    text = fm.get("hero_coming", "").strip()
+    if not text:
+        return ""
+    return f'<p class="tiny os-hero-coming"><span class="tag-coming">coming</span> {_md_inline(text)}</p>'
 
 
 def render_overscan():
@@ -1705,10 +1719,11 @@ def render_overscan():
       <span class="eyebrow">{e("eyebrow")}</span>
       <h1 style="margin-top:18px">{e("h1")}</h1>
       <p class="lede">{e("lede")}</p>
+      {_hero_coming(fm)}
       <div class="cta-row"><a class="btn btn-a" href="#inquiry">{e("cta_label")}</a></div>
       <p class="door">Here for the VFX news? {daily_link("Read the Daily")}. Need VFX help on a show? <a href="{SITE_ROOT}work-with-me/">Work with me</a>.</p>
     </div>
-    <div class="phone"><img src="{SITE_ROOT}static/overscan/issue-phone.png" width="390" height="820" alt="An issue of {DAILY_NAME} on a phone: the opening line says what the day means, then one story with a so-what line."></div>
+    <div class="phone"><img src="{SITE_ROOT}static/overscan/formats-phone.png" width="386" height="811" alt="One real issue on a phone, Listen and watch: a 17 minute audio overview, the slides as a PDF, an 8 minute explainer video and an infographic, all made from the same issue."></div>
   </div>
 </section>
 
@@ -1781,6 +1796,7 @@ def render_overscan():
       <p class="k">{e("form_k")}</p></div>
     {inquiry_form(fm, offer="brief", source="overscan", form_id="os-form")}
     <p class="tiny os-byline">{e("byline")}</p>
+    <p class="tiny os-byline">{e("sold_by")}</p>
   </div>
 </section>
 '''
