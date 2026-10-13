@@ -27,4 +27,16 @@
 .daily-list .n{font-family:var(--mono);color:var(--amber-soft);min-width:3.2em}
 .daily-list .t{color:var(--txt);font-weight:600}
 .daily-list .d{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--mute);white-space:nowrap}
+.daily-join{margin:32px 0 0;padding:28px 24px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+.daily-join h2{font-family:Georgia,"Source Serif 4","Times New Roman",serif;font-size:26px;line-height:1.25;font-weight:600;margin:10px 0 10px}
+.daily-join>p{color:var(--dim);font-size:16px;line-height:1.55;margin:0 0 18px}
+.daily-join .form-card{max-width:none;border:0;background:none;padding:0}
+.daily-join fieldset{border:0;margin:0 0 16px;padding:0}
+.daily-join legend{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mute);margin-bottom:8px}
+.daily-join .formats{display:flex;flex-wrap:wrap;gap:8px}
+.daily-join .formats label{display:flex;gap:8px;align-items:center;padding:8px 12px;border:1px solid var(--line2);border-radius:999px;cursor:pointer;font-size:14px;color:var(--txt)}
+.daily-join .formats input{width:auto;margin:0;accent-color:var(--amber)}
+.daily-join .formats label:has(input:checked){border-color:var(--amber);color:var(--amber-soft)}
+.daily-join .tiny a{color:var(--amber-soft)}
+@media(max-width:600px){.daily-join{padding:22px 16px}.daily-join h2{font-size:22px}}
 @media(max-width:600px){.daily-card{padding:22px 16px}.daily-head h1{font-size:26px}.daily .prose h2{font-size:22px;margin-top:28px}.daily-list a{flex-wrap:wrap}.daily-list .d{margin-left:0}}

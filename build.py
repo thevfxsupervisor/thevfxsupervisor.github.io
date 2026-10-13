@@ -1974,14 +1974,20 @@ def render_note(md_path):
 # The Daily: numbered public issues, one file each in content/<DAILY_SECTION>/
 # (added by the newsletter product, Overscan). Kept apart from notes/ so the
 # hand-written essays are not buried. Each page is styled like the app's
-# issue page via docs/static/daily.css (written below). The four constants are
+# issue page via docs/static/daily.css (written below). The DAILY_* constants are
 # the destination's settings; the newsletter app rewrites them when they change.
+# DAILY_JOIN_*: the subscribe block (index and every issue) posts to the app's
+# /join/<name>, which only queues the address; DAILY_JOIN_CONSENT is the exact
+# text the app stores with it under DAILY_JOIN_VERSION. Empty URL = no block.
 # --------------------------------------------------------------------------
 
 DAILY_SECTION = 'daily'
 DAILY_TITLE = 'The VFX Supervisor Daily'
 DAILY_LEDE = "What the day's VFX news means, in a few lines, with a link to every story."
 DAILY_MADE_WITH = '/overscan/'
+DAILY_JOIN_URL = 'https://newsletter-edge.thevfxsupervisor.workers.dev/join/vfx'
+DAILY_JOIN_VERSION = 'vfx-daily-v1'
+DAILY_JOIN_CONSENT = 'Email me The VFX Supervisor Daily from Geoffrey Hancock (Wangle Media ApS) each morning, in the format I picked, with the occasional note about his VFX services. I can unsubscribe in one click from any email.'
 DAILY_CSS = """
 .daily{max-width:720px;margin:0 auto;padding:36px 16px 64px}
 .daily-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px 28px}
@@ -2012,6 +2018,18 @@ DAILY_CSS = """
 .daily-list .n{font-family:var(--mono);color:var(--amber-soft);min-width:3.2em}
 .daily-list .t{color:var(--txt);font-weight:600}
 .daily-list .d{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--mute);white-space:nowrap}
+.daily-join{margin:32px 0 0;padding:28px 24px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
+.daily-join h2{font-family:Georgia,"Source Serif 4","Times New Roman",serif;font-size:26px;line-height:1.25;font-weight:600;margin:10px 0 10px}
+.daily-join>p{color:var(--dim);font-size:16px;line-height:1.55;margin:0 0 18px}
+.daily-join .form-card{max-width:none;border:0;background:none;padding:0}
+.daily-join fieldset{border:0;margin:0 0 16px;padding:0}
+.daily-join legend{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mute);margin-bottom:8px}
+.daily-join .formats{display:flex;flex-wrap:wrap;gap:8px}
+.daily-join .formats label{display:flex;gap:8px;align-items:center;padding:8px 12px;border:1px solid var(--line2);border-radius:999px;cursor:pointer;font-size:14px;color:var(--txt)}
+.daily-join .formats input{width:auto;margin:0;accent-color:var(--amber)}
+.daily-join .formats label:has(input:checked){border-color:var(--amber);color:var(--amber-soft)}
+.daily-join .tiny a{color:var(--amber-soft)}
+@media(max-width:600px){.daily-join{padding:22px 16px}.daily-join h2{font-size:22px}}
 @media(max-width:600px){.daily-card{padding:22px 16px}.daily-head h1{font-size:26px}.daily .prose h2{font-size:22px;margin-top:28px}.daily-list a{flex-wrap:wrap}.daily-list .d{margin-left:0}}
 """
 
@@ -2046,6 +2064,103 @@ def _daily_foot():
             f' &middot; <a href="{SITE_ROOT}{DAILY_SECTION}/feed.json">JSON Feed</a>{made}</p>')
 
 
+DAILY_JOIN_FORMATS = [("read", "Read it"), ("listen", "Hear it"), ("watch", "Watch it"),
+                      ("slides", "Slides"), ("picture", "One picture")]
+
+
+def _daily_join(source):
+    """The subscribe block, or "" when DAILY_JOIN_URL is empty. It posts to the app, which
+    only queues the address; nothing is emailed until sending opens, then one confirmation."""
+    if not DAILY_JOIN_URL:
+        return ""
+    e = lambda s: html.escape(s, quote=False)  # noqa: E731
+    fid = f"join-{source}"
+    radios = "".join(
+        f'<label><input type="radio" name="format" value="{k}"{" checked" if k == "read" else ""}> {e(v)}</label>'
+        for k, v in DAILY_JOIN_FORMATS)
+    return f"""
+  <section class="daily-join" id="join" aria-labelledby="{fid}-h">
+    <span class="eyebrow">By email, coming soon</span>
+    <h2 id="{fid}-h">Get it every morning your way: read it, hear it, watch it.</h2>
+    <p>Skip the trade-site scroll. {e(DAILY_TITLE)} tells you what the day's VFX news means for your work, with a link to every story. You pick how it lands: text, audio, video, slides or one picture.</p>
+    <form class="form-card join-form" id="{fid}" method="post" action="{html.escape(DAILY_JOIN_URL)}" accept-charset="utf-8">
+      <div class="field"><label for="{fid}-email">Email</label><input type="email" id="{fid}-email" name="email" required maxlength="320" autocomplete="email"></div>
+      <div class="field"><label for="{fid}-name">First name (optional)</label><input type="text" id="{fid}-name" name="name" maxlength="200" autocomplete="given-name"></div>
+      <fieldset><legend>Your format</legend><div class="formats">{radios}</div></fieldset>
+      <div class="hp" aria-hidden="true"><label for="{fid}-website">Leave this empty</label><input type="text" id="{fid}-website" name="website" tabindex="-1" autocomplete="off"></div>
+      <input type="hidden" name="source" value="{html.escape(source)}">
+      <input type="hidden" name="consent_version" value="{html.escape(DAILY_JOIN_VERSION)}">
+      <div class="field consent"><label for="{fid}-consent"><input type="checkbox" id="{fid}-consent" name="consent" value="yes" required> {e(DAILY_JOIN_CONSENT)}</label></div>
+      <button type="submit" class="btn btn-a">Save my spot</button>
+      <div class="wl-status" role="status" aria-live="polite"></div>
+      <p class="tiny">Email opens soon. We'll confirm by email before anything else, and nothing else arrives until you say yes. Until then, read every issue here or in <a href="{SITE_ROOT}{DAILY_SECTION}/feed.xml">RSS</a>. <a href="{SITE_ROOT}privacy/">Privacy note</a>.</p>
+    </form>
+  </section>"""
+
+
+def _daily_join_script():
+    if not DAILY_JOIN_URL:
+        return ""
+    return """
+<script>
+/* Subscribe block: with no script the browser posts the form itself and the app sends it back
+   to the thanks page. With script, the same urlencoded post goes by fetch (no preflight). */
+(function(){
+  var THANKS = "%(thanks)s";
+  Array.prototype.forEach.call(document.querySelectorAll('.join-form'), function(form){
+    var status = form.querySelector('.wl-status'), submit = form.querySelector('[type=submit]');
+    function say(msg, cls){ status.textContent = msg; status.className = 'wl-status ' + (cls || ''); }
+    form.addEventListener('submit', function(e){
+      if (!window.fetch || !window.URLSearchParams || !window.FormData) return;
+      e.preventDefault();
+      submit.disabled = true;
+      say('Saving...', 'info');
+      fetch(form.action, {method: 'POST', headers: {'Accept': 'application/json'},
+                          body: new URLSearchParams(new FormData(form))})
+        .then(function(r){ return r.json(); })
+        .then(function(d){
+          if (d && d.ok) { window.location.href = THANKS; return; }
+          var errs = (d && d.errors) || {}, msgs = Object.keys(errs).map(function(k){ return errs[k]; });
+          say(msgs.length ? msgs.join(' ') : ((d && d.message) || 'That did not save. Please try again.'), 'err');
+          submit.disabled = false;
+        })
+        .catch(function(){ say('That did not save. Please try again in a minute.', 'err'); submit.disabled = false; });
+    });
+  });
+})();
+</script>""" % {"thanks": f"{SITE_ROOT}{DAILY_SECTION}/thanks/"}
+
+
+def _daily_shell(title, description, content, canonical_path, script="", robots=""):
+    """render_shell, passing the subscribe script and robots only when there are some (so a
+    site whose render_shell predates those arguments still builds without the block)."""
+    kw = {"canonical_path": canonical_path}
+    if script:
+        kw["extra_script"] = script
+    if robots:
+        kw["robots"] = robots
+    return render_shell(title, description, content, **kw)
+
+
+def render_daily_thanks():
+    content = f"""{_daily_css_link()}
+<main class="daily">
+  <header class="daily-head">
+    <span class="eyebrow">You're on the list</span>
+    <h1>Your spot is saved.</h1>
+    <p class="daily-date">When email opens, we'll send you one email to confirm. Nothing else arrives until you say yes.</p>
+  </header>
+  <div class="prose">
+    <p>Today's issue is already up: <a href="{SITE_ROOT}{DAILY_SECTION}/">read {html.escape(DAILY_TITLE, quote=False)} now</a>, or follow it in <a href="{SITE_ROOT}{DAILY_SECTION}/feed.xml">RSS</a>.</p>
+    <p>Changed your mind? Write to the address in the <a href="{SITE_ROOT}privacy/">privacy note</a> and your address is deleted.</p>
+  </div>
+  {_daily_foot()}
+</main>
+"""
+    return _daily_shell(f"You're on the list | {DAILY_TITLE}", "Your spot is saved.", content,
+                        f"{DAILY_SECTION}/thanks/", robots="noindex, follow")
+
+
 def render_daily_post(fm, body, slug, newer=None, older=None):
     esc = lambda s: html.escape(s, quote=False)  # noqa: E731
     number = fm.get("number", "")
@@ -2068,13 +2183,14 @@ def render_daily_post(fm, body, slug, newer=None, older=None):
     </div>
   </article>
   {nav}
+  {_daily_join("daily-issue")}
   {_daily_foot()}
 </main>
 """
     # render_shell escapes without quotes, so a quote mark would end the meta attributes.
     plain = lambda s: s.replace('"', "\u201d")  # noqa: E731
-    page = render_shell(plain(fm.get("title", "")), plain(fm.get("description", "")), content,
-                        canonical_path=f"{DAILY_SECTION}/{slug}/")
+    page = _daily_shell(plain(fm.get("title", "")), plain(fm.get("description", "")), content,
+                        f"{DAILY_SECTION}/{slug}/", script=_daily_join_script())
     canonical = fm.get("canonical", "")
     if canonical.startswith("https://"):
         page = re.sub(r'(<link rel="canonical" href=")[^"]*(")',
@@ -2101,11 +2217,12 @@ def render_daily_index(posts):
     <p class="daily-date">{html.escape(DAILY_LEDE, quote=False)}</p>
   </header>
   <ul class="daily-list">{"".join(rows)}</ul>{empty}
+  {_daily_join("daily")}
   {_daily_foot()}
 </main>
 """
-    return render_shell(f"{DAILY_TITLE} | {SITE_NAME}", DAILY_LEDE, content,
-                        canonical_path=f"{DAILY_SECTION}/")
+    return _daily_shell(f"{DAILY_TITLE} | {SITE_NAME}", DAILY_LEDE, content,
+                        f"{DAILY_SECTION}/", script=_daily_join_script())
 
 
 def _daily_date(fm):
@@ -2168,6 +2285,8 @@ def build_daily():
     static_out.mkdir(parents=True, exist_ok=True)
     (static_out / "daily.css").write_text(DAILY_CSS.lstrip(), encoding="utf-8")
     write_page(DAILY_SECTION, render_daily_index(posts))
+    if DAILY_JOIN_URL:
+        write_page(f"{DAILY_SECTION}/thanks", render_daily_thanks())
     slugs = [slug for _fm, _body, slug in posts]
     for i, (fm, body, slug) in enumerate(posts):
         newer = slugs[i - 1] if i > 0 else None
