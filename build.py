@@ -1819,6 +1819,7 @@ def render_overscan():
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">Questions</span><h2>{e("faq_h2")}</h2></div>
     <div class="os-faq">{faq_html}</div>
+    <p class="tiny os-guide-link">Already a customer: <a href="{OVERSCAN_GUIDE_PATH}">the Overscan guide</a> shows you how to change your next issue by replying.</p>
   </div>
 </section>
 
@@ -1847,6 +1848,125 @@ def render_overscan():
     )
     return render_shell(fm.get("title", ""), fm.get("description", ""), content,
                         extra_script=INQUIRY_SCRIPT, canonical_path="overscan/")
+
+
+# --------------------------------------------------------------------------
+# /overscan/guide/: the guide for a customer we have set up (R5 docs)
+# --------------------------------------------------------------------------
+# Every line must be true of the live app, or marked coming. Checked against the newsletter code
+# on 2026-10-14 (welcome screens, reply-to-adjust and its confirmation wording, the Sources page
+# toggle, reader formats and media hold, the link check). Change the app's labels there and here.
+
+OVERSCAN_GUIDE_PATH = SITE_ROOT + "overscan/guide/"
+
+
+def _guide_split(md):
+    """A section body: markdown with [[name]] lines where a widget goes. -> [(kind, text)]."""
+    parts = re.split(r"(?m)^\[\[(\w+)\]\]\s*$", md)
+    return [("md" if i % 2 == 0 else "widget", p) for i, p in enumerate(parts) if p.strip()]
+
+
+def _guide_exchange(fm):
+    """A reply and Overscan's answer, as two small mail cards. The answer's lines are the app's
+    own confirmation sentences (newsletter adjust.process.compose_confirmation)."""
+    lines = "".join(f"<p>{html.escape(l, quote=False)}</p>"
+                    for l in fm.get("exchange_overscan", "").split("\n") if l.strip())
+    return f'''
+    <div class="gd-mail" role="group" aria-label="An example reply and the answer">
+      <div class="gd-msg"><span class="gd-who">You reply</span><p>{html.escape(fm.get("exchange_you", ""), quote=False)}</p></div>
+      <div class="gd-msg gd-answer"><span class="gd-who">Overscan answers</span>{lines}</div>
+    </div>
+    <p class="gd-cap">{_md_inline(fm.get("exchange_caption", ""))}</p>'''
+
+
+def _guide_formats(items):
+    """The ways one issue reaches you. "Coming:" at the start of a body = not live yet."""
+    cards = []
+    for it in items:
+        body = it["body"].strip()
+        coming = body.startswith("Coming:")
+        if coming:
+            body = body[len("Coming:"):].strip()
+        tag = ' <span class="tag-coming">coming</span>' if coming else ""
+        cards.append(f'<div class="gd-fmt{" fmt-coming" if coming else ""}"><b>{html.escape(it["title"], quote=False)}</b>{tag}'
+                     f'<p>{_md_inline(body)}</p></div>')
+    return f'<div class="gd-fmts">{"".join(cards)}</div>'
+
+
+def _guide_shots(fm):
+    """Two real phone screens of the same issue (Read it, Listen), from the strip on /overscan/.
+    Each opens full size; the base template's lightbox enhances the link."""
+    m = MEDIA
+    return f'''
+    <div class="gd-shots">
+      <figure><a class="fmt-zoom" href="{m}phone-read.png"><img src="{m}phone-read.png" width="390" height="700" loading="lazy" alt="Read it: the 13 Oct 2026 issue as an email on a phone."></a><figcaption>Read it</figcaption></figure>
+      <figure><a class="fmt-zoom" href="{m}phone-listen.png"><img src="{m}phone-listen.png" width="390" height="700" loading="lazy" alt="Listen: the same issue with the play button on top and the letter below."></a><figcaption>Listen</figcaption></figure>
+    </div>
+    <p class="gd-cap">{_md_inline(fm.get("shots_caption", ""))}</p>'''
+
+
+def _guide_id(eyebrow):
+    return re.sub(r"[^a-z0-9]+", "-", eyebrow.lower()).strip("-")
+
+
+def render_overscan_guide():
+    fm, body = parse_frontmatter((CONTENT_DIR / "pages" / "overscan-guide.md").read_text(encoding="utf-8"))
+    sections, _ = extract_block(body, "sections")
+    formats, _ = extract_block(body, "formats")
+    coming, _ = extract_block(body, "coming")
+    e = lambda k, d="": html.escape(fm.get(k, d), quote=False)
+    widgets = {"exchange": lambda: _guide_exchange(fm), "formats": lambda: _guide_formats(formats),
+               "shots": lambda: _guide_shots(fm)}
+
+    jump, parts = [], []
+    for sec in sections:
+        eyebrow, h2 = [x.strip() for x in sec["title"].split("::", 1)]
+        sid = _guide_id(eyebrow)
+        jump.append((eyebrow, f"#{sid}"))
+        inner = "".join(markdown_to_html(t) if k == "md" else widgets[t.strip()]()
+                        for k, t in _guide_split(sec["body"]))
+        parts.append(f'''
+<hr class="rule">
+<section id="{sid}">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">{html.escape(eyebrow, quote=False)}</span><h2>{html.escape(h2, quote=False)}</h2></div>
+    <div class="prose gd-body">{inner}</div>
+  </div>
+</section>''')
+    coming_html = "".join(
+        f'<li><strong>{html.escape(c["title"], quote=False)}</strong> <span class="tag-coming">coming</span>'
+        f'<br>{_md_inline(c["body"])}</li>'
+        for c in coming
+    )
+    jump.append(("Coming", "#coming"))
+    jump_html = " &middot; ".join(f'<a href="{h}">{html.escape(l, quote=False)}</a>' for l, h in jump)
+    content = f'''
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow os-brand"><img class="os-mark" src="{SITE_ROOT}static/overscan/mark-e1.svg" alt="" width="40" height="40">{e("eyebrow")}</span>
+    <h1 style="margin-top:18px">{e("h1")}</h1>
+    <p class="lede">{e("lede")}</p>
+    <p class="door">{_md_inline(fm.get("not_set_up", ""))}</p>
+    <nav class="quicklinks" aria-label="On this page"><span class="eyebrow">On this page</span><div class="ql-row">{jump_html}</div></nav>
+  </div>
+</section>
+{"".join(parts)}
+
+<hr class="rule">
+<section id="coming">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Coming</span><h2>Not built yet, and we say so</h2></div>
+    <ul class="os-coming">{coming_html}</ul>
+    <p class="k os-k">{_md_inline(fm.get("stuck", ""))}</p>
+  </div>
+</section>
+'''
+    content += related_section(
+        [("Overscan", SITE_ROOT + "overscan/"), ("See it working: " + DAILY_NAME, DAILY_PATH),
+         ("Work with me", SITE_ROOT + "work-with-me/")],
+    )
+    return render_shell(fm.get("title", ""), fm.get("description", ""), content,
+                        canonical_path="overscan/guide/")
 
 
 def _wwm_record(fm, body):
@@ -2672,6 +2792,7 @@ def main():
     write_page("work-with-me", render_work_with_me())
     write_page("work-with-me/thanks", render_simple_page("work-with-me-thanks", robots="noindex, follow", path="work-with-me/thanks"))
     write_page("overscan", render_overscan())
+    write_page("overscan/guide", render_overscan_guide())
     write_page("notes", render_notes())
 
     note_slugs = []
@@ -2728,6 +2849,7 @@ def main():
         ("privacy/", [CONTENT_DIR / "pages" / "privacy.md"]),
         ("work-with-me/", [CONTENT_DIR / "pages" / "work-with-me.md"]),
         ("overscan/", [CONTENT_DIR / "pages" / "overscan.md"]),
+        ("overscan/guide/", [CONTENT_DIR / "pages" / "overscan-guide.md"]),
     ]
     sitemap_entries += [(f"projects/{s}/", [proj_paths[s]]) for s in proj_slugs]
     sitemap_entries += [(f"notes/{s}/", [note_paths[s]]) for s in note_slugs]
@@ -2742,6 +2864,7 @@ def main():
         ('Course', base + '/course/', 'Breakdown and Budget the VFX of a Whole Film'),
         ('Work with me', base + '/work-with-me/', 'VES Award-winning VFX supervisor and producer: bid review, supervision and AI-assisted pipelines, built to land on budget and on time'),
         ('Overscan', base + '/overscan/', 'Prove what you know, every morning: what changed in your trade and what it means, from you, to read, hear or watch; you shape it by replying'),
+        ('Overscan guide', base + '/overscan/guide/', 'For a customer already set up: the first issue, changing it by replying in plain words, picking a format, turning a website off, and what arrives each morning'),
         ('Notes', base + '/notes/', 'Writing on VFX production and AI orchestration'),
     ]
     # Real frontmatter, not the slug: card_title/card_summary (falling back to
