@@ -2,7 +2,7 @@
 type: page
 slug: privacy
 title: Privacy | the vfx supervisor
-description: What I collect when you join the waitlist or send the work-with-me form, why, how long I keep it, and your rights.
+description: What I collect when you join the waitlist, save a spot for The VFX Supervisor Daily, or send the work-with-me form, why, how long I keep it, and your rights.
 eyebrow: Privacy
 h1: What I do with your details.
 ---
@@ -29,8 +29,20 @@ This is the form on [Work with me](/work-with-me/) and [Overscan](/overscan/).
 
 **How long.** The stored message is deleted automatically two years after you send it, or sooner if you ask. If we end up working together, what we agree is kept as business records for as long as the law requires.
 
+## The VFX Supervisor Daily subscribe form
+
+This is the form on [The VFX Supervisor Daily](/daily/) and on every issue.
+
+**What I collect.** Your email, which format you picked (read, hear, watch, slides or one picture), which page you sent it from, and the exact words shown under the button you pressed, with the version of those words and the time you pressed it. To stop spam, the form also keeps a scrambled, one-way code made from your internet address, used only to count how many sign-ups come from one place. It cannot be turned back into the address.
+
+**Why.** To send you one email asking you to confirm, once the Daily goes out by email, and then the Daily in the format you picked, only if you confirm. The lawful basis is your consent. Saving your spot sends you nothing today: no welcome email, no list, until that one confirmation email.
+
+**Where.** In the same private database on a server I run, reached through Cloudflare. Before the first email goes out, this page will also name the email service that sends it. When an issue on this site has audio or video, it plays from that same server, through Cloudflare, only when you press play.
+
+**How long.** If you confirm, until you unsubscribe (one click in every email) or ask me to delete it. If you do not confirm, your address is deleted 7 days after that one confirmation email. A record that you agreed, and to which words, is kept for two years after you unsubscribe, because Danish law asks me to be able to show it.
+
 ## Your rights
 
-You can ask me what I hold, correct it, or have it deleted, at any time. Every waitlist email includes how to unsubscribe. To exercise any of this, reply to one of my emails or write to geoff@thevfxsupervisor.com, and I will delete both the stored message and the copy in my mailbox.
+You can ask me what I hold, correct it, or have it deleted, at any time. Every waitlist email and every issue of the Daily includes how to unsubscribe. To exercise any of this, reply to one of my emails or write to geoff@thevfxsupervisor.com, and I will delete both the stored message and the copy in my mailbox.
 
-**Who runs this.** Geoffrey Hancock, Wangle Media ApS. Waitlist signups are stored in a private Google Sheet, work-with-me messages in a private database on a server I run, and emails are sent through Google Workspace. That is the whole stack.
+**Who runs this.** Geoffrey Hancock, Wangle Media ApS. Waitlist signups are stored in a private Google Sheet, work-with-me messages and Daily sign-ups in a private database on a server I run, and my own emails are sent through Google Workspace. That is the whole stack.
