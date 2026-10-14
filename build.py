@@ -1711,7 +1711,7 @@ def format_strip():
     while it is on screen (see FMT_SCRIPT)."""
     m = MEDIA
     return f'''
-    <div class="fmt-strip" aria-label="The same issue, five ways">
+    <div class="fmt-strip" aria-label="The same issue, every way it comes today">
       <div class="fmt-card"><div class="fmt-media"><img src="{m}phone-read.png" width="390" height="700" loading="lazy" alt="The 13 Oct 2026 issue as an email on a phone."></div>
         <div class="fmt-txt"><b>Read it</b><p>Two minutes with coffee. Only what is new, and why it matters to them.</p></div></div>
       <div class="fmt-card"><div class="fmt-media"><img src="{m}phone-listen.png" width="390" height="700" loading="lazy" alt="The same issue as it arrives when you pick Listen: the play button on top, the letter below."></div>
@@ -1721,7 +1721,7 @@ def format_strip():
         <div class="fmt-txt"><b>Watch it</b><p>A short explainer, crafted from the same words.</p></div></div>
       <div class="fmt-card"><div class="fmt-media wide"><img src="{m}issue-slide-1.png" width="1280" height="720" loading="lazy" alt="The title slide of the same issue: Defending margins in an AI-augmented production reality."></div>
         <div class="fmt-txt"><b>Flip the slides</b><p>For the Monday meeting, one story a slide.</p></div></div>
-      <div class="fmt-card fmt-coming"><div class="fmt-txt"><b>The one picture</b> <span class="tag-coming">coming</span><p>The whole issue on one screen, for the person who will not read. It ships once it passes the same accuracy check as the rest.</p></div></div>
+      <div class="fmt-card fmt-coming"><div class="fmt-txt"><b>The one picture</b> <span class="tag-coming">coming</span><p>The whole issue on one screen, for the person who will not read. It joins the others once it is reliably accurate.</p></div></div>
     </div>
     <p class="fmt-hint">The 13 Oct 2026 issue as the letter, the audio, the video and the slides. The audio and video here are short clips of the full 19 and 7 minutes.</p>'''
 

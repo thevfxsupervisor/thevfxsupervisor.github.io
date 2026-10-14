@@ -2,11 +2,11 @@
 type: page
 slug: overscan
 title: Overscan | the vfx supervisor
-description: Be the one your customers trust to know what's happening and what it means. From you, every morning, to read, hear, watch, flip or see at a glance.
+description: Be the one your customers trust to know what's happening and what it means. From you, every morning, to read, hear, watch or flip through.
 eyebrow: Overscan
 h1: Stop being quietly brilliant.
 lede: Be the one your customers trust to know what changed in your trade and what it means. Every morning Overscan gives you that briefing under your name: read it, hear it, watch it or flip the slides, with the one picture coming. Tell Overscan what to change in plain words. The next issue listens.
-hero_coming: Email straight to your customers from your own address, each in the way they pick. Today all five come to you, and you send the issue through the tool you already use.
+hero_coming: Email straight to your customers from your own address, each in the way they pick. Today every format comes to you, and you send the issue through the tool you already use.
 cta_label: Make your expertise unmissable
 proof_label: The proof, every morning
 proof_text: The VFX Supervisor Daily is Geoff's own morning VFX briefing, crafted with Overscan. Read it, hear it, watch it. That is how one VFX supervisor shows what he knows to the people who hire one.
@@ -29,7 +29,7 @@ sold_by: Overscan is sold by Wangle Media ApS, Copenhagen.
 
 <!-- features -->
 ### More valuable content than you could make alone, every day
-One morning of your trade's news becomes a letter, an audio overview, a short explainer video, a slide deck and an infographic, all saying the same thing, all under your name. The plumber listens in the van. The office manager reads on the train. The owner wants the one picture. You could not make five pieces a day by hand. Now you do not have to.
+One morning of your trade's news becomes a letter, an audio overview, a short explainer video and a slide deck, all saying the same thing, all under your name, with the one-picture infographic coming. The plumber listens in the van. The office manager reads on the train. You could not make four pieces a day by hand. Now you do not have to.
 
 Pick the one that leads your own email: read it, skim it, listen, watch, slides or the picture, and your copy arrives with it on top. Coming: email straight to your customers, each picking their own. Overscan still crafts each piece once, however many customers you have.
 
