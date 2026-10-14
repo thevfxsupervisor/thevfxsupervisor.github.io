@@ -717,6 +717,20 @@ def _og_image_for(canonical_path):
     return base + "/static/og-image.png"
 
 
+SITE_FAVICON = '<link rel="icon" type="image/png" sizes="256x256" href="{root}static/favicon.png">'
+OVERSCAN_FAVICON = ('<link rel="icon" type="image/svg+xml" href="{root}static/overscan/favicon.svg">\n'
+                    '<link rel="icon" type="image/png" sizes="64x64" href="{root}static/overscan/favicon-64.png">')
+
+
+def _overscan_favicon(html_out, canonical_path):
+    """/overscan/ and the Daily (made with Overscan) carry the Overscan mark (E1) as their tab icon;
+    every other page keeps the site's aperture. Geoff 2026-10-14: favicon only on those pages."""
+    first = canonical_path.strip("/").split("/")[0]
+    if first not in ("overscan", globals().get("DAILY_SECTION", "daily")):
+        return html_out
+    return html_out.replace(SITE_FAVICON.format(root=SITE_ROOT), OVERSCAN_FAVICON.format(root=SITE_ROOT))
+
+
 def render_shell(title, description, content_html, nav_active=None, extra_script="", canonical_path="", robots="index, follow"):
     html_out = BASE_TEMPLATE
     html_out = html_out.replace("{{ROBOTS}}", robots)
@@ -727,6 +741,7 @@ def render_shell(title, description, content_html, nav_active=None, extra_script
     html_out = html_out.replace("{{SITE}}", SITE_CANONICAL.rstrip("/"))
     html_out = html_out.replace("{{CANONICAL}}", SITE_CANONICAL.rstrip("/") + "/" + canonical_path.lstrip("/"))
     html_out = html_out.replace("{{OG_IMAGE}}", _og_image_for(canonical_path))
+    html_out = _overscan_favicon(html_out, canonical_path)
     for key in ("reel", "projects", "course", "notes", "about"):
         cls = " current" if key == nav_active else ""
         html_out = html_out.replace("{{NAV_%s}}" % key.upper(), cls)
@@ -1763,7 +1778,7 @@ def render_overscan():
     content = f'''
 <section class="hero">
   <div class="wrap">
-    <span class="eyebrow">{e("eyebrow")}</span>
+    <span class="eyebrow os-brand"><img class="os-mark" src="{SITE_ROOT}static/overscan/mark-e1.svg" alt="" width="40" height="40">{e("eyebrow")}</span>
     <h1 style="margin-top:18px">{e("h1")}</h1>
     <p class="lede">{e("lede")}</p>
     {_hero_coming(fm)}

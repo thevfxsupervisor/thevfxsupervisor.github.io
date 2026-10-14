@@ -4,8 +4,8 @@ slug: overscan
 title: Overscan | the vfx supervisor
 description: Be the one your customers trust to know what's happening and what it means. From you, every morning, to read, hear, watch, flip or see at a glance.
 eyebrow: Overscan
-h1: Be the one they trust to know what's happening, and what it means.
-lede: Overscan turns what changed in your trade into a morning briefing worth opening, and tells your audience why it matters to them. Every issue comes five ways: read it, hear it, watch it, flip the slides or take the one picture. Tell Overscan what to change in plain words. The next issue listens.
+h1: Stop being quietly brilliant.
+lede: Be the one your customers trust to know what changed in your trade and what it means. Every morning Overscan gives you that briefing under your name, five ways: read it, hear it, watch it, flip the slides or take the one picture. Tell Overscan what to change in plain words. The next issue listens.
 hero_coming: Email straight to your customers from your own address, each in the way they pick. Today all five come to you, and you send the issue through the tool you already use.
 cta_label: Make your expertise unmissable
 proof_label: The proof, every morning
