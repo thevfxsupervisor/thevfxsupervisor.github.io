@@ -497,6 +497,7 @@ footer .mono{font-size:11.5px}
 /* Overscan guide (/overscan/guide/): a reply and its answer, the format cards, two phone shots.
    Tokens only, so both themes come for free. */
 .gd-body{margin-top:22px}
+.gd-body code{white-space:nowrap}
 .gd-body ol li::marker{color:var(--amber);font-family:var(--mono)}
 .os-guide-link{margin-top:18px}
 .os-guide-link a{color:var(--amber-soft)}
