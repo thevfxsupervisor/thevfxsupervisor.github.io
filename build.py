@@ -1706,43 +1706,31 @@ MEDIA = SITE_ROOT + "static/overscan/media/"
 def format_strip():
     """One issue, five ways: the same issue as a phone email, an audio overview, a muted video
     loop, a slide and the infographic. Every file is a stable name under static/overscan/media/,
-    so swapping in a new issue's media is a file copy, not a page edit. Nothing autoplays with
-    sound, nothing loads until it is needed (lazy images, preload=none), and the video plays only
-    while it is on screen (see FMT_SCRIPT)."""
+    so swapping in a new issue's media is a file copy, not a page edit. Every example opens or
+    plays in place: the stills are links to the full image that the base template's lightbox
+    enhances, and the audio and video carry their own controls. Nothing autoplays and nothing
+    loads until it is needed (lazy images, preload=none). The infographic stays off the strip
+    until it is reliably accurate. There is no "full episode" link: no public page carries the
+    full audio or video yet, so add one only when it exists."""
     m = MEDIA
     return f'''
     <div class="fmt-strip" aria-label="The same issue, every way it comes today">
-      <div class="fmt-card"><div class="fmt-media"><img src="{m}phone-read.png" width="390" height="700" loading="lazy" alt="The 13 Oct 2026 issue as an email on a phone."></div>
+      <div class="fmt-card"><div class="fmt-media"><a class="fmt-zoom" href="{m}phone-read.png"><img src="{m}phone-read.png" width="390" height="700" loading="lazy" alt="The 13 Oct 2026 issue as an email on a phone."></a></div>
         <div class="fmt-txt"><b>Read it</b><p>Two minutes with coffee. Only what is new, and why it matters to them.</p></div></div>
-      <div class="fmt-card"><div class="fmt-media"><img src="{m}phone-listen.png" width="390" height="700" loading="lazy" alt="The same issue as it arrives when you pick Listen: the play button on top, the letter below."></div>
+      <div class="fmt-card"><div class="fmt-media"><a class="fmt-zoom" href="{m}phone-listen.png"><img src="{m}phone-listen.png" width="390" height="700" loading="lazy" alt="The same issue as it arrives when you pick Listen: the play button on top, the letter below."></a></div>
         <div class="fmt-txt"><b>Hear it</b><p>The whole issue as a conversation, for the van.</p>
         <audio controls preload="none" src="{m}issue-audio.m4a" aria-label="Audio overview of the issue"></audio></div></div>
-      <div class="fmt-card"><div class="fmt-media wide"><video class="fmt-video" muted loop playsinline preload="none" poster="{m}issue-video-poster.jpg" width="1280" height="720" aria-label="The explainer video of the issue, silent; click to pause or play"><source src="{m}issue-video.mp4" type="video/mp4"></video></div>
+      <div class="fmt-card"><div class="fmt-media wide"><video class="fmt-video" controls playsinline preload="none" poster="{m}issue-video-poster.jpg" width="1280" height="720" aria-label="A short clip of the issue's explainer video, silent"><source src="{m}issue-video.mp4" type="video/mp4"></video></div>
         <div class="fmt-txt"><b>Watch it</b><p>A short explainer, crafted from the same words.</p></div></div>
-      <div class="fmt-card"><div class="fmt-media wide"><img src="{m}issue-slide-1.png" width="1280" height="720" loading="lazy" alt="The title slide of the same issue: Defending margins in an AI-augmented production reality."></div>
+      <div class="fmt-card"><div class="fmt-media wide"><a class="fmt-zoom" href="{m}issue-slide-1.png"><img src="{m}issue-slide-1.png" width="1280" height="714" loading="lazy" alt="The title slide of the same issue: Defending margins in an AI-augmented production reality."></a></div>
         <div class="fmt-txt"><b>Flip the slides</b><p>For the Monday meeting, one story a slide.</p></div></div>
       <div class="fmt-card fmt-coming"><div class="fmt-txt"><b>The one picture</b> <span class="tag-coming">coming</span><p>The whole issue on one screen, for the person who will not read. It joins the others once it is reliably accurate.</p></div></div>
     </div>
     <p class="fmt-hint">The 13 Oct 2026 issue as the letter, the audio, the video and the slides. The audio and video here are short clips of the full 19 and 7 minutes.</p>'''
 
 
-FMT_SCRIPT = """
-<script>
-/* The format strip's video: a muted loop that plays only while it is on screen, so the page
-   stays light and nothing moves behind the reader's back. A click pauses or resumes it, a reader
-   who asked for reduced motion gets the poster only, and with no script the poster stands alone. */
-(function(){
-  var v = document.querySelector('.fmt-video'); if (!v) return;
-  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var held = false;
-  function go(){ if (held || still) return; var p = v.play(); if (p && p.catch) p.catch(function(){}); }
-  v.addEventListener('click', function(){ held = !v.paused; if (held) { v.pause(); } else { still = false; go(); } });
-  v.style.cursor = 'pointer';
-  if (!('IntersectionObserver' in window)) { go(); return; }
-  new IntersectionObserver(function(es){ es.forEach(function(en){ if (en.isIntersecting) { go(); } else { v.pause(); } }); },
-    {threshold: 0.4}).observe(v);
-})();
-</script>"""
+# The video used to be a muted loop driven by a script (FMT_SCRIPT). It now carries its own
+# controls and plays only when the reader presses play, so there is no strip script.
 
 
 def render_overscan():
@@ -1858,7 +1846,7 @@ def render_overscan():
          ("About", SITE_ROOT + "about/")],
     )
     return render_shell(fm.get("title", ""), fm.get("description", ""), content,
-                        extra_script=INQUIRY_SCRIPT + FMT_SCRIPT, canonical_path="overscan/")
+                        extra_script=INQUIRY_SCRIPT, canonical_path="overscan/")
 
 
 def _wwm_record(fm, body):

@@ -4,6 +4,15 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
+<meta name="color-scheme" content="dark light">
+<script>
+/* Theme before first paint, so there is no flash of the wrong one. A saved choice wins;
+   otherwise follow the system. Contract shared with the Daily pages: data-theme on <html>,
+   localStorage key "theme", button.theme-toggle in the header. */
+(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}
+if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark'}
+document.documentElement.dataset.theme=t})();
+</script>
 <title>Overscan | the vfx supervisor</title>
 <meta name="description" content="Be the one your customers trust to know what's happening and what it means. From you, every morning, to read, hear, watch or flip through.">
 <link rel="icon" type="image/svg+xml" href="/static/overscan/favicon.svg">
@@ -23,7 +32,7 @@
 <meta name="twitter:title" content="Overscan | the vfx supervisor">
 <meta name="twitter:description" content="Be the one your customers trust to know what's happening and what it means. From you, every morning, to read, hear, watch or flip through.">
 <meta name="twitter:image" content="https://thevfxsupervisor.com/static/og/default.png">
-<link rel="stylesheet" href="/static/style.css?v=f806af0b">
+<link rel="stylesheet" href="/static/style.css?v=9de83b47">
   <link rel="alternate" type="application/rss+xml" title="the vfx supervisor" href="https://thevfxsupervisor.com/feed.xml">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"the vfx supervisor","url":"https://thevfxsupervisor.com/"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "@id": "https://thevfxsupervisor.com/#person", "name": "Geoffrey Hancock", "jobTitle": "VFX Supervisor and Producer", "url": "https://thevfxsupervisor.com/", "sameAs": ["https://www.imdb.com/name/nm0995883/", "https://github.com/thevfxsupervisor", "https://wangle.media/", "https://www.wangle.studio"], "award": ["VES Award, Outstanding Supporting Visual Effects in a Feature Motion Picture, Changeling (7th Annual VES Awards)", "VES nomination, Invictus (8th Annual VES Awards)", "Robert nomination, Skammerens datter II"], "worksFor": {"@type": "Organization", "name": "Wangle Media", "url": "https://wangle.media/"}, "homeLocation": {"@type": "Place", "address": {"@type": "PostalAddress", "addressLocality": "Humlebaek", "addressCountry": "DK"}}, "knowsAbout": ["Visual effects", "VFX supervision", "VFX production", "VFX bidding and budgeting", "Shot breakdown", "Pipeline engineering", "Real-time and Unreal Engine production", "AI in visual effects", "Multi-vendor VFX delivery"], "knowsLanguage": ["en", "da"]}</script>
@@ -43,6 +52,7 @@
       <a href="/about/" class="hide-sm">About</a>
       <a class="btn btn-a" href="/course/">Join the waitlist</a>
     </nav>
+    <button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button>
   </div>
 </header>
 
@@ -57,14 +67,14 @@
     <div class="cta-row"><a class="btn btn-a" href="#inquiry">Make your expertise unmissable</a></div>
     
     <div class="fmt-strip" aria-label="The same issue, every way it comes today">
-      <div class="fmt-card"><div class="fmt-media"><img src="/static/overscan/media/phone-read.png" width="390" height="700" loading="lazy" alt="The 13 Oct 2026 issue as an email on a phone."></div>
+      <div class="fmt-card"><div class="fmt-media"><a class="fmt-zoom" href="/static/overscan/media/phone-read.png"><img src="/static/overscan/media/phone-read.png" width="390" height="700" loading="lazy" alt="The 13 Oct 2026 issue as an email on a phone."></a></div>
         <div class="fmt-txt"><b>Read it</b><p>Two minutes with coffee. Only what is new, and why it matters to them.</p></div></div>
-      <div class="fmt-card"><div class="fmt-media"><img src="/static/overscan/media/phone-listen.png" width="390" height="700" loading="lazy" alt="The same issue as it arrives when you pick Listen: the play button on top, the letter below."></div>
+      <div class="fmt-card"><div class="fmt-media"><a class="fmt-zoom" href="/static/overscan/media/phone-listen.png"><img src="/static/overscan/media/phone-listen.png" width="390" height="700" loading="lazy" alt="The same issue as it arrives when you pick Listen: the play button on top, the letter below."></a></div>
         <div class="fmt-txt"><b>Hear it</b><p>The whole issue as a conversation, for the van.</p>
         <audio controls preload="none" src="/static/overscan/media/issue-audio.m4a" aria-label="Audio overview of the issue"></audio></div></div>
-      <div class="fmt-card"><div class="fmt-media wide"><video class="fmt-video" muted loop playsinline preload="none" poster="/static/overscan/media/issue-video-poster.jpg" width="1280" height="720" aria-label="The explainer video of the issue, silent; click to pause or play"><source src="/static/overscan/media/issue-video.mp4" type="video/mp4"></video></div>
+      <div class="fmt-card"><div class="fmt-media wide"><video class="fmt-video" controls playsinline preload="none" poster="/static/overscan/media/issue-video-poster.jpg" width="1280" height="720" aria-label="A short clip of the issue's explainer video, silent"><source src="/static/overscan/media/issue-video.mp4" type="video/mp4"></video></div>
         <div class="fmt-txt"><b>Watch it</b><p>A short explainer, crafted from the same words.</p></div></div>
-      <div class="fmt-card"><div class="fmt-media wide"><img src="/static/overscan/media/issue-slide-1.png" width="1280" height="720" loading="lazy" alt="The title slide of the same issue: Defending margins in an AI-augmented production reality."></div>
+      <div class="fmt-card"><div class="fmt-media wide"><a class="fmt-zoom" href="/static/overscan/media/issue-slide-1.png"><img src="/static/overscan/media/issue-slide-1.png" width="1280" height="714" loading="lazy" alt="The title slide of the same issue: Defending margins in an AI-augmented production reality."></a></div>
         <div class="fmt-txt"><b>Flip the slides</b><p>For the Monday meeting, one story a slide.</p></div></div>
       <div class="fmt-card fmt-coming"><div class="fmt-txt"><b>The one picture</b> <span class="tag-coming">coming</span><p>The whole issue on one screen, for the person who will not read. It joins the others once it is reliably accurate.</p></div></div>
     </div>
@@ -228,32 +238,40 @@
 })();
 </script>
 <script>
-/* The format strip's video: a muted loop that plays only while it is on screen, so the page
-   stays light and nothing moves behind the reader's back. A click pauses or resumes it, a reader
-   who asked for reduced motion gets the poster only, and with no script the poster stands alone. */
+/* Theme switch. The label always names the action it will take. */
 (function(){
-  var v = document.querySelector('.fmt-video'); if (!v) return;
-  var still = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var held = false;
-  function go(){ if (held || still) return; var p = v.play(); if (p && p.catch) p.catch(function(){}); }
-  v.addEventListener('click', function(){ held = !v.paused; if (held) { v.pause(); } else { still = false; go(); } });
-  v.style.cursor = 'pointer';
-  if (!('IntersectionObserver' in window)) { go(); return; }
-  new IntersectionObserver(function(es){ es.forEach(function(en){ if (en.isIntersecting) { go(); } else { v.pause(); } }); },
-    {threshold: 0.4}).observe(v);
+  var root = document.documentElement, btn = document.querySelector('button.theme-toggle');
+  if (!btn) return;
+  function label(){ btn.setAttribute('aria-label', root.dataset.theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'); }
+  label();
+  btn.addEventListener('click', function(){
+    var t = root.dataset.theme === 'light' ? 'dark' : 'light';
+    root.dataset.theme = t; label();
+    try { localStorage.setItem('theme', t); } catch (e) {}
+  });
+  /* No saved choice yet: keep following the system if it changes while the page is open. */
+  if (window.matchMedia) {
+    var mq = matchMedia('(prefers-color-scheme: light)');
+    var follow = function(ev){ var saved = null; try { saved = localStorage.getItem('theme'); } catch (e) {}
+      if (saved !== 'light' && saved !== 'dark') { root.dataset.theme = ev.matches ? 'light' : 'dark'; label(); } };
+    if (mq.addEventListener) mq.addEventListener('change', follow); else if (mq.addListener) mq.addListener(follow);
+  }
 })();
 </script>
 <script>
-/* Diagram lightbox. The anchor already opens the full-size file on its own,
-   so this only enhances the click; with JS off nothing is lost. */
+/* Image lightbox (diagrams, and the Overscan format strip's stills). The anchor already
+   opens the full-size file on its own, so this only enhances the click; with JS off
+   nothing is lost. Esc or a click closes it and focus returns to the link. */
 (function(){
-  var links = document.querySelectorAll('figure.diagram a.zoom');
+  var links = document.querySelectorAll('figure.diagram a.zoom, a.fmt-zoom');
   if (!links.length) return;
   var box = document.createElement('div');
   box.className = 'lb';
   box.setAttribute('role', 'dialog');
   box.setAttribute('aria-modal', 'true');
+  box.setAttribute('aria-label', 'Image viewer');
   box.innerHTML = '<button class="lb-x" type="button" aria-label="Close">&times;</button><img alt="">';
+  for (var j = 0; j < links.length; j++) links[j].setAttribute('aria-haspopup', 'dialog');
   document.body.appendChild(box);
   var img = box.querySelector('img'), last = null;
   function open(src, alt, from){
@@ -278,7 +296,9 @@
   }
   box.addEventListener('click', function(e){ if (e.target !== img || e.target === img) close(); });
   document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && box.classList.contains('on')) close();
+    if (!box.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'Tab') { e.preventDefault(); box.querySelector('.lb-x').focus(); }
   });
 })();
 </script>
