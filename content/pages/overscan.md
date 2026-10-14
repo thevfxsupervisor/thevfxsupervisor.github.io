@@ -31,14 +31,14 @@ sold_by: Overscan is sold by Wangle Media ApS, Copenhagen.
 ### More valuable content than you could make alone, every day
 One morning of your trade's news becomes a letter, an audio overview, a short explainer video and a slide deck, all saying the same thing, all under your name, with the one-picture infographic coming. The plumber listens in the van. The office manager reads on the train. You could not make four pieces a day by hand. Now you do not have to.
 
-Pick the one that leads your own email: read it, skim it, listen, watch, slides or the picture, and your copy arrives with it on top. Coming: email straight to your customers, each picking their own. Overscan still crafts each piece once, however many customers you have.
+Pick the one that leads your own email: read it, skim it, listen, watch or the slides, and your copy arrives with it on top. Coming: email straight to your customers, each picking their own. Overscan still crafts each piece once, however many customers you have.
 
 ![The explainer video of one real issue, paused on a frame that reads: A human touch is absolutely essential.](/static/overscan/formats-video.png)
 
 Real explainer video from one issue of a daily VFX update, as it plays on the issue page.
 
 ### Noticed by the right people
-Your name and your issue number on something your customers open every morning. The one who never reads an email hears you in the van; the one who skims gets the picture; the one who runs the Monday meeting flips your slides in front of the room. The same expertise, in the form each person already consumes, with your name on it every time. Coming: each customer picks theirs straight from your email.
+Your name and your issue number on something your customers open every morning. The one who never reads an email hears you in the van; the one who skims reads the two-minute version; the one who runs the Monday meeting flips your slides in front of the room. The same expertise, in the form each person already consumes, with your name on it every time. Coming: each customer picks theirs straight from your email.
 
 Issue #41 is the proof you were right in issue #12.
 
