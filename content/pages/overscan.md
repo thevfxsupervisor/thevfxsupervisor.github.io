@@ -5,7 +5,7 @@ title: Overscan | the vfx supervisor
 description: Be the one your customers trust to know what's happening and what it means. From you, every morning, to read, hear, watch, flip or see at a glance.
 eyebrow: Overscan
 h1: Stop being quietly brilliant.
-lede: Be the one your customers trust to know what changed in your trade and what it means. Every morning Overscan gives you that briefing under your name, five ways: read it, hear it, watch it, flip the slides or take the one picture. Tell Overscan what to change in plain words. The next issue listens.
+lede: Be the one your customers trust to know what changed in your trade and what it means. Every morning Overscan gives you that briefing under your name: read it, hear it, watch it or flip the slides, with the one picture coming. Tell Overscan what to change in plain words. The next issue listens.
 hero_coming: Email straight to your customers from your own address, each in the way they pick. Today all five come to you, and you send the issue through the tool you already use.
 cta_label: Make your expertise unmissable
 proof_label: The proof, every morning
@@ -14,7 +14,7 @@ features_h2: What you get that you could not get alone
 who_h2: For anyone whose customers should hear it from them first
 cadence: Daily for a fast-moving trade, weekly for everyone else.
 compare_h2: The other three ways to do this
-compare_after: Overscan tells your customers why today's news matters to them, five ways. You keep the name, the final word and the customers.
+compare_after: Overscan gives you why today's news matters to your customers, ready to send as text, audio, video or slides. You keep the name, the final word and the customers.
 faq_h2: Before you ask
 coming_h2: Not built yet, and we say so
 form_eyebrow: Start here

@@ -1721,10 +1721,9 @@ def format_strip():
         <div class="fmt-txt"><b>Watch it</b><p>A short explainer, crafted from the same words.</p></div></div>
       <div class="fmt-card"><div class="fmt-media wide"><img src="{m}issue-slide-1.png" width="1280" height="720" loading="lazy" alt="The title slide of the same issue: Defending margins in an AI-augmented production reality."></div>
         <div class="fmt-txt"><b>Flip the slides</b><p>For the Monday meeting, one story a slide.</p></div></div>
-      <div class="fmt-card"><div class="fmt-media"><img src="{m}issue-infographic.png" width="800" height="1130" loading="lazy" alt="Placeholder for the issue infographic."></div>
-        <div class="fmt-txt"><b>The one picture</b><p>The whole issue on one screen, for the person who will not read.</p></div></div>
+      <div class="fmt-card fmt-coming"><div class="fmt-txt"><b>The one picture</b> <span class="tag-coming">coming</span><p>The whole issue on one screen, for the person who will not read. It ships once it passes the same accuracy check as the rest.</p></div></div>
     </div>
-    <p class="fmt-hint">The 13 Oct 2026 issue as the letter, the audio, the video and the slides; its picture joins with the next issue. The audio and video here are short clips of the full 19 and 7 minutes.</p>'''
+    <p class="fmt-hint">The 13 Oct 2026 issue as the letter, the audio, the video and the slides. The audio and video here are short clips of the full 19 and 7 minutes.</p>'''
 
 
 FMT_SCRIPT = """
