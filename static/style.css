@@ -77,9 +77,13 @@ header.top{position:sticky;top:0;z-index:40;backdrop-filter:blur(9px);
 .top .btn{padding:9px 15px}
 .top nav a.btn-a,.top nav a.btn-a:hover{color:var(--on-accent);font-weight:600}
 /* Phone-width CTA: the in-nav "Work with me" button hides at 560px (below), and this compact
-   twin takes over right there, living in the brand row (between wordmark and theme toggle) so
-   it survives the nav wrapping to its own row at 480px. Geoff: the page that earns must stay
-   reachable on a phone. Hidden above 560px, where the in-nav button already does the job. */
+   twin takes over right there, living in the brand row (between wordmark and theme toggle).
+   FIXED 2026-10-14 (review caught it): this swap and the two-row stacking below used to fire at
+   different breakpoints (560 vs 480), so 481-559px got a single row with brand + 4 links +
+   this button + the toggle all at once, which didn't fit and caused horizontal scroll. Both now
+   fire at 560px together, so the row that doesn't fit never renders. Geoff: the page that earns
+   must stay reachable on a phone. Hidden above 560px, where the in-nav button already does the
+   job. */
 .cta-mobile{display:none}
 /* Small screens: keep every SECTION reachable (tighten instead of hiding).
    The in-nav CTA drops on phones (.cta-mobile replaces it, see above). */
@@ -100,9 +104,10 @@ header.top{position:sticky;top:0;z-index:40;backdrop-filter:blur(9px);
   .cta-mobile{display:inline-flex;align-items:center;justify-content:center;min-height:44px;
     box-sizing:border-box;padding:0 9px;font-size:13px;white-space:nowrap;flex:0 0 auto}
 }
-/* 480px: the wrap breakpoint below moves nav to its own full-width row (order:3), so this query
-   only has brand, .cta-mobile and the toggle left on row one; order:0 on all three keeps them in
-   that DOM order, and the toggle's own margin-left:auto (below) pushes it to the row's right edge. */
+/* 560px: the wrap breakpoint below (aligned with the CTA swap above, see its comment) moves nav
+   to its own full-width row (order:3), so this query only has brand, .cta-mobile and the toggle
+   left on row one; order:0 on all three keeps them in that DOM order, and the toggle's own
+   margin-left:auto (below) pushes it to the row's right edge. */
 /* Most phones are 360-430px wide (Geoff, 2026-10-14). On a personal-brand site the NAME matters
    more than the logo, so it stays next to the compact CTA and the toggle down to 360px by
    tightening the row (brand text a touch smaller, less gap, a slightly smaller logo) rather than
@@ -510,8 +515,11 @@ footer .mono{font-size:11.5px}
    brand and switch on top, every section link on a full-width row below. Nothing is hidden.
    The nav row itself may wrap to a second line at the narrowest widths (flex-wrap below) rather
    than overflow: four links (Projects, Daily, Notes, About) fit on one row down to 320px in
-   testing, but wrapping is the deliberate fallback if a label ever doesn't. */
-@media(max-width:480px){
+   testing, but wrapping is the deliberate fallback if a label ever doesn't.
+   This breakpoint MUST match the CTA swap above (560px): the two were split (560 vs 480) until a
+   review caught the 481-559px gap it left, where the in-nav CTA had already hidden, the compact
+   one had already shown, but the row hadn't stacked yet, so none of it fit. Keep them aligned. */
+@media(max-width:560px){
   .top .wrap{flex-wrap:wrap;height:auto;padding-top:8px;padding-bottom:4px;row-gap:2px}
   .top .brand{white-space:nowrap}
   .theme-toggle{margin-left:auto}
