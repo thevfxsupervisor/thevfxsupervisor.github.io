@@ -16,6 +16,9 @@ form_k: A script, a cut, two bids that disagree: tell me what you are staring at
 form_message_label: What are you working on?
 form_placeholder: A feature with about 100 VFX shots, shooting in spring. We have two bids and do not know how to compare them.
 form_submit: Skip the expensive lessons
+record_eyebrow: The record
+record_h2: VFX for Eastwood, Affleck and the Wachowskis
+record_k: Hire the supervisor behind a VES Award win on Changeling, with ten released films and series on the record.
 ---
 
 <!-- offers -->
@@ -47,3 +50,46 @@ Be the one your customers trust to know what changed in your trade and what it m
 
 **How it starts:** a short call about what you would send and to whom. Setup is a paid engagement, quoted after the call.
 <!-- /offers -->
+
+<!-- awards -->
+### VES Award win: Changeling
+7th Annual VES Awards, Outstanding Supporting Visual Effects in a Feature Motion Picture.
+
+### VES Award nomination: Invictus
+8th Annual VES Awards, Outstanding Supporting Visual Effects in a Feature Motion Picture.
+
+### Robert nomination, 2020: Skammerens datter II
+Visual effects of the year.
+<!-- /awards -->
+
+<!-- credits -->
+### Changeling
+Directed by Clint Eastwood. My role: VFX Supervisor.
+
+### Vantage Point
+Directed by Pete Travis. My role: VFX Supervisor.
+
+### Invictus
+Directed by Clint Eastwood. My role: VFX Supervisor.
+
+### J. Edgar
+Directed by Clint Eastwood. My role: VFX Supervisor.
+
+### Argo
+Directed by Ben Affleck. My role: VFX Supervisor.
+
+### Cloud Atlas
+Directed by The Wachowskis. My role: VFX Supervisor.
+
+### Red Dawn
+Directed by Dan Bradley. My role: VFX Supervisor.
+
+### Skammerens datter II
+Directed by Ask Hasselbalch. My role: VFX Supervisor.
+
+### Atlantic Crossing
+Directed by Alexander Eik. My role: VFX Supervisor & Producer.
+
+### Barzakh
+Directed by Asim Abbasi. My role: VFX Producer.
+<!-- /credits -->

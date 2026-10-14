@@ -1862,6 +1862,31 @@ def render_overscan():
                         extra_script=INQUIRY_SCRIPT + FMT_SCRIPT, canonical_path="overscan/")
 
 
+def _wwm_record(fm, body):
+    """The record: awards and released credits, from the <!-- awards --> and <!-- credits -->
+    blocks of work-with-me.md. Only what the live site already lists, at the LOWER claim:
+    ONE VES Award win (Changeling), never two (geoff-agents knowledge/geoff-credentials.md)."""
+    awards, _ = extract_block(body, "awards")
+    credits, _ = extract_block(body, "credits")
+    if not awards and not credits:
+        return ""
+    e = lambda k, d="": html.escape(fm.get(k, d), quote=False)
+    aw = "".join(f'<li><strong>{html.escape(a["title"], quote=False)}</strong><br>{_md_inline(a["body"])}</li>'
+                 for a in awards)
+    cr = "".join(f'<li><span class="film">{html.escape(c["title"], quote=False)}</span> '
+                 f'<span class="dim">{_md_inline(c["body"])}</span></li>' for c in credits)
+    return f'''<hr class="rule">
+<section id="record">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">{e("record_eyebrow", "The record")}</span><h2>{e("record_h2")}</h2>
+      <p class="k">{e("record_k")}</p></div>
+    <ul class="wwm-awards">{aw}</ul>
+    <ul class="wwm-credits">{cr}</ul>
+  </div>
+</section>
+'''
+
+
 def render_work_with_me():
     fm, body = parse_frontmatter((CONTENT_DIR / "pages" / "work-with-me.md").read_text(encoding="utf-8"))
     offers, _ = extract_block(body, "offers")
@@ -1883,6 +1908,7 @@ def render_work_with_me():
   </div>
 </section>
 
+{_wwm_record(fm, body)}
 <hr class="rule">
 <section>
   <div class="wrap">

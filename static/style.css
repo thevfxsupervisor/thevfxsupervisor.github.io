@@ -430,3 +430,4 @@ footer .mono{font-size:11.5px}
 @media(min-width:900px){.fmt-strip{margin:34px 0 0;padding:0;overflow:visible;display:grid;grid-template-columns:repeat(5,1fr)}.fmt-card{flex:none}}
 .note-cta{margin-top:28px;color:var(--dim);font-size:17px}
 .os-brand{display:inline-flex;align-items:center;gap:12px}.os-mark{width:40px;height:40px;flex:0 0 auto;display:block}
+.wwm-awards{list-style:none;padding:0;margin:0 0 22px;display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}.wwm-awards li{padding:16px 18px;border:1px solid var(--line);border-radius:12px;background:var(--panel)}.wwm-credits{list-style:none;padding:0;margin:0;display:grid;gap:8px 24px;grid-template-columns:repeat(auto-fit,minmax(220px,1fr))}.wwm-credits .film{font-weight:600}.wwm-credits .dim{color:var(--dim,#a3aab1)}
