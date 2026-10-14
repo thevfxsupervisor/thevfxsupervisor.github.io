@@ -95,19 +95,31 @@ header.top{position:sticky;top:0;z-index:40;backdrop-filter:blur(9px);
   .top nav a.btn-a{display:none}
   .top .logo{width:32px;height:32px}
   .brand{font-size:14px;gap:8px}
+  /* Compact: smaller horizontal padding, 13px text, still a real 44px touch target
+     (Geoff, 2026-10-14: the button must stay this small so the wordmark has room to live). */
   .cta-mobile{display:inline-flex;align-items:center;justify-content:center;min-height:44px;
-    box-sizing:border-box;padding:0 12px;font-size:11px;white-space:nowrap;flex:0 0 auto}
+    box-sizing:border-box;padding:0 9px;font-size:13px;white-space:nowrap;flex:0 0 auto}
 }
 /* 480px: the wrap breakpoint below moves nav to its own full-width row (order:3), so this query
    only has brand, .cta-mobile and the toggle left on row one; order:0 on all three keeps them in
    that DOM order, and the toggle's own margin-left:auto (below) pushes it to the row's right edge. */
-@media(max-width:400px){
-  /* The wordmark text would not fit next to the button and toggle at this width: the logo
-     stands alone (accessible name stays, visually hidden, same technique as .sr). */
+/* Most phones are 360-430px wide (Geoff, 2026-10-14). On a personal-brand site the NAME matters
+   more than the logo, so it stays next to the compact CTA and the toggle down to 360px by
+   tightening the row (brand text a touch smaller, less gap, a slightly smaller logo) rather than
+   dropping to the logo alone. */
+@media(max-width:430px){
+  .top .wrap{gap:6px}
+  .brand{font-size:12px;gap:5px}
+  .top .logo{width:26px;height:26px}
+  .cta-mobile{padding:0 7px}
+}
+/* Only below 360px may the name drop: the wordmark would not fit next to the button and toggle
+   at this width even at its smallest readable size, so the logo stands alone (accessible name
+   stays, visually hidden, same technique as .sr). */
+@media(max-width:359px){
   .brand-text{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
     overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
   .brand{gap:0}
-  .cta-mobile{padding:0 10px}
 }
 
 section{padding:clamp(46px,7vw,80px) 0}
