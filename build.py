@@ -742,7 +742,7 @@ def render_shell(title, description, content_html, nav_active=None, extra_script
     html_out = html_out.replace("{{CANONICAL}}", SITE_CANONICAL.rstrip("/") + "/" + canonical_path.lstrip("/"))
     html_out = html_out.replace("{{OG_IMAGE}}", _og_image_for(canonical_path))
     html_out = _overscan_favicon(html_out, canonical_path)
-    for key in ("daily", "reel", "projects", "notes", "about"):
+    for key in ("projects", "daily", "notes", "about"):
         cls = " current" if key == nav_active else ""
         html_out = html_out.replace("{{NAV_%s}}" % key.upper(), cls)
     html_out = html_out.replace("{{EXTRA_SCRIPT}}", extra_script)

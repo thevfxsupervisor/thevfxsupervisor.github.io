@@ -507,12 +507,16 @@ footer .mono{font-size:11.5px}
 :root[data-theme=dark] .theme-toggle .i-moon,:root[data-theme=light] .theme-toggle .i-sun{display:none}
 @media(max-width:560px){.theme-toggle{margin-left:0}}
 /* Phones: the switch would push the header past the screen edge, so the header becomes two rows,
-   brand and switch on top, every section link on a full-width row below. Nothing is hidden. */
+   brand and switch on top, every section link on a full-width row below. Nothing is hidden.
+   The nav row itself may wrap to a second line at the narrowest widths (flex-wrap below) rather
+   than overflow: four links (Projects, Daily, Notes, About) fit on one row down to 320px in
+   testing, but wrapping is the deliberate fallback if a label ever doesn't. */
 @media(max-width:480px){
   .top .wrap{flex-wrap:wrap;height:auto;padding-top:8px;padding-bottom:4px;row-gap:2px}
   .top .brand{white-space:nowrap}
   .theme-toggle{margin-left:auto}
-  .top nav{order:3;width:100%;margin-left:0;justify-content:space-between;gap:8px;min-height:40px}
+  .top nav{order:3;width:100%;margin-left:0;flex-wrap:wrap;justify-content:space-between;
+    gap:8px;min-height:40px}
   .top nav a{font-size:12px;padding:10px 0}
 }
 
