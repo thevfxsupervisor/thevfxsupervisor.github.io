@@ -4,9 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
+<meta name="color-scheme" content="dark light">
+<script>
+/* Theme before first paint, so there is no flash of the wrong one. A saved choice wins;
+   otherwise follow the system. Contract shared with the Daily pages: data-theme on <html>,
+   localStorage key "theme", button.theme-toggle in the header. */
+(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}
+if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark'}
+document.documentElement.dataset.theme=t})();
+</script>
 <title>#7: A new studio landing a horror feature shows where mid-size work is going</title>
 <meta name="description" content="Roxel Creative founder Calvin Romeyn serving as associate VFX supervisor on Backrooms, the studio's first major project, could be a useful signal for anyone">
-<link rel="icon" type="image/png" sizes="256x256" href="/static/favicon.png">
+<link rel="icon" type="image/svg+xml" href="/static/overscan/favicon.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="/static/overscan/favicon-64.png">
 <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
 <link rel="canonical" href="https://thevfxsupervisor.com/daily/7/">
 <meta property="og:type" content="website">
@@ -22,7 +32,7 @@
 <meta name="twitter:title" content="#7: A new studio landing a horror feature shows where mid-size work is going">
 <meta name="twitter:description" content="Roxel Creative founder Calvin Romeyn serving as associate VFX supervisor on Backrooms, the studio's first major project, could be a useful signal for anyone">
 <meta name="twitter:image" content="https://thevfxsupervisor.com/static/og/default.png">
-<link rel="stylesheet" href="/static/style.css?v=86ac1e06">
+<link rel="stylesheet" href="/static/style.css?v=9de83b47">
   <link rel="alternate" type="application/rss+xml" title="the vfx supervisor" href="https://thevfxsupervisor.com/feed.xml">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"the vfx supervisor","url":"https://thevfxsupervisor.com/"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "@id": "https://thevfxsupervisor.com/#person", "name": "Geoffrey Hancock", "jobTitle": "VFX Supervisor and Producer", "url": "https://thevfxsupervisor.com/", "sameAs": ["https://www.imdb.com/name/nm0995883/", "https://github.com/thevfxsupervisor", "https://wangle.media/", "https://www.wangle.studio"], "award": ["VES Award, Outstanding Supporting Visual Effects in a Feature Motion Picture, Changeling (7th Annual VES Awards)", "VES nomination, Invictus (8th Annual VES Awards)", "Robert nomination, Skammerens datter II"], "worksFor": {"@type": "Organization", "name": "Wangle Media", "url": "https://wangle.media/"}, "homeLocation": {"@type": "Place", "address": {"@type": "PostalAddress", "addressLocality": "Humlebaek", "addressCountry": "DK"}}, "knowsAbout": ["Visual effects", "VFX supervision", "VFX production", "VFX bidding and budgeting", "Shot breakdown", "Pipeline engineering", "Real-time and Unreal Engine production", "AI in visual effects", "Multi-vendor VFX delivery"], "knowsLanguage": ["en", "da"]}</script>
@@ -42,45 +52,43 @@
       <a href="/about/" class="hide-sm">About</a>
       <a class="btn btn-a" href="/course/">Join the waitlist</a>
     </nav>
+    <button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button>
   </div>
 </header>
 
 <main id="main">
-<link rel="stylesheet" href="/static/daily.css">
+<script>document.documentElement.className+=" dj-js";</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap"><link rel="stylesheet" href="/static/daily.css">
 <main class="daily">
-  <article class="daily-card">
-    <header class="daily-head">
-      <span class="eyebrow">The VFX Supervisor Daily &middot; #7</span>
-      <h1>A new studio landing a horror feature shows where mid-size work is going</h1>
-      <p class="daily-date"><time datetime="2026-10-12">12 October 2026</time></p>
-    </header>
+  <header class="daily-head">
+    <span class="daily-eyebrow">The VFX Supervisor Daily &middot; #7 &middot; <time datetime="2026-10-12">12 October 2026</time></span>
+    <h1>A new studio landing a horror feature shows where mid-size work is going</h1>
+    <div class="daily-lede"><p>Roxel Creative founder Calvin Romeyn serving as associate VFX supervisor on Backrooms, the studio's first major project, could be a useful signal for anyone bidding mid-size work.</p></div>
+  </header>
+  
+  <article class="daily-card" id="issue">
     <div class="prose">
-<p>Roxel Creative founder Calvin Romeyn serving as associate VFX supervisor on Backrooms, the studio's first major project, could be a useful signal for anyone bidding mid-size work.</p>
 <h2>Small studios taking on feature-scale work</h2>
 <p>Roxel Creative's first major project was the feature Backrooms, where founder Calvin Romeyn also served as associate VFX supervisor on the entire movie, suggesting a strong debut for the studio. That suggests newer, leaner studios can compete for sizeable scope. Worth watching as a possible partner or rival on future bids, especially for CG environment extensions of practical sets.</p>
 <ul><li><a href="https://www.cgchannel.com/2026/10/check-out-roxel-creatives-eerie-vfx-breakdown-for-backrooms/">Check out Roxel Creative’s eerie VFX breakdown for Backrooms</a> · cgchannel.com <em>Roxel Creative, founded by Calvin Romeyn, worked on Backrooms with Romeyn as associate VFX supervisor, which suggests small, newly formed studios could turn up as rivals or vendor partners on bids.</em></li><li><a href="https://beforesandafters.com/2026/10/12/creating-the-spinosaurus-for-the-end-of-oak-street/">Creating the Spinosaurus for ‘The End of Oak Street’</a> · befores &amp; afters</li></ul>
 <p><em>2 links checked when this went out, 0 dead.</em></p>
     </div>
   </article>
-  <nav class="daily-nav" aria-label="More issues"><span></span><span><a href="/daily/">All issues</a></span><span></span></nav>
   
-  <section class="daily-join" id="join" aria-labelledby="join-daily-issue-h">
-    <span class="eyebrow">By email, coming soon</span>
-    <h2 id="join-daily-issue-h">Get it every morning your way: read it, hear it, watch it.</h2>
-    <p>Skip the trade-site scroll. The VFX Supervisor Daily tells you what the day's VFX news means for your work, with a link to every story. You pick how it lands: text, audio, video, slides or one picture.</p>
-    <form class="form-card join-form" id="join-daily-issue" method="post" action="https://newsletter-edge.thevfxsupervisor.workers.dev/join/vfx" accept-charset="utf-8">
-      <div class="field"><label for="join-daily-issue-email">Email</label><input type="email" id="join-daily-issue-email" name="email" required maxlength="320" autocomplete="email"></div>
-      <div class="field"><label for="join-daily-issue-name">First name (optional)</label><input type="text" id="join-daily-issue-name" name="name" maxlength="200" autocomplete="given-name"></div>
-      <fieldset><legend>Your format</legend><div class="formats"><label><input type="radio" name="format" value="read" checked> Read it</label><label><input type="radio" name="format" value="listen"> Hear it</label><label><input type="radio" name="format" value="watch"> Watch it</label><label><input type="radio" name="format" value="slides"> Slides</label><label><input type="radio" name="format" value="picture"> One picture</label></div></fieldset>
-      <div class="hp" aria-hidden="true"><label for="join-daily-issue-website">Leave this empty</label><input type="text" id="join-daily-issue-website" name="website" tabindex="-1" autocomplete="off"></div>
+  <section class="daily-join" id="join-daily-issue" aria-labelledby="join-daily-issue-h">
+    <h2 id="join-daily-issue-h">Get The VFX Supervisor Daily every morning, your way</h2>
+    <form class="join-form" method="post" action="https://newsletter-edge.thevfxsupervisor.workers.dev/join/vfx" accept-charset="utf-8">
+      <fieldset><legend class="daily-sr">Your format</legend><label class="daily-pick"><input type="radio" name="format" value="read" checked><span>Read it</span></label><label class="daily-pick"><input type="radio" name="format" value="listen"><span>Hear it</span></label><label class="daily-pick"><input type="radio" name="format" value="watch"><span>Watch it</span></label><label class="daily-pick"><input type="radio" name="format" value="slides"><span>Slides</span></label><label class="daily-pick"><input type="radio" name="format" value="picture"><span>The picture</span></label></fieldset>
+      <div class="daily-row"><label class="daily-sr" for="join-daily-issue-email">Your email</label><input type="email" id="join-daily-issue-email" name="email" required maxlength="320" autocomplete="email" placeholder="you@studio.com"><button type="submit" class="daily-send">Send me the Daily</button></div>
+      <p class="daily-consent">Email me The VFX Supervisor Daily from Geoffrey Hancock each morning, in the format I picked, with the occasional note about his VFX updates. I can unsubscribe in one click from any email.</p>
+      <div class="daily-hp" aria-hidden="true"><label for="join-daily-issue-website">Leave this empty</label><input type="text" id="join-daily-issue-website" name="website" tabindex="-1" autocomplete="off"></div>
       <input type="hidden" name="source" value="daily-issue">
-      <input type="hidden" name="consent_version" value="vfx-daily-v1">
-      <div class="field consent"><label for="join-daily-issue-consent"><input type="checkbox" id="join-daily-issue-consent" name="consent" value="yes" required> Email me The VFX Supervisor Daily from Geoffrey Hancock (Wangle Media ApS) each morning, in the format I picked, with the occasional note about his VFX services. I can unsubscribe in one click from any email.</label></div>
-      <button type="submit" class="btn btn-a">Save my spot</button>
+      <input type="hidden" name="consent" value="yes">
+      <input type="hidden" name="consent_version" value="vfx-daily-v2">
       <div class="wl-status" role="status" aria-live="polite"></div>
-      <p class="tiny">Email opens soon. We'll confirm by email before anything else, and nothing else arrives until you say yes. Until then, read every issue here or in <a href="/daily/feed.xml">RSS</a>. <a href="/privacy/">Privacy note</a>.</p>
+      <p class="daily-small">Email opens soon. We'll confirm by email before anything else, and nothing else arrives until you say yes. Until then, read every issue here or in <a href="/daily/feed.xml">RSS</a>. <a href="/privacy/">Privacy note</a>.</p>
     </form>
   </section>
+  <nav class="daily-nav" aria-label="More issues"><span></span><span><a href="/daily/">All issues</a></span><span></span></nav>
   <p class="daily-foot"><a href="/daily/feed.xml">RSS</a> &middot; <a href="/daily/feed.json">JSON Feed</a> &middot; Made with <a href="/overscan/">Overscan</a></p>
 </main>
 
@@ -106,11 +114,23 @@
 </footer>
 
 <script>
-/* Subscribe block: with no script the browser posts the form itself and the app sends it back
-   to the thanks page. With script, the same urlencoded post goes by fetch (no preflight). */
 (function(){
+  var each = function(list, fn){ Array.prototype.forEach.call(list, fn); };
+  each(document.querySelectorAll('.daily-take'), function(sec){
+    var chips = sec.querySelectorAll('.daily-chip'), panels = sec.querySelectorAll('.daily-panel');
+    function pick(f){
+      each(chips, function(c){ var on = c.getAttribute('data-f') === f; c.classList.toggle('on', on);
+        if (on) { c.setAttribute('aria-current', 'true'); } else { c.removeAttribute('aria-current'); } });
+      each(panels, function(p){ var on = p.getAttribute('data-f') === f; p.classList.toggle('on', on);
+        if (!on) { each(p.querySelectorAll('audio,video'), function(m){ try { m.pause(); } catch (e) {} }); } });
+    }
+    each(chips, function(c){ c.addEventListener('click', function(e){ e.preventDefault(); pick(c.getAttribute('data-f')); }); });
+    pick('read');
+  });
+  /* The sign-up form: with no script the browser posts it and the app sends the visitor to
+     the thanks page. With script, the same urlencoded post goes by fetch (no preflight). */
   var THANKS = "/daily/thanks/";
-  Array.prototype.forEach.call(document.querySelectorAll('.join-form'), function(form){
+  each(document.querySelectorAll('.join-form'), function(form){
     var status = form.querySelector('.wl-status'), submit = form.querySelector('[type=submit]');
     function say(msg, cls){ status.textContent = msg; status.className = 'wl-status ' + (cls || ''); }
     form.addEventListener('submit', function(e){
@@ -133,16 +153,40 @@
 })();
 </script>
 <script>
-/* Diagram lightbox. The anchor already opens the full-size file on its own,
-   so this only enhances the click; with JS off nothing is lost. */
+/* Theme switch. The label always names the action it will take. */
 (function(){
-  var links = document.querySelectorAll('figure.diagram a.zoom');
+  var root = document.documentElement, btn = document.querySelector('button.theme-toggle');
+  if (!btn) return;
+  function label(){ btn.setAttribute('aria-label', root.dataset.theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'); }
+  label();
+  btn.addEventListener('click', function(){
+    var t = root.dataset.theme === 'light' ? 'dark' : 'light';
+    root.dataset.theme = t; label();
+    try { localStorage.setItem('theme', t); } catch (e) {}
+  });
+  /* No saved choice yet: keep following the system if it changes while the page is open. */
+  if (window.matchMedia) {
+    var mq = matchMedia('(prefers-color-scheme: light)');
+    var follow = function(ev){ var saved = null; try { saved = localStorage.getItem('theme'); } catch (e) {}
+      if (saved !== 'light' && saved !== 'dark') { root.dataset.theme = ev.matches ? 'light' : 'dark'; label(); } };
+    if (mq.addEventListener) mq.addEventListener('change', follow); else if (mq.addListener) mq.addListener(follow);
+  }
+})();
+</script>
+<script>
+/* Image lightbox (diagrams, and the Overscan format strip's stills). The anchor already
+   opens the full-size file on its own, so this only enhances the click; with JS off
+   nothing is lost. Esc or a click closes it and focus returns to the link. */
+(function(){
+  var links = document.querySelectorAll('figure.diagram a.zoom, a.fmt-zoom');
   if (!links.length) return;
   var box = document.createElement('div');
   box.className = 'lb';
   box.setAttribute('role', 'dialog');
   box.setAttribute('aria-modal', 'true');
+  box.setAttribute('aria-label', 'Image viewer');
   box.innerHTML = '<button class="lb-x" type="button" aria-label="Close">&times;</button><img alt="">';
+  for (var j = 0; j < links.length; j++) links[j].setAttribute('aria-haspopup', 'dialog');
   document.body.appendChild(box);
   var img = box.querySelector('img'), last = null;
   function open(src, alt, from){
@@ -167,7 +211,9 @@
   }
   box.addEventListener('click', function(e){ if (e.target !== img || e.target === img) close(); });
   document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && box.classList.contains('on')) close();
+    if (!box.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'Tab') { e.preventDefault(); box.querySelector('.lb-x').focus(); }
   });
 })();
 </script>

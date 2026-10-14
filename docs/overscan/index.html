@@ -4,15 +4,25 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="robots" content="index, follow">
+<meta name="color-scheme" content="dark light">
+<script>
+/* Theme before first paint, so there is no flash of the wrong one. A saved choice wins;
+   otherwise follow the system. Contract shared with the Daily pages: data-theme on <html>,
+   localStorage key "theme", button.theme-toggle in the header. */
+(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}
+if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark'}
+document.documentElement.dataset.theme=t})();
+</script>
 <title>Overscan | the vfx supervisor</title>
-<meta name="description" content="Overscan reads the sources a business picks, drafts what changed in its trade and why it matters, and waits for approval before anything goes out under its name.">
-<link rel="icon" type="image/png" sizes="256x256" href="/static/favicon.png">
+<meta name="description" content="Be the one your customers trust to know what's happening and what it means. From you, every morning, to read, hear, watch or flip through.">
+<link rel="icon" type="image/svg+xml" href="/static/overscan/favicon.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="/static/overscan/favicon-64.png">
 <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
 <link rel="canonical" href="https://thevfxsupervisor.com/overscan/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="the vfx supervisor">
 <meta property="og:title" content="Overscan | the vfx supervisor">
-<meta property="og:description" content="Overscan reads the sources a business picks, drafts what changed in its trade and why it matters, and waits for approval before anything goes out under its name.">
+<meta property="og:description" content="Be the one your customers trust to know what's happening and what it means. From you, every morning, to read, hear, watch or flip through.">
 <meta property="og:url" content="https://thevfxsupervisor.com/overscan/">
 <meta property="og:image" content="https://thevfxsupervisor.com/static/og/default.png">
 <meta property="og:image:width" content="1200">
@@ -20,9 +30,9 @@
 <meta property="og:image:alt" content="Overscan | the vfx supervisor">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Overscan | the vfx supervisor">
-<meta name="twitter:description" content="Overscan reads the sources a business picks, drafts what changed in its trade and why it matters, and waits for approval before anything goes out under its name.">
+<meta name="twitter:description" content="Be the one your customers trust to know what's happening and what it means. From you, every morning, to read, hear, watch or flip through.">
 <meta name="twitter:image" content="https://thevfxsupervisor.com/static/og/default.png">
-<link rel="stylesheet" href="/static/style.css?v=86ac1e06">
+<link rel="stylesheet" href="/static/style.css?v=9de83b47">
   <link rel="alternate" type="application/rss+xml" title="the vfx supervisor" href="https://thevfxsupervisor.com/feed.xml">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"the vfx supervisor","url":"https://thevfxsupervisor.com/"}</script>
 <script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "@id": "https://thevfxsupervisor.com/#person", "name": "Geoffrey Hancock", "jobTitle": "VFX Supervisor and Producer", "url": "https://thevfxsupervisor.com/", "sameAs": ["https://www.imdb.com/name/nm0995883/", "https://github.com/thevfxsupervisor", "https://wangle.media/", "https://www.wangle.studio"], "award": ["VES Award, Outstanding Supporting Visual Effects in a Feature Motion Picture, Changeling (7th Annual VES Awards)", "VES nomination, Invictus (8th Annual VES Awards)", "Robert nomination, Skammerens datter II"], "worksFor": {"@type": "Organization", "name": "Wangle Media", "url": "https://wangle.media/"}, "homeLocation": {"@type": "Place", "address": {"@type": "PostalAddress", "addressLocality": "Humlebaek", "addressCountry": "DK"}}, "knowsAbout": ["Visual effects", "VFX supervision", "VFX production", "VFX bidding and budgeting", "Shot breakdown", "Pipeline engineering", "Real-time and Unreal Engine production", "AI in visual effects", "Multi-vendor VFX delivery"], "knowsLanguage": ["en", "da"]}</script>
@@ -42,21 +52,34 @@
       <a href="/about/" class="hide-sm">About</a>
       <a class="btn btn-a" href="/course/">Join the waitlist</a>
     </nav>
+    <button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button>
   </div>
 </header>
 
 <main id="main">
 
 <section class="hero">
-  <div class="wrap os-hero">
-    <div>
-      <span class="eyebrow">Overscan</span>
-      <h1 style="margin-top:18px">Be the business that knows what changed in your trade.</h1>
-      <p class="lede">Every business has to publish to be noticed now. Overscan reads the sources you choose, writes what is new and why it matters to your customers, and waits for your OK. Nothing goes out under your name until you approve it.</p>
-      <div class="cta-row"><a class="btn btn-a" href="#inquiry">Want this for your business?</a></div>
-      <p class="door">Here for the VFX news? <a href="/daily/">Read the Daily</a>. Need VFX help on a show? <a href="/work-with-me/">Work with me</a>.</p>
+  <div class="wrap">
+    <span class="eyebrow os-brand"><img class="os-mark" src="/static/overscan/mark-e1.svg" alt="" width="40" height="40">Overscan</span>
+    <h1 style="margin-top:18px">Stop being quietly brilliant.</h1>
+    <p class="lede">Be the one your customers trust to know what changed in your trade and what it means. Every morning Overscan gives you that briefing under your name: read it, hear it, watch it or flip the slides, with the one picture coming. Tell Overscan what to change in plain words. The next issue listens.</p>
+    <p class="tiny os-hero-coming"><span class="tag-coming">coming</span> Email straight to your customers from your own address, each in the way they pick. Today every format comes to you, and you send the issue through the tool you already use.</p>
+    <div class="cta-row"><a class="btn btn-a" href="#inquiry">Make your expertise unmissable</a></div>
+    
+    <div class="fmt-strip" aria-label="The same issue, every way it comes today">
+      <div class="fmt-card"><div class="fmt-media"><a class="fmt-zoom" href="/static/overscan/media/phone-read.png"><img src="/static/overscan/media/phone-read.png" width="390" height="700" loading="lazy" alt="The 13 Oct 2026 issue as an email on a phone."></a></div>
+        <div class="fmt-txt"><b>Read it</b><p>Two minutes with coffee. Only what is new, and why it matters to them.</p></div></div>
+      <div class="fmt-card"><div class="fmt-media"><a class="fmt-zoom" href="/static/overscan/media/phone-listen.png"><img src="/static/overscan/media/phone-listen.png" width="390" height="700" loading="lazy" alt="The same issue as it arrives when you pick Listen: the play button on top, the letter below."></a></div>
+        <div class="fmt-txt"><b>Hear it</b><p>The whole issue as a conversation, for the van.</p>
+        <audio controls preload="none" src="/static/overscan/media/issue-audio.m4a" aria-label="Audio overview of the issue"></audio></div></div>
+      <div class="fmt-card"><div class="fmt-media wide"><video class="fmt-video" controls playsinline preload="none" poster="/static/overscan/media/issue-video-poster.jpg" width="1280" height="720" aria-label="A short clip of the issue's explainer video, silent"><source src="/static/overscan/media/issue-video.mp4" type="video/mp4"></video></div>
+        <div class="fmt-txt"><b>Watch it</b><p>A short explainer, crafted from the same words.</p></div></div>
+      <div class="fmt-card"><div class="fmt-media wide"><a class="fmt-zoom" href="/static/overscan/media/issue-slide-1.png"><img src="/static/overscan/media/issue-slide-1.png" width="1280" height="714" loading="lazy" alt="The title slide of the same issue: Defending margins in an AI-augmented production reality."></a></div>
+        <div class="fmt-txt"><b>Flip the slides</b><p>For the Monday meeting, one story a slide.</p></div></div>
+      <div class="fmt-card fmt-coming"><div class="fmt-txt"><b>The one picture</b> <span class="tag-coming">coming</span><p>The whole issue on one screen, for the person who will not read. It joins the others once it is reliably accurate.</p></div></div>
     </div>
-    <div class="phone"><img src="/static/overscan/issue-phone.png" width="390" height="820" alt="An issue of The VFX Supervisor Daily on a phone: the opening line says what the day means, then one story with a so-what line."></div>
+    <p class="fmt-hint">The 13 Oct 2026 issue as the letter, the audio, the video and the slides. The audio and video here are short clips of the full 19 and 7 minutes.</p>
+    <p class="door">The VFX news, every morning: <a href="/daily/">Read the Daily</a>. Shooting VFX: skip the expensive lessons and <a href="/work-with-me/">put me on your show</a>.</p>
   </div>
 </section>
 
@@ -64,45 +87,38 @@
 <section>
   <div class="wrap">
     <div class="os-proof">
-      <b>Made with Overscan</b>
-      <p>Geoff's own daily VFX brief is made this way: public sources in, one editor approving each morning. Its public edition is The VFX Supervisor Daily.</p>
+      <b>The proof, every morning</b>
+      <p>The VFX Supervisor Daily is Geoff's own morning VFX briefing, crafted with Overscan. Read it, hear it, watch it. That is how one VFX supervisor shows what he knows to the people who hire one.</p>
       <p class="os-proof-link"><a href="/daily/">See it working</a></p>
     </div>
   </div>
 </section>
 
+
 <hr class="rule">
 <section>
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">How it works</span><h2>One morning, three steps</h2></div>
-    <ol class="os-steps"><li><h3>You pick the sources</h3><p>Websites, RSS feeds, forum threads, YouTube channels, keywords, or a page saved with a browser button. Say in your own words who reads you and what they care about.</p></li><li><h3>It reads and drafts</h3><p>Every morning it checks each source, keeps only what is new, and writes one line per story on why it matters. Every link points back to the original.</p></li><li><h3>You approve</h3><p>You read the draft and approve it, or skip the day and nothing goes out. The approved issue comes to you, ready to send through the tool you already use.</p></li></ol>
+    <div class="sec-head"><span class="eyebrow">Why it is different</span><h2>What you get that you could not get alone</h2></div>
+    <div class="feat"><div class="txt"><h3>More valuable content than you could make alone, every day</h3><p>One morning of your trade's news becomes a letter, an audio overview, a short explainer video and a slide deck, all saying the same thing, all under your name, with the one-picture infographic coming. The plumber listens in the van. The office manager reads on the train. You could not make four pieces a day by hand. Now you do not have to.</p><p class="pr">Pick the one that leads your own email: read it, skim it, listen, watch or the slides, and your copy arrives with it on top. Coming: email straight to your customers, each picking their own. Overscan still crafts each piece once, however many customers you have.</p></div><figure class="shot"><a class="zoom" href="/static/overscan/formats-video.png" aria-label="Open the full-size screen"><img src="/static/overscan/formats-video.png" alt="The explainer video of one real issue, paused on a frame that reads: A human touch is absolutely essential." loading="lazy"></a><figcaption>Real explainer video from one issue of a daily VFX update, as it plays on the issue page.</figcaption></figure></div><div class="feat"><div class="txt"><h3>Noticed by the right people</h3><p>Your name and your issue number on something your customers open every morning. The one who never reads an email hears you in the van; the one who skims reads the two-minute version; the one who runs the Monday meeting flips your slides in front of the room. The same expertise, in the form each person already consumes, with your name on it every time. Coming: each customer picks theirs straight from your email.</p><p class="pr">Issue #41 is the proof you were right in issue #12.</p></div></div><div class="feat"><div class="txt"><h3>The one they trust to know what's happening, and what it means</h3><p>Every story carries one line on why it matters to your customers, not a link dump. A story they have already seen stays out until something changes, then comes back marked as an update. Every link is checked before the issue goes out, and the last line of every issue says so. Over a month of mornings, that is what makes you the one they ask.</p></div><figure class="shot"><a class="zoom" href="/static/overscan/links.png" aria-label="Open the full-size screen"><img src="/static/overscan/links.png" alt="The end of a real web issue, finishing with: 2 links checked when this went out, 0 dead." loading="lazy"></a><figcaption>Real web issue, last lines.</figcaption></figure></div><div class="feat"><div class="txt"><h3>Sounds like you, because you taught Overscan</h3><p>"Shorter." "More on the new rules, less on trade shows." "Drop that site, add this one." Reply to any issue in your own words and the next one changes. You get a note back saying what Overscan understood, and replying UNDO takes it back. No settings page, no manual: you teach Overscan the way you would teach a new hire, and Overscan gets you a little more every week.</p><p class="pr">Every reply changes the next issue, and the ones after it.</p></div></div>
   </div>
 </section>
 
 <hr class="rule">
 <section>
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Why it is different</span><h2>Your name, your OK on every issue</h2></div>
-    <div class="feat"><div class="txt"><h3>Nothing goes out until you say so</h3><p>Overscan drafts. You decide. An issue waits for your approval, and once you approve it, it is locked: nothing changes after that except your name on it.</p><p class="pr">Each approved issue is printed with "Reviewed by" and your name.</p></div><figure class="shot"><a class="zoom" href="/static/overscan/approve.png" aria-label="Open the full-size screen"><img src="/static/overscan/approve.png" alt="The review screen: Review before it goes out, the email as it will look, and an Approve button." loading="lazy"></a><figcaption>Real screen from a demo brief with made-up readers.</figcaption></figure></div><div class="feat"><div class="txt"><h3>Careful by default</h3><p>It opens every link before the issue goes out and leaves out a story whose only link is dead. It remembers what your readers have already seen and keeps a story out unless something changed; when it has, the story comes back marked as an update.</p><p class="pr">The last line of every issue says how many links were checked.</p></div><figure class="shot"><a class="zoom" href="/static/overscan/links.png" aria-label="Open the full-size screen"><img src="/static/overscan/links.png" alt="The end of a real web issue, finishing with: 2 links checked when this went out, 0 dead." loading="lazy"></a><figcaption>Real web issue, last lines.</figcaption></figure></div>
+    <div class="sec-head"><span class="eyebrow">Who it is for</span><h2>For anyone whose customers should hear it from them first</h2></div>
+    <div class="os-cards"><div class="os-card"><h3>A local trade</h3><p>A plumber, an electrician, a builder. New rules, prices and kit, explained by the person who will fit it. Your customers hear it from you first, and remember who told them.</p></div><div class="os-card"><h3>Advisers and consultancies</h3><p>You are paid for knowing. Your clients get a taste of it every week, in their inbox, under your name, and a reply turns into a conversation.</p></div><div class="os-card"><h3>Trade bodies and brands</h3><p>A whole field hears what changed from one source it trusts, with a person's name on every issue.</p></div></div>
+    <p class="k os-k">Daily for a fast-moving trade, weekly for everyone else.</p>
+    <div class="os-not"><h3>What Overscan does not do</h3><ul><li><strong>Write your own company news.</strong> Overscan works from what the trade press, the forums and the videos say about your trade. Your own announcements are still yours to write.</li><li><strong>Run ads or paid subscriptions.</strong> Use a newsletter platform built for that.</li><li><strong>Replace you.</strong> Your judgment is the point. Overscan makes it reach further, every morning.</li></ul></div>
   </div>
 </section>
 
 <hr class="rule">
 <section>
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Who it is for</span><h2>For any business that has to publish to be noticed</h2></div>
-    <div class="os-cards"><div class="os-card"><h3>A local trade</h3><p>A plumber, an electrician, a builder: a short weekly note to your customers on what changed in the trade (rules, prices, products), with your name on it.</p></div><div class="os-card"><h3>Advisers and consultancies</h3><p>Your clients and contacts get something useful from you each week, not a sales email. A reply is a warm conversation.</p></div><div class="os-card"><h3>Trade bodies and brands</h3><p>One editor keeps a whole field or customer base up to date, and approves every issue before it goes.</p></div></div>
-    <p class="k os-k">Daily for a fast field, weekly for everyone else. Both work today.</p>
-    <div class="os-not"><h3>What it does not do</h3><ul><li><strong>Write your own company news.</strong> Overscan works from other people's sources about your trade. Your own announcements are still yours to write.</li><li><strong>Run ads or paid subscriptions.</strong> Use a newsletter platform built for that.</li><li><strong>Run without you.</strong> A person approves every issue. That is the point.</li></ul></div>
-  </div>
-</section>
-
-<hr class="rule">
-<section>
-  <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">An honest comparison</span><h2>Three other ways to do this</h2></div>
-    <div class="os-cards"><div class="os-card"><h3>By hand</h3><p>You read the trade press every morning and write it up. Full control. It costs the hours you do not have, and it stops the first busy week.</p></div><div class="os-card"><h3>A newsletter platform</h3><p>Good for sending and for growing a list. You still find the news and write every word yourself.</p></div><div class="os-card"><h3>A personal AI briefing</h3><p>Fast and often free, and a fine way to keep yourself informed. It is written for you, not for your customers under your name, with your approval on every issue.</p></div></div>
-    <p class="k os-k">Overscan does the reading and the first draft. You keep the approval and the name.</p>
+    <div class="sec-head"><span class="eyebrow">An honest comparison</span><h2>The other three ways to do this</h2></div>
+    <div class="os-cards"><div class="os-card"><h3>By hand</h3><p>Read the trade press every morning and write it up yourself. Full control. It costs the hours you do not have, and it dies the first busy week.</p></div><div class="os-card"><h3>A newsletter platform</h3><p>Great at sending and at growing a list. No idea what to say. You still find the news and write every word.</p></div><div class="os-card"><h3>A personal AI summary</h3><p>Fast, often free, and fine for keeping yourself informed. It is written for you. Nobody else reads it, nobody learns what you know, and your name is nowhere on it.</p></div></div>
+    <p class="k os-k">Overscan gives you why today's news matters to your customers, ready to send as text, audio, video or slides. You keep the name, the final word and the customers.</p>
   </div>
 </section>
 
@@ -110,7 +126,7 @@
 <section>
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">Questions</span><h2>Before you ask</h2></div>
-    <div class="os-faq"><details><summary>Is AI writing it?</summary><p>It drafts. You approve. Every story links to its original source, and nothing goes out until you approve it. If you would not sign it, do not send it.</p></details><details><summary>Who owns what it makes?</summary><p>You do: your sources, your brief and every issue. Today the approved issue comes to you, and you send it to your own list through the tool you already use.</p></details><details><summary>What does it cost?</summary><p>We set it up with you as a paid engagement, quoted after a short call. There is no self-serve plan or public price yet.</p></details></div>
+    <div class="os-faq"><details><summary>How do we start, and how does it reach my customers?</summary><p>A short call, then we point Overscan at the websites, forums, videos and newsletters you trust, and describe your customers in your words. You see a week of real issues before anyone else does. Email straight to your customers from your own address is coming; until then each issue comes to you first, and you send it through the tool you already use.</p></details><details><summary>Does Overscan make a separate video for every customer?</summary><p>No. Overscan crafts each piece once per issue, whether ten people read it or ten thousand. That is why each customer picking their own will not grow the cost with your list.</p></details><details><summary>Is AI writing it?</summary><p>Overscan crafts it, you decide what carries your name, and you change anything by replying. Every story links to the original. If you would not say it yourself, do not send it.</p></details><details><summary>Who owns what Overscan makes?</summary><p>You do. Every issue, every website you chose, every lesson you taught Overscan.</p></details><details><summary>What does it cost?</summary><p>A paid setup, quoted after one call. No tiers to decode, no self-serve plan, no public price yet.</p></details></div>
   </div>
 </section>
 
@@ -118,27 +134,27 @@
 <section>
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">Coming</span><h2>Not built yet, and we say so</h2></div>
-    <ul class="os-coming"><li><strong>Email to your readers</strong> <span class="tag-coming">coming</span><br>Issues sent by email to your readers from your own domain (for example news.yourbusiness.com), with a dated consent record for each reader and one-click unsubscribe.</li><li><strong>Readers choose their own version</strong> <span class="tag-coming">coming</span><br>Each reader picks their topics, length, time and format.</li><li><strong>Sign up on your own</strong> <span class="tag-coming">coming</span><br>Today we set it up with you.</li></ul>
+    <ul class="os-coming"><li><strong>Email straight to your customers</strong> <span class="tag-coming">coming</span><br>Issues sent from your own address (for example news@yourbusiness.com), each customer in the format they picked, with a dated record of each customer's yes and one-click unsubscribe.</li><li><strong>Sign up on your own</strong> <span class="tag-coming">coming</span><br>Today we set it up with you.</li></ul>
   </div>
 </section>
 
 <hr class="rule">
 <section id="inquiry">
   <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Want this for your business?</span><h2>Tell me what you would send, and to whom.</h2>
-      <p class="k">I read every message myself and reply from geoff@thevfxsupervisor.com to set up a short call.</p></div>
+    <div class="sec-head"><span class="eyebrow">Start here</span><h2>Start showing what you know</h2>
+      <p class="k">Tell me who your customers are and what they should hear from you first. I read every message myself and reply from geoff@thevfxsupervisor.com to set up a short call.</p></div>
     
     <form class="form-card inquiry-form" id="os-form" method="post" action="https://newsletter-edge.thevfxsupervisor.workers.dev/hooks/inquiry" accept-charset="utf-8">
       <div class="field"><label for="os-form-name">Your name</label><input type="text" id="os-form-name" name="name" required maxlength="200" autocomplete="name"></div>
       <div class="field"><label for="os-form-email">Email</label><input type="email" id="os-form-email" name="email" required maxlength="320" autocomplete="email"></div>
       <div class="field"><label for="os-form-company">Your business (optional)</label><input type="text" id="os-form-company" name="company" maxlength="200" autocomplete="organization"></div>
       <input type="hidden" name="offer" value="brief">
-      <div class="field"><label for="os-form-message">What would you send, and to whom?</label>
-        <textarea id="os-form-message" name="message" required maxlength="5000" placeholder="We are a heating firm. A weekly note to our customers on rules, prices and new kit."></textarea></div>
+      <div class="field"><label for="os-form-message">Who are your customers, and what should they hear from you first?</label>
+        <textarea id="os-form-message" name="message" required maxlength="5000" placeholder="We are a heating firm. Our customers should hear about new rules, prices and kit from us, before they hear it from anyone else."></textarea></div>
       <div class="hp" aria-hidden="true"><label for="os-form-website">Leave this empty</label><input type="text" id="os-form-website" name="website" tabindex="-1" autocomplete="off"></div>
       <input type="hidden" name="source" value="overscan">
       <div class="field consent"><label for="os-form-consent"><input type="checkbox" id="os-form-consent" name="consent" value="yes" required> I agree to be contacted about this message at the email address I gave.</label></div>
-      <button type="submit" class="btn btn-a">Send</button>
+      <button type="submit" class="btn btn-a">Start showing what you know</button>
       <div class="wl-status" role="status" aria-live="polite"></div>
       <p class="tiny">Sending this does not add you to any list. Or email me at <a href="mailto:geoff@thevfxsupervisor.com">geoff@thevfxsupervisor.com</a>. <a href="/privacy/">Privacy note</a>.</p>
     </form>
@@ -222,16 +238,40 @@
 })();
 </script>
 <script>
-/* Diagram lightbox. The anchor already opens the full-size file on its own,
-   so this only enhances the click; with JS off nothing is lost. */
+/* Theme switch. The label always names the action it will take. */
 (function(){
-  var links = document.querySelectorAll('figure.diagram a.zoom');
+  var root = document.documentElement, btn = document.querySelector('button.theme-toggle');
+  if (!btn) return;
+  function label(){ btn.setAttribute('aria-label', root.dataset.theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'); }
+  label();
+  btn.addEventListener('click', function(){
+    var t = root.dataset.theme === 'light' ? 'dark' : 'light';
+    root.dataset.theme = t; label();
+    try { localStorage.setItem('theme', t); } catch (e) {}
+  });
+  /* No saved choice yet: keep following the system if it changes while the page is open. */
+  if (window.matchMedia) {
+    var mq = matchMedia('(prefers-color-scheme: light)');
+    var follow = function(ev){ var saved = null; try { saved = localStorage.getItem('theme'); } catch (e) {}
+      if (saved !== 'light' && saved !== 'dark') { root.dataset.theme = ev.matches ? 'light' : 'dark'; label(); } };
+    if (mq.addEventListener) mq.addEventListener('change', follow); else if (mq.addListener) mq.addListener(follow);
+  }
+})();
+</script>
+<script>
+/* Image lightbox (diagrams, and the Overscan format strip's stills). The anchor already
+   opens the full-size file on its own, so this only enhances the click; with JS off
+   nothing is lost. Esc or a click closes it and focus returns to the link. */
+(function(){
+  var links = document.querySelectorAll('figure.diagram a.zoom, a.fmt-zoom');
   if (!links.length) return;
   var box = document.createElement('div');
   box.className = 'lb';
   box.setAttribute('role', 'dialog');
   box.setAttribute('aria-modal', 'true');
+  box.setAttribute('aria-label', 'Image viewer');
   box.innerHTML = '<button class="lb-x" type="button" aria-label="Close">&times;</button><img alt="">';
+  for (var j = 0; j < links.length; j++) links[j].setAttribute('aria-haspopup', 'dialog');
   document.body.appendChild(box);
   var img = box.querySelector('img'), last = null;
   function open(src, alt, from){
@@ -256,7 +296,9 @@
   }
   box.addEventListener('click', function(e){ if (e.target !== img || e.target === img) close(); });
   document.addEventListener('keydown', function(e){
-    if (e.key === 'Escape' && box.classList.contains('on')) close();
+    if (!box.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'Tab') { e.preventDefault(); box.querySelector('.lb-x').focus(); }
   });
 })();
 </script>

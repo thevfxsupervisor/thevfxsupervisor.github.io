@@ -717,6 +717,20 @@ def _og_image_for(canonical_path):
     return base + "/static/og-image.png"
 
 
+SITE_FAVICON = '<link rel="icon" type="image/png" sizes="256x256" href="{root}static/favicon.png">'
+OVERSCAN_FAVICON = ('<link rel="icon" type="image/svg+xml" href="{root}static/overscan/favicon.svg">\n'
+                    '<link rel="icon" type="image/png" sizes="64x64" href="{root}static/overscan/favicon-64.png">')
+
+
+def _overscan_favicon(html_out, canonical_path):
+    """/overscan/ and the Daily (made with Overscan) carry the Overscan mark (E1) as their tab icon;
+    every other page keeps the site's aperture. Geoff 2026-10-14: favicon only on those pages."""
+    first = canonical_path.strip("/").split("/")[0]
+    if first not in ("overscan", globals().get("DAILY_SECTION", "daily")):
+        return html_out
+    return html_out.replace(SITE_FAVICON.format(root=SITE_ROOT), OVERSCAN_FAVICON.format(root=SITE_ROOT))
+
+
 def render_shell(title, description, content_html, nav_active=None, extra_script="", canonical_path="", robots="index, follow"):
     html_out = BASE_TEMPLATE
     html_out = html_out.replace("{{ROBOTS}}", robots)
@@ -727,6 +741,7 @@ def render_shell(title, description, content_html, nav_active=None, extra_script
     html_out = html_out.replace("{{SITE}}", SITE_CANONICAL.rstrip("/"))
     html_out = html_out.replace("{{CANONICAL}}", SITE_CANONICAL.rstrip("/") + "/" + canonical_path.lstrip("/"))
     html_out = html_out.replace("{{OG_IMAGE}}", _og_image_for(canonical_path))
+    html_out = _overscan_favicon(html_out, canonical_path)
     for key in ("reel", "projects", "course", "notes", "about"):
         cls = " current" if key == nav_active else ""
         html_out = html_out.replace("{{NAV_%s}}" % key.upper(), cls)
@@ -1120,7 +1135,7 @@ def render_project(md_path):
     ctas = []
     if fm.get("get_href"):
         ctas.append(f'<a class="btn btn-a" href="{fm["get_href"]}">{html.escape(fm.get("get_label","Get the tool"), quote=False)}</a>')
-    ctas.append(f'<a class="btn btn-b" href="{SITE_ROOT}about/">Work with me</a>')
+    ctas.append(f'<a class="btn btn-b" href="{SITE_ROOT}work-with-me/">Put me on your show</a>')
     cta_row = f'<div class="cta-row">{"".join(ctas)}</div>'
 
     stats_section = ""
@@ -1157,10 +1172,10 @@ def render_project(md_path):
 </section>
 {stats_section}'''
     content += final_cta(
-        fm.get("final_h2", "Work with me"),
+        fm.get("final_h2", "Don't learn the hard lessons the expensive way"),
         fm.get("final_p", ""),
-        fm.get("final_primary_label", "Get in touch"),
-        fm.get("final_primary_href", SITE_ROOT + "about/"),
+        fm.get("final_primary_label", "Skip the expensive lessons"),
+        fm.get("final_primary_href", SITE_ROOT + "work-with-me/"),
         fm.get("final_secondary_label", "Join the waitlist"),
         fm.get("final_secondary_href", SITE_ROOT + "course/"),
         soon=fm.get("soon"),
@@ -1240,9 +1255,9 @@ def render_projects():
 </section>
 '''
     content += final_cta(
-        "Want this kind of tooling on your show?",
-        "I build and run AI-assisted VFX pipelines on real productions. If that is useful to your film, let's talk. Or book the course for the method behind the tools.",
-        "Work with me", SITE_ROOT + "about/",
+        "Want this kind of tooling on your show, without the expensive lessons?",
+        "I build and run AI-assisted VFX pipelines on real productions, built to land on budget and on time. Get me in before the shoot, not after the overrun. Or book the course for the method behind the tools.",
+        "Skip the expensive lessons", SITE_ROOT + "work-with-me/",
         "Join the waitlist", SITE_ROOT + "course/",
     )
     content += related_section(
@@ -1363,7 +1378,7 @@ def render_course():
             ("Breakdown Studio", SITE_ROOT + "projects/breakdown-studio/"),
             ("link-session", SITE_ROOT + "projects/link-session/"),
             (NOTE_LABEL, NOTE_HREF),
-            ("Work with me", SITE_ROOT + "about/"),
+            ("Work with me", SITE_ROOT + "work-with-me/"),
         ],
         eyebrow="The tools and writing behind the method",
     )
@@ -1491,8 +1506,8 @@ def render_about():
         fm.get("final_p", "Questions, collaborations, or just say hello."),
         "Email",
         f'mailto:{fm.get("contact_email","geoff@thevfxsupervisor.com")}',
-        "See Breakdown Studio",
-        SITE_ROOT + "projects/breakdown-studio/",
+        "Skip the expensive lessons",
+        SITE_ROOT + "work-with-me/",
         section_id="get-top",
     )
     content += '''
@@ -1508,8 +1523,8 @@ def render_about():
         fm.get("final_p", "Questions, collaborations, or just say hello."),
         "Email",
         f'mailto:{fm.get("contact_email","geoff@thevfxsupervisor.com")}',
-        "See Breakdown Studio",
-        SITE_ROOT + "projects/breakdown-studio/",
+        "Skip the expensive lessons",
+        SITE_ROOT + "work-with-me/",
     )
     content += related_section(
         [
@@ -1544,7 +1559,7 @@ INQUIRY_OFFERS = [
     ("bid-review", "Breakdown and bid review"),
     ("supervision", "Supervision for your show"),
     ("ai-pipeline", "AI-assisted pipeline for your production"),
-    ("brief", "A brief for my business"),
+    ("brief", "Content for my business"),
     ("not-sure", "Not sure"),
 ]
 # Must say the same as the endpoint's stored consent text (newsletter.inquiry.CONSENT_TEXT).
@@ -1595,7 +1610,7 @@ def inquiry_form(fm, offer=None, source="work-with-me", form_id="inquiry-form"):
       <div class="hp" aria-hidden="true"><label for="{form_id}-website">Leave this empty</label><input type="text" id="{form_id}-website" name="website" tabindex="-1" autocomplete="off"></div>
       <input type="hidden" name="source" value="{html.escape(source)}">
       <div class="field consent"><label for="{form_id}-consent"><input type="checkbox" id="{form_id}-consent" name="consent" value="yes" required> {html.escape(INQUIRY_CONSENT, quote=False)}</label></div>
-      <button type="submit" class="btn btn-a">Send</button>
+      <button type="submit" class="btn btn-a">{html.escape(fm.get("form_submit", "Send"), quote=False)}</button>
       <div class="wl-status" role="status" aria-live="polite"></div>
       <p class="tiny">Sending this does not add you to any list. Or email me at <a href="mailto:{CONTACT_EMAIL}">{CONTACT_EMAIL}</a>. <a href="{SITE_ROOT}privacy/">Privacy note</a>.</p>
     </form>'''
@@ -1660,7 +1675,12 @@ def _feature(it):
         else:
             text.append(p)
     first, rest = (text[0], text[1:]) if text else ("", [])
-    txt = f'<p>{_md_inline(first)}</p>' + "".join(f'<p class="pr">{_md_inline(p)}</p>' for p in rest)
+    def _para(p):
+        # "Coming: ..." marks a line that is not live yet; delete the prefix when it ships.
+        if p.startswith("Coming:"):
+            return f'<p><span class="tag-coming">coming</span> {_md_inline(p[len("Coming:"):].strip())}</p>'
+        return f'<p class="pr">{_md_inline(p)}</p>'
+    txt = f'<p>{_md_inline(first)}</p>' + "".join(_para(p) for p in rest)
     shot = ""
     if fig is not None:
         alt, src = html.escape(fig.group(1)), html.escape(fig.group(2))
@@ -1669,6 +1689,48 @@ def _feature(it):
                 f'<img src="{src}" alt="{alt}" loading="lazy"></a>{cap_html}</figure>')
     return (f'<div class="feat"><div class="txt"><h3>{html.escape(it["title"], quote=False)}</h3>'
             f'{txt}</div>{shot}</div>')
+
+
+def _hero_coming(fm):
+    """One small line under the hero lede naming what in the headline is not live yet, with the
+    coming tag. Empty ``hero_coming`` (delete the field) once it ships: the hero then stands alone."""
+    text = fm.get("hero_coming", "").strip()
+    if not text:
+        return ""
+    return f'<p class="tiny os-hero-coming"><span class="tag-coming">coming</span> {_md_inline(text)}</p>'
+
+
+MEDIA = SITE_ROOT + "static/overscan/media/"
+
+
+def format_strip():
+    """One issue, five ways: the same issue as a phone email, an audio overview, a muted video
+    loop, a slide and the infographic. Every file is a stable name under static/overscan/media/,
+    so swapping in a new issue's media is a file copy, not a page edit. Every example opens or
+    plays in place: the stills are links to the full image that the base template's lightbox
+    enhances, and the audio and video carry their own controls. Nothing autoplays and nothing
+    loads until it is needed (lazy images, preload=none). The infographic stays off the strip
+    until it is reliably accurate. There is no "full episode" link: no public page carries the
+    full audio or video yet, so add one only when it exists."""
+    m = MEDIA
+    return f'''
+    <div class="fmt-strip" aria-label="The same issue, every way it comes today">
+      <div class="fmt-card"><div class="fmt-media"><a class="fmt-zoom" href="{m}phone-read.png"><img src="{m}phone-read.png" width="390" height="700" loading="lazy" alt="The 13 Oct 2026 issue as an email on a phone."></a></div>
+        <div class="fmt-txt"><b>Read it</b><p>Two minutes with coffee. Only what is new, and why it matters to them.</p></div></div>
+      <div class="fmt-card"><div class="fmt-media"><a class="fmt-zoom" href="{m}phone-listen.png"><img src="{m}phone-listen.png" width="390" height="700" loading="lazy" alt="The same issue as it arrives when you pick Listen: the play button on top, the letter below."></a></div>
+        <div class="fmt-txt"><b>Hear it</b><p>The whole issue as a conversation, for the van.</p>
+        <audio controls preload="none" src="{m}issue-audio.m4a" aria-label="Audio overview of the issue"></audio></div></div>
+      <div class="fmt-card"><div class="fmt-media wide"><video class="fmt-video" controls playsinline preload="none" poster="{m}issue-video-poster.jpg" width="1280" height="720" aria-label="A short clip of the issue's explainer video, silent"><source src="{m}issue-video.mp4" type="video/mp4"></video></div>
+        <div class="fmt-txt"><b>Watch it</b><p>A short explainer, crafted from the same words.</p></div></div>
+      <div class="fmt-card"><div class="fmt-media wide"><a class="fmt-zoom" href="{m}issue-slide-1.png"><img src="{m}issue-slide-1.png" width="1280" height="714" loading="lazy" alt="The title slide of the same issue: Defending margins in an AI-augmented production reality."></a></div>
+        <div class="fmt-txt"><b>Flip the slides</b><p>For the Monday meeting, one story a slide.</p></div></div>
+      <div class="fmt-card fmt-coming"><div class="fmt-txt"><b>The one picture</b> <span class="tag-coming">coming</span><p>The whole issue on one screen, for the person who will not read. It joins the others once it is reliably accurate.</p></div></div>
+    </div>
+    <p class="fmt-hint">The 13 Oct 2026 issue as the letter, the audio, the video and the slides. The audio and video here are short clips of the full 19 and 7 minutes.</p>'''
+
+
+# The video used to be a muted loop driven by a script (FMT_SCRIPT). It now carries its own
+# controls and plays only when the reader presses play, so there is no strip script.
 
 
 def render_overscan():
@@ -1697,17 +1759,19 @@ def render_overscan():
         f'<br>{_md_inline(c["body"])}</li>'
         for c in coming
     )
+    # The steps block is optional: with no <!-- steps --> block the page has no "How it works".
+    steps_section = (f'<hr class="rule">\n<section>\n  <div class="wrap">\n    <div class="sec-head"><span class="eyebrow">How it works</span>'
+                     f'<h2>{e("steps_h2")}</h2></div>\n    <ol class="os-steps">{steps_html}</ol>\n  </div>\n</section>\n') if steps else ""
     content = f'''
 <section class="hero">
-  <div class="wrap os-hero">
-    <div>
-      <span class="eyebrow">{e("eyebrow")}</span>
-      <h1 style="margin-top:18px">{e("h1")}</h1>
-      <p class="lede">{e("lede")}</p>
-      <div class="cta-row"><a class="btn btn-a" href="#inquiry">{e("cta_label")}</a></div>
-      <p class="door">Here for the VFX news? {daily_link("Read the Daily")}. Need VFX help on a show? <a href="{SITE_ROOT}work-with-me/">Work with me</a>.</p>
-    </div>
-    <div class="phone"><img src="{SITE_ROOT}static/overscan/issue-phone.png" width="390" height="820" alt="An issue of {DAILY_NAME} on a phone: the opening line says what the day means, then one story with a so-what line."></div>
+  <div class="wrap">
+    <span class="eyebrow os-brand"><img class="os-mark" src="{SITE_ROOT}static/overscan/mark-e1.svg" alt="" width="40" height="40">{e("eyebrow")}</span>
+    <h1 style="margin-top:18px">{e("h1")}</h1>
+    <p class="lede">{e("lede")}</p>
+    {_hero_coming(fm)}
+    <div class="cta-row"><a class="btn btn-a" href="#inquiry">{e("cta_label")}</a></div>
+    {format_strip()}
+    <p class="door">The VFX news, every morning: {daily_link("Read the Daily")}. Shooting VFX: skip the expensive lessons and <a href="{SITE_ROOT}work-with-me/">put me on your show</a>.</p>
   </div>
 </section>
 
@@ -1722,14 +1786,7 @@ def render_overscan():
   </div>
 </section>
 
-<hr class="rule">
-<section>
-  <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">How it works</span><h2>{e("steps_h2")}</h2></div>
-    <ol class="os-steps">{steps_html}</ol>
-  </div>
-</section>
-
+{steps_section}
 <hr class="rule">
 <section>
   <div class="wrap">
@@ -1744,7 +1801,7 @@ def render_overscan():
     <div class="sec-head"><span class="eyebrow">Who it is for</span><h2>{e("who_h2")}</h2></div>
     <div class="os-cards">{_cards(who, "os-card")}</div>
     <p class="k os-k">{e("cadence")}</p>
-    <div class="os-not"><h3>What it does not do</h3><ul>{notfor_html}</ul></div>
+    <div class="os-not"><h3>What Overscan does not do</h3><ul>{notfor_html}</ul></div>
   </div>
 </section>
 
@@ -1792,6 +1849,31 @@ def render_overscan():
                         extra_script=INQUIRY_SCRIPT, canonical_path="overscan/")
 
 
+def _wwm_record(fm, body):
+    """The record: awards and released credits, from the <!-- awards --> and <!-- credits -->
+    blocks of work-with-me.md. Only what the live site already lists, at the LOWER claim:
+    ONE VES Award win (Changeling), never two (geoff-agents knowledge/geoff-credentials.md)."""
+    awards, _ = extract_block(body, "awards")
+    credits, _ = extract_block(body, "credits")
+    if not awards and not credits:
+        return ""
+    e = lambda k, d="": html.escape(fm.get(k, d), quote=False)
+    aw = "".join(f'<li><strong>{html.escape(a["title"], quote=False)}</strong><br>{_md_inline(a["body"])}</li>'
+                 for a in awards)
+    cr = "".join(f'<li><span class="film">{html.escape(c["title"], quote=False)}</span> '
+                 f'<span class="dim">{_md_inline(c["body"])}</span></li>' for c in credits)
+    return f'''<hr class="rule">
+<section id="record">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">{e("record_eyebrow", "The record")}</span><h2>{e("record_h2")}</h2>
+      <p class="k">{e("record_k")}</p></div>
+    <ul class="wwm-awards">{aw}</ul>
+    <ul class="wwm-credits">{cr}</ul>
+  </div>
+</section>
+'''
+
+
 def render_work_with_me():
     fm, body = parse_frontmatter((CONTENT_DIR / "pages" / "work-with-me.md").read_text(encoding="utf-8"))
     offers, _ = extract_block(body, "offers")
@@ -1808,11 +1890,12 @@ def render_work_with_me():
     <h1 style="margin-top:18px">{e("h1")}</h1>
     <p class="lede">{e("lede")}</p>
     <p class="tiny">{e("logistics")}</p>
-    <div class="cta-row"><a class="btn btn-a" href="#inquiry">Tell me about your project</a>
-      <a class="btn btn-b" href="{SITE_ROOT}about/">About me</a></div>
+    <div class="cta-row"><a class="btn btn-a" href="#inquiry">{e("cta_label", "Tell me about your show")}</a>
+      <a class="btn btn-b" href="{SITE_ROOT}reel/">Watch the reel</a></div>
   </div>
 </section>
 
+{_wwm_record(fm, body)}
 <hr class="rule">
 <section>
   <div class="wrap">
@@ -1931,6 +2014,11 @@ def render_note(md_path):
   </div>
 </section>
 '''
+    content += f'''
+<section>
+  <div class="wrap"><p class="k note-cta">Is this the problem on your show? Don't learn it the expensive way: <a href="{SITE_ROOT}work-with-me/">work with me</a>.</p></div>
+</section>
+'''
     content += related_section(
         [
             ("Breakdown Studio", SITE_ROOT + "projects/breakdown-studio/"),
@@ -1973,31 +2061,62 @@ def render_note(md_path):
 # --------------------------------------------------------------------------
 # The Daily: numbered public issues, one file each in content/<DAILY_SECTION>/
 # (added by the newsletter product, Overscan). Kept apart from notes/ so the
-# hand-written essays are not buried. Each page is styled like the app's
-# issue page via docs/static/daily.css (written below). The DAILY_* constants are
+# hand-written essays are not buried. Styled by docs/static/daily.css (written
+# below): the site's dark ground and a light mode (Northlight palette), with a
+# light/dark switch that only exists on these pages. The DAILY_* constants are
 # the destination's settings; the newsletter app rewrites them when they change.
-# DAILY_JOIN_*: the subscribe block (index and every issue) posts to the app's
+# DAILY_JOIN_*: the sign-up block (index and every issue) posts to the app's
 # /join/<name>, which only queues the address; DAILY_JOIN_CONSENT is the exact
-# text the app stores with it under DAILY_JOIN_VERSION. Empty URL = no block.
+# text the app stores with it under DAILY_JOIN_VERSION, shown under the button
+# (the tap is the consent). Empty URL = no block.
+# An issue's media (frontmatter formats/audio/video/slides/picture, written by
+# the app) shows only pieces that passed the app's media check: audio and video
+# play from the app, the picture and slides are copied from
+# content/<DAILY_SECTION>/media/<N>/ next to the issue page.
 # --------------------------------------------------------------------------
 
+DAILY_PROMISE = "What changed in VFX today, and what that means for your next bid."
+DAILY_FORMATS_LINE = ("Skip the trade-site scroll. Read it here every morning, and hear it, "
+                      "watch it or flip the slides on days we have them.")
+DAILY_LIGHT = ("--bg:#F4EFE6;--panel:#FBF8F2;--raise:#ECE5D8;--line:#D9D0C1;--line2:#C9BFAE;"
+               "--txt:#14213D;--dim:#3B4660;--mute:#56607A;--amber:#0567c4;--amber-soft:#0567c4;"
+               "--dj-accent-line:#9cc3e8;color-scheme:light")
 DAILY_SECTION = 'daily'
 DAILY_TITLE = 'The VFX Supervisor Daily'
 DAILY_LEDE = "What the day's VFX news means, in a few lines, with a link to every story."
 DAILY_MADE_WITH = '/overscan/'
 DAILY_JOIN_URL = 'https://newsletter-edge.thevfxsupervisor.workers.dev/join/vfx'
-DAILY_JOIN_VERSION = 'vfx-daily-v1'
-DAILY_JOIN_CONSENT = 'Email me The VFX Supervisor Daily from Geoffrey Hancock (Wangle Media ApS) each morning, in the format I picked, with the occasional note about his VFX services. I can unsubscribe in one click from any email.'
+DAILY_JOIN_VERSION = 'vfx-daily-v2'
+DAILY_JOIN_CONSENT = 'Email me The VFX Supervisor Daily from Geoffrey Hancock each morning, in the format I picked, with the occasional note about his VFX updates. I can unsubscribe in one click from any email.'
 DAILY_CSS = """
-.daily{max-width:720px;margin:0 auto;padding:36px 16px 64px}
-.daily-card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:32px 28px}
-.daily-head{text-align:center;padding-bottom:20px;border-bottom:2px solid var(--line)}
-.daily-head .eyebrow{display:block;margin-bottom:12px}
-.daily-head h1{font-family:Georgia,"Source Serif 4","Times New Roman",serif;font-size:32px;line-height:1.25;font-weight:600;letter-spacing:-.01em}
-.daily-head .daily-date{margin-top:8px;color:var(--mute);font-size:14px}
-.daily .prose{max-width:none;font-size:16px;line-height:1.6}
-.daily .prose>p:first-child{margin:20px 0 4px;font-size:17px;line-height:1.6;color:var(--dim)}
-.daily .prose h2{font-family:Georgia,"Source Serif 4","Times New Roman",serif;font-size:26px;line-height:1.25;font-weight:600;margin:36px 0 12px}
+:root{--dim:#a3aab1;--dj-accent-line:#1f4f7a;--dj-serif:"EB Garamond",Georgia,"Times New Roman",serif;--dj-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--dj-sans:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,sans-serif}
+@media (prefers-color-scheme:light){:root:not([data-theme=dark]){@@LIGHT@@}:root:not([data-theme=dark]) header.top{background:rgba(244,239,230,.86)}}
+:root[data-theme=light]{@@LIGHT@@}
+:root[data-theme=light] header.top{background:rgba(244,239,230,.86)}
+.daily{max-width:760px;margin:0 auto;padding:28px 16px 64px;font-family:var(--dj-sans);display:flex;flex-direction:column;gap:28px}
+.daily a{color:var(--amber-soft)}
+.daily-eyebrow{font-family:var(--dj-mono);font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--amber-soft)}
+.daily-head{display:flex;flex-direction:column;gap:12px}
+.daily-head h1{margin:0;font-family:var(--dj-serif);font-weight:600;font-size:34px;line-height:1.1;letter-spacing:0}
+.daily-lede,.daily-lede p{margin:0;font-size:18px;line-height:1.55;color:var(--dim)}
+.daily-take{display:flex;flex-direction:column;gap:14px}
+.daily-label{font-family:var(--dj-mono);font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--dim)}
+.daily-chips{display:flex;flex-wrap:wrap;gap:10px}
+.daily-chip{min-height:48px;display:inline-flex;align-items:center;padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--txt);font-family:var(--dj-mono);font-size:13px;text-decoration:none;cursor:pointer}
+.daily .daily-chip{color:var(--txt)}
+.daily .daily-chip.on{background:#0585f8;border-color:#0585f8;color:#ffffff}
+.daily-panel{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px}
+.dj-js .daily-panel{display:none}
+.dj-js .daily-panel.on{display:flex}
+.daily-panel h2{margin:0;font-family:var(--dj-sans);font-size:16px;font-weight:600;letter-spacing:0}
+.daily-panel audio,.daily-panel video,.daily-panel img{display:block;width:100%;max-width:100%;border-radius:12px}
+.daily-panel video{background:#000;aspect-ratio:16/9;height:auto}
+.daily-pdf{width:100%;height:480px;border:1px solid var(--line);border-radius:12px;background:var(--raise)}
+.daily-note{margin:0;font-size:14px;color:var(--dim)}
+.daily-card{font-size:17px;line-height:1.6}
+.daily .prose{max-width:none;font-size:17px;line-height:1.6}
+.daily .prose h2{font-family:var(--dj-serif);font-size:26px;line-height:1.2;font-weight:600;letter-spacing:0;margin:32px 0 12px}
+.daily .prose>h2:first-child{margin-top:0}
 .daily .prose h2+p{background:var(--raise);border-radius:10px;padding:14px 16px;margin:0 0 8px;font-size:15px;line-height:1.55;color:var(--txt)}
 .daily .prose h2+p::before{content:"So what: ";font-weight:700;color:var(--amber-soft)}
 .daily .prose ul{list-style:none;padding:0;margin:4px 0 0}
@@ -2006,32 +2125,62 @@ DAILY_CSS = """
 .daily .prose li a{color:var(--txt);font-size:16px;font-weight:600;text-decoration:none;overflow-wrap:anywhere}
 .daily .prose li a:hover{color:var(--amber-soft);text-decoration:underline}
 .daily .prose li em{display:block;font-style:normal;color:var(--dim);font-size:15px;margin-top:4px}
-.daily .prose>p:last-child:has(>em:only-child){margin-top:24px;font-size:13px;color:var(--mute)}
-.daily-nav{display:flex;justify-content:space-between;gap:12px;margin-top:24px;font-family:var(--mono);font-size:13px}
-.daily-nav a{color:var(--dim);text-decoration:none}
+.daily .prose>p:last-child:has(>em:only-child){margin-top:24px;font-family:var(--dj-mono);font-size:12px;color:var(--dim)}
+.daily-nav{display:flex;justify-content:space-between;gap:12px;font-family:var(--dj-mono);font-size:13px}
+.daily-nav a{color:var(--dim);text-decoration:none;display:inline-flex;align-items:center;min-height:44px}
 .daily-nav a:hover{color:var(--amber-soft)}
-.daily-foot{margin-top:28px;text-align:center;font-size:13px;color:var(--mute)}
+.daily-foot{text-align:center;font-size:13px;color:var(--mute)}
 .daily-foot a{color:var(--mute)}
-.daily-list{list-style:none;padding:0;margin:24px 0 0}
-.daily-list li{border-bottom:1px solid var(--line)}
-.daily-list a{display:flex;gap:14px;align-items:baseline;padding:14px 2px;text-decoration:none}
-.daily-list .n{font-family:var(--mono);color:var(--amber-soft);min-width:3.2em}
-.daily-list .t{color:var(--txt);font-weight:600}
-.daily-list .d{margin-left:auto;font-family:var(--mono);font-size:12px;color:var(--mute);white-space:nowrap}
-.daily-join{margin:32px 0 0;padding:28px 24px;border:1px solid var(--line);border-radius:16px;background:var(--panel)}
-.daily-join h2{font-family:Georgia,"Source Serif 4","Times New Roman",serif;font-size:26px;line-height:1.25;font-weight:600;margin:10px 0 10px}
-.daily-join>p{color:var(--dim);font-size:16px;line-height:1.55;margin:0 0 18px}
-.daily-join .form-card{max-width:none;border:0;background:none;padding:0}
-.daily-join fieldset{border:0;margin:0 0 16px;padding:0}
-.daily-join legend{font-family:var(--mono);font-size:11.5px;letter-spacing:.05em;text-transform:uppercase;color:var(--mute);margin-bottom:8px}
-.daily-join .formats{display:flex;flex-wrap:wrap;gap:8px}
-.daily-join .formats label{display:flex;gap:8px;align-items:center;padding:8px 12px;border:1px solid var(--line2);border-radius:999px;cursor:pointer;font-size:14px;color:var(--txt)}
-.daily-join .formats input{width:auto;margin:0;accent-color:var(--amber)}
-.daily-join .formats label:has(input:checked){border-color:var(--amber);color:var(--amber-soft)}
-.daily-join .tiny a{color:var(--amber-soft)}
-@media(max-width:600px){.daily-join{padding:22px 16px}.daily-join h2{font-size:22px}}
-@media(max-width:600px){.daily-card{padding:22px 16px}.daily-head h1{font-size:26px}.daily .prose h2{font-size:22px;margin-top:28px}.daily-list a{flex-wrap:wrap}.daily-list .d{margin-left:0}}
-"""
+.daily-list{list-style:none;padding:0;margin:0}
+.daily-list a{display:flex;flex-direction:column;gap:8px;padding:22px 0;border-top:1px solid var(--line);color:var(--txt);text-decoration:none}
+.daily .daily-list a{color:var(--txt)}
+.daily-list a:hover .t{color:var(--amber-soft)}
+.daily-list .n{font-family:var(--dj-mono);font-size:12px;color:var(--mute)}
+.daily-list .t{font-size:20px;font-weight:600;line-height:1.3}
+.daily-tags{display:flex;flex-wrap:wrap;gap:6px}
+.daily-tag{padding:4px 10px;border-radius:999px;border:1px solid var(--line2);font-family:var(--dj-mono);font-size:11px;color:var(--dim)}
+.daily-join{border-radius:16px;background:var(--panel);border:1px solid var(--dj-accent-line);padding:24px 18px;display:flex;flex-direction:column;gap:16px}
+.daily-join h2{margin:0;font-family:var(--dj-serif);font-size:28px;line-height:1.15;font-weight:600;letter-spacing:0}
+.daily-join form{display:flex;flex-direction:column;gap:14px}
+.daily-join fieldset{border:0;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px}
+.daily-pick{position:relative;display:inline-flex}
+.daily-pick input{position:absolute;opacity:0;width:1px;height:1px}
+.daily-pick span{min-height:48px;display:inline-flex;align-items:center;padding:0 16px;border-radius:999px;border:1px solid var(--line);font-family:var(--dj-mono);font-size:13px;color:var(--txt);cursor:pointer}
+.daily-pick input:checked+span{background:#0585f8;border-color:#0585f8;color:#ffffff}
+.daily-pick input:focus-visible+span{outline:2px solid var(--amber-soft);outline-offset:2px}
+.daily-row{display:flex;flex-wrap:wrap;gap:10px}
+.daily-row input[type=email],.daily-row select{flex:1 1 240px;min-height:48px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--txt);padding:0 14px;font-size:16px;font-family:var(--dj-sans)}
+.daily-row select{flex:0 1 auto;font-family:var(--dj-mono);font-size:14px}
+.daily-send{min-height:48px;padding:0 22px;border-radius:8px;border:0;background:#0585f8;color:#ffffff;font-family:var(--dj-mono);font-size:14px;font-weight:600;cursor:pointer;flex:1 1 auto}
+.daily-send:hover{background:#3aa3f5}
+.daily-send:disabled{opacity:.6}
+.daily-consent{margin:0;font-size:13px;line-height:1.5;color:var(--dim)}
+.daily-small{margin:0;font-size:12px;line-height:1.5;color:var(--mute)}
+.daily-small a{color:var(--amber-soft)}
+.daily-sr{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.daily-hp{position:absolute;left:-9999px}
+.daily .wl-status:empty{display:none}
+.daily .wl-status{font-size:14px;color:var(--txt)}
+@media(min-width:700px){.daily{padding-top:40px}.daily-head h1{font-size:44px}.daily-index .daily-head h1{font-size:52px;line-height:1.05}.daily-join{padding:28px}.daily-join h2{font-size:30px}.daily-send{flex:0 0 auto}}
+@media(max-width:600px){.daily-pdf{display:none}}
+""".replace("@@LIGHT@@", DAILY_LIGHT)
+
+DAILY_FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
+               '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
+               '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600'
+               '&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">')
+# Runs as the page is read, before the Daily's own markup: "dj-js" turns the stacked media
+# panels into one panel at a time. Light/dark is the SITE's (its header's button.theme-toggle
+# and head script set data-theme on <html>, key "theme"); the CSS above only styles it, and
+# follows the device when nothing is set.
+DAILY_THEME_HEAD = '<script>document.documentElement.className+=" dj-js";</script>'
+
+# (form value, chip label, index tag) for the five ways to take an issue.
+DAILY_FORMATS = [("read", "Read it", "Read"), ("listen", "Hear it", "Hear"),
+                 ("watch", "Watch it", "Watch"), ("slides", "Slides", "Slides"),
+                 ("picture", "The picture", "Picture")]
+DAILY_PANEL_TITLES = {"read": "Read it", "listen": "Hear it", "watch": "Watch it",
+                      "slides": "Flip the slides", "picture": "Take the one picture"}
 
 
 def _daily_posts():
@@ -2052,7 +2201,8 @@ def _daily_posts():
 
 
 def _daily_css_link():
-    return f'<link rel="stylesheet" href="{SITE_ROOT}static/daily.css">'
+    return (f'{DAILY_THEME_HEAD}{DAILY_FONTS}'
+            f'<link rel="stylesheet" href="{SITE_ROOT}static/daily.css">')
 
 
 def _daily_foot():
@@ -2064,50 +2214,149 @@ def _daily_foot():
             f' &middot; <a href="{SITE_ROOT}{DAILY_SECTION}/feed.json">JSON Feed</a>{made}</p>')
 
 
-DAILY_JOIN_FORMATS = [("read", "Read it"), ("listen", "Hear it"), ("watch", "Watch it"),
-                      ("slides", "Slides"), ("picture", "One picture")]
+def _daily_formats(fm):
+    """The formats an issue offers: always read, then each piece the app put in its
+    frontmatter that has its address (audio/video) or its file (slides/picture)."""
+    have = {"read"}
+    keys = {"listen": "audio", "watch": "video", "slides": "slides", "picture": "picture"}
+    for f in [x.strip() for x in fm.get("formats", "").split(",")]:
+        if f in keys and _daily_media_src(fm, keys[f]):
+            have.add(f)
+    return [f for f, _label, _tag in DAILY_FORMATS if f in have]
 
 
-def _daily_join(source):
-    """The subscribe block, or "" when DAILY_JOIN_URL is empty. It posts to the app, which
-    only queues the address; nothing is emailed until sending opens, then one confirmation."""
+def _daily_media_src(fm, key):
+    """A safe address for one piece: https for audio/video, a bare file name for the rest."""
+    v = fm.get(key, "").strip()
+    if key in ("audio", "video"):
+        return v if re.fullmatch(r"https://[A-Za-z0-9.:-]+/[A-Za-z0-9._~/-]{1,400}", v) else ""
+    return v if re.fullmatch(r"[a-z0-9][a-z0-9.-]{0,40}", v) else ""
+
+
+def _daily_split(body):
+    """(lede markdown, the rest): the opening paragraph goes in the page head."""
+    text = body.strip("\n")
+    first, _sep, rest = text.partition("\n\n")
+    if rest and first.strip() and not first.lstrip().startswith(("#", "-", "*", ">", "|")):
+        return first.strip(), rest
+    return "", text
+
+
+def _daily_take(fm, slug):
+    """Choose how to take today's issue: a chip per format and one panel each. With no
+    script every panel shows, stacked; with script one at a time."""
+    have = _daily_formats(fm)
+    if len(have) < 2:
+        return ""
+    e = lambda s: html.escape(s, quote=True)  # noqa: E731
+    labels = {f: label for f, label, _tag in DAILY_FORMATS}
+    chips = "".join(
+        f'<a class="daily-chip" href="#take-{f}" data-f="{f}">{e(labels[f])}</a>' for f in have)
+    panels = []
+    for f in have:
+        if f == "read":
+            inner = '<p class="daily-note">The issue is right below.</p>'
+        elif f in ("listen", "watch"):
+            key = "audio" if f == "listen" else "video"
+            src = e(_daily_media_src(fm, key))
+            note = fm.get(f"{key}_note", "").strip()
+            inner = f'<p class="daily-note">{e(note)}</p>' if note else ""
+            if f == "listen":
+                inner += (f'<audio controls preload="none" src="{src}">'
+                          f'<a href="{src}">Play the audio</a></audio>')
+            else:
+                inner += (f'<video controls preload="none" playsinline src="{src}">'
+                          f'<a href="{src}">Play the video</a></video>')
+        elif f == "slides":
+            src = e(_daily_media_src(fm, "slides"))
+            inner = (f'<iframe class="daily-pdf" src="{src}" loading="lazy" title="Slides for this issue"></iframe>'
+                     f'<p class="daily-note"><a href="{src}">Open the slides (PDF)</a></p>')
+        else:
+            src = e(_daily_media_src(fm, "picture"))
+            inner = (f'<a href="{src}"><img src="{src}" loading="lazy" decoding="async" '
+                     f'alt="This issue as one picture"></a>'
+                     '<p class="daily-note">Tap the picture to open it full size.</p>')
+        panels.append(f'<div class="daily-panel" id="take-{f}" data-f="{f}">'
+                      f'<h2>{e(DAILY_PANEL_TITLES[f])}</h2>{inner}</div>')
+    return f"""
+  <section class="daily-take" aria-label="Choose how you take it">
+    <span class="daily-label">Take today's issue your way</span>
+    <div class="daily-chips">{chips}</div>
+    {"".join(panels)}
+  </section>"""
+
+
+def _daily_join(source, compact=False):
+    """The sign-up block, or "" when DAILY_JOIN_URL is empty. It posts to the app, which
+    only queues the address; nothing is emailed until sending opens, then one confirmation.
+    One tap on the button is the sign-up: the consent words sit right under it and the form
+    sends consent=yes with the version of the words it showed."""
     if not DAILY_JOIN_URL:
         return ""
-    e = lambda s: html.escape(s, quote=False)  # noqa: E731
+    e = lambda s: html.escape(s, quote=True)  # noqa: E731
     fid = f"join-{source}"
-    radios = "".join(
-        f'<label><input type="radio" name="format" value="{k}"{" checked" if k == "read" else ""}> {e(v)}</label>'
-        for k, v in DAILY_JOIN_FORMATS)
+    if compact:
+        opts = "".join(f'<option value="{k}">{e(v)}</option>' for k, v, _t in DAILY_FORMATS)
+        pick = (f'<label class="daily-sr" for="{fid}-format">Your format</label>'
+                f'<select id="{fid}-format" name="format">{opts}</select>')
+        head = ""
+        row = (f'<div class="daily-row"><label class="daily-sr" for="{fid}-email">Your email</label>'
+               f'<input type="email" id="{fid}-email" name="email" required maxlength="320" '
+               f'autocomplete="email" placeholder="you@studio.com">{pick}'
+               '<button type="submit" class="daily-send">Send me the Daily</button></div>')
+        picks = ""
+    else:
+        picks = "".join(
+            f'<label class="daily-pick"><input type="radio" name="format" value="{k}"'
+            f'{" checked" if k == "read" else ""}><span>{e(v)}</span></label>'
+            for k, v, _t in DAILY_FORMATS)
+        picks = f'<fieldset><legend class="daily-sr">Your format</legend>{picks}</fieldset>'
+        head = f'<h2 id="{fid}-h">Get {e(DAILY_TITLE)} every morning, your way</h2>'
+        row = (f'<div class="daily-row"><label class="daily-sr" for="{fid}-email">Your email</label>'
+               f'<input type="email" id="{fid}-email" name="email" required maxlength="320" '
+               f'autocomplete="email" placeholder="you@studio.com">'
+               '<button type="submit" class="daily-send">Send me the Daily</button></div>')
+    label = f'aria-labelledby="{fid}-h"' if head else f'aria-label="Get {e(DAILY_TITLE)} every morning"'
     return f"""
-  <section class="daily-join" id="join" aria-labelledby="{fid}-h">
-    <span class="eyebrow">By email, coming soon</span>
-    <h2 id="{fid}-h">Get it every morning your way: read it, hear it, watch it.</h2>
-    <p>Skip the trade-site scroll. {e(DAILY_TITLE)} tells you what the day's VFX news means for your work, with a link to every story. You pick how it lands: text, audio, video, slides or one picture.</p>
-    <form class="form-card join-form" id="{fid}" method="post" action="{html.escape(DAILY_JOIN_URL)}" accept-charset="utf-8">
-      <div class="field"><label for="{fid}-email">Email</label><input type="email" id="{fid}-email" name="email" required maxlength="320" autocomplete="email"></div>
-      <div class="field"><label for="{fid}-name">First name (optional)</label><input type="text" id="{fid}-name" name="name" maxlength="200" autocomplete="given-name"></div>
-      <fieldset><legend>Your format</legend><div class="formats">{radios}</div></fieldset>
-      <div class="hp" aria-hidden="true"><label for="{fid}-website">Leave this empty</label><input type="text" id="{fid}-website" name="website" tabindex="-1" autocomplete="off"></div>
-      <input type="hidden" name="source" value="{html.escape(source)}">
-      <input type="hidden" name="consent_version" value="{html.escape(DAILY_JOIN_VERSION)}">
-      <div class="field consent"><label for="{fid}-consent"><input type="checkbox" id="{fid}-consent" name="consent" value="yes" required> {e(DAILY_JOIN_CONSENT)}</label></div>
-      <button type="submit" class="btn btn-a">Save my spot</button>
+  <section class="daily-join" id="{fid}" {label}>
+    {head}
+    <form class="join-form" method="post" action="{e(DAILY_JOIN_URL)}" accept-charset="utf-8">
+      {picks}
+      {row}
+      <p class="daily-consent">{html.escape(DAILY_JOIN_CONSENT, quote=False)}</p>
+      <div class="daily-hp" aria-hidden="true"><label for="{fid}-website">Leave this empty</label><input type="text" id="{fid}-website" name="website" tabindex="-1" autocomplete="off"></div>
+      <input type="hidden" name="source" value="{e(source)}">
+      <input type="hidden" name="consent" value="yes">
+      <input type="hidden" name="consent_version" value="{e(DAILY_JOIN_VERSION)}">
       <div class="wl-status" role="status" aria-live="polite"></div>
-      <p class="tiny">Email opens soon. We'll confirm by email before anything else, and nothing else arrives until you say yes. Until then, read every issue here or in <a href="{SITE_ROOT}{DAILY_SECTION}/feed.xml">RSS</a>. <a href="{SITE_ROOT}privacy/">Privacy note</a>.</p>
+      <p class="daily-small">Email opens soon. We'll confirm by email before anything else, and nothing else arrives until you say yes. Until then, read every issue here or in <a href="{SITE_ROOT}{DAILY_SECTION}/feed.xml">RSS</a>. <a href="{SITE_ROOT}privacy/">Privacy note</a>.</p>
     </form>
   </section>"""
 
 
-def _daily_join_script():
-    if not DAILY_JOIN_URL:
-        return ""
-    return """
+def _daily_script():
+    """One media panel at a time and the sign-up form by fetch. Both are enhancements: with no
+    script every panel shows, stacked, and the browser posts the form itself."""
+    thanks = f"{SITE_ROOT}{DAILY_SECTION}/thanks/"
+    js = """
 <script>
-/* Subscribe block: with no script the browser posts the form itself and the app sends it back
-   to the thanks page. With script, the same urlencoded post goes by fetch (no preflight). */
 (function(){
-  var THANKS = "%(thanks)s";
-  Array.prototype.forEach.call(document.querySelectorAll('.join-form'), function(form){
+  var each = function(list, fn){ Array.prototype.forEach.call(list, fn); };
+  each(document.querySelectorAll('.daily-take'), function(sec){
+    var chips = sec.querySelectorAll('.daily-chip'), panels = sec.querySelectorAll('.daily-panel');
+    function pick(f){
+      each(chips, function(c){ var on = c.getAttribute('data-f') === f; c.classList.toggle('on', on);
+        if (on) { c.setAttribute('aria-current', 'true'); } else { c.removeAttribute('aria-current'); } });
+      each(panels, function(p){ var on = p.getAttribute('data-f') === f; p.classList.toggle('on', on);
+        if (!on) { each(p.querySelectorAll('audio,video'), function(m){ try { m.pause(); } catch (e) {} }); } });
+    }
+    each(chips, function(c){ c.addEventListener('click', function(e){ e.preventDefault(); pick(c.getAttribute('data-f')); }); });
+    pick('read');
+  });
+  /* The sign-up form: with no script the browser posts it and the app sends the visitor to
+     the thanks page. With script, the same urlencoded post goes by fetch (no preflight). */
+  var THANKS = "@@THANKS@@";
+  each(document.querySelectorAll('.join-form'), function(form){
     var status = form.querySelector('.wl-status'), submit = form.querySelector('[type=submit]');
     function say(msg, cls){ status.textContent = msg; status.className = 'wl-status ' + (cls || ''); }
     form.addEventListener('submit', function(e){
@@ -2128,12 +2377,13 @@ def _daily_join_script():
     });
   });
 })();
-</script>""" % {"thanks": f"{SITE_ROOT}{DAILY_SECTION}/thanks/"}
+</script>"""
+    return js.replace("@@THANKS@@", thanks)
 
 
 def _daily_shell(title, description, content, canonical_path, script="", robots=""):
-    """render_shell, passing the subscribe script and robots only when there are some (so a
-    site whose render_shell predates those arguments still builds without the block)."""
+    """render_shell, passing the script and robots only when there are some (so a site whose
+    render_shell predates those arguments still builds)."""
     kw = {"canonical_path": canonical_path}
     if script:
         kw["extra_script"] = script
@@ -2143,54 +2393,62 @@ def _daily_shell(title, description, content, canonical_path, script="", robots=
 
 
 def render_daily_thanks():
+    t = html.escape(DAILY_TITLE, quote=False)
     content = f"""{_daily_css_link()}
 <main class="daily">
   <header class="daily-head">
-    <span class="eyebrow">You're on the list</span>
+    <span class="daily-eyebrow">You're on the list</span>
     <h1>Your spot is saved.</h1>
-    <p class="daily-date">When email opens, we'll send you one email to confirm. Nothing else arrives until you say yes.</p>
+    <p class="daily-lede">When email opens, we'll send you one email to confirm. Nothing else arrives until you say yes.</p>
   </header>
   <div class="prose">
-    <p>Today's issue is already up: <a href="{SITE_ROOT}{DAILY_SECTION}/">read {html.escape(DAILY_TITLE, quote=False)} now</a>, or follow it in <a href="{SITE_ROOT}{DAILY_SECTION}/feed.xml">RSS</a>.</p>
+    <p>Today's issue is already up: <a href="{SITE_ROOT}{DAILY_SECTION}/">read {t} now</a>, or follow it in <a href="{SITE_ROOT}{DAILY_SECTION}/feed.xml">RSS</a>.</p>
     <p>Changed your mind? Write to the address in the <a href="{SITE_ROOT}privacy/">privacy note</a> and your address is deleted.</p>
   </div>
   {_daily_foot()}
 </main>
 """
     return _daily_shell(f"You're on the list | {DAILY_TITLE}", "Your spot is saved.", content,
-                        f"{DAILY_SECTION}/thanks/", robots="noindex, follow")
+                        f"{DAILY_SECTION}/thanks/", script=_daily_script(),
+                        robots="noindex, follow")
 
 
 def render_daily_post(fm, body, slug, newer=None, older=None):
     esc = lambda s: html.escape(s, quote=False)  # noqa: E731
     number = fm.get("number", "")
-    eyebrow = f"{esc(DAILY_TITLE)} &middot; #{esc(number)}" if number else esc(DAILY_TITLE)
+    bits = [esc(DAILY_TITLE)] + ([f"#{esc(number)}"] if number else [])
+    when = fm.get("date_text") or fm.get("date", "")
+    if when:
+        bits.append(f'<time datetime="{html.escape(fm.get("date", ""))}">{esc(when)}</time>')
     links = [f'<a href="{SITE_ROOT}{DAILY_SECTION}/{older}/">&larr; Earlier</a>' if older else "",
              f'<a href="{SITE_ROOT}{DAILY_SECTION}/">All issues</a>',
              f'<a href="{SITE_ROOT}{DAILY_SECTION}/{newer}/">Later &rarr;</a>' if newer else ""]
     nav = ('<nav class="daily-nav" aria-label="More issues">'
            + "".join(f"<span>{x}</span>" for x in links) + "</nav>")
+    lede, rest = _daily_split(body)
+    lede_html = f'<div class="daily-lede">{markdown_to_html(lede)}</div>' if lede else ""
     content = f"""{_daily_css_link()}
 <main class="daily">
-  <article class="daily-card">
-    <header class="daily-head">
-      <span class="eyebrow">{eyebrow}</span>
-      <h1>{esc(fm.get("headline") or fm.get("title", ""))}</h1>
-      <p class="daily-date"><time datetime="{esc(fm.get("date", ""))}">{esc(fm.get("date_text") or fm.get("date", ""))}</time></p>
-    </header>
+  <header class="daily-head">
+    <span class="daily-eyebrow">{" &middot; ".join(bits)}</span>
+    <h1>{esc(fm.get("headline") or fm.get("title", ""))}</h1>
+    {lede_html}
+  </header>
+  {_daily_take(fm, slug)}
+  <article class="daily-card" id="issue">
     <div class="prose">
-{markdown_to_html(body)}
+{markdown_to_html(rest)}
     </div>
   </article>
-  {nav}
   {_daily_join("daily-issue")}
+  {nav}
   {_daily_foot()}
 </main>
 """
     # render_shell escapes without quotes, so a quote mark would end the meta attributes.
-    plain = lambda s: s.replace('"', "\u201d")  # noqa: E731
+    plain = lambda s: s.replace('"', "”")  # noqa: E731
     page = _daily_shell(plain(fm.get("title", "")), plain(fm.get("description", "")), content,
-                        f"{DAILY_SECTION}/{slug}/", script=_daily_join_script())
+                        f"{DAILY_SECTION}/{slug}/", script=_daily_script())
     canonical = fm.get("canonical", "")
     if canonical.startswith("https://"):
         page = re.sub(r'(<link rel="canonical" href=")[^"]*(")',
@@ -2199,30 +2457,35 @@ def render_daily_post(fm, body, slug, newer=None, older=None):
 
 
 def render_daily_index(posts):
+    tags = {f: tag for f, _label, tag in DAILY_FORMATS}
     rows = []
     for fm, _body, slug in posts:
         n = fm.get("number", "")
+        when = fm.get("date_text") or fm.get("date", "")
+        meta = " &middot; ".join(x for x in ("#" + html.escape(n) if n else "",
+                                             html.escape(when, quote=False)) if x)
+        chips = "".join(f'<span class="daily-tag">{tags[f]}</span>' for f in _daily_formats(fm))
         rows.append(
             f'<li><a href="{SITE_ROOT}{DAILY_SECTION}/{slug}/">'
-            f'<span class="n">{"#" + html.escape(n) if n else ""}</span>'
+            f'<span class="n">{meta}</span>'
             f'<span class="t">{html.escape(fm.get("headline") or fm.get("title", ""), quote=False)}</span>'
-            f'<span class="d">{html.escape(fm.get("date", ""), quote=False)}</span></a></li>'
+            f'<span class="daily-tags" aria-label="Formats">{chips}</span></a></li>'
         )
     empty = "" if rows else "<p>The first issue is on its way.</p>"
     content = f"""{_daily_css_link()}
-<main class="daily">
+<main class="daily daily-index">
   <header class="daily-head">
-    <span class="eyebrow">Every morning</span>
-    <h1>{html.escape(DAILY_TITLE, quote=False)}</h1>
-    <p class="daily-date">{html.escape(DAILY_LEDE, quote=False)}</p>
+    <span class="daily-eyebrow">{html.escape(DAILY_TITLE, quote=False)}</span>
+    <h1>{html.escape(DAILY_PROMISE, quote=False)}</h1>
+    <p class="daily-lede">{html.escape(DAILY_FORMATS_LINE, quote=False)}</p>
   </header>
+  {_daily_join("daily", compact=True)}
   <ul class="daily-list">{"".join(rows)}</ul>{empty}
-  {_daily_join("daily")}
   {_daily_foot()}
 </main>
 """
     return _daily_shell(f"{DAILY_TITLE} | {SITE_NAME}", DAILY_LEDE, content,
-                        f"{DAILY_SECTION}/", script=_daily_join_script())
+                        f"{DAILY_SECTION}/", script=_daily_script())
 
 
 def _daily_date(fm):
@@ -2279,6 +2542,21 @@ def write_daily_feeds(posts, out_dir):
     print(f"  wrote {DAILY_SECTION}/feed.xml and feed.json ({len(posts)} issues)")
 
 
+def _daily_copy_media(slug):
+    """content/<DAILY_SECTION>/media/<slug>/* (the picture and slides the app checked) next to
+    the issue page."""
+    import shutil
+
+    src = CONTENT_DIR / DAILY_SECTION / "media" / slug
+    if not src.is_dir():
+        return
+    out = DOCS_DIR / DAILY_SECTION / slug
+    out.mkdir(parents=True, exist_ok=True)
+    for f in sorted(src.iterdir()):
+        if f.is_file() and re.fullmatch(r"[a-z0-9][a-z0-9.-]{0,40}", f.name):
+            shutil.copyfile(f, out / f.name)
+
+
 def build_daily():
     posts = _daily_posts()
     static_out = DOCS_DIR / "static"
@@ -2292,6 +2570,7 @@ def build_daily():
         newer = slugs[i - 1] if i > 0 else None
         older = slugs[i + 1] if i + 1 < len(slugs) else None
         write_page(f"{DAILY_SECTION}/{slug}", render_daily_post(fm, body, slug, newer, older))
+        _daily_copy_media(slug)
     write_daily_feeds(posts, DOCS_DIR)
     return slugs
 
@@ -2412,8 +2691,8 @@ def main():
         ('About', base + '/about/', 'Career, credits and how I work'),
         ('Projects', base + '/projects/', 'Case studies for the open-source tools'),
         ('Course', base + '/course/', 'Breakdown and Budget the VFX of a Whole Film'),
-        ('Work with me', base + '/work-with-me/', 'Four ways to work together, and the form to start'),
-        ('Overscan', base + '/overscan/', 'A brief for your business: drafted from your sources, approved by you'),
+        ('Work with me', base + '/work-with-me/', 'VES Award-winning VFX supervisor and producer: bid review, supervision and AI-assisted pipelines, built to land on budget and on time'),
+        ('Overscan', base + '/overscan/', 'Prove what you know, every morning: what changed in your trade and what it means, from you, to read, hear or watch; you shape it by replying'),
         ('Notes', base + '/notes/', 'Writing on VFX production and AI orchestration'),
     ]
     # Real frontmatter, not the slug: card_title/card_summary (falling back to
