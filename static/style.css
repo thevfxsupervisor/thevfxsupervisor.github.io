@@ -76,8 +76,13 @@ header.top{position:sticky;top:0;z-index:40;backdrop-filter:blur(9px);
 .top nav a.current{color:var(--amber)}
 .top .btn{padding:9px 15px}
 .top nav a.btn-a,.top nav a.btn-a:hover{color:var(--on-accent);font-weight:600}
+/* Phone-width CTA: the in-nav "Work with me" button hides at 560px (below), and this compact
+   twin takes over right there, living in the brand row (between wordmark and theme toggle) so
+   it survives the nav wrapping to its own row at 480px. Geoff: the page that earns must stay
+   reachable on a phone. Hidden above 560px, where the in-nav button already does the job. */
+.cta-mobile{display:none}
 /* Small screens: keep every SECTION reachable (tighten instead of hiding).
-   Only the header CTA drops on phones, since the hero and every page footer repeat it. */
+   The in-nav CTA drops on phones (.cta-mobile replaces it, see above). */
 @media(max-width:820px){
   .top nav{gap:14px}
   .top nav a{font-size:11.5px}
@@ -90,6 +95,19 @@ header.top{position:sticky;top:0;z-index:40;backdrop-filter:blur(9px);
   .top nav a.btn-a{display:none}
   .top .logo{width:32px;height:32px}
   .brand{font-size:14px;gap:8px}
+  .cta-mobile{display:inline-flex;align-items:center;justify-content:center;min-height:44px;
+    box-sizing:border-box;padding:0 12px;font-size:11px;white-space:nowrap;flex:0 0 auto}
+}
+/* 480px: the wrap breakpoint below moves nav to its own full-width row (order:3), so this query
+   only has brand, .cta-mobile and the toggle left on row one; order:0 on all three keeps them in
+   that DOM order, and the toggle's own margin-left:auto (below) pushes it to the row's right edge. */
+@media(max-width:400px){
+  /* The wordmark text would not fit next to the button and toggle at this width: the logo
+     stands alone (accessible name stays, visually hidden, same technique as .sr). */
+  .brand-text{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;
+    overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}
+  .brand{gap:0}
+  .cta-mobile{padding:0 10px}
 }
 
 section{padding:clamp(46px,7vw,80px) 0}
