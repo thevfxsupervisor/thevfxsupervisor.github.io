@@ -57,15 +57,15 @@ document.documentElement.dataset.theme=t})();
 </header>
 
 <main id="main">
-<script>document.documentElement.className+=" dj-js";</script><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap"><link rel="stylesheet" href="/static/daily.css">
+<script>document.documentElement.className+=" dj-js";</script><link rel="stylesheet" href="/static/daily.css">
 <main class="daily">
   <header class="daily-head">
     <span class="daily-eyebrow">You're on the list</span>
     <h1>Your spot is saved.</h1>
-    <p class="daily-lede">When email opens, we'll send you one email to confirm. Nothing else arrives until you say yes.</p>
+    <p class="daily-lede">When email opens, I'll send you one email to confirm. Nothing else arrives until you say yes.</p>
   </header>
   <div class="prose">
-    <p>Today's issue is already up: <a href="/daily/">read The VFX Supervisor Daily now</a>, or follow it in <a href="/daily/feed.xml">RSS</a>.</p>
+    <p>The latest issue is up: <a href="/daily/">read The VFX Supervisor Daily now</a>, or follow it in <a href="/daily/feed.xml">RSS</a>.</p>
     <p>Changed your mind? Write to the address in the <a href="/privacy/">privacy note</a> and your address is deleted.</p>
   </div>
   <p class="daily-foot"><a href="/daily/feed.xml">RSS</a> &middot; <a href="/daily/feed.json">JSON Feed</a> &middot; Made with <a href="/overscan/">Overscan</a></p>
@@ -126,7 +126,7 @@ document.documentElement.dataset.theme=t})();
           say(msgs.length ? msgs.join(' ') : ((d && d.message) || 'That did not save. Please try again.'), 'err');
           submit.disabled = false;
         })
-        .catch(function(){ say('That did not save. Please try again in a minute.', 'err'); submit.disabled = false; });
+        .catch(function(){ form.submit(); });  /* no answer by script: post it the plain way */
     });
   });
 })();

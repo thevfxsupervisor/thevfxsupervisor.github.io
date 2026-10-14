@@ -2076,11 +2076,19 @@ def render_note(md_path):
 # --------------------------------------------------------------------------
 
 DAILY_PROMISE = "What changed in VFX today, and what that means for your next bid."
-DAILY_FORMATS_LINE = ("Skip the trade-site scroll. Read it here every morning, and hear it, "
-                      "watch it or flip the slides on days we have them.")
+DAILY_FORMATS_LINE = ("Skip the trade-site scroll. Read every issue here. Audio, video and slides "
+                      "come with an issue once they pass my fact check.")
+# One real sample per format, from files already on the site (13 Oct 2026 issue): shown on the
+# index so a visitor sees what each format is before picking one. A missing file = no sample.
+DAILY_SAMPLES_FROM = "13 October 2026"
+DAILY_SAMPLES = [("listen", "Hear it", "static/overscan/media/issue-audio.m4a", ""),
+                 ("watch", "Watch it", "static/overscan/media/issue-video.mp4",
+                  "static/overscan/media/issue-video-poster.jpg"),
+                 ("slides", "Slides", "static/overscan/media/issue-slide-1.png", "")]
 DAILY_LIGHT = ("--bg:#F4EFE6;--panel:#FBF8F2;--raise:#ECE5D8;--line:#D9D0C1;--line2:#C9BFAE;"
                "--txt:#14213D;--dim:#3B4660;--mute:#56607A;--amber:#0567c4;--amber-soft:#0567c4;"
-               "--dj-accent-line:#9cc3e8;color-scheme:light")
+               "--dj-accent-line:#9cc3e8;--dj-btn:#0567c4;--dj-btn-ink:#ffffff;--dj-btn-hover:#04529c;"
+               "color-scheme:light")
 DAILY_SECTION = 'daily'
 DAILY_TITLE = 'The VFX Supervisor Daily'
 DAILY_LEDE = "What the day's VFX news means, in a few lines, with a link to every story."
@@ -2089,7 +2097,11 @@ DAILY_JOIN_URL = 'https://newsletter-edge.thevfxsupervisor.workers.dev/join/vfx'
 DAILY_JOIN_VERSION = 'vfx-daily-v2'
 DAILY_JOIN_CONSENT = 'Email me The VFX Supervisor Daily from Geoffrey Hancock each morning, in the format I picked, with the occasional note about his VFX updates. I can unsubscribe in one click from any email.'
 DAILY_CSS = """
-:root{--dim:#a3aab1;--dj-accent-line:#1f4f7a;--dj-serif:"EB Garamond",Georgia,"Times New Roman",serif;--dj-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--dj-sans:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,sans-serif}
+@font-face{font-family:"EB Garamond";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/eb-garamond-600-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:400 600;font-display:swap;src:url(fonts/ibm-plex-sans-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:400;font-display:swap;src:url(fonts/ibm-plex-mono-400-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+@font-face{font-family:"IBM Plex Mono";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/ibm-plex-mono-600-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
+:root{--dim:#a3aab1;--dj-accent-line:#1f4f7a;--dj-btn:#0585f8;--dj-btn-ink:#06131d;--dj-btn-hover:#3aa3f5;--dj-serif:"EB Garamond",Georgia,"Times New Roman",serif;--dj-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;--dj-sans:"IBM Plex Sans",-apple-system,"Segoe UI",Roboto,sans-serif}
 @media (prefers-color-scheme:light){:root:not([data-theme=dark]){@@LIGHT@@}:root:not([data-theme=dark]) header.top{background:rgba(244,239,230,.86)}}
 :root[data-theme=light]{@@LIGHT@@}
 :root[data-theme=light] header.top{background:rgba(244,239,230,.86)}
@@ -2104,7 +2116,7 @@ DAILY_CSS = """
 .daily-chips{display:flex;flex-wrap:wrap;gap:10px}
 .daily-chip{min-height:48px;display:inline-flex;align-items:center;padding:10px 18px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--txt);font-family:var(--dj-mono);font-size:13px;text-decoration:none;cursor:pointer}
 .daily .daily-chip{color:var(--txt)}
-.daily .daily-chip.on{background:#0585f8;border-color:#0585f8;color:#ffffff}
+.daily .daily-chip.on{background:var(--dj-btn);border-color:var(--dj-btn);color:var(--dj-btn-ink)}
 .daily-panel{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px}
 .dj-js .daily-panel{display:none}
 .dj-js .daily-panel.on{display:flex}
@@ -2146,29 +2158,34 @@ DAILY_CSS = """
 .daily-pick{position:relative;display:inline-flex}
 .daily-pick input{position:absolute;opacity:0;width:1px;height:1px}
 .daily-pick span{min-height:48px;display:inline-flex;align-items:center;padding:0 16px;border-radius:999px;border:1px solid var(--line);font-family:var(--dj-mono);font-size:13px;color:var(--txt);cursor:pointer}
-.daily-pick input:checked+span{background:#0585f8;border-color:#0585f8;color:#ffffff}
+.daily-pick input:checked+span{background:var(--dj-btn);border-color:var(--dj-btn);color:var(--dj-btn-ink)}
 .daily-pick input:focus-visible+span{outline:2px solid var(--amber-soft);outline-offset:2px}
 .daily-row{display:flex;flex-wrap:wrap;gap:10px}
 .daily-row input[type=email],.daily-row select{flex:1 1 240px;min-height:48px;border-radius:8px;border:1px solid var(--line);background:var(--bg);color:var(--txt);padding:0 14px;font-size:16px;font-family:var(--dj-sans)}
 .daily-row select{flex:0 1 auto;font-family:var(--dj-mono);font-size:14px}
-.daily-send{min-height:48px;padding:0 22px;border-radius:8px;border:0;background:#0585f8;color:#ffffff;font-family:var(--dj-mono);font-size:14px;font-weight:600;cursor:pointer;flex:1 1 auto}
-.daily-send:hover{background:#3aa3f5}
+.daily-send{min-height:48px;padding:0 22px;border-radius:8px;border:0;background:var(--dj-btn);color:var(--dj-btn-ink);font-family:var(--dj-mono);font-size:14px;font-weight:600;cursor:pointer;flex:1 1 auto}
+.daily-send:hover{background:var(--dj-btn-hover)}
 .daily-send:disabled{opacity:.6}
 .daily-consent{margin:0;font-size:13px;line-height:1.5;color:var(--dim)}
 .daily-small{margin:0;font-size:12px;line-height:1.5;color:var(--mute)}
 .daily-small a{color:var(--amber-soft)}
+.daily-samples{display:flex;flex-direction:column;gap:14px}
+.daily-samples h2{margin:0;font-weight:400}
+.daily-samples-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.daily-sample{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:16px;display:flex;flex-direction:column;gap:10px}
+.daily-sample h3{margin:0;font-family:var(--dj-sans);font-size:16px;font-weight:600;letter-spacing:0}
+.daily-sample audio,.daily-sample video,.daily-sample img{display:block;width:100%;max-width:100%;border-radius:10px}
+.daily-sample video{aspect-ratio:16/9;height:auto;background:#000}
 .daily-sr{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
 .daily-hp{position:absolute;left:-9999px}
 .daily .wl-status:empty{display:none}
 .daily .wl-status{font-size:14px;color:var(--txt)}
-@media(min-width:700px){.daily{padding-top:40px}.daily-head h1{font-size:44px}.daily-index .daily-head h1{font-size:52px;line-height:1.05}.daily-join{padding:28px}.daily-join h2{font-size:30px}.daily-send{flex:0 0 auto}}
+@media(min-width:700px){.daily{padding-top:40px}.daily-head h1{font-size:44px}.daily-index .daily-head h1{font-size:52px;line-height:1.05}.daily-join{padding:28px}.daily-samples-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.daily-join h2{font-size:30px}.daily-send{flex:0 0 auto}}
 @media(max-width:600px){.daily-pdf{display:none}}
 """.replace("@@LIGHT@@", DAILY_LIGHT)
 
-DAILY_FONTS = ('<link rel="preconnect" href="https://fonts.googleapis.com">'
-               '<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>'
-               '<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600'
-               '&amp;family=IBM+Plex+Mono:wght@400;600&amp;family=IBM+Plex+Sans:wght@400;500;600&amp;display=swap">')
+# The fonts are the site's own files (static/fonts/, OFL; @font-face in daily.css): no request
+# to any font service, so a visitor's address goes nowhere but GitHub Pages.
 # Runs as the page is read, before the Daily's own markup: "dj-js" turns the stacked media
 # panels into one panel at a time. Light/dark is the SITE's (its header's button.theme-toggle
 # and head script set data-theme on <html>, key "theme"); the CSS above only styles it, and
@@ -2178,9 +2195,9 @@ DAILY_THEME_HEAD = '<script>document.documentElement.className+=" dj-js";</scrip
 # (form value, chip label, index tag) for the five ways to take an issue.
 DAILY_FORMATS = [("read", "Read it", "Read"), ("listen", "Hear it", "Hear"),
                  ("watch", "Watch it", "Watch"), ("slides", "Slides", "Slides"),
-                 ("picture", "The picture", "Picture")]
+                 ("picture", "One picture", "Picture")]
 DAILY_PANEL_TITLES = {"read": "Read it", "listen": "Hear it", "watch": "Watch it",
-                      "slides": "Flip the slides", "picture": "Take the one picture"}
+                      "slides": "Flip the slides", "picture": "One picture"}
 
 
 def _daily_posts():
@@ -2201,7 +2218,7 @@ def _daily_posts():
 
 
 def _daily_css_link():
-    return (f'{DAILY_THEME_HEAD}{DAILY_FONTS}'
+    return (f'{DAILY_THEME_HEAD}'
             f'<link rel="stylesheet" href="{SITE_ROOT}static/daily.css">')
 
 
@@ -2329,7 +2346,7 @@ def _daily_join(source, compact=False):
       <input type="hidden" name="consent" value="yes">
       <input type="hidden" name="consent_version" value="{e(DAILY_JOIN_VERSION)}">
       <div class="wl-status" role="status" aria-live="polite"></div>
-      <p class="daily-small">Email opens soon. We'll confirm by email before anything else, and nothing else arrives until you say yes. Until then, read every issue here or in <a href="{SITE_ROOT}{DAILY_SECTION}/feed.xml">RSS</a>. <a href="{SITE_ROOT}privacy/">Privacy note</a>.</p>
+      <p class="daily-small">Email opens soon. I'll confirm by email before anything else, and nothing else arrives until you say yes. Until then, read every issue here or in <a href="{SITE_ROOT}{DAILY_SECTION}/feed.xml">RSS</a>. <a href="{SITE_ROOT}privacy/">Privacy note</a>.</p>
     </form>
   </section>"""
 
@@ -2373,7 +2390,7 @@ def _daily_script():
           say(msgs.length ? msgs.join(' ') : ((d && d.message) || 'That did not save. Please try again.'), 'err');
           submit.disabled = false;
         })
-        .catch(function(){ say('That did not save. Please try again in a minute.', 'err'); submit.disabled = false; });
+        .catch(function(){ form.submit(); });  /* no answer by script: post it the plain way */
     });
   });
 })();
@@ -2399,10 +2416,10 @@ def render_daily_thanks():
   <header class="daily-head">
     <span class="daily-eyebrow">You're on the list</span>
     <h1>Your spot is saved.</h1>
-    <p class="daily-lede">When email opens, we'll send you one email to confirm. Nothing else arrives until you say yes.</p>
+    <p class="daily-lede">When email opens, I'll send you one email to confirm. Nothing else arrives until you say yes.</p>
   </header>
   <div class="prose">
-    <p>Today's issue is already up: <a href="{SITE_ROOT}{DAILY_SECTION}/">read {t} now</a>, or follow it in <a href="{SITE_ROOT}{DAILY_SECTION}/feed.xml">RSS</a>.</p>
+    <p>The latest issue is up: <a href="{SITE_ROOT}{DAILY_SECTION}/">read {t} now</a>, or follow it in <a href="{SITE_ROOT}{DAILY_SECTION}/feed.xml">RSS</a>.</p>
     <p>Changed your mind? Write to the address in the <a href="{SITE_ROOT}privacy/">privacy note</a> and your address is deleted.</p>
   </div>
   {_daily_foot()}
@@ -2456,6 +2473,35 @@ def render_daily_post(fm, body, slug, newer=None, older=None):
     return page
 
 
+def _daily_samples():
+    """One short real sample per format whose file is on the site, and the picture marked
+    Coming; "" when none of the files exist."""
+    e = lambda s: html.escape(s, quote=True)  # noqa: E731
+    cards = []
+    for _f, label, path, poster in DAILY_SAMPLES:
+        if not (ROOT_DIR / path).is_file():
+            continue
+        src = e(SITE_ROOT + path)
+        if path.endswith((".m4a", ".mp3")):
+            body = f'<audio controls preload="none" src="{src}"></audio>'
+        elif path.endswith(".mp4"):
+            pos = f' poster="{e(SITE_ROOT + poster)}"' if poster and (ROOT_DIR / poster).is_file() else ""
+            body = f'<video controls preload="none" playsinline src="{src}"{pos}></video>'
+        else:
+            body = f'<img src="{src}" loading="lazy" decoding="async" alt="One slide from the issue">'
+        cards.append(f'<div class="daily-sample"><h3>{e(label)}</h3>{body}</div>')
+    if not cards:
+        return ""
+    cards.append('<div class="daily-sample"><h3>One picture</h3>'
+                 '<p class="daily-note">Coming.</p></div>')
+    return f"""
+  <section class="daily-samples" aria-labelledby="daily-samples-h">
+    <h2 class="daily-label" id="daily-samples-h">What each format looks like</h2>
+    <p class="daily-note">Short samples from one issue ({e(DAILY_SAMPLES_FROM)}).</p>
+    <div class="daily-samples-grid">{"".join(cards)}</div>
+  </section>"""
+
+
 def render_daily_index(posts):
     tags = {f: tag for f, _label, tag in DAILY_FORMATS}
     rows = []
@@ -2472,14 +2518,17 @@ def render_daily_index(posts):
             f'<span class="daily-tags" aria-label="Formats">{chips}</span></a></li>'
         )
     empty = "" if rows else "<p>The first issue is on its way.</p>"
+    samples = _daily_samples()
+    lede = DAILY_FORMATS_LINE + (" Short samples are below." if samples else "")
     content = f"""{_daily_css_link()}
 <main class="daily daily-index">
   <header class="daily-head">
     <span class="daily-eyebrow">{html.escape(DAILY_TITLE, quote=False)}</span>
     <h1>{html.escape(DAILY_PROMISE, quote=False)}</h1>
-    <p class="daily-lede">{html.escape(DAILY_FORMATS_LINE, quote=False)}</p>
+    <p class="daily-lede">{html.escape(lede, quote=False)}</p>
   </header>
   {_daily_join("daily", compact=True)}
+  {samples}
   <ul class="daily-list">{"".join(rows)}</ul>{empty}
   {_daily_foot()}
 </main>

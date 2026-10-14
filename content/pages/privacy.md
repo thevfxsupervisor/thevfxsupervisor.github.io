@@ -33,11 +33,11 @@ This is the form on [Work with me](/work-with-me/) and [Overscan](/overscan/).
 
 This is the form on [The VFX Supervisor Daily](/daily/) and on every issue.
 
-**What I collect.** Your email, your first name if you give it, which format you picked (read, hear, watch, slides or one picture), which page you sent it from, and the exact words of the box you ticked, with the time you ticked it. To stop spam, the form also keeps a scrambled, one-way code made from your internet address, used only to count how many sign-ups come from one place. It cannot be turned back into the address.
+**What I collect.** Your email, which format you picked (read, hear, watch, slides or one picture), which page you sent it from, and the exact words shown under the button you pressed, with the version of those words and the time you pressed it. To stop spam, the form also keeps a scrambled, one-way code made from your internet address, used only to count how many sign-ups come from one place. It cannot be turned back into the address.
 
 **Why.** To send you one email asking you to confirm, once the Daily goes out by email, and then the Daily in the format you picked, only if you confirm. The lawful basis is your consent. Saving your spot sends you nothing today: no welcome email, no list, until that one confirmation email.
 
-**Where.** In the same private database on a server I run, reached through Cloudflare. Before the first email goes out, this page will also name the email service that sends it.
+**Where.** In the same private database on a server I run, reached through Cloudflare. Before the first email goes out, this page will also name the email service that sends it. When an issue on this site has audio or video, it plays from that same server, through Cloudflare, only when you press play.
 
 **How long.** If you confirm, until you unsubscribe (one click in every email) or ask me to delete it. If you do not confirm, your address is deleted 7 days after that one confirmation email. A record that you agreed, and to which words, is kept for two years after you unsubscribe, because Danish law asks me to be able to show it.
 
