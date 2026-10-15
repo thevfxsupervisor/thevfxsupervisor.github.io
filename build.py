@@ -1048,6 +1048,15 @@ def render_home():
             f'<p>{html.escape(pfm.get("card_summary", pfm.get("description","")), quote=False)}</p>'
             f'<span class="proj-more mono">Read the case study &rarr;</span></a>'
         )
+    # Overscan sits right under the flagship: it is the system behind the Daily and the one
+    # thing on the site sold to businesses, so a visitor scanning the work meets it early.
+    cards.insert(1 if cards else 0,
+        f'<a class="proj-card" href="{SITE_ROOT}overscan/">'
+        f'<span class="eyebrow os-brand"><img class="os-mark os-mark-sm" src="{SITE_ROOT}static/overscan/mark-e1.svg" alt="" width="22" height="22">Overscan &middot; for your business</span>'
+        f'<h2>Your customers hear what changed in your trade from you, not from a competitor.</h2>'
+        f'<p>Overscan turns the news in your trade into a briefing under your name, to read, hear or watch, with one line on why each story matters to your customers. Overscan is the system behind {html.escape(DAILY_NAME, quote=False)}, my own morning VFX briefing, and I set Overscan up with you.</p>'
+        f'<span class="proj-more mono">Put your name on your trade&rsquo;s news &rarr;</span></a>'
+    )
     cards.append(
         f'<a class="proj-card" href="{SITE_ROOT}course/">'
         f'<span class="eyebrow">Course &middot; free waitlist</span>'
@@ -1554,6 +1563,12 @@ DAILY_NAME = "The VFX Supervisor Daily"
 INQUIRY_ENDPOINT = "https://newsletter-edge.thevfxsupervisor.workers.dev/hooks/inquiry"
 CONTACT_EMAIL = "geoff@thevfxsupervisor.com"
 INQUIRY_THANKS = SITE_ROOT + "work-with-me/thanks/"
+# An Overscan inquiry (the /overscan/ form, or "Content for my business" picked on /work-with-me/)
+# lands on its own thanks page with the Overscan next step. Only the scripted post can route it:
+# the endpoint's no-script redirect is one URL (NL_INQUIRY_THANKS_URL) for every form, so the
+# generic thanks page also carries a short Overscan line.
+OVERSCAN_THANKS = SITE_ROOT + "overscan/thanks/"
+OVERSCAN_OFFER = "brief"
 # The keys the endpoint accepts (newsletter.inquiry.OFFERS); labels are what the visitor reads.
 INQUIRY_OFFERS = [
     ("bid-review", "Breakdown and bid review"),
@@ -1622,7 +1637,7 @@ INQUIRY_SCRIPT = """
    page. With script, the same urlencoded post goes by fetch (no preflight: only safelisted
    headers), errors show next to the button, and a failure offers email instead. */
 (function(){
-  var THANKS = "%(thanks)s", CONTACT = "%(contact)s";
+  var THANKS = "%(thanks)s", OS_THANKS = "%(os_thanks)s", OS_OFFER = "%(os_offer)s", CONTACT = "%(contact)s";
   var forms = document.querySelectorAll('.inquiry-form');
   Array.prototype.forEach.call(forms, function(form){
     var status = form.querySelector('.wl-status');
@@ -1642,7 +1657,11 @@ INQUIRY_SCRIPT = """
                           body: new URLSearchParams(new FormData(form))})
         .then(function(r){ return r.json().then(function(d){ return {status: r.status, data: d}; }); })
         .then(function(res){
-          if (res.data && res.data.ok) { window.location.href = THANKS; return; }
+          if (res.data && res.data.ok) {
+            var offer = form.querySelector('[name=offer]');
+            window.location.href = (offer && offer.value === OS_OFFER) ? OS_THANKS : THANKS;
+            return;
+          }
           var errs = (res.data && res.data.errors) || {};
           var msgs = Object.keys(errs).map(function(k){ return errs[k]; });
           if (!msgs.length) msgs = [(res.data && res.data.message) || 'That did not send.'];
@@ -1659,7 +1678,8 @@ INQUIRY_SCRIPT = """
     });
   });
 })();
-</script>""" % {"thanks": INQUIRY_THANKS, "contact": CONTACT_EMAIL}
+</script>""" % {"thanks": INQUIRY_THANKS, "os_thanks": OVERSCAN_THANKS, "os_offer": OVERSCAN_OFFER,
+               "contact": CONTACT_EMAIL}
 
 
 def _feature(it):
@@ -1837,7 +1857,7 @@ def render_overscan():
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">{e("form_eyebrow")}</span><h2>{e("form_h2")}</h2>
       <p class="k">{e("form_k")}</p></div>
-    {inquiry_form(fm, offer="brief", source="overscan", form_id="os-form")}
+    {inquiry_form(fm, offer=OVERSCAN_OFFER, source="overscan", form_id="os-form")}
     <p class="tiny os-byline">{e("byline")}</p>
     <p class="tiny os-byline">{e("sold_by")}</p>
   </div>
@@ -2072,6 +2092,32 @@ def render_simple_page(slug, nav_active=None, robots="index, follow", path=None)
 </section>
 '''
     return render_shell(fm.get("title", ""), fm.get("description", ""), content, nav_active=nav_active, canonical_path=(path or slug) + "/", robots=robots)
+
+
+def render_404():
+    """docs/404.html: GitHub Pages serves it for any missing path, at that path, so every link
+    here is root-absolute (SITE_ROOT is "/"). Replaces GitHub's default page, which scrolled
+    sideways on a phone."""
+    links = [
+        ("Read the latest Daily", DAILY_PATH, "btn btn-a"),
+        ("Overscan: your name on your trade\u2019s news", SITE_ROOT + "overscan/", "btn btn-b"),
+        ("Work with me", SITE_ROOT + "work-with-me/", "btn btn-b"),
+        ("Home", SITE_ROOT, "btn btn-b"),
+    ]
+    btns = "".join(f'<a class="{cls}" href="{href}">{html.escape(label, quote=False)}</a>'
+                   for label, href, cls in links)
+    content = f'''
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">404 &middot; page not found</span>
+    <h1 style="margin-top:18px">That page is not here.</h1>
+    <p class="lede">The link may be old, or the address mistyped. Pick up from one of these.</p>
+    <div class="cta-row cta-404">{btns}</div>
+  </div>
+</section>
+'''
+    return render_shell("Page not found | the vfx supervisor", "That page is not here.", content,
+                        canonical_path="404.html", robots="noindex, follow")
 
 
 def render_notes():
@@ -2554,7 +2600,7 @@ def render_daily_thanks():
   </header>
   <div class="prose">
     <p>The latest issue is up: <a href="{SITE_ROOT}{DAILY_SECTION}/">read {t} now</a>, or follow it in <a href="{SITE_ROOT}{DAILY_SECTION}/feed.xml">RSS</a>.</p>
-    <p>Changed your mind? Write to the address in the <a href="{SITE_ROOT}privacy/">privacy note</a> and your address is deleted.</p>
+    <p>Changed your mind? <a href="mailto:{CONTACT_EMAIL}?subject=Remove%20me%20from%20the%20Daily%20list">Email me to come off the list</a> and your address is deleted (see the <a href="{SITE_ROOT}privacy/">privacy note</a>).</p>
   </div>
   {_daily_foot()}
 </main>
@@ -2807,7 +2853,10 @@ def main():
     write_page("work-with-me/thanks", render_simple_page("work-with-me-thanks", robots="noindex, follow", path="work-with-me/thanks"))
     write_page("overscan", render_overscan())
     write_page("overscan/guide", render_overscan_guide())
+    write_page("overscan/thanks", render_simple_page("overscan-thanks", robots="noindex, follow", path="overscan/thanks"))
     write_page("notes", render_notes())
+    (DOCS_DIR / "404.html").write_text(render_404(), encoding="utf-8")
+    print("  wrote docs/404.html")
 
     note_slugs = []
     note_fms = []
