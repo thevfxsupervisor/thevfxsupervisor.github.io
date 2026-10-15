@@ -31,7 +31,7 @@ Three short questions follow, and we can answer them together on the call:
 
 Press `Make my newsletter`. For the first issue today, open `Issues` in the top menu and press `Make an issue now`. Overscan starts on it within ten minutes and emails it to you (or keeps it on the web page, if that is all you picked).
 
-Bookmark the page you land on. Signed out later? Type your email on the sign-in page and a fresh link arrives by email.
+Bookmark the page you land on. Signed out later? Type your email on the [sign-in page](https://newsletter-edge.thevfxsupervisor.workers.dev/) and a fresh link arrives by email.
 
 ### Make it yours :: Hit reply. The next issue listens.
 Teach Overscan the way you would teach a new hire: reply to any issue in your own words. Overscan answers in the same thread with what it understood, and the next issue follows it.

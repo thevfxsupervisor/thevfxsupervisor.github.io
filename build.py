@@ -2216,9 +2216,10 @@ DAILY_TITLE = 'The VFX Supervisor Daily'
 DAILY_LEDE = "What the day's VFX news means, in a few lines, with a link to every story."
 DAILY_MADE_WITH = '/overscan/'
 DAILY_JOIN_URL = 'https://newsletter-edge.thevfxsupervisor.workers.dev/join/vfx'
-# Where an Overscan customer signs in (an emailed sign-in link, no password). Shown small at the top
-# of /overscan/ and /overscan/guide/ and in the footer, never in the top bar (it is full).
-OVERSCAN_SIGNIN_URL = "https://newsletter-edge.thevfxsupervisor.workers.dev/login"
+# Where an Overscan customer signs in: the app root. It sends a signed-out visitor to the sign-in
+# page (an emailed link, no password) and a signed-in one straight in. Shown small at the top of
+# /overscan/ and /overscan/guide/ and in the footer, never in the top bar (it is full).
+OVERSCAN_SIGNIN_URL = "https://newsletter-edge.thevfxsupervisor.workers.dev/"
 
 
 def signin_line():
