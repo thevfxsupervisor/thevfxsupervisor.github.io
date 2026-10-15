@@ -1962,7 +1962,7 @@ def render_overscan_guide():
 </section>
 '''
     content += related_section(
-        [("Overscan", SITE_ROOT + "overscan/"), ("See it working: " + DAILY_NAME, DAILY_PATH),
+        [("Overscan", SITE_ROOT + "overscan/"), ("See it working", DAILY_PATH),
          ("Work with me", SITE_ROOT + "work-with-me/")],
     )
     return render_shell(fm.get("title", ""), fm.get("description", ""), content,

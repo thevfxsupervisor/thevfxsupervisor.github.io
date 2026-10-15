@@ -7,9 +7,9 @@ eyebrow: Overscan guide
 h1: Your first issue today, then teach Overscan by replying in plain words.
 lede: Running your own briefing should never take a manual, so this one is short. Your first issue in three answers, every change in your own words by email, and exactly what lands in your inbox each morning.
 not_set_up: Not a customer yet: [see what Overscan does for your business](/overscan/).
-exchange_you: Shorter please. More on the new rules, less on trade shows.
+exchange_you: Longer please. More on the new rules, less on trade shows.
 exchange_overscan: |
-  Got it. Your issues will be short from the next one.
+  Got it. Your issues will be the usual length from the next one.
   You'll see more on the new rules from the next issue.
   You'll see less on trade shows from the next issue.
   Changed your mind? Just reply UNDO.
@@ -32,6 +32,8 @@ Three short questions follow, and we can answer them together on the call:
 Press `Make my newsletter`. For the first issue today, open `Issues` in the top menu and press `Make an issue now`. Overscan starts on it within ten minutes and emails it to you (or keeps it on the web page, if that is all you picked).
 
 Bookmark the page you land on. Signed out later? Type your email on the sign-in page and a fresh link arrives by email.
+
+Set up directly by me rather than the sign-in link, from my own invite list? Everything below is the same: your email, your replies and your pause link all work exactly as described here.
 
 ### Make it yours :: Hit reply. The next issue listens.
 Teach Overscan the way you would teach a new hire: reply to any issue in your own words. Overscan answers in the same thread with what it understood, and the next issue follows it.
@@ -60,7 +62,7 @@ Take each issue the way your morning allows. Overscan crafts it once as a letter
 
 **Pick yours.** Tell me which one should lead your email and I switch it for you, any time. Every extra starts switched off: tick the ones you like on the `Brief` page under `Extras`, or reply "add the slides". The list also offers `Simple podcast`, a plainer spoken version, and `Infographic`, the whole issue as one picture.
 
-**When a piece is missing.** Audio, video, slides and the picture come once they are ready and pass a check against the stories, and not every issue gets every piece. For now, video and slides come with some issues each week, not every day; on the other days the audio is the plainer spoken version and the video and slides skip that issue. If yours is still being made, Overscan holds your copy for it, for up to a few hours. If it does not come, you get the full letter with one line saying so.
+**When a piece is missing.** Audio, video, slides and the infographic share one allowance of two a week from the outside service that makes them, used audio first; once that is used up for the week, the rest skip until next week and you get the full letter with one line saying so. Tick `Simple podcast` and that spoken version is unaffected: it is made ourselves, every day. Whatever is made still has to pass a check against the stories before it is shown; if yours is still being checked, Overscan holds your copy for it, for up to a few hours.
 
 **Your customers.** Today the issue and its extras come to you, and you copy what you like into the tool you already use. Forward the whole email and you pass on your own `Pause this newsletter` link with it. Each customer picking their own is coming, below.
 
@@ -69,7 +71,7 @@ You decide where Overscan looks. Open `Sources` in the top menu: every website, 
 
 Or reply "drop" with the site's name, and Overscan confirms you won't see anything from it any more.
 
-Overscan also finds new websites your stories came from. They show up marked `Added for you`, and the next issue lists them at the top under "New sources for you", each with a way to remove it. Overscan pauses the ones that turn out not to be useful. Turn one back on yourself and it stays on, marked `Kept on`, unless it stops answering or starts sending junk.
+Overscan also finds new websites your stories came from. They show up marked `Added for you`, and the next issue lists them at the top under "New sources for you": one Overscan added comes with a way to remove it, and one Overscan has already paused as not useful just says why, since it is off already. Turn one back on yourself and it stays on, marked `Kept on`, unless it stops answering or starts sending junk.
 
 Away for a week? `Pause this newsletter` at the bottom of every issue stops it, and the same page starts it again.
 
@@ -102,7 +104,7 @@ The short explainer video on top, then the letter.
 ### Slides
 The slide deck on top, then the letter.
 
-### Picture
+### See it
 Coming: The whole issue on one screen, as a format of its own once it is reliably accurate. Today you can tick `Infographic` under `Extras` and see it on the issue's page when it passes its check.
 <!-- /formats -->
 
@@ -111,9 +113,9 @@ Coming: The whole issue on one screen, as a format of its own once it is reliabl
 Issues sent from your own address (for example news@yourbusiness.com), with a dated record of each customer's yes and one-click unsubscribe.
 
 ### Each customer picks their format
-Read it, Skim it, Listen, Watch, Slides or Picture, from a link at the bottom of every issue they get.
+Read it, Skim it, Listen, Watch, Slides or See it, from a link at the bottom of every issue they get.
 
-### The one picture as a format
+### See it as a format
 The whole issue on one screen, for the person who will not read, once it is reliably accurate.
 
 ### Your issue on Telegram or Slack
