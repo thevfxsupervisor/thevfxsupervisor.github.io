@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="dark light">
+<script>
+/* Theme before first paint, so there is no flash of the wrong one. A saved choice wins;
+   otherwise follow the system. Contract shared with the Daily pages: data-theme on <html>,
+   localStorage key "theme", button.theme-toggle in the header. */
+(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}
+if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark'}
+document.documentElement.dataset.theme=t})();
+</script>
+<title>Overscan guide | the vfx supervisor</title>
+<meta name="description" content="Run Overscan on your own once it is set up: your first issue in three answers, change anything by replying in plain words, pick how your issue reaches you, turn a website off, and what lands each morning.">
+<link rel="icon" type="image/svg+xml" href="/static/overscan/favicon.svg">
+<link rel="icon" type="image/png" sizes="64x64" href="/static/overscan/favicon-64.png">
+<link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+<link rel="canonical" href="https://thevfxsupervisor.com/overscan/guide/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="the vfx supervisor">
+<meta property="og:title" content="Overscan guide | the vfx supervisor">
+<meta property="og:description" content="Run Overscan on your own once it is set up: your first issue in three answers, change anything by replying in plain words, pick how your issue reaches you, turn a website off, and what lands each morning.">
+<meta property="og:url" content="https://thevfxsupervisor.com/overscan/guide/">
+<meta property="og:image" content="https://thevfxsupervisor.com/static/og/default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Overscan guide | the vfx supervisor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Overscan guide | the vfx supervisor">
+<meta name="twitter:description" content="Run Overscan on your own once it is set up: your first issue in three answers, change anything by replying in plain words, pick how your issue reaches you, turn a website off, and what lands each morning.">
+<meta name="twitter:image" content="https://thevfxsupervisor.com/static/og/default.png">
+<link rel="stylesheet" href="/static/style.css?v=47d0933d">
+  <link rel="alternate" type="application/rss+xml" title="the vfx supervisor" href="https://thevfxsupervisor.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"the vfx supervisor","url":"https://thevfxsupervisor.com/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "@id": "https://thevfxsupervisor.com/#person", "name": "Geoffrey Hancock", "jobTitle": "VFX Supervisor and Producer", "url": "https://thevfxsupervisor.com/", "sameAs": ["https://www.imdb.com/name/nm0995883/", "https://github.com/thevfxsupervisor", "https://wangle.media/", "https://www.wangle.studio"], "award": ["VES Award, Outstanding Supporting Visual Effects in a Feature Motion Picture, Changeling (7th Annual VES Awards)", "VES nomination, Invictus (8th Annual VES Awards)", "Robert nomination, Skammerens datter II"], "worksFor": {"@type": "Organization", "name": "Wangle Media", "url": "https://wangle.media/"}, "homeLocation": {"@type": "Place", "address": {"@type": "PostalAddress", "addressLocality": "Humlebaek", "addressCountry": "DK"}}, "knowsAbout": ["Visual effects", "VFX supervision", "VFX production", "VFX bidding and budgeting", "Shot breakdown", "Pipeline engineering", "Real-time and Unreal Engine production", "AI in visual effects", "Multi-vendor VFX delivery"], "knowsLanguage": ["en", "da"]}</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="logo" aria-hidden="true"></span><span class="brand-text">the vfx supervisor</span></a>
+    <nav>
+      <a href="/projects/" class="">Projects</a>
+      <a href="/daily/" class="">Daily</a>
+      <a href="/notes/" class="">Notes</a>
+      <a href="/about/" class="">About</a>
+      <a class="btn btn-a" href="/work-with-me/">Work with me</a>
+    </nav>
+    <a class="btn btn-a cta-mobile" href="/work-with-me/">Work with me</a>
+    <button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow os-brand"><img class="os-mark" src="/static/overscan/mark-e1.svg" alt="" width="40" height="40">Overscan guide</span>
+    <h1 style="margin-top:18px">Your first issue today, then teach Overscan by replying in plain words.</h1>
+    <p class="lede">Running your own briefing should never take a manual, so this one is short. Your first issue in three answers, every change in your own words by email, and exactly what lands in your inbox each morning.</p>
+    <p class="door">Not a customer yet: <a href="/overscan/">see what Overscan does for your business</a>.</p>
+    <nav class="quicklinks" aria-label="On this page"><span class="eyebrow">On this page</span><div class="ql-row"><a href="#day-one">Day one</a> &middot; <a href="#make-it-yours">Make it yours</a> &middot; <a href="#every-format">Every format</a> &middot; <a href="#what-goes-in">What goes in</a> &middot; <a href="#every-morning">Every morning</a> &middot; <a href="#coming">Coming</a></div></nav>
+  </div>
+</section>
+
+<hr class="rule">
+<section id="day-one">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Day one</span><h2>Your first issue, in three answers</h2></div>
+    <div class="prose gd-body"><p>Your first issue can be in your inbox today. After our call I email you one sign-in link: open it and press <code>Get started</code>. There is no password. The link works once; if it runs out, ask me for a fresh one.</p>
+<p>Three short questions follow, and we can answer them together on the call:</p>
+<ol><li><strong>What do you want to follow?</strong> Say it the way you would tell a friend: who your customers are, and what they should hear about first.</li><li><strong>Where and when?</strong> By email and on a web page, or on the web page only. How often, what time, and your time zone.</li><li><strong>Where should we start looking?</strong> Websites, feeds or keywords, one per line, or tick a starter set.</li></ol>
+<p>Press <code>Make my newsletter</code>. For the first issue today, open <code>Issues</code> in the top menu and press <code>Make an issue now</code>. Overscan starts on it within ten minutes and emails it to you (or keeps it on the web page, if that is all you picked).</p>
+<p>Bookmark the page you land on. Signed out later? Type your email on the sign-in page and a fresh link arrives by email.</p></div>
+  </div>
+</section>
+<hr class="rule">
+<section id="make-it-yours">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Make it yours</span><h2>Hit reply. The next issue listens.</h2></div>
+    <div class="prose gd-body"><p>Teach Overscan the way you would teach a new hire: reply to any issue in your own words. Overscan answers in the same thread with what it understood, and the next issue follows it.</p>
+    <div class="gd-mail" role="group" aria-label="An example reply and the answer">
+      <div class="gd-msg"><span class="gd-who">You reply</span><p>Longer please. More on the new rules, less on trade shows.</p></div>
+      <div class="gd-msg gd-answer"><span class="gd-who">Overscan answers</span><p>Got it. Your issues will be the usual length from the next one.</p><p>You'll see more on the new rules from the next issue.</p><p>You'll see less on trade shows from the next issue.</p><p>Changed your mind? Just reply UNDO.</p><p>All your settings are here: (a link to your page)</p></div>
+    </div>
+    <p class="gd-cap">An example reply, and the answer in Overscan's own words, back in the same email thread.</p><p>What a reply can change:</p>
+<ul><li><strong>Length</strong>: shorter, longer, or how many stories.</li><li><strong>Topics</strong>: more of one thing, less of another.</li><li><strong>What matters to you</strong>: a new sentence about your customers, or a better one in place of an old one.</li><li><strong>Websites</strong>: paste a link to add it, name one to drop it, name it again to bring it back.</li><li><strong>Tone and layout</strong>: how it sounds, how each story is laid out, an emoji on each heading.</li><li><strong>Extras</strong>: add or drop the audio, the slides or the video.</li></ul>
+<p>Reply <code>UNDO</code> on its own to take back the last change. Reply from the address your issue goes to: Overscan acts only on replies from you, and a forward to a colleague changes nothing.</p>
+<p>A reply cannot move the days or the time your issue arrives. Change those on the <code>Brief</code> page in the top menu, under <code>When it arrives</code>. Changes you save on that page, every reply, and every website you turn off or back on are listed at the bottom of it.</p></div>
+  </div>
+</section>
+<hr class="rule">
+<section id="every-format">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Every format</span><h2>Read it, skim it, hear it, watch it, flip it.</h2></div>
+    <div class="prose gd-body"><p>Take each issue the way your morning allows. Overscan crafts it once as a letter, and can turn the same issue into an audio overview, a short explainer video and slides. Pick the one that leads your email; the extras you turn on play on the issue's page in your account.</p><div class="gd-fmts"><div class="gd-fmt"><b>Read it</b><p>The whole letter in your email.</p></div><div class="gd-fmt"><b>Skim it</b><p>A short email with a link to read it on the web.</p></div><div class="gd-fmt"><b>Listen</b><p>The audio overview on top, then the letter.</p></div><div class="gd-fmt"><b>Watch</b><p>The short explainer video on top, then the letter.</p></div><div class="gd-fmt"><b>Slides</b><p>The slide deck on top, then the letter.</p></div><div class="gd-fmt fmt-coming"><b>See it</b> <span class="tag-coming">coming</span><p>The whole issue on one screen, as a format of its own once it is reliably accurate. Today you can tick <code>Infographic</code> under <code>Extras</code> and see it on the issue's page when it passes its check.</p></div></div>
+    <div class="gd-shots">
+      <figure><a class="fmt-zoom" href="/static/overscan/media/phone-read.png"><img src="/static/overscan/media/phone-read.png" width="390" height="700" loading="lazy" alt="Read it: the 13 Oct 2026 issue as an email on a phone."></a><figcaption>Read it</figcaption></figure>
+      <figure><a class="fmt-zoom" href="/static/overscan/media/phone-listen.png"><img src="/static/overscan/media/phone-listen.png" width="390" height="700" loading="lazy" alt="Listen: the same issue with the play button on top and the letter below."></a><figcaption>Listen</figcaption></figure>
+    </div>
+    <p class="gd-cap">Two of the ways the same 13 Oct 2026 issue of my own VFX briefing lands on a phone. Tap either to see it full size, and hear, watch and flip that issue on the <a href="/overscan/">Overscan page</a>.</p><p><strong>Pick yours.</strong> Tell me which one should lead your email and I switch it for you, any time. Every extra starts switched off: tick the ones you like on the <code>Brief</code> page under <code>Extras</code>, or reply "add the slides". The list also offers <code>Simple podcast</code>, a plainer spoken version, and <code>Infographic</code>, the whole issue as one picture.</p>
+<p><strong>When a piece is missing.</strong> Each week you get up to two of the audio overview, video, slides and infographic. Once those two are used, audio still comes, as the plainer spoken version, and slides, video and the infographic wait until next week. If the piece that leads your email is the one missing, you get the full letter with one line saying so. Every piece has to pass a check against the stories before it is shown; while yours is still being checked, Overscan holds your copy for it, for up to a few hours.</p>
+<p><strong>Your customers.</strong> Today the issue and its extras come to you, and you copy what you like into the tool you already use. Forward the whole email and you pass on your own <code>Pause this newsletter</code> link with it. Each customer picking their own is coming, below.</p></div>
+  </div>
+</section>
+<hr class="rule">
+<section id="what-goes-in">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">What goes in</span><h2>Turn off a website in one tap. Turn it back on in one more.</h2></div>
+    <div class="prose gd-body"><p>You decide where Overscan looks. Open <code>Sources</code> in the top menu: every website, feed, forum and channel on your list has a <code>Turn off</code> button. Press it and Overscan drops that one, and never adds it back by itself. <code>Turn back on</code> brings it straight back. <code>Delete</code> takes it off your list.</p>
+<p>Or reply "drop" with the site's name, and Overscan confirms you won't see anything from it any more.</p>
+<p>Overscan also finds new websites your stories came from. They show up marked <code>Added for you</code>, and the next issue lists them at the top under "New sources for you": one Overscan added comes with a way to remove it, and one Overscan has already paused as not useful just says why, since it is off already. Turn one back on yourself and it stays on, marked <code>Kept on</code>, unless it stops answering or starts sending junk.</p>
+<p>Away for a week? <code>Pause this newsletter</code> at the bottom of every issue stops it, and the same page starts it again.</p></div>
+  </div>
+</section>
+<hr class="rule">
+<section id="every-morning">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Every morning</span><h2>What lands in your inbox, and why you can trust it</h2></div>
+    <div class="prose gd-body"><p>At the time you picked, Overscan turns the day's news in your trade into one issue with your newsletter's name on it.</p>
+<ol><li><strong>Overscan catches anything new</strong> from every website, feed, forum and channel you follow.</li><li><strong>Overscan keeps what matters to your customers.</strong> A story you have already had stays out, unless something changed. Then it comes back marked as an update.</li><li><strong>Most stories carry a short line on why they matter to your customers</strong>, and every story links to the original.</li><li><strong>Every link is tried before the issue goes out.</strong> A story whose only link is dead is left out, and a line at the foot of the issue says how many links were checked, how many were dead, and any Overscan could not check.</li><li><strong>Your copy arrives by email, from Overscan</strong>, unless you picked web page only. Nothing to press. Every issue is also kept on the <code>Issues</code> page.</li><li><strong>Audio, video and slides follow</strong> on the issue's page once they pass their check.</li></ol>
+<p>If your account reaches its monthly writing allowance, issues pause until the next month, and your pages say so.</p></div>
+  </div>
+</section>
+
+<hr class="rule">
+<section id="coming">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Coming</span><h2>Not built yet, and we say so</h2></div>
+    <ul class="os-coming"><li><strong>Email straight to your customers</strong> <span class="tag-coming">coming</span><br>Issues sent from your own address (for example news@yourbusiness.com), with a dated record of each customer's yes and one-click unsubscribe.</li><li><strong>Each customer picks their format</strong> <span class="tag-coming">coming</span><br>Read it, Skim it, Listen, Watch, Slides or See it, from a link at the bottom of every issue they get.</li><li><strong>See it as a format</strong> <span class="tag-coming">coming</span><br>The whole issue on one screen, for the person who will not read, once it is reliably accurate.</li><li><strong>Your issue on Telegram or Slack</strong> <span class="tag-coming">coming</span><br>Today it comes by email and on the web.</li><li><strong>Sign up on your own</strong> <span class="tag-coming">coming</span><br>Today we set it up with you.</li></ul>
+    <p class="k os-k">Anything unclear, email me at <a href="mailto:geoff@thevfxsupervisor.com">geoff@thevfxsupervisor.com</a>. I read every message myself.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <div class="quicklinks" style="margin-top:0">
+      <span class="eyebrow">Keep exploring</span>
+      <div class="ql-row"><a href="/overscan/">Overscan</a> &middot; <a href="/daily/">See it working</a> &middot; <a href="/work-with-me/">Work with me</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="/" style="font-size:14px"><span class="logo" aria-hidden="true"></span>the vfx supervisor</a>
+    <nav>
+      <a href="/projects/">Projects</a>
+      <a href="/course/">Course</a>
+      <a href="/notes/">Notes</a>
+      <a href="/reel/">Reel</a>
+      <a href="/about/">About</a>
+      <a href="/work-with-me/">Work with me</a>
+      <a href="https://wangle.media/">Wangle Media</a>
+      <a href="https://github.com/thevfxsupervisor">GitHub</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="mailto:geoff@thevfxsupervisor.com">Contact</a>
+    </nav>
+    <div class="mono">&copy; 2026 Geoffrey Hancock. All rights reserved. Open-source tools (Breakdown Studio, link-session) are MIT.</div>
+  </div>
+</footer>
+
+<script>
+/* Theme switch. The label always names the action it will take. */
+(function(){
+  var root = document.documentElement, btn = document.querySelector('button.theme-toggle');
+  if (!btn) return;
+  function label(){ btn.setAttribute('aria-label', root.dataset.theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'); }
+  label();
+  btn.addEventListener('click', function(){
+    var t = root.dataset.theme === 'light' ? 'dark' : 'light';
+    root.dataset.theme = t; label();
+    try { localStorage.setItem('theme', t); } catch (e) {}
+  });
+  /* No saved choice yet: keep following the system if it changes while the page is open. */
+  if (window.matchMedia) {
+    var mq = matchMedia('(prefers-color-scheme: light)');
+    var follow = function(ev){ var saved = null; try { saved = localStorage.getItem('theme'); } catch (e) {}
+      if (saved !== 'light' && saved !== 'dark') { root.dataset.theme = ev.matches ? 'light' : 'dark'; label(); } };
+    if (mq.addEventListener) mq.addEventListener('change', follow); else if (mq.addListener) mq.addListener(follow);
+  }
+})();
+</script>
+<script>
+/* Image lightbox (diagrams, and the Overscan format strip's stills). The anchor already
+   opens the full-size file on its own, so this only enhances the click; with JS off
+   nothing is lost. Esc or a click closes it and focus returns to the link. */
+(function(){
+  var links = document.querySelectorAll('figure.diagram a.zoom, a.fmt-zoom');
+  if (!links.length) return;
+  var box = document.createElement('div');
+  box.className = 'lb';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.setAttribute('aria-label', 'Image viewer');
+  box.innerHTML = '<button class="lb-x" type="button" aria-label="Close">&times;</button><img alt="">';
+  for (var j = 0; j < links.length; j++) links[j].setAttribute('aria-haspopup', 'dialog');
+  document.body.appendChild(box);
+  var img = box.querySelector('img'), last = null;
+  function open(src, alt, from){
+    img.src = src; img.alt = alt || '';
+    box.classList.add('on');
+    document.documentElement.style.overflow = 'hidden';
+    last = from; box.querySelector('.lb-x').focus();
+  }
+  function close(){
+    box.classList.remove('on');
+    document.documentElement.style.overflow = '';
+    img.removeAttribute('src');
+    if (last) { last.focus(); last = null; }
+  }
+  for (var i = 0; i < links.length; i++) {
+    links[i].addEventListener('click', function(e){
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+      e.preventDefault();
+      var im = this.querySelector('img');
+      open(this.getAttribute('href'), im ? im.getAttribute('alt') : '', this);
+    });
+  }
+  box.addEventListener('click', function(e){ if (e.target !== img || e.target === img) close(); });
+  document.addEventListener('keydown', function(e){
+    if (!box.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'Tab') { e.preventDefault(); box.querySelector('.lb-x').focus(); }
+  });
+})();
+</script>
+</body>
+</html>

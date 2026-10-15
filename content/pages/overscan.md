@@ -5,7 +5,7 @@ title: Overscan | the vfx supervisor
 description: Be the one your customers trust to know what's happening and what it means. From you, every morning, to read, hear, watch or flip through.
 eyebrow: Overscan
 h1: Stop being quietly brilliant.
-lede: Be the one your customers trust to know what changed in your trade and what it means. Every morning Overscan gives you that briefing under your name: read it, hear it, watch it or flip the slides, with the one picture coming. Tell Overscan what to change in plain words. The next issue listens.
+lede: Be the one your customers trust to know what changed in your trade and what it means. Every morning Overscan gives you that briefing under your name: read it, hear it, watch it, flip the slides or turn on the infographic. Tell Overscan what to change in plain words. The next issue listens.
 hero_coming: Email straight to your customers from your own address, each in the way they pick. Today every format comes to you, and you send the issue through the tool you already use.
 cta_label: Make your expertise unmissable
 proof_label: The proof, every morning
@@ -29,7 +29,7 @@ sold_by: Overscan is sold by Wangle Media ApS, Copenhagen.
 
 <!-- features -->
 ### More valuable content than you could make alone, every day
-One morning of your trade's news becomes a letter, an audio overview, a short explainer video and a slide deck, all saying the same thing, all under your name, with the one-picture infographic coming. The plumber listens in the van. The office manager reads on the train. You could not make four pieces a day by hand. Now you do not have to.
+One morning of your trade's news becomes a letter, under your name, with up to two extras a week on top: an audio overview first, then a slide deck, a short explainer video or the infographic. The plumber listens in the van. The office manager reads on the train. You could not make this by hand. Now you do not have to.
 
 Pick the one that leads your own email: read it, skim it, listen, watch or the slides, and your copy arrives with it on top. Coming: email straight to your customers, each picking their own. Overscan still crafts each piece once, however many customers you have.
 
@@ -50,7 +50,7 @@ Every story carries one line on why it matters to your customers, not a link dum
 Real web issue, last lines.
 
 ### Sounds like you, because you taught Overscan
-"Shorter." "More on the new rules, less on trade shows." "Drop that site, add this one." Reply to any issue in your own words and the next one changes. You get a note back saying what Overscan understood, and replying UNDO takes it back. No settings page, no manual: you teach Overscan the way you would teach a new hire, and Overscan gets you a little more every week.
+"Shorter." "More on the new rules, less on trade shows." "Drop that site, add this one." Reply to any issue in your own words and the next one changes. You get a note back saying what Overscan understood, and replying UNDO takes it back. You teach Overscan the way you would teach a new hire: reply in plain words and the next issue follows it. Overscan gets you a little more every week.
 
 Every reply changes the next issue, and the ones after it.
 <!-- /features -->
