@@ -2225,6 +2225,8 @@ OVERSCAN_SIGNIN_URL = "https://newsletter-edge.thevfxsupervisor.workers.dev/"
 def signin_line():
     return (f'<p class="signin-top">Already using Overscan? '
             f'<a href="{OVERSCAN_SIGNIN_URL}">Sign in</a></p>')
+
+
 DAILY_JOIN_VERSION = 'vfx-daily-v2'
 DAILY_JOIN_CONSENT = 'Email me The VFX Supervisor Daily from Geoffrey Hancock each morning, in the format I picked, with the occasional note about his VFX updates. I can unsubscribe in one click from any email.'
 DAILY_CSS = """
