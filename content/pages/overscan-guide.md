@@ -60,7 +60,7 @@ Take each issue the way your morning allows. Overscan crafts it once as a letter
 
 **Pick yours.** Tell me which one should lead your email and I switch it for you, any time. Every extra starts switched off: tick the ones you like on the `Brief` page under `Extras`, or reply "add the slides". The list also offers `Simple podcast`, a plainer spoken version, and `Infographic`, the whole issue as one picture.
 
-**When a piece is missing.** I can give you up to two of audio, video, slides and the infographic each week. Once those two are used, audio still comes, just as the plainer spoken version; slides, video and the infographic wait until next week. If that piece leads your email, you get the full letter with one line saying so. Whatever is made still has to pass a check against the stories before it is shown; if yours is still being checked, I hold your copy for it, for up to a few hours.
+**When a piece is missing.** Each week you get up to two of the audio overview, video, slides and infographic. Once those two are used, audio still comes, as the plainer spoken version, and slides, video and the infographic wait until next week. If the piece that leads your email is the one missing, you get the full letter with one line saying so. Every piece has to pass a check against the stories before it is shown; while yours is still being checked, Overscan holds your copy for it, for up to a few hours.
 
 **Your customers.** Today the issue and its extras come to you, and you copy what you like into the tool you already use. Forward the whole email and you pass on your own `Pause this newsletter` link with it. Each customer picking their own is coming, below.
 
