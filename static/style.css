@@ -560,3 +560,6 @@ footer .mono{font-size:11.5px}
 .prose .gd-shots img{display:block;width:100%;height:auto;border:0;border-radius:0}
 .gd-shots figcaption{padding:8px 12px;font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--amber)}
 @media(min-width:820px){.gd-mail{grid-template-columns:1fr 1fr;align-items:start}.gd-fmts{grid-template-columns:repeat(3,minmax(0,1fr))}}
+/* Overscan sign in: small and secondary, top of the Overscan pages (the top bar is full) */
+.signin-top{margin:0 0 6px;font-size:13px;color:var(--mute);text-align:right}
+.signin-top a{display:inline-block;padding:12px 0;color:var(--amber-soft);font-weight:600}

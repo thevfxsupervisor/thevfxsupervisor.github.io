@@ -1765,6 +1765,7 @@ def render_overscan():
     content = f'''
 <section class="hero">
   <div class="wrap">
+    {signin_line()}
     <span class="eyebrow os-brand"><img class="os-mark" src="{SITE_ROOT}static/overscan/mark-e1.svg" alt="" width="40" height="40">{e("eyebrow")}</span>
     <h1 style="margin-top:18px">{e("h1")}</h1>
     <p class="lede">{e("lede")}</p>
@@ -1943,6 +1944,7 @@ def render_overscan_guide():
     content = f'''
 <section class="hero">
   <div class="wrap">
+    {signin_line()}
     <span class="eyebrow os-brand"><img class="os-mark" src="{SITE_ROOT}static/overscan/mark-e1.svg" alt="" width="40" height="40">{e("eyebrow")}</span>
     <h1 style="margin-top:18px">{e("h1")}</h1>
     <p class="lede">{e("lede")}</p>
@@ -2214,6 +2216,17 @@ DAILY_TITLE = 'The VFX Supervisor Daily'
 DAILY_LEDE = "What the day's VFX news means, in a few lines, with a link to every story."
 DAILY_MADE_WITH = '/overscan/'
 DAILY_JOIN_URL = 'https://newsletter-edge.thevfxsupervisor.workers.dev/join/vfx'
+# Where an Overscan customer signs in: the app root. It sends a signed-out visitor to the sign-in
+# page (an emailed link, no password) and a signed-in one straight in. Shown small at the top of
+# /overscan/ and /overscan/guide/ and in the footer, never in the top bar (it is full).
+OVERSCAN_SIGNIN_URL = "https://newsletter-edge.thevfxsupervisor.workers.dev/"
+
+
+def signin_line():
+    return (f'<p class="signin-top">Already using Overscan? '
+            f'<a href="{OVERSCAN_SIGNIN_URL}">Sign in</a></p>')
+
+
 DAILY_JOIN_VERSION = 'vfx-daily-v2'
 DAILY_JOIN_CONSENT = 'Email me The VFX Supervisor Daily from Geoffrey Hancock each morning, in the format I picked, with the occasional note about his VFX updates. I can unsubscribe in one click from any email.'
 DAILY_CSS = """
