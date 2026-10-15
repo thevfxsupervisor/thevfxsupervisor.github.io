@@ -29,7 +29,7 @@ sold_by: Overscan is sold by Wangle Media ApS, Copenhagen.
 
 <!-- features -->
 ### More valuable content than you could make alone, every day
-One morning of your trade's news becomes a letter, under your name, with up to two extras a week on top: an audio overview first, then a short explainer video, a slide deck or the infographic. The plumber listens in the van. The office manager reads on the train. You could not make this by hand. Now you do not have to.
+One morning of your trade's news becomes a letter, under your name, with up to two extras a week on top: an audio overview first, then a slide deck, a short explainer video or the infographic. The plumber listens in the van. The office manager reads on the train. You could not make this by hand. Now you do not have to.
 
 Pick the one that leads your own email: read it, skim it, listen, watch or the slides, and your copy arrives with it on top. Coming: email straight to your customers, each picking their own. Overscan still crafts each piece once, however many customers you have.
 
