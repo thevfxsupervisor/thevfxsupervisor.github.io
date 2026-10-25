@@ -1,0 +1,236 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="dark light">
+<script>
+/* Theme before first paint, so there is no flash of the wrong one. A saved choice wins;
+   otherwise follow the system. Contract shared with the Daily pages: data-theme on <html>,
+   localStorage key "theme", button.theme-toggle in the header. */
+(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}
+if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark'}
+document.documentElement.dataset.theme=t})();
+</script>
+<title>Pin the deliverable, not the recipe</title>
+<meta name="description" content="Re-running an approved generative shot does not reliably give it back, and raising the resolution quietly re-frames it. Why the approved file is the asset, not the settings.">
+<link rel="icon" type="image/png" sizes="256x256" href="/static/favicon.png">
+<link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+<link rel="canonical" href="https://thevfxsupervisor.com/notes/pin-the-deliverable-not-the-recipe/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="the vfx supervisor">
+<meta property="og:title" content="Pin the deliverable, not the recipe">
+<meta property="og:description" content="Re-running an approved generative shot does not reliably give it back, and raising the resolution quietly re-frames it. Why the approved file is the asset, not the settings.">
+<meta property="og:url" content="https://thevfxsupervisor.com/notes/pin-the-deliverable-not-the-recipe/">
+<meta property="og:image" content="https://thevfxsupervisor.com/static/og/default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Pin the deliverable, not the recipe">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Pin the deliverable, not the recipe">
+<meta name="twitter:description" content="Re-running an approved generative shot does not reliably give it back, and raising the resolution quietly re-frames it. Why the approved file is the asset, not the settings.">
+<meta name="twitter:image" content="https://thevfxsupervisor.com/static/og/default.png">
+<link rel="stylesheet" href="/static/style.css?v=826f824a">
+  <link rel="alternate" type="application/rss+xml" title="the vfx supervisor" href="https://thevfxsupervisor.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"the vfx supervisor","url":"https://thevfxsupervisor.com/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "@id": "https://thevfxsupervisor.com/#person", "name": "Geoffrey Hancock", "jobTitle": "VFX Supervisor and Producer", "url": "https://thevfxsupervisor.com/", "sameAs": ["https://www.imdb.com/name/nm0995883/", "https://github.com/thevfxsupervisor", "https://wangle.media/", "https://www.wangle.studio"], "award": ["VES Award, Outstanding Supporting Visual Effects in a Feature Motion Picture, Changeling (7th Annual VES Awards)", "VES nomination, Invictus (8th Annual VES Awards)", "Robert nomination, Skammerens datter II"], "worksFor": {"@type": "Organization", "name": "Wangle Media", "url": "https://wangle.media/"}, "homeLocation": {"@type": "Place", "address": {"@type": "PostalAddress", "addressLocality": "Humlebaek", "addressCountry": "DK"}}, "knowsAbout": ["Visual effects", "VFX supervision", "VFX production", "VFX bidding and budgeting", "Shot breakdown", "Pipeline engineering", "Real-time and Unreal Engine production", "AI in visual effects", "Multi-vendor VFX delivery"], "knowsLanguage": ["en", "da"]}</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="logo" aria-hidden="true"></span><span class="brand-text">the vfx supervisor</span></a>
+    <nav>
+      <a href="/projects/" class="">Projects</a>
+      <a href="/daily/" class="">Daily</a>
+      <a href="/notes/" class=" current">Notes</a>
+      <a href="/about/" class="">About</a>
+      <a class="btn btn-a" href="/work-with-me/">Work with me</a>
+    </nav>
+    <a class="btn btn-a cta-mobile" href="/work-with-me/">Work with me</a>
+    <button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Notes &middot; 2026-10-02</span>
+    <h1 style="margin-top:18px">Pin the deliverable, not the recipe</h1>
+  </div>
+</section>
+<hr class="rule">
+<section>
+  <div class="wrap prose">
+    <p>In traditional VFX, if you keep the scene file you can re-render the shot. Generative pipelines inherit that assumption, and on our setup it was not reliably true.</p>
+<p><strong>Same settings, different picture.</strong> Two runs of an identical configuration came out identical in one GPU state and about 5 points of mean pixel difference apart in another. That retracted an earlier, stronger claim we had made that the lane was bit-for-bit deterministic. It also gave us something useful: 5 became the project's noise floor. Any effect smaller than that could not be told apart from nothing.</p>
+<p>The rule that came out of it is short. <strong>Pin the deliverable, not the recipe.</strong> When a person approves a frame, the approved file is the asset. The settings are the history of how you got there.</p>
+<p><strong>Higher resolution is not a neutral upgrade.</strong> The obvious way to improve quality is to render bigger. At native 1920 wide the model framed the subject wider than it did at 1280, with the same prompt and the same seed, on all four seeds we tried. Changing resolution changed the shot size, so a composition approved at one resolution can be invalidated by moving to the other.</p>
+<p>Rendering at 1280 and upscaling sidesteps the re-framing, and it came out sharper on our edge measure on all four seeds, and cost about 50 seconds a frame against 78 for native. On a 16 GB card, native 1920 was clean on eight of eight seeds; 2048 wide failed three times in eight. A setting that fails sometimes is worse than one that always fails, because every frame then needs a person to check it.</p>
+<p>Limits, stated so these are not over-quoted: stills only, one prompt, and frame-to-frame consistency of the upscale on moving images was not tested.</p>
+<p>For anyone budgeting a generative project, the point is not the numbers. It is that "we can always re-render it" needs to be tested on your setup before it goes in a schedule.</p>
+  </div>
+</section>
+<section>
+  <div class="wrap">
+    <a class="btn btn-b" href="/notes/">&larr; All notes</a>
+  </div>
+</section>
+
+<section>
+  <div class="wrap"><p class="k note-cta">Is this the problem on your show? Don't learn it the expensive way: <a href="/work-with-me/">work with me</a>.</p></div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <div class="quicklinks" style="margin-top:0">
+      <span class="eyebrow">The tools this method runs on</span>
+      <div class="ql-row"><a href="/projects/breakdown-studio/">Breakdown Studio</a> &middot; <a href="/projects/link-session/">link-session</a> &middot; <a href="/course/">The course</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="/" style="font-size:14px"><span class="logo" aria-hidden="true"></span>the vfx supervisor</a>
+    <nav>
+      <a href="/projects/">Projects</a>
+      <a href="/overscan/">Overscan</a>
+      <a href="/course/">Course</a>
+      <a href="/notes/">Notes</a>
+      <a href="/reel/">Reel</a>
+      <a href="/about/">About</a>
+      <a href="/work-with-me/">Work with me</a>
+      <a href="https://newsletter-edge.thevfxsupervisor.workers.dev/">Overscan sign in</a>
+      <a href="https://wangle.media/">Wangle Media</a>
+      <a href="https://github.com/thevfxsupervisor">GitHub</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="mailto:geoff@thevfxsupervisor.com">Contact</a>
+    </nav>
+    <div class="mono">&copy; 2026 Geoffrey Hancock. All rights reserved. Open-source tools (Breakdown Studio, link-session) are MIT.</div>
+  </div>
+</footer>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BlogPosting",
+ "headline": "Pin the deliverable, not the recipe",
+ "description": "Re-running an approved generative shot does not reliably give it back, and raising the resolution quietly re-frames it. Why the approved file is the asset, not the settings.",
+ "url": "https://thevfxsupervisor.com/notes/pin-the-deliverable-not-the-recipe/",
+ "datePublished": "2026-10-02",
+ "author": {
+  "@type": "Person",
+  "name": "Geoffrey Hancock",
+  "url": "https://thevfxsupervisor.com/about/"
+ },
+ "publisher": {
+  "@type": "Person",
+  "name": "Geoffrey Hancock",
+  "url": "https://thevfxsupervisor.com/about/"
+ },
+ "mainEntityOfPage": {
+  "@type": "WebPage",
+  "@id": "https://thevfxsupervisor.com/notes/pin-the-deliverable-not-the-recipe/"
+ }
+}
+</script>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://thevfxsupervisor.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Notes",
+   "item": "https://thevfxsupervisor.com/notes/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Pin the deliverable, not the recipe",
+   "item": "https://thevfxsupervisor.com/notes/pin-the-deliverable-not-the-recipe/"
+  }
+ ]
+}
+</script>
+<script>
+/* Theme switch. The label always names the action it will take. */
+(function(){
+  var root = document.documentElement, btn = document.querySelector('button.theme-toggle');
+  if (!btn) return;
+  function label(){ btn.setAttribute('aria-label', root.dataset.theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'); }
+  label();
+  btn.addEventListener('click', function(){
+    var t = root.dataset.theme === 'light' ? 'dark' : 'light';
+    root.dataset.theme = t; label();
+    try { localStorage.setItem('theme', t); } catch (e) {}
+  });
+  /* No saved choice yet: keep following the system if it changes while the page is open. */
+  if (window.matchMedia) {
+    var mq = matchMedia('(prefers-color-scheme: light)');
+    var follow = function(ev){ var saved = null; try { saved = localStorage.getItem('theme'); } catch (e) {}
+      if (saved !== 'light' && saved !== 'dark') { root.dataset.theme = ev.matches ? 'light' : 'dark'; label(); } };
+    if (mq.addEventListener) mq.addEventListener('change', follow); else if (mq.addListener) mq.addListener(follow);
+  }
+})();
+</script>
+<script>
+/* Image lightbox (diagrams, and the Overscan format strip's stills). The anchor already
+   opens the full-size file on its own, so this only enhances the click; with JS off
+   nothing is lost. Esc or a click closes it and focus returns to the link. */
+(function(){
+  var links = document.querySelectorAll('figure.diagram a.zoom, a.fmt-zoom');
+  if (!links.length) return;
+  var box = document.createElement('div');
+  box.className = 'lb';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.setAttribute('aria-label', 'Image viewer');
+  box.innerHTML = '<button class="lb-x" type="button" aria-label="Close">&times;</button><img alt="">';
+  for (var j = 0; j < links.length; j++) links[j].setAttribute('aria-haspopup', 'dialog');
+  document.body.appendChild(box);
+  var img = box.querySelector('img'), last = null;
+  function open(src, alt, from){
+    img.src = src; img.alt = alt || '';
+    box.classList.add('on');
+    document.documentElement.style.overflow = 'hidden';
+    last = from; box.querySelector('.lb-x').focus();
+  }
+  function close(){
+    box.classList.remove('on');
+    document.documentElement.style.overflow = '';
+    img.removeAttribute('src');
+    if (last) { last.focus(); last = null; }
+  }
+  for (var i = 0; i < links.length; i++) {
+    links[i].addEventListener('click', function(e){
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+      e.preventDefault();
+      var im = this.querySelector('img');
+      open(this.getAttribute('href'), im ? im.getAttribute('alt') : '', this);
+    });
+  }
+  box.addEventListener('click', function(e){ if (e.target !== img || e.target === img) close(); });
+  document.addEventListener('keydown', function(e){
+    if (!box.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'Tab') { e.preventDefault(); box.querySelector('.lb-x').focus(); }
+  });
+})();
+</script>
+</body>
+</html>

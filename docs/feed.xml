@@ -5,8 +5,29 @@
     <link>https://thevfxsupervisor.com/</link>
     <description>Notes on VFX supervision, breakdowns, budgets and pipeline.</description>
     <language>en</language>
-    <lastBuildDate>Thu, 15 Oct 2026 13:27:20 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 25 Oct 2026 17:35:39 +0000</lastBuildDate>
     <atom:link href="https://thevfxsupervisor.com/feed.xml" rel="self" type="application/rss+xml"/>
+    <item>
+      <title>A clean licence is not clean provenance</title>
+      <link>https://thevfxsupervisor.com/notes/a-clean-licence-is-not-clean-provenance/</link>
+      <guid isPermaLink="true">https://thevfxsupervisor.com/notes/a-clean-licence-is-not-clean-provenance/</guid>
+      <pubDate>Fri, 09 Oct 2026 00:00:00 +0000</pubDate>
+      <description>Every model file in a generative pipeline matched its publisher by hash, and all but one were permissively licensed. That answers whether you may use the weights. It does not answer what a client actually asks.</description>
+    </item>
+    <item>
+      <title>Pin the deliverable, not the recipe</title>
+      <link>https://thevfxsupervisor.com/notes/pin-the-deliverable-not-the-recipe/</link>
+      <guid isPermaLink="true">https://thevfxsupervisor.com/notes/pin-the-deliverable-not-the-recipe/</guid>
+      <pubDate>Fri, 02 Oct 2026 00:00:00 +0000</pubDate>
+      <description>Re-running an approved generative shot does not reliably give it back, and raising the resolution quietly re-frames it. Why the approved file is the asset, not the settings.</description>
+    </item>
+    <item>
+      <title>The ControlNet that was not broken</title>
+      <link>https://thevfxsupervisor.com/notes/the-controlnet-that-was-not-broken/</link>
+      <guid isPermaLink="true">https://thevfxsupervisor.com/notes/the-controlnet-that-was-not-broken/</guid>
+      <pubDate>Wed, 23 Sep 2026 00:00:00 +0000</pubDate>
+      <description>A depth control that did nothing on one model worked strongly on its sibling. Why model family is not a detail, and why a test only means something when the signals disagree.</description>
+    </item>
     <item>
       <title>Every gate is a person, and that is the product</title>
       <link>https://thevfxsupervisor.com/notes/every-gate-is-a-person/</link>
@@ -20,6 +41,13 @@
       <guid isPermaLink="true">https://thevfxsupervisor.com/notes/config-in-coordination-out/</guid>
       <pubDate>Sat, 19 Sep 2026 00:00:00 +0000</pubDate>
       <description>Two separate paths carry a rulebook into an AI agent's session, and confusing them is the mistake. What a working multi-agent fleet looks like, drawn.</description>
+    </item>
+    <item>
+      <title>The negative prompt that does nothing</title>
+      <link>https://thevfxsupervisor.com/notes/the-negative-prompt-that-does-nothing/</link>
+      <guid isPermaLink="true">https://thevfxsupervisor.com/notes/the-negative-prompt-that-does-nothing/</guid>
+      <pubDate>Wed, 09 Sep 2026 00:00:00 +0000</pubDate>
+      <description>On a speed-LoRA recipe at guidance 1.0, the negative prompt is never read. Measured four ways, traced to one line of the sampler, and why it changed how every instruction was written.</description>
     </item>
     <item>
       <title>The cheapest message is the one nobody sends</title>

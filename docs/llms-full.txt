@@ -190,6 +190,18 @@ Elsewhere
 Breakdown Studio , open source on GitHub Notes , writing on pipeline and production the course , on the method (free waitlist)
 
 ---
+# A clean licence is not clean provenance
+https://thevfxsupervisor.com/notes/a-clean-licence-is-not-clean-provenance/
+
+Before a generative pipeline goes near paid work, someone has to answer two questions. Can we use these models commercially? And can we tell the client the output is free of anyone else's rights?
+We checked every model file in ours. Seventeen of seventeen matched their publisher's published hash, so we knew exactly which files we were running. Sixteen were under a permissive commercial licence. One was research-only.
+That is a clean answer to the first question. It is not an answer to the second, and the gap is easy to miss.
+Only two of the thirteen source repositories shipped a licence file at all. And none of the thirteen disclosed what the model was trained on. A permissive licence on the weights tells you nothing about the training data behind them.
+So the honest claim you can make to a client is narrower than the one they want. Permissive licence, commercial use of the weights granted, no claim asserted over the output, verified by hash. Not "the output is free of third-party rights." That is a legal and indemnity question, and a supervisor who answers it casually is signing something they cannot back.
+One method note, because it nearly went wrong. A quick search through one licence returned the first clause that matched and stopped, missing a clause eleven lines further down. It produced a confident blocker that held up other work for an hour. Read the licence whole. Never grep it.
+On AI-assisted work, chain of title is part of the deliverable. Knowing exactly where your claim stops is worth more than a confident one.
+
+---
 # Config in, coordination out: the shape of an agent fleet
 https://thevfxsupervisor.com/notes/config-in-coordination-out/
 
@@ -270,6 +282,18 @@ None of this is glamorous. It is the plumbing that lets a team of agents run for
 This is one piece of the coordination layer I run every day. If you want AI run as a coordinated team on your show, with the guardrails that keep it safe, let's talk , or book the course for the method.
 
 ---
+# Pin the deliverable, not the recipe
+https://thevfxsupervisor.com/notes/pin-the-deliverable-not-the-recipe/
+
+In traditional VFX, if you keep the scene file you can re-render the shot. Generative pipelines inherit that assumption, and on our setup it was not reliably true.
+Same settings, different picture. Two runs of an identical configuration came out identical in one GPU state and about 5 points of mean pixel difference apart in another. That retracted an earlier, stronger claim we had made that the lane was bit-for-bit deterministic. It also gave us something useful: 5 became the project's noise floor. Any effect smaller than that could not be told apart from nothing.
+The rule that came out of it is short. Pin the deliverable, not the recipe. When a person approves a frame, the approved file is the asset. The settings are the history of how you got there.
+Higher resolution is not a neutral upgrade. The obvious way to improve quality is to render bigger. At native 1920 wide the model framed the subject wider than it did at 1280, with the same prompt and the same seed, on all four seeds we tried. Changing resolution changed the shot size, so a composition approved at one resolution can be invalidated by moving to the other.
+Rendering at 1280 and upscaling sidesteps the re-framing, and it came out sharper on our edge measure on all four seeds, and cost about 50 seconds a frame against 78 for native. On a 16 GB card, native 1920 was clean on eight of eight seeds; 2048 wide failed three times in eight. A setting that fails sometimes is worse than one that always fails, because every frame then needs a person to check it.
+Limits, stated so these are not over-quoted: stills only, one prompt, and frame-to-frame consistency of the upscale on moving images was not tested.
+For anyone budgeting a generative project, the point is not the numbers. It is that "we can always re-render it" needs to be tested on your setup before it goes in a schedule.
+
+---
 # Running several AI agents as one coordinated team
 https://thevfxsupervisor.com/notes/running-ai-agents-as-a-coordinated-team/
 
@@ -321,6 +345,19 @@ The plumbing was never really the problem. You can build a perfectly efficient c
 The tool is open source, and there is a longer write-up of how the agents coordinate in the link-session case study .
 
 ---
+# The ControlNet that was not broken
+https://thevfxsupervisor.com/notes/the-controlnet-that-was-not-broken/
+
+I wanted to steer the camera in a generated image with a depth map. Same room, new angle. A depth ControlNet is a common tool for that, so we wired one in and measured what it did.
+On the image-edit model we were using, it did nothing. At strength 0.8 it moved the picture by about 3 points of mean pixel difference. Re-running an identical setup on that machine could move it by 5 on its own, so 3 was noise. Turning the strength down to 0.4 gave roughly the same number. No dose response, no effect.
+Another route through the same model did move the picture a lot, 35 points. It looked like success until we looked at what had moved. It had read the depth map as content and added a doorway. The change was content, not camera.
+That is the first lesson, and it is the one I would put on a wall: a big effect in the wrong dimension is worse than no effect. Measure which axis moved, not just how much.
+The obvious conclusion was "ControlNet does not work here, move on." It would have been wrong. The edit model and the base model share a name and a family, and they are not the same thing. On the base model the same file scored nearly 50 against that noise floor of 5, with a clear dose response.
+What made that result believable is how the test was built. The prompt asked for the opposite framing to the one the depth map described. If the prompt and the control had agreed, a matching picture would have proved nothing, because either one could have produced it. With them in conflict, the camera followed the depth map against the text. Make your signals disagree, or you cannot tell adherence from coincidence.
+Two honest limits. It was one sample per strength, so this is a strong direction, not a law. And moving the camera is not the same as keeping the room: a later test showed palette held across cameras while the position of features drifted.
+Most of AI production work is not getting a model to do something once. It is knowing, with evidence, why it did not, before you throw the tool away.
+
+---
 # The eleven things I check
 https://thevfxsupervisor.com/notes/the-eleven-things-i-check/
 
@@ -332,17 +369,33 @@ Most come down to one question: does the element sit in the plate the way a real
 None of this is making it real. It is making it unnoticed. The shots people remember as great VFX are usually the ones that failed a little, just enough to be seen. VFX are done well when nobody mentions them, because they never registered as something that wasn't just in front of the camera.
 
 ---
+# The negative prompt that does nothing
+https://thevfxsupervisor.com/notes/the-negative-prompt-that-does-nothing/
+
+A lot of generated-image workflows carry a negative prompt: a list of things you do not want in the frame. Ours did too. Then we asked a question we had not measured. Does it do anything?
+On our speed-LoRA recipe, with guidance (cfg) at 1.0, the answer was no. Two completely different negative prompts, same everything else, produced images that differed by exactly zero. Not a small amount. Zero.
+The same pair at a guidance of 4.0 produced a large difference, about 27 points. So the test could detect a negative prompt working; there simply was not one working at 1.0.
+Then we read the code instead of guessing. The sampler we use skips the unconditioned pass entirely when guidance is 1.0, and the negative prompt lives in that pass. There is a setting that looks like it turns this back on. It does not restore the negative, it only doubles the compute.
+So the finding was confirmed four separate ways, including a source read and a positive control that proved the measurement could fail.
+The practical consequence was bigger than the bug. If you want something absent, describe what is there instead. Ask for an empty corridor, because on this recipe "no people" is a sentence the model never hears. Once we knew that, positively stated instructions beat negations everywhere in the project.
+The general version is the one that travels: a setting that exists in the interface is not evidence that it is connected. Before you tune something, prove it moves the output.
+
+---
 # Notes
 https://thevfxsupervisor.com/notes/
 
+A clean licence is not clean provenance: Every model file in a generative pipeline matched its publisher by hash, and all but one were permissively licensed. That answers whether you may use the weights. It does not answer what a client actually asks.
 Config in, coordination out: the shape of an agent fleet: Two separate paths carry a rulebook into an AI agent's session, and confusing them is the mistake. What a working multi-agent fleet looks like, drawn.
 Every gate is a person, and that is the product: A generative video pipeline where the tracker is the state machine, a deterministic check can only refuse, and nothing ever self-approves. Drawn.
 How a one-person VFX department orchestrates AI: The mechanical half automates. The judgment half stays with the supervisor. Notes on briefing an AI assistant with guardrails on a live production.
 Keeping a long-running AI agent in sync with its own rules: An AI agent that runs for days works from the rulebook it read on day one. Updating it without restarting or drowning it: notify always, load on demand.
+Pin the deliverable, not the recipe: Re-running an approved generative shot does not reliably give it back, and raising the resolution quietly re-frames it. Why the approved file is the asset, not the settings.
 Running several AI agents as one coordinated team: A shared folder and a few JSON files let a fleet of AI agents work one production: handing off work, staying out of each other's way, across restarts.
 The bad monitor: A supervisor on Eastwood films learned a trick at ILM: check the finished shot on the worst screen in the building. Why comparison beats memory.
 The cheapest message is the one nobody sends: A fleet of AI agents coordinating on the same work gets noisy fast, and the noise is billed. Why the fix is a systems change, not better instructions.
+The ControlNet that was not broken: A depth control that did nothing on one model worked strongly on its sibling. Why model family is not a detail, and why a test only means something when the signals disagree.
 The eleven things I check: A post producer asked how you know a VFX shot looks real. Real is the wrong test. The tells a supervisor checks, from black point to lens characteristics.
+The negative prompt that does nothing: On a speed-LoRA recipe at guidance 1.0, the negative prompt is never read. Measured four ways, traced to one line of the sampler, and why it changed how every instruction was written.
 
 ---
 # Privacy | the vfx supervisor
