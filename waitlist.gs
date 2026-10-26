@@ -17,6 +17,9 @@
  * Manage deployments > edit > New version) for changes to take effect.
  */
 
+// Submissions faster than this are treated as bots. See doPost.
+var MIN_FILL_MS = 3000;
+
 function doPost(e) {
   var result = { ok: false };
   try {
@@ -24,6 +27,14 @@ function doPost(e) {
     var email = (data.email || "").toString().trim();
     var name = (data.name || "").toString().trim();
     var question = (data.note || "").toString().trim(); // the form field is still named "note"
+
+    // Spam check. Humans never see url_hp, and nobody reads the form and fills
+    // it in under three seconds. Answer "ok" so a bot learns nothing, but record
+    // and send nothing. A request with no elapsed value did not come from the page.
+    var elapsed = Number(data.elapsed);
+    if (data.url_hp || !(elapsed >= MIN_FILL_MS)) {
+      return jsonOutput({ ok: true });
+    }
 
     if (!email) {
       return jsonOutput({ ok: false, error: "missing email" });

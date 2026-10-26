@@ -1348,6 +1348,7 @@ def render_course():
       <div class="field"><label for="wl-hemail">Email</label><input type="email" id="wl-hemail" name="email" required autocomplete="email"></div>
       <div class="field"><label for="wl-hnote">Your project, or a question (optional)</label><textarea id="wl-hnote" name="note" placeholder="e.g. an indie feature I'm bidding, my first show as supervisor, or a bid I'm stuck on"></textarea></div>
       <button type="submit" class="btn btn-a">{html.escape(hero_cta, quote=False)} &rarr;</button>
+      <div class="wl-hp" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Leave this empty<input type="text" name="url_hp" tabindex="-1" autocomplete="off"></label></div>
       <div class="wl-status"></div>
       <p class="tiny" style="margin-top:12px">{reassure}By joining you agree to the <a href="/privacy/">privacy note</a>. Unsubscribe anytime.</p>
     </form>
@@ -1376,6 +1377,7 @@ def render_course():
       <div class="field"><label for="wl-note">Your project, or a question (optional)</label>
         <textarea id="wl-note" name="note" placeholder="e.g. an indie feature I'm bidding, my first show as supervisor, or a bid I'm stuck on"></textarea></div>
       <button type="submit" class="btn btn-a">Join the waitlist</button>
+      <div class="wl-hp" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>Leave this empty<input type="text" name="url_hp" tabindex="-1" autocomplete="off"></label></div>
       <div class="wl-status"></div>
       <p class="tiny">Your email sends you the gotchas list and the next course date, nothing else. By joining you agree to the <a href="/privacy/">privacy note</a>. Unsubscribe anytime.</p>
     </form>
@@ -1396,6 +1398,9 @@ def render_course():
 const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist.gs (see WAITLIST_SETUP.md)
 (function(){{
   var CONTACT_EMAIL = "{contact_email}";
+  // Spam check, deliberately simple: bots fill the hidden field or submit
+  // instantly. waitlist.gs repeats both checks, since a bot can skip this page.
+  var loadedAt = Date.now();
   var forms = document.querySelectorAll('.waitlist-form');
   Array.prototype.forEach.call(forms, function(form){{
     var status = form.querySelector('.wl-status');
@@ -1437,7 +1442,7 @@ const WAITLIST_ENDPOINT = "{waitlist_endpoint}"; // set after deploying waitlist
       fetch(WAITLIST_ENDPOINT, {{
         method: 'POST',
         headers: {{'Content-Type': 'text/plain;charset=utf-8'}},
-        body: JSON.stringify({{email: email, name: name, note: note}})
+        body: JSON.stringify({{email: email, name: name, note: note, url_hp: val('[name=url_hp]'), elapsed: Date.now() - loadedAt}})
       }})
         .then(function(r){{ return r.json(); }})
         .then(function(data){{
