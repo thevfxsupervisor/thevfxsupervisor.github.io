@@ -2,10 +2,10 @@
 type: page
 slug: overscan
 title: Overscan | the vfx supervisor
-description: Be the expert your customers hear from first. Every morning Overscan turns your trade's news into a letter under your name, with audio, a short video or slides up to twice a week. Free, or from $19 a month.
+description: Be the expert your customers hear from first. Every morning Overscan turns your trade's news into a letter under your name and reads it to you, plus the full audio conversation, a short video or slides up to twice a week. Free, or from $19 a month.
 eyebrow: Overscan
 h1: Stop being quietly brilliant. Be the expert your customers hear from first.
-lede: Every morning Overscan turns your trade's news into a letter under your name, with what changed and why it matters to your customers. Add audio, a short video or slides up to twice a week, and change anything by replying in plain words.
+lede: Every morning Overscan turns your trade's news into a letter under your name, with what changed and why it matters to your customers. Hear it read to you every morning, add the full audio conversation, a short video or slides up to twice a week, and change anything by replying in plain words.
 cta_label: Book a short call. See your first week of issues.
 price_line: Free, Solo at $19 a month, or Business at $95 a month. [Compare the three](#plans).
 plans_h2: Start free. Audio, video and slides for $19. Your name in front of your customers for $95.
@@ -122,7 +122,8 @@ You do. Every issue, every website you chose, every lesson you taught Overscan.
 Know what changed in your trade before your first coffee.
 
 - Your letter every morning, to read
-- Audio every morning, to hear
+- Audio every morning, read in a plain voice
+- Coming: the full audio conversation every morning
 - Coming: a weekly summary as a letter, audio and video
 
 [Ask for an invite](mailto:geoff@thevfxsupervisor.com?subject=Overscan%20Free%20invite)
@@ -130,9 +131,9 @@ Know what changed in your trade before your first coffee.
 ### Solo :: $19 a month
 Your trade's news every morning, plus video to watch and slides to flip through.
 
-- Your letter and audio every morning
-- Video and slides up to twice a week
-- Coming: video and slides every morning
+- Your letter and a plain-voice audio read every morning
+- The full audio conversation, video and slides, up to two a week
+- Coming: the full audio conversation, video and slides every morning
 - Coming: the whole issue as one picture
 
 [Ask for an invite](mailto:geoff@thevfxsupervisor.com?subject=Overscan%20Solo%20invite)
