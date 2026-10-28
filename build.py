@@ -1728,7 +1728,31 @@ def _hero_coming(fm):
 def _price_line(fm):
     """The price, where a buyer looks for it: under the hero CTA and beside the form."""
     text = fm.get("price_line", "").strip()
-    return f'<p class="os-price"><b>{html.escape(text, quote=False)}</b></p>' if text else ""
+    return f'<p class="os-price">{_md_inline(text)}</p>' if text else ""
+
+
+def _plans(items):
+    """Price table: '### Name :: price', an outcome line, a list ('Coming:' = not live yet),
+    then one markdown link as the tier's CTA. Three columns on wide screens, stacked on a phone."""
+    cols = []
+    for it in items:
+        name, price = [x.strip() for x in it["title"].split("::", 1)]
+        lines = [l.strip() for l in it["body"].strip().split("\n") if l.strip()]
+        outcome = next((l for l in lines if not l.startswith(("- ", "["))), "")
+        lis = []
+        for l in (l[2:] for l in lines if l.startswith("- ")):
+            if l.startswith("Coming:"):
+                lis.append(f'<li class="plan-coming"><span class="tag-coming">coming</span> {_md_inline(l[7:].strip())}</li>')
+            else:
+                lis.append(f'<li>{_md_inline(l)}</li>')
+        cta = next((re.match(r"^\[([^\]]+)\]\(([^)]+)\)$", l) for l in lines if l.startswith("[")), None)
+        cta_html = (f'<a class="btn {"btn-a" if cta.group(2).startswith("#") else "btn-b"} plan-cta" '
+                    f'href="{html.escape(cta.group(2))}">{html.escape(cta.group(1), quote=False)}</a>') if cta else ""
+        cols.append(f'<div class="plan"><h3>{html.escape(name, quote=False)}</h3>'
+                    f'<p class="plan-price">{html.escape(price, quote=False)}</p>'
+                    f'<p class="plan-outcome">{_md_inline(outcome)}</p><ul>{"".join(lis)}</ul>{cta_html}</div>')
+    return f'<div class="os-plans">{"".join(cols)}</div>'
+
 
 
 def _strip_label(fm):
@@ -1779,6 +1803,7 @@ def render_overscan():
     compare, _ = extract_block(body, "compare")
     faq, _ = extract_block(body, "faq")
     coming, _ = extract_block(body, "coming")
+    plans, _ = extract_block(body, "plans")
     e = lambda k, d="": html.escape(fm.get(k, d), quote=False)
 
     steps_html = "".join(
@@ -1854,6 +1879,15 @@ def render_overscan():
 </section>
 
 <hr class="rule">
+<section id="plans">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Plans</span><h2>{e("plans_h2")}</h2></div>
+    {_plans(plans)}
+    <p class="k os-k">{_md_inline(fm.get("plans_after", ""))}</p>
+  </div>
+</section>
+
+<hr class="rule">
 <section>
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">Questions</span><h2>{e("faq_h2")}</h2></div>
@@ -1874,8 +1908,7 @@ def render_overscan():
 <section id="inquiry">
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">{e("form_eyebrow")}</span><h2>{e("form_h2")}</h2>
-      <p class="k">{e("form_k")}</p>
-      {_price_line(fm)}</div>
+      <p class="k">{e("form_k")}</p></div>
     {inquiry_form(fm, offer=OVERSCAN_OFFER, source="overscan", form_id="os-form")}
     <p class="tiny os-byline">{e("byline")}</p>
     <p class="tiny os-byline">{e("sold_by")}</p>

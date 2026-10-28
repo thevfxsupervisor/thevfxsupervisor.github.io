@@ -2,12 +2,14 @@
 type: page
 slug: overscan
 title: Overscan | the vfx supervisor
-description: Be the expert your customers hear from first. Every morning Overscan turns your trade's news into a letter under your name, with audio, a short video or slides up to twice a week. $95 a month.
+description: Be the expert your customers hear from first. Every morning Overscan turns your trade's news into a letter under your name, with audio, a short video or slides up to twice a week. Free, or from $19 a month.
 eyebrow: Overscan
 h1: Stop being quietly brilliant. Be the expert your customers hear from first.
 lede: Every morning Overscan turns your trade's news into a letter under your name, with what changed and why it matters to your customers. Add audio, a short video or slides up to twice a week, and change anything by replying in plain words.
 cta_label: Book a short call. See your first week of issues.
-price_line: $95 a month. One short call, and I set Overscan up with you.
+price_line: Free, Solo at $19 a month, or Business at $95 a month. [Compare the three](#plans).
+plans_h2: Start free. Audio, video and slides for $19. Your name in front of your customers for $95.
+plans_after: Sign-up is by invite today, and I invoice the first customers myself through Wangle Media.
 strip_label: One morning, every format
 hero_coming: Overscan sends straight to each customer, in the format each one picks. Today every format lands with you first, ready to send through the email tool you already use, or to forward.
 proof_label: The proof, every morning
@@ -102,9 +104,6 @@ Fast, often free, and fine for keeping yourself informed. It is written for you.
 <!-- /compare -->
 
 <!-- faq -->
-### What does it cost?
-$95 a month. One short call, and I set Overscan up with you.
-
 ### How do we start, and how does it reach my customers?
 A short call, then I point Overscan at the websites, forums, videos and newsletters you trust, and we describe your customers in your words. You see a week of real issues before anyone else does. Today each issue comes to you first, and you send it through the email tool you already use, or forward it. Email straight to your customers from your own address is coming.
 
@@ -117,6 +116,40 @@ Yes. Overscan writes with AI, checks names and figures against the original stor
 ### Who owns what Overscan makes?
 You do. Every issue, every website you chose, every lesson you taught Overscan.
 <!-- /faq -->
+
+<!-- plans -->
+### Free :: $0
+Know what changed in your trade before your first coffee.
+
+- Your letter every morning, to read
+- Audio every morning, to hear
+- Coming: a weekly summary as a letter, audio and video
+
+[Ask for an invite](mailto:geoff@thevfxsupervisor.com?subject=Overscan%20Free%20invite)
+
+### Solo :: $19 a month
+Your trade's news every morning, plus video to watch and slides to flip through.
+
+- Your letter and audio every morning
+- Video and slides up to twice a week
+- Coming: video and slides every morning
+- Coming: the whole issue as one picture
+
+[Ask for an invite](mailto:geoff@thevfxsupervisor.com?subject=Overscan%20Solo%20invite)
+
+### Business :: $95 a month
+Be the expert your customers hear from first.
+
+- Everything in Solo, under your name, for your customers
+- Set up with you on one short call
+- Send each issue through the email tool you already use, or forward it
+- Coming: Overscan sends straight to your audience from your own address
+- Coming: social posts for every issue
+- Coming: your own blog page that keeps itself current
+- Coming: your issue on Telegram or Slack
+
+[Book a short call](#inquiry)
+<!-- /plans -->
 
 <!-- coming -->
 ### Email straight to your customers

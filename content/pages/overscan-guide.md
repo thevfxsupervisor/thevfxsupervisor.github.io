@@ -89,7 +89,7 @@ At the time you picked, Overscan turns the day's news in your trade into one iss
 5. **Your copy arrives by email, from Overscan**, unless you picked web page only. Nothing to press. Every issue is also kept on the `Issues` page.
 6. **Audio, video and slides follow** on the issue's page once they pass their check.
 
-Your account covers a set amount of writing each month. If you reach it, Overscan says so on your pages and picks up again next month.
+Your plan covers a set amount of writing each month. If you reach it, Overscan says so on your pages and picks up again next month.
 <!-- /sections -->
 
 <!-- formats -->
