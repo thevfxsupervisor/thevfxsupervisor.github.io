@@ -1725,6 +1725,18 @@ def _hero_coming(fm):
     return f'<p class="tiny os-hero-coming"><span class="tag-coming">coming</span> {_md_inline(text)}</p>'
 
 
+def _price_line(fm):
+    """The price, where a buyer looks for it: under the hero CTA and beside the form."""
+    text = fm.get("price_line", "").strip()
+    return f'<p class="os-price"><b>{html.escape(text, quote=False)}</b></p>' if text else ""
+
+
+def _strip_label(fm):
+    """A short label over the format strip, naming what the strip proves."""
+    text = fm.get("strip_label", "").strip()
+    return f'<p class="eyebrow os-strip-label">{html.escape(text, quote=False)}</p>' if text else ""
+
+
 MEDIA = SITE_ROOT + "static/overscan/media/"
 
 
@@ -1749,7 +1761,7 @@ def format_strip():
         <div class="fmt-txt"><b>Watch it</b><p>A short explainer, crafted from the same words.</p></div></div>
       <div class="fmt-card"><div class="fmt-media wide"><a class="fmt-zoom" href="{m}issue-slide-1.png"><img src="{m}issue-slide-1.png" width="1280" height="714" loading="lazy" alt="The title slide of the same issue: Defending margins in an AI-augmented production reality."></a></div>
         <div class="fmt-txt"><b>Flip the slides</b><p>For the Monday meeting, one story a slide.</p></div></div>
-      <div class="fmt-card fmt-coming"><div class="fmt-txt"><b>The one picture</b> <span class="tag-coming">coming</span><p>The whole issue on one screen, for the person who will not read. It joins the others once it is reliably accurate.</p></div></div>
+      <div class="fmt-card fmt-coming"><div class="fmt-txt"><b>The one picture</b> <span class="tag-coming">coming</span><p>The whole issue on one screen, for the person who will not read.</p></div></div>
     </div>
     <p class="fmt-hint">The 13 Oct 2026 issue as the letter, the audio, the video and the slides. The audio and video here are short clips of the full 19 and 7 minutes.</p>'''
 
@@ -1790,13 +1802,14 @@ def render_overscan():
     content = f'''
 <section class="hero">
   <div class="wrap">
-    {signin_line()}
     <span class="eyebrow os-brand"><img class="os-mark" src="{SITE_ROOT}static/overscan/mark-e1.svg" alt="" width="40" height="40">{e("eyebrow")}</span>
     <h1 style="margin-top:18px">{e("h1")}</h1>
     <p class="lede">{e("lede")}</p>
-    {_hero_coming(fm)}
     <div class="cta-row"><a class="btn btn-a" href="#inquiry">{e("cta_label")}</a></div>
+    {_price_line(fm)}
+    {_strip_label(fm)}
     {format_strip()}
+    {_hero_coming(fm)}
     <p class="door">The VFX news, every morning: {daily_link("Read the Daily")}. Shooting VFX: skip the expensive lessons and <a href="{SITE_ROOT}work-with-me/">put me on your show</a>.</p>
   </div>
 </section>
@@ -1861,10 +1874,12 @@ def render_overscan():
 <section id="inquiry">
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">{e("form_eyebrow")}</span><h2>{e("form_h2")}</h2>
-      <p class="k">{e("form_k")}</p></div>
+      <p class="k">{e("form_k")}</p>
+      {_price_line(fm)}</div>
     {inquiry_form(fm, offer=OVERSCAN_OFFER, source="overscan", form_id="os-form")}
     <p class="tiny os-byline">{e("byline")}</p>
     <p class="tiny os-byline">{e("sold_by")}</p>
+    {signin_line()}
   </div>
 </section>
 '''

@@ -2,10 +2,10 @@
 type: page
 slug: overscan-guide
 title: Overscan guide | the vfx supervisor
-description: Run Overscan on your own once it is set up: your first issue in three answers, change anything by replying in plain words, pick how your issue reaches you, turn a website off, and what lands each morning.
+description: Reply to any issue in plain words and the next one changes. Reply UNDO to take it back. Then your first issue, how your issue reaches you, turning a website off, and what lands each morning.
 eyebrow: Overscan guide
-h1: Your first issue today, then teach Overscan by replying in plain words.
-lede: Running your own briefing should never take a manual, so this one is short. Your first issue in three answers, every change in your own words by email, and exactly what lands in your inbox each morning.
+h1: Reply to any issue in plain words. The next one changes.
+lede: Four answers cover most mornings. The rest of this page is there when you need it.
 not_set_up: Not a customer yet: [see what Overscan does for your business](/overscan/).
 exchange_you: Longer please. More on the new rules, less on trade shows.
 exchange_overscan: |
@@ -20,10 +20,16 @@ stuck: Anything unclear, email me at [geoff@thevfxsupervisor.com](mailto:geoff@t
 ---
 
 <!-- sections -->
-### Day one :: Your first issue, in three answers
-Your first issue can be in your inbox today. After our call I email you one sign-in link: open it and press `Get started`. There is no password. The link works once; if it runs out, ask me for a fresh one.
+### Quick answers :: Four answers cover most mornings
+- **Change your issue**: reply to any issue in plain words, for example "shorter please". The next issue follows it.
+- **Undo a change**: reply `UNDO`.
+- **Pause it**: press `Pause this newsletter` at the bottom of any issue. The same page starts it again.
+- **Sign in**: open the sign-in link I email you. Signed out later? Type your email on the [sign-in page](https://newsletter-edge.thevfxsupervisor.workers.dev/) and a fresh link arrives by email.
 
-Three short questions follow, and we can answer them together on the call:
+### Day one :: Your first issue, in three answers
+Your first issue can be in your inbox today. Once your account is set up, I email you one sign-in link: open it and press `Get started`. There is no password. The link works once; if it runs out, ask me for a fresh one.
+
+Three short questions follow. Answer them on your own, or ask me and we go through them together:
 
 1. **What do you want to follow?** Say it the way you would tell a friend: who your customers are, and what they should hear about first.
 2. **Where and when?** By email and on a web page, or on the web page only. How often, what time, and your time zone.
@@ -58,9 +64,9 @@ Take each issue the way your morning allows. Overscan crafts it once as a letter
 
 [[shots]]
 
-**Pick yours.** Tell me which one should lead your email and I switch it for you, any time. Every extra starts switched off: tick the ones you like on the `Brief` page under `Extras`, or reply "add the slides". The list also offers `Simple podcast`, a plainer spoken version, and `Infographic`, the whole issue as one picture.
+**Pick yours.** Tell me which one should lead your email and I switch it for you, any time. Every extra starts switched off: tick the ones you like on the `Brief` page under `Extras`, or reply "add the slides". Audio comes two ways: the full conversation, or a shorter plain read, listed as `Simple podcast`. The list also offers `Infographic`, the whole issue as one picture.
 
-**When a piece is missing.** Each week you get up to two of the audio overview, video, slides and infographic. Once those two are used, audio still comes, as the plainer spoken version, and slides, video and the infographic wait until next week. If the piece that leads your email is the one missing, you get the full letter with one line saying so. Every piece has to pass a check against the stories before it is shown; while yours is still being checked, Overscan holds your copy for it, for up to a few hours.
+**When a piece is missing.** Each week you get up to two of the audio overview, video, slides and infographic. Once those two are used, audio still comes, as the plainer spoken version, and slides, video and the infographic wait until next week. If the piece that leads your email is the one missing, you get the full letter with one line saying so. Overscan checks every audio, slide and video against the stories before you see it, so on extras days your copy can arrive up to a few hours later.
 
 **Your customers.** Today the issue and its extras come to you, and you copy what you like into the tool you already use. Forward the whole email and you pass on your own `Pause this newsletter` link with it. Each customer picking their own is coming, below.
 
@@ -69,7 +75,7 @@ You decide where Overscan looks. Open `Sources` in the top menu: every website, 
 
 Or reply "drop" with the site's name, and Overscan confirms you won't see anything from it any more.
 
-Overscan also finds new websites your stories came from. They show up marked `Added for you`, and the next issue lists them at the top under "New sources for you": one Overscan added comes with a way to remove it, and one Overscan has already paused as not useful just says why, since it is off already. Turn one back on yourself and it stays on, marked `Kept on`, unless it stops answering or starts sending junk.
+Overscan also finds new websites your stories came from and lists them in the next issue under "New sources for you", each with a way to remove it. Turn one back on yourself and it stays on, marked `Kept on`, unless it stops answering or starts sending junk.
 
 Away for a week? `Pause this newsletter` at the bottom of every issue stops it, and the same page starts it again.
 
@@ -83,7 +89,7 @@ At the time you picked, Overscan turns the day's news in your trade into one iss
 5. **Your copy arrives by email, from Overscan**, unless you picked web page only. Nothing to press. Every issue is also kept on the `Issues` page.
 6. **Audio, video and slides follow** on the issue's page once they pass their check.
 
-If your account reaches its monthly writing allowance, issues pause until the next month, and your pages say so.
+Your account covers a set amount of writing each month. If you reach it, Overscan says so on your pages and picks up again next month.
 <!-- /sections -->
 
 <!-- formats -->
@@ -103,7 +109,7 @@ The short explainer video on top, then the letter.
 The slide deck on top, then the letter.
 
 ### See it
-Coming: The whole issue on one screen, as a format of its own once it is reliably accurate. Today you can tick `Infographic` under `Extras` and see it on the issue's page when it passes its check.
+Coming: The whole issue on one screen, as a format of its own. Today you can tick `Infographic` under `Extras` and see it on the issue's page when it passes its check.
 <!-- /formats -->
 
 <!-- coming -->
@@ -114,7 +120,7 @@ Issues sent from your own address (for example news@yourbusiness.com), with a da
 Read it, Skim it, Listen, Watch, Slides or See it, from a link at the bottom of every issue they get.
 
 ### See it as a format
-The whole issue on one screen, for the person who will not read, once it is reliably accurate.
+The whole issue on one screen, for the person who will not read.
 
 ### Your issue on Telegram or Slack
 Today it comes by email and on the web.
