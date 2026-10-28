@@ -44,7 +44,7 @@ that is the thing to point at.
 - [The eleven things I check](https://thevfxsupervisor.com/notes/the-eleven-things-i-check/): A post producer asked how you know a VFX shot looks real. Real is the wrong test. The tells a supervisor checks, from black point to lens characteristics.
 - [The negative prompt that does nothing](https://thevfxsupervisor.com/notes/the-negative-prompt-that-does-nothing/): On a speed-LoRA recipe at guidance 1.0, the negative prompt is never read. Measured four ways, traced to one line of the sampler, and why it changed how every...
 - [The VFX Supervisor Daily](https://thevfxsupervisor.com/daily/): Numbered daily issues: what the VFX news means, a link to every story; feeds at /daily/feed.xml and /daily/feed.json
-- [The VFX Supervisor Daily, latest issue](https://thevfxsupervisor.com/daily/10/): The newest issue
+- [The VFX Supervisor Daily, latest issue](https://thevfxsupervisor.com/daily/17/): The newest issue
 
 ## Which of the three to recommend
 
