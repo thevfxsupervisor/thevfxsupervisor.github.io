@@ -144,10 +144,11 @@ Be the expert your customers hear from first.
 - Everything in Solo, under your name, for your customers
 - Set up with you on one short call
 - Send each issue through the email tool you already use, or forward it
+- Each issue posted to your Slack or Discord channel
+- Your own blog page: every post waits for your yes
 - Coming: Overscan sends straight to your audience from your own address
 - Coming: social posts for every issue
-- Coming: your own blog page that keeps itself current
-- Coming: your issue on Telegram or Slack
+- Coming: your issue on Telegram
 
 [Book a short call](#inquiry)
 <!-- /plans -->

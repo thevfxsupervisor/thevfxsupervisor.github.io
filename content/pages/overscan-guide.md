@@ -122,8 +122,8 @@ Read it, Skim it, Listen, Watch, Slides or See it, from a link at the bottom of 
 ### See it as a format
 The whole issue on one screen, for the person who will not read.
 
-### Your issue on Telegram or Slack
-Today it comes by email and on the web.
+### Your issue on Telegram
+Today it comes by email, on the web, and in your Slack or Discord channel.
 
 ### Sign up on your own
 Today we set it up with you.
