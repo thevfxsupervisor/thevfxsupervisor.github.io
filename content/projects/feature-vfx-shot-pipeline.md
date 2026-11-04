@@ -36,7 +36,7 @@ The slate has its own grammar. Scene parts, joined scenes and insert series all 
 
 Edit data does not always arrive, and when it does not, most shows stall or start typing. Every cut we received carried three things burned into the picture: the slate, the timecode and the editor's VFX note. So when the data could not be delivered, I rebuilt the breakdown from the picture itself. The software reads all three off every shot, on our own machines, and turns a cut into a shot list with IDs, timecodes and VFX notes attached.
 
-Reading text off a picture goes wrong in predictable ways, so the reads are guarded. A VFX note counts only if it appears at the start, middle and end of a shot, so a stray overlay cannot invent a VFX shot. Look-alike characters are corrected against the slate grammar. And a read is a candidate until it is checked: it never writes itself into the shot list unchecked. Checked against nearly ten thousand human-verified slate reads, the reader agreed on 98 percent. That reader now ships free in [Breakdown Studio](/projects/breakdown-studio/).
+Reading text off a picture goes wrong in predictable ways, so the reads are guarded. The note is read on the start, middle and end frames of every shot: on all three it marks a VFX shot, and on only some it goes to review, because some notes show only while the effect plays. Look-alike characters are corrected against the slate grammar. And a read is a candidate until it is checked: it never writes itself into the shot list unchecked. Checked against nearly ten thousand human-verified slate reads, the reader agreed on 98 percent. That reader now ships free in [Breakdown Studio](/projects/breakdown-studio/).
 
 ## The software proposes cuts. The doubtful ones get reviewed.
 
