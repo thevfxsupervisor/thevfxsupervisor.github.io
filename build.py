@@ -1131,7 +1131,7 @@ def render_home():
     return render_shell(fm.get("title", SITE_NAME), fm.get("description", ""), content, nav_active=None, extra_script=REEL_SCRIPT + CREDIT_SCRIPT, canonical_path="")
 
 
-PROJECT_ORDER = ["breakdown-studio", "signalbox", "link-session"]  # flagship first
+PROJECT_ORDER = ["breakdown-studio", "feature-vfx-production-office", "signalbox", "link-session"]  # flagship first
 
 
 def render_project(md_path):
@@ -1144,7 +1144,8 @@ def render_project(md_path):
     ctas = []
     if fm.get("get_href"):
         ctas.append(f'<a class="btn btn-a" href="{fm["get_href"]}">{html.escape(fm.get("get_label","Get the tool"), quote=False)}</a>')
-    ctas.append(f'<a class="btn btn-b" href="{SITE_ROOT}work-with-me/">Put me on your show</a>')
+    if not fm.get("get_href", "").rstrip("/").endswith("work-with-me"):   # no duplicate hire button
+        ctas.append(f'<a class="btn btn-b" href="{SITE_ROOT}work-with-me/">Put me on your show</a>')
     cta_row = f'<div class="cta-row">{"".join(ctas)}</div>'
 
     stats_section = ""

@@ -1,0 +1,242 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="dark light">
+<script>
+/* Theme before first paint, so there is no flash of the wrong one. A saved choice wins;
+   otherwise follow the system. Contract shared with the Daily pages: data-theme on <html>,
+   localStorage key "theme", button.theme-toggle in the header. */
+(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}
+if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark'}
+document.documentElement.dataset.theme=t})();
+</script>
+<title>Case study: five vendors, a moving cut, and every VFX cost change in the client's next report | the vfx supervisor</title>
+<meta name="description" content="Five vendors, a moving cut and first bids over budget: how I kept every VFX cost change in the client's next report, and cut not one shot when the budget came under pressure.">
+<link rel="icon" type="image/png" sizes="256x256" href="/static/favicon.png">
+<link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+<link rel="canonical" href="https://thevfxsupervisor.com/projects/feature-vfx-production-office/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="the vfx supervisor">
+<meta property="og:title" content="Case study: five vendors, a moving cut, and every VFX cost change in the client's next report | the vfx supervisor">
+<meta property="og:description" content="Five vendors, a moving cut and first bids over budget: how I kept every VFX cost change in the client's next report, and cut not one shot when the budget came under pressure.">
+<meta property="og:url" content="https://thevfxsupervisor.com/projects/feature-vfx-production-office/">
+<meta property="og:image" content="https://thevfxsupervisor.com/static/og/default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Case study: five vendors, a moving cut, and every VFX cost change in the client's next report | the vfx supervisor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Case study: five vendors, a moving cut, and every VFX cost change in the client's next report | the vfx supervisor">
+<meta name="twitter:description" content="Five vendors, a moving cut and first bids over budget: how I kept every VFX cost change in the client's next report, and cut not one shot when the budget came under pressure.">
+<meta name="twitter:image" content="https://thevfxsupervisor.com/static/og/default.png">
+<link rel="stylesheet" href="/static/style.css?v=9d4a2c8b">
+  <link rel="alternate" type="application/rss+xml" title="the vfx supervisor" href="https://thevfxsupervisor.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"the vfx supervisor","url":"https://thevfxsupervisor.com/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "@id": "https://thevfxsupervisor.com/#person", "name": "Geoffrey Hancock", "jobTitle": "VFX Supervisor and Producer", "url": "https://thevfxsupervisor.com/", "sameAs": ["https://www.imdb.com/name/nm0995883/", "https://github.com/thevfxsupervisor", "https://wangle.media/", "https://www.wangle.studio"], "award": ["VES Award, Outstanding Supporting Visual Effects in a Feature Motion Picture, Changeling (7th Annual VES Awards)", "VES nomination, Invictus (8th Annual VES Awards)", "Robert nomination, Skammerens datter II"], "worksFor": {"@type": "Organization", "name": "Wangle Media", "url": "https://wangle.media/"}, "homeLocation": {"@type": "Place", "address": {"@type": "PostalAddress", "addressLocality": "Humlebaek", "addressCountry": "DK"}}, "knowsAbout": ["Visual effects", "VFX supervision", "VFX production", "VFX bidding and budgeting", "Shot breakdown", "Pipeline engineering", "Real-time and Unreal Engine production", "AI in visual effects", "Multi-vendor VFX delivery"], "knowsLanguage": ["en", "da"]}</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="logo" aria-hidden="true"></span><span class="brand-text">the vfx supervisor</span></a>
+    <nav>
+      <a href="/projects/" class=" current">Projects</a>
+      <a href="/daily/" class="">Daily</a>
+      <a href="/notes/" class="">Notes</a>
+      <a href="/about/" class="">About</a>
+      <a class="btn btn-a" href="/work-with-me/">Work with me</a>
+    </nav>
+    <a class="btn btn-a cta-mobile" href="/work-with-me/">Work with me</a>
+    <button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Case study</span>
+    <h1 style="margin-top:18px">Five vendors, a cut that never sat still, and every VFX cost change in front of the client while there was still time to choose.</h1>
+    <p class="lede">I ran the VFX money on a Nordic feature: bidding, five vendor contracts, budget control and the client's financial reporting. My AI production office did the legwork, with the footage pipeline on our own machines. I made every call and every send.</p>
+    <div class="cta-row"><a class="btn btn-a" href="/work-with-me/">Put me on your show's VFX budget</a></div>
+    <div class="cred"><span class="dot"></span><b>Bidding, five vendor contracts, the live forecast and the client's financial pack, run by one producer through delivery.</b></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap prose">
+    <h2>The job</h2>
+<p>First-round bids came in over budget, and the edit kept moving until picture lock. A Nordic feature with several hundred VFX shots. I owned the money side: bidding, vendor contracts, budget control and the client's financial reporting, from the first bid package through final delivery invoicing. The forecast final cost finished within a fraction of a percent of the agreed budget.</p>
+<h2>What I did</h2>
+<p>Every vendor price flowed into one live forecast, so a bid moved the number the moment it landed, long before any invoice.</p>
+<p><strong>Bidding.</strong> All five vendors bid on one standard template, linked live to the master budget. Each vendor saw only its own sheet: no rates, no rival's pricing. Each received a watermarked per-shot reference set, and every new cut arrived with their own previous prices already filled in, so they only priced what changed and re-bids came back fast. Lesson worth stealing: over-locked bid sheets push vendors into unofficial copies, so protect the formulas and nothing else.</p>
+<p><strong>Vendors.</strong> The forecast counted only signed money, with the maybes tracked beside it. Vendor discounts went in once they were in the contract. Potential rebates were shown next to the forecast, never counted in it: money not yet received does not belong in the reported number. When one vendor declined part of a package, those shots moved to a second vendor without moving the budget. I caught mismatched payment terms before signature, reconciled every invoice against milestones and scope, and gave every change order its own tracked line. And when part of one package was paused, I priced the pause before anyone counted on the saving: the vendor had already started every shot, so pausing VFX work does not give you the money back.</p>
+<p><strong>Budget.</strong> The budget was frozen at the agreed figure while the forecast moved live, so variance was always on screen. Unpriced shots were carried at an internal estimate from day one, so the forecast never understated cost. Contingency sat as a visible flag through the risky middle of the show and was released once delivery risk passed. When the budget came under pressure mid-show, I did not hand over a cut list. I sorted every candidate shot: must-have for story, must-have technically, worth a creative review, or could be simplified. That sort settled the question, and not one shot was cut. The job was never to hit the first number. It was to make every move in the number visible, explained and on the record.</p>
+<p><strong>Reporting.</strong> The client got a financial pack in their own format: overview, cash flow, exposure, payments, contracts, finaling and delivery, mapped to their chart of accounts and tied to the forecast to the cent. A live working report fed a frozen client copy at a stable link and a dated PDF archive, refreshed every one to two weeks. The client flagged key shots directly in the shot-level budget report, and those flags survived every rebuild.</p>
+<h2>How the office ran</h2>
+<p>Two specialist AI agents did the mechanical work, and I kept every judgment call and every send. One owned shot identity and delivery, the other money and reporting. They coordinated through <a href="/projects/link-session/">link-session</a> and drafted the procedural emails for me to review. I handled every negotiation, answered every producer question and wrote the important emails myself.</p>
+<p>Shot identity came from <a href="/projects/breakdown-studio/">Breakdown Studio</a>: shots were keyed on their on-screen slate burn-in, not timecode, so identity survived every re-cut. OCR proposed, a human confirmed, and OCR never wrote a number into the budget.</p>
+<p>The discipline is what made the agents safe on a client's money. Every write was read back and matched by shot identity. Every audit was tested to prove it could fail. By delivery, fifteen automatic audits stood between the working file and the client, each one added after a real error. Independent audit agents, never handed the correct totals, worked each report tab and caught sign errors, double counts and stale labels before the client saw the detail. Checking every tab's totals against the others caught a flipped sign that would have shown savings as overruns.</p>
+<h2>Security: the footage pipeline ran on our own machines</h2>
+<p>Shot detection, slate reading, thumbnails, reference clips and the cut-to-cut comparison all ran on our own machines, and the only footage that went out was the watermarked reference each vendor needed to bid. The only cloud model in the office was Claude Code, on a private account with training turned off. It looked at occasional stills when checking the breakdown, never the footage itself, and no other cloud AI service touched the show. And I made every send myself. On a show under NDA, that is the difference between an AI office a client can sign off and one they cannot.</p>
+<h2>When it went wrong</h2>
+<p>Errors still happened. The agents logged their own, and every kind of error became an audit or a rule. When an unexplained jump appeared in the forecast, revision history on the live sheets traced it to a single changed line, and the contracted price was restored.</p>
+<h2>Why this matters on your show</h2>
+<p>Overruns happen when nobody sees the cost change in time. A shot gets added, a bid changes, a scope grows, and if the report only catches it when the invoice arrives, the chance to choose has gone. I run bidding, vendors and the forecast so every change is in the client's very next report, with a production office that checks its own work first. On your show, that office runs from the first breakdown, so the bid, the forecast and the client's report are one system from day one.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="proof">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Validated, not vibes</span>
+      <h2>What held under pressure</h2></div>
+    <div style="margin-top:26px;max-width:820px"><div class="tiers"><div class="tier win"><span class="n mono">5</span><div><b>Vendors, one live forecast</b><span>Every bid, change order and invoice fed the same number the client read.</span></div></div><div class="tier win"><span class="n mono">15</span><div><b>Automatic audits before a report reaches the client</b><span>Grown from six, one added for every kind of error found. A single failure stops the report.</span></div></div><div class="tier win"><span class="n mono">0</span><div><b>Shots cut when the budget came under pressure</b><span>Every candidate shot was sorted by need instead, and work carried on.</span></div></div><div class="tier win"><span class="n mono">98%</span><div><b>Slate reads the machine got right first time</b><span>Checked against nearly ten thousand human-verified reads. A person still confirmed every one.</span></div></div></div></div>
+  </div>
+</section>
+
+<section id="get">
+  <div class="wrap">
+    <div class="final">
+      <span class="soon"><span class="dot"></span>Nordic feature · client details under NDA</span>
+      <h2>Don't learn about your VFX overrun from the invoice.</h2>
+      <p>Bring me in before the first bid goes out. My AI production office runs from your first breakdown, so every shot added, bid changed or scope grown is in your next report, while you can still choose.</p>
+      <div class="cta-row">
+        <a class="btn btn-a" href="/work-with-me/">Bring me in before the first bid</a>
+        <a class="btn btn-b" href="/projects/breakdown-studio/">Get the free breakdown tool</a>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <div class="quicklinks" style="margin-top:0">
+      <span class="eyebrow">Keep exploring</span>
+      <div class="ql-row"><a href="/projects/breakdown-studio/">Breakdown Studio</a> &middot; <a href="/projects/signalbox/">SignalBox</a> &middot; <a href="/projects/link-session/">link-session</a> &middot; <a href="/course/">The course</a> &middot; <a href="/notes/how-a-one-person-vfx-department-orchestrates-ai/">Note: orchestrating AI solo</a> &middot; <a href="/projects/">All projects</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="/" style="font-size:14px"><span class="logo" aria-hidden="true"></span>the vfx supervisor</a>
+    <nav>
+      <a href="/projects/">Projects</a>
+      <a href="/overscan/">Overscan</a>
+      <a href="/course/">Course</a>
+      <a href="/notes/">Notes</a>
+      <a href="/reel/">Reel</a>
+      <a href="/about/">About</a>
+      <a href="/work-with-me/">Work with me</a>
+      <a href="https://newsletter-edge.thevfxsupervisor.workers.dev/">Overscan sign in</a>
+      <a href="https://wangle.media/">Wangle Media</a>
+      <a href="https://github.com/thevfxsupervisor">GitHub</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="mailto:geoff@thevfxsupervisor.com">Contact</a>
+    </nav>
+    <div class="mono">&copy; 2026 Geoffrey Hancock. All rights reserved. Open-source tools (Breakdown Studio, link-session) are MIT.</div>
+  </div>
+</footer>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://thevfxsupervisor.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Projects",
+   "item": "https://thevfxsupervisor.com/projects/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Feature VFX production office",
+   "item": "https://thevfxsupervisor.com/projects/feature-vfx-production-office/"
+  }
+ ]
+}
+</script>
+<script>
+/* Theme switch. The label always names the action it will take. */
+(function(){
+  var root = document.documentElement, btn = document.querySelector('button.theme-toggle');
+  if (!btn) return;
+  function label(){ btn.setAttribute('aria-label', root.dataset.theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'); }
+  label();
+  btn.addEventListener('click', function(){
+    var t = root.dataset.theme === 'light' ? 'dark' : 'light';
+    root.dataset.theme = t; label();
+    try { localStorage.setItem('theme', t); } catch (e) {}
+  });
+  /* No saved choice yet: keep following the system if it changes while the page is open. */
+  if (window.matchMedia) {
+    var mq = matchMedia('(prefers-color-scheme: light)');
+    var follow = function(ev){ var saved = null; try { saved = localStorage.getItem('theme'); } catch (e) {}
+      if (saved !== 'light' && saved !== 'dark') { root.dataset.theme = ev.matches ? 'light' : 'dark'; label(); } };
+    if (mq.addEventListener) mq.addEventListener('change', follow); else if (mq.addListener) mq.addListener(follow);
+  }
+})();
+</script>
+<script>
+/* Image lightbox (diagrams, and the Overscan format strip's stills). The anchor already
+   opens the full-size file on its own, so this only enhances the click; with JS off
+   nothing is lost. Esc or a click closes it and focus returns to the link. */
+(function(){
+  var links = document.querySelectorAll('figure.diagram a.zoom, a.fmt-zoom');
+  if (!links.length) return;
+  var box = document.createElement('div');
+  box.className = 'lb';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.setAttribute('aria-label', 'Image viewer');
+  box.innerHTML = '<button class="lb-x" type="button" aria-label="Close">&times;</button><img alt="">';
+  for (var j = 0; j < links.length; j++) links[j].setAttribute('aria-haspopup', 'dialog');
+  document.body.appendChild(box);
+  var img = box.querySelector('img'), last = null;
+  function open(src, alt, from){
+    img.src = src; img.alt = alt || '';
+    box.classList.add('on');
+    document.documentElement.style.overflow = 'hidden';
+    last = from; box.querySelector('.lb-x').focus();
+  }
+  function close(){
+    box.classList.remove('on');
+    document.documentElement.style.overflow = '';
+    img.removeAttribute('src');
+    if (last) { last.focus(); last = null; }
+  }
+  for (var i = 0; i < links.length; i++) {
+    links[i].addEventListener('click', function(e){
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+      e.preventDefault();
+      var im = this.querySelector('img');
+      open(this.getAttribute('href'), im ? im.getAttribute('alt') : '', this);
+    });
+  }
+  box.addEventListener('click', function(e){ if (e.target !== img || e.target === img) close(); });
+  document.addEventListener('keydown', function(e){
+    if (!box.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'Tab') { e.preventDefault(); box.querySelector('.lb-x').focus(); }
+  });
+})();
+</script>
+</body>
+</html>
