@@ -1,0 +1,255 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="index, follow">
+<meta name="color-scheme" content="dark light">
+<script>
+/* Theme before first paint, so there is no flash of the wrong one. A saved choice wins;
+   otherwise follow the system. Contract shared with the Daily pages: data-theme on <html>,
+   localStorage key "theme", button.theme-toggle in the header. */
+(function(){var t=null;try{t=localStorage.getItem('theme')}catch(e){}
+if(t!=='light'&&t!=='dark'){t=(window.matchMedia&&matchMedia('(prefers-color-scheme: light)').matches)?'light':'dark'}
+document.documentElement.dataset.theme=t})();
+</script>
+<title>Case study: a five-vendor shot list through several re-cuts, and the errors we caught | the vfx supervisor</title>
+<meta name="description" content="Several re-cuts, five vendors, several hundred VFX shots: how the shot list reached a clean final cut, and the errors we caught on the way, from a one-frame bug that halved the apparent VFX count to ten shots wrongly flagged missing.">
+<link rel="icon" type="image/png" sizes="256x256" href="/static/favicon.png">
+<link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+<link rel="canonical" href="https://thevfxsupervisor.com/projects/feature-vfx-shot-pipeline/">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="the vfx supervisor">
+<meta property="og:title" content="Case study: a five-vendor shot list through several re-cuts, and the errors we caught | the vfx supervisor">
+<meta property="og:description" content="Several re-cuts, five vendors, several hundred VFX shots: how the shot list reached a clean final cut, and the errors we caught on the way, from a one-frame bug that halved the apparent VFX count to ten shots wrongly flagged missing.">
+<meta property="og:url" content="https://thevfxsupervisor.com/projects/feature-vfx-shot-pipeline/">
+<meta property="og:image" content="https://thevfxsupervisor.com/static/og/default.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Case study: a five-vendor shot list through several re-cuts, and the errors we caught | the vfx supervisor">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Case study: a five-vendor shot list through several re-cuts, and the errors we caught | the vfx supervisor">
+<meta name="twitter:description" content="Several re-cuts, five vendors, several hundred VFX shots: how the shot list reached a clean final cut, and the errors we caught on the way, from a one-frame bug that halved the apparent VFX count to ten shots wrongly flagged missing.">
+<meta name="twitter:image" content="https://thevfxsupervisor.com/static/og/default.png">
+<link rel="stylesheet" href="/static/style.css?v=9d4a2c8b">
+  <link rel="alternate" type="application/rss+xml" title="the vfx supervisor" href="https://thevfxsupervisor.com/feed.xml">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"the vfx supervisor","url":"https://thevfxsupervisor.com/"}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "Person", "@id": "https://thevfxsupervisor.com/#person", "name": "Geoffrey Hancock", "jobTitle": "VFX Supervisor and Producer", "url": "https://thevfxsupervisor.com/", "sameAs": ["https://www.imdb.com/name/nm0995883/", "https://github.com/thevfxsupervisor", "https://wangle.media/", "https://www.wangle.studio"], "award": ["VES Award, Outstanding Supporting Visual Effects in a Feature Motion Picture, Changeling (7th Annual VES Awards)", "VES nomination, Invictus (8th Annual VES Awards)", "Robert nomination, Skammerens datter II"], "worksFor": {"@type": "Organization", "name": "Wangle Media", "url": "https://wangle.media/"}, "homeLocation": {"@type": "Place", "address": {"@type": "PostalAddress", "addressLocality": "Humlebaek", "addressCountry": "DK"}}, "knowsAbout": ["Visual effects", "VFX supervision", "VFX production", "VFX bidding and budgeting", "Shot breakdown", "Pipeline engineering", "Real-time and Unreal Engine production", "AI in visual effects", "Multi-vendor VFX delivery"], "knowsLanguage": ["en", "da"]}</script>
+</head>
+<body>
+
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="/"><span class="logo" aria-hidden="true"></span><span class="brand-text">the vfx supervisor</span></a>
+    <nav>
+      <a href="/projects/" class=" current">Projects</a>
+      <a href="/daily/" class="">Daily</a>
+      <a href="/notes/" class="">Notes</a>
+      <a href="/about/" class="">About</a>
+      <a class="btn btn-a" href="/work-with-me/">Work with me</a>
+    </nav>
+    <a class="btn btn-a cta-mobile" href="/work-with-me/">Work with me</a>
+    <button class="theme-toggle" type="button" aria-label="Switch to light theme"><svg class="i-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.2M12 19.8V22M4.9 4.9l1.6 1.6M17.5 17.5l1.6 1.6M2 12h2.2M19.8 12H22M4.9 19.1l1.6-1.6M17.5 6.5l1.6-1.6"/></svg><svg class="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.5 14.2A8.5 8.5 0 0 1 9.8 3.5a8.5 8.5 0 1 0 10.7 10.7z"/></svg></button>
+  </div>
+</header>
+
+<main id="main">
+
+<section class="hero">
+  <div class="wrap">
+    <span class="eyebrow">Case study</span>
+    <h1 style="margin-top:18px">Every re-cut changed every timecode. We caught the errors that would have scrambled the shot list, and the final cut landed clean.</h1>
+    <p class="lede">As VFX Producer, I ran the VFX production office and the shot pipeline on a Nordic feature with five vendors and several hundred VFX shots, through several re-cuts, from the first breakdown to deliveries coming back. My AI agents did the mechanical work, with the footage pipeline on our own machines. Every pipeline call and every send were mine.</p>
+    <div class="cta-row"><a class="btn btn-a" href="/work-with-me/">Put me on your show's shot list</a></div>
+    <div class="cred"><span class="dot"></span><b>Shot IDs, re-cut tracking, vendor reference clips and delivery tracking, run by one person across several re-cuts.</b></div>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section>
+  <div class="wrap prose">
+    <h2>Every re-cut changes every timecode</h2>
+<p>On a Nordic feature with several hundred VFX shots and five vendors, that is how a bid, a reference clip or a status ends up pinned to the wrong shot without anyone noticing. My job was to stop that happening quietly. The shot breakdown was rebuilt and reconciled to the shot list across several re-cuts, and on the final cut the update went in with no duplicate shots and no broken links.</p>
+<h2>A shot's ID lives on the slate, not the timecode</h2>
+<p>Every shot was identified by the slate burned into the picture, not by its timecode. Timecodes change with every edit; the slate does not. The ID carried the take as well, because a different take of the same setup is a different plate, and I need that visible before anyone bids.</p>
+<p>The slate has its own grammar. Scene parts, joined scenes and insert series all look like slates to a naive reader, and teaching the software that grammar removed a whole class of false shot IDs. A slate change is evidence of a cut, not proof: a screen in frame or a swish pan can show two slates in one shot, so those get flagged for review instead of split.</p>
+<h2>The software proposes cuts. The doubtful ones get reviewed.</h2>
+<p>Cut-finding software misses real cuts and invents false ones, so I never take its list as final. At its default sensitivity the software missed a few percent of cuts, and turning the sensitivity up invented cuts on camera moves. So the clear cases are accepted automatically, and the doubtful ones go to a review queue as a strip of frames, which I reviewed with Claude; nothing in that queue is applied automatically. A detected cut was confirmed when the slate changed across it, and a slate change with no detected cut was flagged as a possible missed one.</p>
+<p>Some missed cuts hide behind placeholder slates, where there is no clean slate change to catch. I had a list kept of each case and its fix, tied to the shot's ID, so the same problem gets flagged when the next re-cut is checked, instead of being rediscovered. And of 21 suggested cut fixes on the final cut, only one touched a VFX shot. I applied that one and logged the others, because tidying shots that do not affect the VFX list adds risk for no benefit.</p>
+<h2>What went wrong, and what caught it</h2>
+<p><strong>A one-frame bug halved the apparent VFX count.</strong> A one-frame slip in frame grabbing made every shot's last-frame thumbnail show the next shot. Earlier builds only used the middle frame, so nobody had seen it. The bug surfaced on the final cut because a stricter check of the burned-in notes read the neighbour's note on the last frame, and the strict count of VFX shots came back at roughly half the loose count of the same cut. That gap between two counts of the same thing was the clue. After the fix, the two counts landed within a handful of shots of each other.</p>
+<p><strong>A shortcut that worked on one re-cut failed on the next.</strong> Comparing one frame per shot was fine between cuts delivered the same way. When the next cut arrived as a different delivery, the one-frame comparison called most of the film changed. Comparing several frames per shot separated same shots from different shots cleanly, and the first run of that fix was itself checked and corrected.</p>
+<p><strong>99 shots in the new cut claimed 42 shots on the list that can each belong to only one.</strong> We changed the matching so each listed shot can be claimed by one new shot only, with the slate overriding any look-alike. Replayed later against my approved matches from the final cut, the open-source version of the matcher reproduced about 95 percent of them wherever a match could be made, with zero collisions.</p>
+<p><strong>The first automatic match also called about a quarter of the VFX shots dropped. They were not.</strong> One camera take can be cut into several shots, so nothing was called dropped without more checks and a human decision. Separately, some invisible-VFX shots had been added to the list by hand and carry no on-set slate. An audit found an automatic "dropped from cut" rule had wrongly marked some of them as dropped. Those shots are now protected from automatic removal, and only I can omit them.</p>
+<p><strong>Matching on the slate alone said ten shots were missing from a vendor's bid.</strong> They were all there: the vendor had renumbered the slate but kept the plate name. I caught it, and the match now uses three names instead of one: slate, alias and plate name. That cleared all ten.</p>
+<p><strong>A status script let a resubmitted shot outrank the reviewer's verdict.</strong> Another overwrote three hand-set verdicts, and a third silently stopped reading partway down the sheet. Each became a rule: only verdicts rank, nothing downgrades a verdict, and every read covers the whole sheet.</p>
+<p><strong>Snapshot first, compare after.</strong> Consolidating four report tabs into one, we saved a snapshot of the schedule first and compared it afterwards. The comparison caught the rebuild itself zeroing part of the plan, and after the fix the schedule matched the snapshot on every row. A separate check found a schedule status that had never worked.</p>
+<h2>The reviewer's verdict beats the vendor's own report</h2>
+<p>Each vendor was sent a set of per-shot reference clips, watermarked with their own name and limited to the VFX shots up for bid. The clip set was cut frame-accurately from the edit in about a minute and a half on one local machine, then watermarked per vendor.</p>
+<p>Vendors name shots in different ways, so deliveries did not match up uniformly. For the hardest scheme we built a lookup of verified name prefixes rather than guess from spelling: 97 of 98 names decoded, and the odd one out was flagged, not forced.</p>
+<p>Every delivery went into a delivery log that is only ever added to, and the weekly report was built from that log, so any past week's figure could be re-derived and defended. The counting rules were fixed in advance: a resubmitted shot is one shot, a test never counts. A vendor's own status report is a claim. The tracker took the reviewer's verdict over the vendor's own claim, with set rules for which wins when email and the production-tracking system disagree.</p>
+<p>Email tracking only sees what happens in email: when approvals happen in a review tool or on a call, a report can show work as behind when it is not. When a report did exactly that, we named the blind spot and kept the report out of any vendor conversation until the review tool had been checked.</p>
+<h2>The slate grouped shots better than image matching</h2>
+<p>A shot wall of hundreds of tiles was built to put the whole VFX scope in front of the VFX consultant in one view. Each tile was built to be dragged, and later updates renamed tiles but never moved them, because the layout was the consultant's. Off-the-shelf image similarity could not tell one shot from another on footage that all looked alike. For a grouped copy of the wall, the camera setup already recorded in the slate did the job better, and a local image model then confirmed the slate grouping was visually coherent.</p>
+<h2>Agents gathered and cross-checked. I decided and sent.</h2>
+<p>Specialist AI agents coordinated through shared files, one writer per file, and anything that mattered was kept in the project, not in the chat between them. They drafted the procedural emails. I wrote the important ones and made every send. They gathered and cross-checked; I kept the pipeline judgment calls. The standing rule became: no summary counts until someone opens the real file. When an agent broke it, the miss went into a visible log of the agents' own mistakes, and each class of mistake became a check or a rule.</p>
+<p>The shot-list software became an open-source, free tool: <a href="/projects/breakdown-studio/">Breakdown Studio</a>. It was tested against this production: nearly ten thousand human-verified slate reads, 98 percent of them matching what the software read.</p>
+<p>The money side of this show is its own case study: <a href="/projects/feature-vfx-production-office/">five vendors, a moving cut and every cost change in the client's next report</a>.</p>
+<h2>Our own machines, and one cloud model</h2>
+<p>The footage pipeline ran on our own machines. Vendors were sent watermarked reference clips. The only cloud model was Claude Code, on a private account with training off, and it looked at stills, mostly when we reviewed doubtful cuts together.</p>
+<h2>What this means for your show</h2>
+<p>The expensive old way: someone rebuilds the shot list by hand after every re-cut, and a vendor prices the wrong shot. On this show the final-cut update went in with no duplicate shots and no broken links, and the matcher, replayed against my approved matches, reproduced about 95 percent of them wherever a match could be made. Bring me in before the first cut moves, and I'll build your shot list to keep every shot tied to the right plate, bid and status, so a re-cut means reviewing what changed.</p>
+  </div>
+</section>
+
+<hr class="rule">
+
+<section id="proof">
+  <div class="wrap">
+    <div class="sec-head"><span class="eyebrow">Validated, not vibes</span>
+      <h2>Four numbers from the shot list</h2></div>
+    <div style="margin-top:26px;max-width:820px"><div class="tiers"><div class="tier win"><span class="n mono">97 of 98</span><div><b>Vendor shot names decoded from the hardest naming scheme</b><span>The one that did not decode was flagged, not forced.</span></div></div><div class="tier win"><span class="n mono">Half</span><div><b>The VFX count a one-frame bug would have hidden</b><span>Caught because two counts of the same cut disagreed.</span></div></div><div class="tier win"><span class="n mono">1 of 21</span><div><b>Suggested cut fixes on the final cut that touched a VFX shot</b><span>I applied that one and logged the others.</span></div></div><div class="tier win"><span class="n mono">42</span><div><b>Shots on the list claimed by two or more new shots</b><span>On the first match. Each listed shot can now be claimed once.</span></div></div></div></div>
+  </div>
+</section>
+
+<section id="get">
+  <div class="wrap">
+    <div class="final">
+      <span class="soon"><span class="dot"></span>Nordic feature · client details under NDA</span>
+      <h2>Stop rebuilding your shot list by hand at every re-cut.</h2>
+      <p>I'll set up your shot list before the first bid package goes out, so a re-cut means reviewing what changed, not re-logging the film. My AI production office cross-checks from your first breakdown, and every pipeline call is mine.</p>
+      <div class="cta-row">
+        <a class="btn btn-a" href="/work-with-me/">Lock your shot list before the first re-cut</a>
+        <a class="btn btn-b" href="/projects/breakdown-studio/">Get the free breakdown tool</a>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="rule">
+
+<section>
+  <div class="wrap">
+    <div class="quicklinks" style="margin-top:0">
+      <span class="eyebrow">Keep exploring</span>
+      <div class="ql-row"><a href="/projects/breakdown-studio/">Breakdown Studio</a> &middot; <a href="/projects/feature-vfx-production-office/">Feature VFX production office</a> &middot; <a href="/projects/signalbox/">SignalBox</a> &middot; <a href="/projects/link-session/">link-session</a> &middot; <a href="/course/">The course</a> &middot; <a href="/notes/how-a-one-person-vfx-department-orchestrates-ai/">Note: orchestrating AI solo</a> &middot; <a href="/projects/">All projects</a></div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <a class="brand" href="/" style="font-size:14px"><span class="logo" aria-hidden="true"></span>the vfx supervisor</a>
+    <nav>
+      <a href="/projects/">Projects</a>
+      <a href="/overscan/">Overscan</a>
+      <a href="/course/">Course</a>
+      <a href="/notes/">Notes</a>
+      <a href="/reel/">Reel</a>
+      <a href="/about/">About</a>
+      <a href="/work-with-me/">Work with me</a>
+      <a href="https://newsletter-edge.thevfxsupervisor.workers.dev/">Overscan sign in</a>
+      <a href="https://wangle.media/">Wangle Media</a>
+      <a href="https://github.com/thevfxsupervisor">GitHub</a>
+      <a href="/privacy/">Privacy</a>
+      <a href="mailto:geoff@thevfxsupervisor.com">Contact</a>
+    </nav>
+    <div class="mono">&copy; 2026 Geoffrey Hancock. All rights reserved. Open-source tools (Breakdown Studio, link-session) are MIT.</div>
+  </div>
+</footer>
+<script type="application/ld+json">
+{
+ "@context": "https://schema.org",
+ "@type": "BreadcrumbList",
+ "itemListElement": [
+  {
+   "@type": "ListItem",
+   "position": 1,
+   "name": "Home",
+   "item": "https://thevfxsupervisor.com/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 2,
+   "name": "Projects",
+   "item": "https://thevfxsupervisor.com/projects/"
+  },
+  {
+   "@type": "ListItem",
+   "position": 3,
+   "name": "Feature VFX shot list",
+   "item": "https://thevfxsupervisor.com/projects/feature-vfx-shot-pipeline/"
+  }
+ ]
+}
+</script>
+<script>
+/* Theme switch. The label always names the action it will take. */
+(function(){
+  var root = document.documentElement, btn = document.querySelector('button.theme-toggle');
+  if (!btn) return;
+  function label(){ btn.setAttribute('aria-label', root.dataset.theme === 'light' ? 'Switch to dark theme' : 'Switch to light theme'); }
+  label();
+  btn.addEventListener('click', function(){
+    var t = root.dataset.theme === 'light' ? 'dark' : 'light';
+    root.dataset.theme = t; label();
+    try { localStorage.setItem('theme', t); } catch (e) {}
+  });
+  /* No saved choice yet: keep following the system if it changes while the page is open. */
+  if (window.matchMedia) {
+    var mq = matchMedia('(prefers-color-scheme: light)');
+    var follow = function(ev){ var saved = null; try { saved = localStorage.getItem('theme'); } catch (e) {}
+      if (saved !== 'light' && saved !== 'dark') { root.dataset.theme = ev.matches ? 'light' : 'dark'; label(); } };
+    if (mq.addEventListener) mq.addEventListener('change', follow); else if (mq.addListener) mq.addListener(follow);
+  }
+})();
+</script>
+<script>
+/* Image lightbox (diagrams, and the Overscan format strip's stills). The anchor already
+   opens the full-size file on its own, so this only enhances the click; with JS off
+   nothing is lost. Esc or a click closes it and focus returns to the link. */
+(function(){
+  var links = document.querySelectorAll('figure.diagram a.zoom, a.fmt-zoom');
+  if (!links.length) return;
+  var box = document.createElement('div');
+  box.className = 'lb';
+  box.setAttribute('role', 'dialog');
+  box.setAttribute('aria-modal', 'true');
+  box.setAttribute('aria-label', 'Image viewer');
+  box.innerHTML = '<button class="lb-x" type="button" aria-label="Close">&times;</button><img alt="">';
+  for (var j = 0; j < links.length; j++) links[j].setAttribute('aria-haspopup', 'dialog');
+  document.body.appendChild(box);
+  var img = box.querySelector('img'), last = null;
+  function open(src, alt, from){
+    img.src = src; img.alt = alt || '';
+    box.classList.add('on');
+    document.documentElement.style.overflow = 'hidden';
+    last = from; box.querySelector('.lb-x').focus();
+  }
+  function close(){
+    box.classList.remove('on');
+    document.documentElement.style.overflow = '';
+    img.removeAttribute('src');
+    if (last) { last.focus(); last = null; }
+  }
+  for (var i = 0; i < links.length; i++) {
+    links[i].addEventListener('click', function(e){
+      if (e.metaKey || e.ctrlKey || e.shiftKey || e.button) return;
+      e.preventDefault();
+      var im = this.querySelector('img');
+      open(this.getAttribute('href'), im ? im.getAttribute('alt') : '', this);
+    });
+  }
+  box.addEventListener('click', function(e){ if (e.target !== img || e.target === img) close(); });
+  document.addEventListener('keydown', function(e){
+    if (!box.classList.contains('on')) return;
+    if (e.key === 'Escape') close();
+    else if (e.key === 'Tab') { e.preventDefault(); box.querySelector('.lb-x').focus(); }
+  });
+})();
+</script>
+</body>
+</html>
