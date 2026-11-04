@@ -1053,8 +1053,8 @@ def render_home():
     cards.insert(1 if cards else 0,
         f'<a class="proj-card" href="https://getlonglens.com/">'
         f'<span class="eyebrow os-brand"><img class="os-mark os-mark-sm" src="{SITE_ROOT}static/overscan/mark-e1.svg" alt="" width="22" height="22">LongLens &middot; for your business</span>'
-        f'<h2>Your customers hear what changed in your trade from you, not from a competitor.</h2>'
-        f'<p>LongLens turns the news in your trade into a briefing under your name, to read, hear or watch, with one line on why each story matters to your customers. LongLens is the system behind {html.escape(DAILY_NAME, quote=False)}, my own morning VFX briefing, and I set LongLens up with you.</p>'
+        f'<h2>Your customers hear what changed in your industry from you, not from a competitor.</h2>'
+        f'<p>LongLens turns the news in your industry into a briefing under your name, to read and often to hear, with one line on why each story matters to your customers. LongLens is the system behind {html.escape(DAILY_NAME, quote=False)}, my own morning VFX briefing, and I set LongLens up with you.</p>'
         f'<span class="proj-more mono">Try LongLens: free during the pilot &rarr;</span></a>'
     )
     cards.append(
@@ -1949,7 +1949,7 @@ def render_404():
     sideways on a phone."""
     links = [
         ("Read the latest Daily", DAILY_PATH, "btn btn-a"),
-        ("LongLens: your name on your trade\u2019s news", SITE_ROOT + "longlens/", "btn btn-b"),
+        ("LongLens: your name on your industry\u2019s news", SITE_ROOT + "longlens/", "btn btn-b"),
         ("Work with me", SITE_ROOT + "work-with-me/", "btn btn-b"),
         ("Home", SITE_ROOT, "btn btn-b"),
     ]
