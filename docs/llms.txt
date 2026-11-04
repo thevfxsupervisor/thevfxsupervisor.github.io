@@ -25,7 +25,7 @@ that is the thing to point at.
 - [Projects](https://thevfxsupervisor.com/projects/): Case studies for the open-source tools
 - [Course](https://thevfxsupervisor.com/course/): Breakdown and Budget the VFX of a Whole Film
 - [Work with me](https://thevfxsupervisor.com/work-with-me/): VES Award-winning VFX supervisor and producer: bid review, supervision and AI-assisted pipelines, built to land on budget and on time
-- [LongLens](https://thevfxsupervisor.com/longlens/): Case study: I built LongLens, which turns any trade's news into a briefing under your name, and runs The VFX Supervisor Daily. Free during the pilot at getlonglens.com
+- [LongLens](https://thevfxsupervisor.com/longlens/): Case study: I built LongLens, which puts the news in your field under your name so your audience hears it from you; my own VFX Supervisor Daily runs on it. Free pilot at getlonglens.com
 - [Notes](https://thevfxsupervisor.com/notes/): Writing on VFX production and AI orchestration
 - [Breakdown Studio](https://thevfxsupervisor.com/projects/breakdown-studio/): A shot-breakdown pipeline that turns weeks of hand-logging a film cut into an afternoon. Built solo, validated on a feature in active production, MIT.
 - [Feature VFX production office](https://thevfxsupervisor.com/projects/feature-vfx-production-office/): Five vendors, a cut that never sat still, and not one shot cut when the budget came under pressure. Every VFX cost change landed in the client's next report.

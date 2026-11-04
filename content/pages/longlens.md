@@ -2,24 +2,30 @@
 type: page
 slug: longlens
 title: I built LongLens | the vfx supervisor
-description: I built LongLens, which turns any trade's news into a briefing under your name, and I run The VFX Supervisor Daily on it. Free during the pilot.
+description: I built LongLens, which puts each morning's news in your field under your name, so your audience hears it from you. My own VFX Supervisor Daily runs on it. Free pilot at getlonglens.com.
 eyebrow: Case study
-h1: I built LongLens. It turns your trade's news into a briefing under your name.
-cta_label: See LongLens: free during the pilot
-cta_href: https://getlonglens.com
-daily_label: Read today's Daily
+h1: I built LongLens so your audience hears the news from you, every morning.
+cta_label: Start my free LongLens pilot
+cta_href: https://getlonglens.com/
+daily_label: Read the latest Daily
 ---
 
-LongLens turns the news in your trade into a briefing under your name, to read, hear or watch, with one line on why each story matters to your customers. I built it, and I run it on my own work every day.
+LongLens turns each morning's news in your field into a short read under your name, often with audio, and tells your readers what every story means for them. They stop hearing it from a feed or a competitor. They hear it from you.
 
-## It runs The VFX Supervisor Daily
+## Why I built LongLens
 
-Every morning LongLens turns the day's VFX news into [The VFX Supervisor Daily](/daily/): what changed, and what it means for your next bid. Read it, hear it or watch it. LongLens checks names and figures against the original story and tries every link before an issue goes out. A story whose only link is dead stays out.
+The person who explains the news is the person people remember as the expert. Doing that by hand every morning is a second job. LongLens does the reading and the writing. You pick the topics, the tone and the name on top, and you change the next issue by replying in plain words.
 
-## What it shows about my pipeline work
+## Who LongLens is for
 
-I build production pipelines for a living. LongLens is the same job pointed at news: many inputs in, one checked result out, and a person making the final call. I run it on my own briefing first, so you can judge the method on something you can read, before you trust it on your production.
+- Business owners who want customers to see them as the expert.
+- Experts starting a business who need an audience before the first sale.
+- Anyone building an audience they reach directly, with no algorithm in between.
 
-## Try it on your own trade
+## See LongLens working: The VFX Supervisor Daily
 
-LongLens is free during the pilot. Email me your trade, and I set up your first week of briefings under your name.
+My field is VFX, so my own [VFX Supervisor Daily](/daily/) is where LongLens runs first. It goes out most mornings: what changed, and what it means for the people reading. LongLens checks names and figures against the original story and tries every link before an issue goes out. A story whose only link is dead stays out.
+
+## Start your own
+
+LongLens is free during the pilot, no card. Start at [getlonglens.com](https://getlonglens.com/), or email me at [geoff@wanglemedia.com](mailto:geoff@wanglemedia.com) and I set it up with you.

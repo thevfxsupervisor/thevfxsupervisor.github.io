@@ -2774,7 +2774,7 @@ def main():
         ('Projects', base + '/projects/', 'Case studies for the open-source tools'),
         ('Course', base + '/course/', 'Breakdown and Budget the VFX of a Whole Film'),
         ('Work with me', base + '/work-with-me/', 'VES Award-winning VFX supervisor and producer: bid review, supervision and AI-assisted pipelines, built to land on budget and on time'),
-        ('LongLens', base + '/longlens/', 'Case study: I built LongLens, which turns any trade\'s news into a briefing under your name, and runs The VFX Supervisor Daily. Free during the pilot at getlonglens.com'),
+        ('LongLens', base + '/longlens/', 'Case study: I built LongLens, which puts the news in your field under your name so your audience hears it from you; my own VFX Supervisor Daily runs on it. Free pilot at getlonglens.com'),
         ('Notes', base + '/notes/', 'Writing on VFX production and AI orchestration'),
     ]
     # Real frontmatter, not the slug: card_title/card_summary (falling back to
