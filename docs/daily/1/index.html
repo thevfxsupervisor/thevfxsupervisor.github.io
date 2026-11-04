@@ -79,6 +79,7 @@ document.documentElement.dataset.theme=t})();
     </div>
   </article>
   
+  
   <section class="daily-join" id="join-daily-issue" aria-labelledby="join-daily-issue-h">
     <h2 id="join-daily-issue-h">Get The VFX Supervisor Daily every morning, your way</h2>
     <form class="join-form" method="post" action="https://newsletter-edge.thevfxsupervisor.workers.dev/join/vfx" accept-charset="utf-8">
@@ -123,17 +124,6 @@ document.documentElement.dataset.theme=t})();
 <script>
 (function(){
   var each = function(list, fn){ Array.prototype.forEach.call(list, fn); };
-  each(document.querySelectorAll('.daily-take'), function(sec){
-    var chips = sec.querySelectorAll('.daily-chip'), panels = sec.querySelectorAll('.daily-panel');
-    function pick(f){
-      each(chips, function(c){ var on = c.getAttribute('data-f') === f; c.classList.toggle('on', on);
-        if (on) { c.setAttribute('aria-current', 'true'); } else { c.removeAttribute('aria-current'); } });
-      each(panels, function(p){ var on = p.getAttribute('data-f') === f; p.classList.toggle('on', on);
-        if (!on) { each(p.querySelectorAll('audio,video'), function(m){ try { m.pause(); } catch (e) {} }); } });
-    }
-    each(chips, function(c){ c.addEventListener('click', function(e){ e.preventDefault(); pick(c.getAttribute('data-f')); }); });
-    pick('read');
-  });
   /* The sign-up form: with no script the browser posts it and the app sends the visitor to
      the thanks page. With script, the same urlencoded post goes by fetch (no preflight). */
   var THANKS = "/daily/thanks/";

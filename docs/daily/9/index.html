@@ -65,10 +65,9 @@ document.documentElement.dataset.theme=t})();
     <div class="daily-lede"><p>Netflix's in-house studio has moved from AI pitch to credited shows, and Netflix is reportedly cutting staff. Clients may push harder on price for crowds and set extensions. Worth watching how your bids frame hybrid work, and which shots you keep traditional.</p></div>
   </header>
   
-  <section class="daily-take" aria-label="Choose how you take it">
-    <span class="daily-label">Take today's issue your way</span>
-    <div class="daily-chips"><a class="daily-chip" href="#take-read" data-f="read">Read it</a><a class="daily-chip" href="#take-listen" data-f="listen">Hear it</a><a class="daily-chip" href="#take-watch" data-f="watch">Watch it</a></div>
-    <div class="daily-panel" id="take-read" data-f="read"><h2>Read it</h2><p class="daily-note">The issue is right below.</p></div><div class="daily-panel" id="take-listen" data-f="listen"><h2>Hear it</h2><audio controls preload="none" src="https://newsletter-edge.thevfxsupervisor.workers.dev/pm/pm1.1.11.3cwIvHXWZosMOQPTftxCzw"><a href="https://newsletter-edge.thevfxsupervisor.workers.dev/pm/pm1.1.11.3cwIvHXWZosMOQPTftxCzw">Play the audio</a></audio></div><div class="daily-panel" id="take-watch" data-f="watch"><h2>Watch it</h2><video controls preload="none" playsinline src="https://newsletter-edge.thevfxsupervisor.workers.dev/pm/pm1.1.13.QaUD_VC3h8pgM7wBQsKZJA"><a href="https://newsletter-edge.thevfxsupervisor.workers.dev/pm/pm1.1.13.QaUD_VC3h8pgM7wBQsKZJA">Play the video</a></video></div>
+  <section class="daily-ways" aria-labelledby="ways-h">
+    <h2 class="daily-label daily-section-h" id="ways-h">Ways to take this issue</h2>
+    <ul><li><a href="#issue"><span class="k">Read it</span><span class="d">The stories, with what each one means</span></a></li><li><a href="#take-listen"><span class="k">Hear it</span><span class="d">The issue read aloud</span></a></li><li><a href="#take-watch"><span class="k">Watch it</span><span class="d">The issue as a video</span></a></li></ul>
   </section>
   <article class="daily-card" id="issue">
     <div class="prose">
@@ -84,6 +83,12 @@ document.documentElement.dataset.theme=t})();
 <p><em>7 links checked when this went out, 0 dead.</em></p>
     </div>
   </article>
+  
+  <section class="daily-media" aria-labelledby="media-h">
+    <h2 id="media-h">This issue in other formats</h2>
+    <p class="daily-note">Audio, video and slides come with an issue only once they pass my fact check, so not every issue has every format.</p>
+    <div class="daily-media-grid"><div class="daily-panel" id="take-listen" data-f="listen"><h3>Hear it</h3><audio controls preload="none" src="https://newsletter-edge.thevfxsupervisor.workers.dev/pm/pm1.1.11.3cwIvHXWZosMOQPTftxCzw"><a href="https://newsletter-edge.thevfxsupervisor.workers.dev/pm/pm1.1.11.3cwIvHXWZosMOQPTftxCzw">Play the audio</a></audio></div><div class="daily-panel" id="take-watch" data-f="watch"><h3>Watch it</h3><video controls preload="metadata" playsinline src="https://newsletter-edge.thevfxsupervisor.workers.dev/pm/pm1.1.13.QaUD_VC3h8pgM7wBQsKZJA#t=0.1"><a href="https://newsletter-edge.thevfxsupervisor.workers.dev/pm/pm1.1.13.QaUD_VC3h8pgM7wBQsKZJA">Play the video</a></video></div></div>
+  </section>
   
   <section class="daily-join" id="join-daily-issue" aria-labelledby="join-daily-issue-h">
     <h2 id="join-daily-issue-h">Get The VFX Supervisor Daily every morning, your way</h2>
@@ -129,17 +134,6 @@ document.documentElement.dataset.theme=t})();
 <script>
 (function(){
   var each = function(list, fn){ Array.prototype.forEach.call(list, fn); };
-  each(document.querySelectorAll('.daily-take'), function(sec){
-    var chips = sec.querySelectorAll('.daily-chip'), panels = sec.querySelectorAll('.daily-panel');
-    function pick(f){
-      each(chips, function(c){ var on = c.getAttribute('data-f') === f; c.classList.toggle('on', on);
-        if (on) { c.setAttribute('aria-current', 'true'); } else { c.removeAttribute('aria-current'); } });
-      each(panels, function(p){ var on = p.getAttribute('data-f') === f; p.classList.toggle('on', on);
-        if (!on) { each(p.querySelectorAll('audio,video'), function(m){ try { m.pause(); } catch (e) {} }); } });
-    }
-    each(chips, function(c){ c.addEventListener('click', function(e){ e.preventDefault(); pick(c.getAttribute('data-f')); }); });
-    pick('read');
-  });
   /* The sign-up form: with no script the browser posts it and the app sends the visitor to
      the thanks page. With script, the same urlencoded post goes by fetch (no preflight). */
   var THANKS = "/daily/thanks/";

@@ -65,10 +65,9 @@ document.documentElement.dataset.theme=t})();
     <div class="daily-lede"><p>DNEG is working with sister company ReDefine on an IMAX two-parter, and Netflix is talking up AI at its Eyeline VFX arm. Both point to work consolidating inside large groups with in-house tools. Worth watching what that leaves for outside bidders.</p></div>
   </header>
   
-  <section class="daily-take" aria-label="Choose how you take it">
-    <span class="daily-label">Take today's issue your way</span>
-    <div class="daily-chips"><a class="daily-chip" href="#take-read" data-f="read">Read it</a><a class="daily-chip" href="#take-watch" data-f="watch">Watch it</a></div>
-    <div class="daily-panel" id="take-read" data-f="read"><h2>Read it</h2><p class="daily-note">The issue is right below.</p></div><div class="daily-panel" id="take-watch" data-f="watch"><h2>Watch it</h2><video controls preload="none" playsinline src="https://newsletter-edge.thevfxsupervisor.workers.dev/pm/pm1.1.80.kzI5gaSLoq05bP0BT-4jVA"><a href="https://newsletter-edge.thevfxsupervisor.workers.dev/pm/pm1.1.80.kzI5gaSLoq05bP0BT-4jVA">Play the video</a></video></div>
+  <section class="daily-ways" aria-labelledby="ways-h">
+    <h2 class="daily-label daily-section-h" id="ways-h">Ways to take this issue</h2>
+    <ul><li><a href="#issue"><span class="k">Read it</span><span class="d">The stories, with what each one means</span></a></li><li><a href="#take-watch"><span class="k">Watch it</span><span class="d">The issue as a video</span></a></li><li><a href="#take-short"><span class="k">One minute</span><span class="d">A one-minute vertical video</span></a></li></ul>
   </section>
   <article class="daily-card" id="issue">
     <div class="prose">
@@ -78,6 +77,12 @@ document.documentElement.dataset.theme=t})();
 <p><em>1 link checked when this went out, 0 dead, 1 we couldn't check.</em></p>
     </div>
   </article>
+  
+  <section class="daily-media" aria-labelledby="media-h">
+    <h2 id="media-h">This issue in other formats</h2>
+    <p class="daily-note">Audio, video and slides come with an issue only once they pass my fact check, so not every issue has every format.</p>
+    <div class="daily-media-grid"><div class="daily-panel" id="take-watch" data-f="watch"><h3>Watch it</h3><video controls preload="metadata" playsinline src="https://newsletter-edge.thevfxsupervisor.workers.dev/pm/pm1.1.80.kzI5gaSLoq05bP0BT-4jVA#t=0.1"><a href="https://newsletter-edge.thevfxsupervisor.workers.dev/pm/pm1.1.80.kzI5gaSLoq05bP0BT-4jVA">Play the video</a></video></div><div class="daily-panel" id="take-short" data-f="short"><h3>One minute</h3><video class="daily-short" controls preload="metadata" playsinline src="https://newsletter-edge.thevfxsupervisor.workers.dev/pm/pm1.1.82.hFMn3P53Se31IYbPcVfWrQ#t=0.1"><a href="https://newsletter-edge.thevfxsupervisor.workers.dev/pm/pm1.1.82.hFMn3P53Se31IYbPcVfWrQ">Play the video</a></video></div></div>
+  </section>
   
   <section class="daily-join" id="join-daily-issue" aria-labelledby="join-daily-issue-h">
     <h2 id="join-daily-issue-h">Get The VFX Supervisor Daily every morning, your way</h2>
@@ -123,17 +128,6 @@ document.documentElement.dataset.theme=t})();
 <script>
 (function(){
   var each = function(list, fn){ Array.prototype.forEach.call(list, fn); };
-  each(document.querySelectorAll('.daily-take'), function(sec){
-    var chips = sec.querySelectorAll('.daily-chip'), panels = sec.querySelectorAll('.daily-panel');
-    function pick(f){
-      each(chips, function(c){ var on = c.getAttribute('data-f') === f; c.classList.toggle('on', on);
-        if (on) { c.setAttribute('aria-current', 'true'); } else { c.removeAttribute('aria-current'); } });
-      each(panels, function(p){ var on = p.getAttribute('data-f') === f; p.classList.toggle('on', on);
-        if (!on) { each(p.querySelectorAll('audio,video'), function(m){ try { m.pause(); } catch (e) {} }); } });
-    }
-    each(chips, function(c){ c.addEventListener('click', function(e){ e.preventDefault(); pick(c.getAttribute('data-f')); }); });
-    pick('read');
-  });
   /* The sign-up form: with no script the browser posts it and the app sends the visitor to
      the thanks page. With script, the same urlencoded post goes by fetch (no preflight). */
   var THANKS = "/daily/thanks/";

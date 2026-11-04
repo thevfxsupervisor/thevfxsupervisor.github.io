@@ -2095,8 +2095,12 @@ def render_note(md_path):
 DAILY_PROMISE = "What changed in VFX today, and what that means for your next bid."
 DAILY_FORMATS_LINE = ("Skip the trade-site scroll. Read every issue here. Audio, video and slides "
                       "come with an issue once they pass my fact check.")
-# One real sample per format, from files already on the site (13 Oct 2026 issue): shown on the
-# index so a visitor sees what each format is before picking one. A missing file = no sample.
+# Under an issue's own formats: why not every issue has every one.
+DAILY_MEDIA_LINE = ("Audio, video and slides come with an issue only once they pass my fact check, "
+                    "so not every issue has every format.")
+# Fallback samples (13 Oct 2026 issue, files already on the site), shown LOW on the index and
+# only for a format the latest issue lacks and no earlier issue has either (_daily_samples).
+# The latest issue itself always comes first, with its own formats. A missing file = no sample.
 DAILY_SAMPLES_FROM = "13 October 2026"
 DAILY_SAMPLES = [("listen", "Hear it", "static/overscan/media/issue-audio.m4a", ""),
                  ("watch", "Watch it", "static/overscan/media/issue-video.mp4",
@@ -2146,8 +2150,28 @@ DAILY_CSS = """
 .daily .daily-chip{color:var(--txt)}
 .daily .daily-chip.on{background:var(--dj-btn);border-color:var(--dj-btn);color:var(--dj-btn-ink)}
 .daily-panel{border:1px solid var(--line);background:var(--panel);border-radius:16px;padding:20px;display:flex;flex-direction:column;gap:10px}
-.dj-js .daily-panel{display:none}
-.dj-js .daily-panel.on{display:flex}
+.daily-panel h3{margin:0;font-family:var(--dj-sans);font-size:16px;font-weight:600;letter-spacing:0}
+.daily-panel video.daily-short{aspect-ratio:9/16;max-width:300px;margin:0 auto}
+.daily-ways{display:flex;flex-direction:column;gap:10px}
+.daily-ways ul{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.daily-ways a{display:flex;flex-direction:column;gap:4px;min-height:48px;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--panel);text-decoration:none}
+.daily .daily-ways a{color:var(--txt)}
+.daily-ways a:hover{border-color:var(--amber-soft)}
+.daily-ways .k{font-family:var(--dj-mono);font-size:13px;font-weight:600;color:var(--amber-soft)}
+.daily-ways .d{font-size:13px;line-height:1.4;color:var(--dim)}
+.daily-media{display:flex;flex-direction:column;gap:14px}
+.daily-media h2{margin:0;font-family:var(--dj-serif);font-size:26px;line-height:1.2;font-weight:600;letter-spacing:0}
+.daily-media-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.daily-takeline{border-left:3px solid var(--amber-soft);padding:2px 0 2px 14px;display:flex;flex-direction:column;gap:6px}
+.daily-takeline p{margin:0;font-size:19px;line-height:1.5;color:var(--txt)}
+.daily .prose p.daily-reviewed{margin-top:24px;font-family:var(--dj-mono);font-size:13px;color:var(--dim)}
+.daily-latest{display:flex;flex-direction:column;gap:24px}
+.daily-latest h1 a{color:var(--txt);text-decoration:none}
+.daily-latest h1 a:hover{color:var(--amber-soft)}
+.daily-masthead{gap:6px}
+.daily-masthead p{margin:0;font-size:15px;line-height:1.5;color:var(--dim)}
+.daily-more{margin:0;font-family:var(--dj-mono);font-size:13px}
+.daily-section-h{margin:0}
 .daily-panel h2{margin:0;font-family:var(--dj-sans);font-size:16px;font-weight:600;letter-spacing:0}
 .daily-panel audio,.daily-panel video,.daily-panel img{display:block;width:100%;max-width:100%;border-radius:12px}
 .daily-panel video{background:#000;aspect-ratio:16/9;height:auto}
@@ -2208,7 +2232,7 @@ DAILY_CSS = """
 .daily-hp{position:absolute;left:-9999px}
 .daily .wl-status:empty{display:none}
 .daily .wl-status{font-size:14px;color:var(--txt)}
-@media(min-width:700px){.daily{padding-top:40px}.daily-head h1{font-size:44px}.daily-index .daily-head h1{font-size:52px;line-height:1.05}.daily-join{padding:28px}.daily-samples-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.daily-join h2{font-size:30px}.daily-send{flex:0 0 auto}}
+@media(min-width:700px){.daily{padding-top:40px}.daily-head h1{font-size:44px}.daily-index .daily-head h1{font-size:40px;line-height:1.1}.daily-join{padding:28px}.daily-samples-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.daily-media-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.daily-join h2{font-size:30px}.daily-send{flex:0 0 auto}}
 @media(max-width:600px){.daily-pdf{display:none}}
 """.replace("@@LIGHT@@", DAILY_LIGHT)
 
@@ -2224,8 +2248,23 @@ DAILY_THEME_HEAD = '<script>document.documentElement.className+=" dj-js";</scrip
 DAILY_FORMATS = [("read", "Read it", "Read"), ("listen", "Hear it", "Hear"),
                  ("watch", "Watch it", "Watch"), ("slides", "Slides", "Slides"),
                  ("picture", "One picture", "Picture")]
-DAILY_PANEL_TITLES = {"read": "Read it", "listen": "Hear it", "watch": "Watch it",
-                      "slides": "Flip the slides", "picture": "One picture"}
+# The ways an issue offers it: the sign-up formats plus the one-minute vertical video (the
+# short), which is not a sign-up format. Same order as the app's DAILY_TAKES.
+DAILY_TAKES = DAILY_FORMATS[:3] + [("short", "One minute", "Short")] + DAILY_FORMATS[3:]
+# What each way IS, in a few words, on its card, so a visitor can tell them apart at a glance.
+DAILY_WAY_NOTES = {"read": "The stories, with what each one means",
+                   "listen": "The issue read aloud",
+                   "watch": "The issue as a video",
+                   "short": "A one-minute vertical video",
+                   "slides": "The issue as slides",
+                   "picture": "The whole issue as one picture"}
+DAILY_PANEL_TITLES = {"listen": "Hear it", "watch": "Watch it", "short": "One minute",
+                      "slides": "Slides", "picture": "One picture"}
+# (issue number, format) pieces the frontmatter lists but the app no longer serves (its /pm/
+# address answers 404), so the page never shows a dead player. Checked by curl 2026-11-04.
+DAILY_MEDIA_GONE = {("17", "short")}
+DAILY_MEDIA_KEY = {"listen": "audio", "watch": "video", "short": "short", "slides": "slides",
+                   "picture": "picture"}
 
 
 def _daily_posts():
@@ -2261,19 +2300,19 @@ def _daily_foot():
 
 def _daily_formats(fm):
     """The formats an issue offers: always read, then each piece the app put in its
-    frontmatter that has its address (audio/video) or its file (slides/picture)."""
+    frontmatter that has its address (audio/video/short) or its file (slides/picture)."""
     have = {"read"}
-    keys = {"listen": "audio", "watch": "video", "slides": "slides", "picture": "picture"}
     for f in [x.strip() for x in fm.get("formats", "").split(",")]:
-        if f in keys and _daily_media_src(fm, keys[f]):
+        if (f in DAILY_MEDIA_KEY and _daily_media_src(fm, DAILY_MEDIA_KEY[f])
+                and (fm.get("number", ""), f) not in DAILY_MEDIA_GONE):
             have.add(f)
-    return [f for f, _label, _tag in DAILY_FORMATS if f in have]
+    return [f for f, _label, _tag in DAILY_TAKES if f in have]
 
 
 def _daily_media_src(fm, key):
-    """A safe address for one piece: https for audio/video, a bare file name for the rest."""
+    """A safe address for one piece: https for audio/video/short, a bare file name for the rest."""
     v = fm.get(key, "").strip()
-    if key in ("audio", "video"):
+    if key in ("audio", "video", "short"):
         return v if re.fullmatch(r"https://[A-Za-z0-9.:-]+/[A-Za-z0-9._~/-]{1,400}", v) else ""
     return v if re.fullmatch(r"[a-z0-9][a-z0-9.-]{0,40}", v) else ""
 
@@ -2287,48 +2326,114 @@ def _daily_split(body):
     return "", text
 
 
-def _daily_take(fm, slug):
-    """Choose how to take today's issue: a chip per format and one panel each. With no
-    script every panel shows, stacked; with script one at a time."""
+# "<name>'s take: ..." as the post's first paragraph: the owner's one line (the app's
+# store.framed, "One tap + your take"). Lifted into the page head with its own label.
+_DAILY_TAKE_RE = re.compile(r"(.{1,60}?'s take): (.+)", re.S)
+
+
+def _daily_head_html(body):
+    """(head html, rest markdown): the owner's take (when there is one) and the issue's opening
+    paragraph go in the page head, the stories stay below."""
+    lede, rest = _daily_split(body)
+    out = ""
+    m = _DAILY_TAKE_RE.fullmatch(lede) if lede else None
+    if m:
+        out = (f'<div class="daily-takeline"><span class="daily-label">'
+               f'{html.escape(m.group(1), quote=False)}</span>{markdown_to_html(m.group(2))}</div>')
+        lede, rest = _daily_split(rest)
+    if lede:
+        out += f'<div class="daily-lede">{markdown_to_html(lede)}</div>'
+    return out, rest
+
+
+def _daily_prose(md):
+    """The stories. A closing "Reviewed by <name>" line gets its own quiet style."""
+    out = markdown_to_html(md)
+    return re.sub(r"<p>(Reviewed by [^<]{1,120})</p>", r'<p class="daily-reviewed">\1</p>', out)
+
+
+def _daily_ways(fm):
+    """A labelled card per way this issue really comes in, each a jump to it. Only formats
+    the issue has (_daily_formats); "" when it is read-only, so there is no lone card."""
     have = _daily_formats(fm)
     if len(have) < 2:
         return ""
     e = lambda s: html.escape(s, quote=True)  # noqa: E731
-    labels = {f: label for f, label, _tag in DAILY_FORMATS}
-    chips = "".join(
-        f'<a class="daily-chip" href="#take-{f}" data-f="{f}">{e(labels[f])}</a>' for f in have)
-    panels = []
-    for f in have:
-        if f == "read":
-            inner = '<p class="daily-note">The issue is right below.</p>'
-        elif f in ("listen", "watch"):
-            key = "audio" if f == "listen" else "video"
-            src = e(_daily_media_src(fm, key))
-            note = fm.get(f"{key}_note", "").strip()
-            inner = f'<p class="daily-note">{e(note)}</p>' if note else ""
-            if f == "listen":
-                inner += (f'<audio controls preload="none" src="{src}">'
-                          f'<a href="{src}">Play the audio</a></audio>')
-            else:
-                inner += (f'<video controls preload="none" playsinline src="{src}">'
-                          f'<a href="{src}">Play the video</a></video>')
-        elif f == "slides":
-            src = e(_daily_media_src(fm, "slides"))
-            inner = (f'<iframe class="daily-pdf" src="{src}" loading="lazy" title="Slides for this issue"></iframe>'
-                     f'<p class="daily-note"><a href="{src}">Open the slides (PDF)</a></p>')
-        else:
-            src = e(_daily_media_src(fm, "picture"))
-            inner = (f'<a href="{src}"><img src="{src}" loading="lazy" decoding="async" '
-                     f'alt="This issue as one picture"></a>'
-                     '<p class="daily-note">Tap the picture to open it full size.</p>')
-        panels.append(f'<div class="daily-panel" id="take-{f}" data-f="{f}">'
-                      f'<h2>{e(DAILY_PANEL_TITLES[f])}</h2>{inner}</div>')
+    labels = {f: label for f, label, _tag in DAILY_TAKES}
+    cards = "".join(
+        f'<li><a href="#{"issue" if f == "read" else "take-" + f}">'
+        f'<span class="k">{e(labels[f])}</span><span class="d">{e(DAILY_WAY_NOTES[f])}</span></a></li>'
+        for f in have)
     return f"""
-  <section class="daily-take" aria-label="Choose how you take it">
-    <span class="daily-label">Take today's issue your way</span>
-    <div class="daily-chips">{chips}</div>
-    {"".join(panels)}
+  <section class="daily-ways" aria-labelledby="ways-h">
+    <h2 class="daily-label daily-section-h" id="ways-h">Ways to take this issue</h2>
+    <ul>{cards}</ul>
   </section>"""
+
+
+def _daily_panel(fm, f, base="", note=""):
+    """One format of one issue, shown as it is (the player, the picture, the slides). base is
+    the issue folder's address when the page is not the issue's own (the index)."""
+    e = lambda s: html.escape(s, quote=True)  # noqa: E731
+    key = DAILY_MEDIA_KEY[f]
+    src = _daily_media_src(fm, key)
+    if not src:
+        return ""
+    if f in ("slides", "picture"):
+        src = base + src
+    src = e(src)
+    extra = fm.get(f"{key}_note", "").strip() if f in ("listen", "watch") else ""
+    inner = f'<p class="daily-note">{e(extra)}</p>' if extra else ""
+    if f == "listen":
+        inner += (f'<audio controls preload="none" src="{src}">'
+                  f'<a href="{src}">Play the audio</a></audio>')
+    elif f in ("watch", "short"):
+        cls = ' class="daily-short"' if f == "short" else ""
+        inner += (f'<video{cls} controls preload="metadata" playsinline src="{src}#t=0.1">'
+                  f'<a href="{src}">Play the video</a></video>')
+    elif f == "slides":
+        inner += (f'<iframe class="daily-pdf" src="{src}" loading="lazy" title="Slides for this issue"></iframe>'
+                  f'<p class="daily-note"><a href="{src}">Open the slides (PDF)</a></p>')
+    else:
+        inner += (f'<a href="{src}"><img src="{src}" loading="lazy" decoding="async" '
+                  f'alt="This issue as one picture"></a>'
+                  '<p class="daily-note">Tap the picture to open it full size.</p>')
+    if note:
+        inner += f'<p class="daily-note">{note}</p>'
+    return (f'<div class="daily-panel" data-f="{f}"><h3>{e(DAILY_PANEL_TITLES[f])}</h3>'
+            f'{inner}</div>')
+
+
+def _daily_media(fm, base=""):
+    """Every format this issue has beyond reading, shown in full under the stories, each with
+    the id its card in _daily_ways jumps to. "" for a read-only issue."""
+    panels = []
+    for f in _daily_formats(fm):
+        if f == "read":
+            continue
+        panel = _daily_panel(fm, f, base)
+        if panel:
+            panels.append(panel.replace('<div class="daily-panel"',
+                                        f'<div class="daily-panel" id="take-{f}"', 1))
+    if not panels:
+        return ""
+    return f"""
+  <section class="daily-media" aria-labelledby="media-h">
+    <h2 id="media-h">This issue in other formats</h2>
+    <p class="daily-note">{html.escape(DAILY_MEDIA_LINE, quote=False)}</p>
+    <div class="daily-media-grid">{"".join(panels)}</div>
+  </section>"""
+
+
+def _daily_issue_html(fm, rest, base=""):
+    """The ways, the stories and the formats: shared by the issue page and the index."""
+    return f"""{_daily_ways(fm)}
+  <article class="daily-card" id="issue">
+    <div class="prose">
+{_daily_prose(rest)}
+    </div>
+  </article>
+  {_daily_media(fm, base)}"""
 
 
 def _daily_join(source, compact=False):
@@ -2380,24 +2485,13 @@ def _daily_join(source, compact=False):
 
 
 def _daily_script():
-    """One media panel at a time and the sign-up form by fetch. Both are enhancements: with no
-    script every panel shows, stacked, and the browser posts the form itself."""
+    """The sign-up form by fetch, an enhancement: with no script the browser posts it itself.
+    Every format panel always shows (no toggle), so what each looks like is never hidden."""
     thanks = f"{SITE_ROOT}{DAILY_SECTION}/thanks/"
     js = """
 <script>
 (function(){
   var each = function(list, fn){ Array.prototype.forEach.call(list, fn); };
-  each(document.querySelectorAll('.daily-take'), function(sec){
-    var chips = sec.querySelectorAll('.daily-chip'), panels = sec.querySelectorAll('.daily-panel');
-    function pick(f){
-      each(chips, function(c){ var on = c.getAttribute('data-f') === f; c.classList.toggle('on', on);
-        if (on) { c.setAttribute('aria-current', 'true'); } else { c.removeAttribute('aria-current'); } });
-      each(panels, function(p){ var on = p.getAttribute('data-f') === f; p.classList.toggle('on', on);
-        if (!on) { each(p.querySelectorAll('audio,video'), function(m){ try { m.pause(); } catch (e) {} }); } });
-    }
-    each(chips, function(c){ c.addEventListener('click', function(e){ e.preventDefault(); pick(c.getAttribute('data-f')); }); });
-    pick('read');
-  });
   /* The sign-up form: with no script the browser posts it and the app sends the visitor to
      the thanks page. With script, the same urlencoded post goes by fetch (no preflight). */
   var THANKS = "@@THANKS@@";
@@ -2471,21 +2565,15 @@ def render_daily_post(fm, body, slug, newer=None, older=None):
              f'<a href="{SITE_ROOT}{DAILY_SECTION}/{newer}/">Later &rarr;</a>' if newer else ""]
     nav = ('<nav class="daily-nav" aria-label="More issues">'
            + "".join(f"<span>{x}</span>" for x in links) + "</nav>")
-    lede, rest = _daily_split(body)
-    lede_html = f'<div class="daily-lede">{markdown_to_html(lede)}</div>' if lede else ""
+    head_html, rest = _daily_head_html(body)
     content = f"""{_daily_css_link()}
 <main class="daily">
   <header class="daily-head">
     <span class="daily-eyebrow">{" &middot; ".join(bits)}</span>
     <h1>{esc(fm.get("headline") or fm.get("title", ""))}</h1>
-    {lede_html}
+    {head_html}
   </header>
-  {_daily_take(fm, slug)}
-  <article class="daily-card" id="issue">
-    <div class="prose">
-{markdown_to_html(rest)}
-    </div>
-  </article>
+  {_daily_issue_html(fm, rest)}
   {_daily_join("daily-issue")}
   {nav}
   {_daily_foot()}
@@ -2502,63 +2590,103 @@ def render_daily_post(fm, body, slug, newer=None, older=None):
     return page
 
 
-def _daily_samples():
-    """One short real sample per format whose file is on the site, and the picture marked
-    Coming; "" when none of the files exist."""
+def _daily_issue_name(fm):
+    n = fm.get("number", "")
+    when = fm.get("date_text") or fm.get("date", "")
+    return " &middot; ".join(x for x in ("#" + html.escape(n) if n else "",
+                                         html.escape(when, quote=False)) if x)
+
+
+def _daily_samples(posts):
+    """Below the latest issue and the archive: each format the latest issue does NOT have,
+    shown from the newest earlier issue that has it, else from the fixed 13 October sample
+    files. Every card says which issue it comes from. "" when the latest has every format."""
     e = lambda s: html.escape(s, quote=True)  # noqa: E731
+    have = set(_daily_formats(posts[0][0])) if posts else set()
+    statics = {f: (path, poster) for f, _label, path, poster in DAILY_SAMPLES}
     cards = []
-    for _f, label, path, poster in DAILY_SAMPLES:
-        if not (ROOT_DIR / path).is_file():
+    for f, _label, _tag in DAILY_TAKES:
+        if f == "read" or f in have:
             continue
-        src = e(SITE_ROOT + path)
-        if path.endswith((".m4a", ".mp3")):
-            body = f'<audio controls preload="none" src="{src}"></audio>'
-        elif path.endswith(".mp4"):
-            pos = f' poster="{e(SITE_ROOT + poster)}"' if poster and (ROOT_DIR / poster).is_file() else ""
-            body = f'<video controls preload="none" playsinline src="{src}"{pos}></video>'
-        else:
-            body = f'<img src="{src}" loading="lazy" decoding="async" alt="One slide from the issue">'
-        cards.append(f'<div class="daily-sample"><h3>{e(label)}</h3>{body}</div>')
+        card = ""
+        for fm, _body, slug in posts[1:]:
+            if f in _daily_formats(fm):
+                base = f"{SITE_ROOT}{DAILY_SECTION}/{slug}/"
+                note = f'From issue <a href="{base}">{_daily_issue_name(fm)}</a>.'
+                card = _daily_panel(fm, f, base, note)
+                if card:
+                    break
+        if not card and f in statics and (ROOT_DIR / statics[f][0]).is_file():
+            path, poster = statics[f]
+            src = e(SITE_ROOT + path)
+            if path.endswith((".m4a", ".mp3")):
+                body = f'<audio controls preload="none" src="{src}"></audio>'
+            elif path.endswith(".mp4"):
+                pos = f' poster="{e(SITE_ROOT + poster)}"' if poster and (ROOT_DIR / poster).is_file() else ""
+                body = f'<video controls preload="none" playsinline src="{src}"{pos}></video>'
+            else:
+                body = f'<img src="{src}" loading="lazy" decoding="async" alt="One slide from an issue">'
+            card = (f'<div class="daily-panel" data-f="{f}"><h3>{e(DAILY_PANEL_TITLES[f])}</h3>{body}'
+                    f'<p class="daily-note">A short sample from the {e(DAILY_SAMPLES_FROM)} issue.</p></div>')
+        if card:
+            cards.append(card)
     if not cards:
         return ""
-    cards.append('<div class="daily-sample"><h3>One picture</h3>'
-                 '<p class="daily-note">Coming.</p></div>')
     return f"""
-  <section class="daily-samples" aria-labelledby="daily-samples-h">
-    <h2 class="daily-label" id="daily-samples-h">What each format looks like</h2>
-    <p class="daily-note">Short samples from one issue ({e(DAILY_SAMPLES_FROM)}).</p>
-    <div class="daily-samples-grid">{"".join(cards)}</div>
+  <section class="daily-media" aria-labelledby="daily-samples-h">
+    <h2 id="daily-samples-h">Other formats, from earlier issues</h2>
+    <p class="daily-note">The latest issue does not come in these. This is what each one looks like.</p>
+    <div class="daily-media-grid">{"".join(cards)}</div>
   </section>"""
 
 
 def render_daily_index(posts):
-    tags = {f: tag for f, _label, tag in DAILY_FORMATS}
+    """The latest issue in full first (headline, take, the stories, its own formats), then the
+    sign-up, the earlier issues, and only then samples of formats the latest issue lacks."""
+    tags = {f: tag for f, _label, tag in DAILY_TAKES}
     rows = []
-    for fm, _body, slug in posts:
-        n = fm.get("number", "")
-        when = fm.get("date_text") or fm.get("date", "")
-        meta = " &middot; ".join(x for x in ("#" + html.escape(n) if n else "",
-                                             html.escape(when, quote=False)) if x)
+    for fm, _body, slug in posts[1:]:
         chips = "".join(f'<span class="daily-tag">{tags[f]}</span>' for f in _daily_formats(fm))
         rows.append(
             f'<li><a href="{SITE_ROOT}{DAILY_SECTION}/{slug}/">'
-            f'<span class="n">{meta}</span>'
+            f'<span class="n">{_daily_issue_name(fm)}</span>'
             f'<span class="t">{html.escape(fm.get("headline") or fm.get("title", ""), quote=False)}</span>'
             f'<span class="daily-tags" aria-label="Formats">{chips}</span></a></li>'
         )
-    empty = "" if rows else "<p>The first issue is on its way.</p>"
-    samples = _daily_samples()
-    lede = DAILY_FORMATS_LINE + (" Short samples are below." if samples else "")
+    latest = ""
+    if posts:
+        fm, body, slug = posts[0]
+        url = f"{SITE_ROOT}{DAILY_SECTION}/{slug}/"
+        head_html, rest = _daily_head_html(body)
+        latest = f"""
+  <section class="daily-latest" aria-labelledby="latest-h">
+    <header class="daily-head">
+      <span class="daily-eyebrow">Latest issue &middot; {_daily_issue_name(fm)}</span>
+      <h1 id="latest-h"><a href="{url}">{html.escape(fm.get("headline") or fm.get("title", ""), quote=False)}</a></h1>
+      {head_html}
+    </header>
+    {_daily_issue_html(fm, rest, base=url)}
+    <p class="daily-more"><a href="{url}">This issue on its own page</a></p>
+  </section>"""
+    else:
+        latest = "<p>The first issue is on its way.</p>"
+    earlier = ""
+    if rows:
+        earlier = f"""
+  <section aria-labelledby="earlier-h">
+    <h2 class="daily-label daily-section-h" id="earlier-h">Earlier issues</h2>
+    <ul class="daily-list">{"".join(rows)}</ul>
+  </section>"""
     content = f"""{_daily_css_link()}
 <main class="daily daily-index">
-  <header class="daily-head">
+  <header class="daily-head daily-masthead">
     <span class="daily-eyebrow">{html.escape(DAILY_TITLE, quote=False)}</span>
-    <h1>{html.escape(DAILY_PROMISE, quote=False)}</h1>
-    <p class="daily-lede">{html.escape(lede, quote=False)}</p>
+    <p>{html.escape(DAILY_PROMISE, quote=False)}</p>
   </header>
+  {latest}
   {_daily_join("daily", compact=True)}
-  {samples}
-  <ul class="daily-list">{"".join(rows)}</ul>{empty}
+  {earlier}
+  {_daily_samples(posts)}
   {_daily_foot()}
 </main>
 """
