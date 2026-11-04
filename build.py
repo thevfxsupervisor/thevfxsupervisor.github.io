@@ -2077,7 +2077,7 @@ def render_note(md_path):
 
 # --------------------------------------------------------------------------
 # The Daily: numbered public issues, one file each in content/<DAILY_SECTION>/
-# (added by the newsletter product, Overscan). Kept apart from notes/ so the
+# (added by the newsletter product, LongLens). Kept apart from notes/ so the
 # hand-written essays are not buried. Styled by docs/static/daily.css (written
 # below): the site's dark ground and a light mode (Northlight palette), with a
 # light/dark switch that only exists on these pages. The DAILY_* constants are
@@ -2106,21 +2106,21 @@ DAILY_LIGHT = ("--bg:#F4EFE6;--panel:#FBF8F2;--raise:#ECE5D8;--line:#D9D0C1;--li
                "--txt:#14213D;--dim:#3B4660;--mute:#56607A;--amber:#0567c4;--amber-soft:#0567c4;"
                "--dj-accent-line:#9cc3e8;--dj-btn:#0567c4;--dj-btn-ink:#ffffff;--dj-btn-hover:#04529c;"
                "color-scheme:light")
-# Where an Overscan customer signs in: the app root. It sends a signed-out visitor to the sign-in
+# Where a LongLens customer signs in: the app root. It sends a signed-out visitor to the sign-in
 # page (an emailed link, no password) and a signed-in one straight in. Shown small at the top of
 # /overscan/ and /overscan/guide/ and in the footer, never in the top bar (it is full).
 OVERSCAN_SIGNIN_URL = "https://newsletter-edge.thevfxsupervisor.workers.dev/"
 
 
 def signin_line():
-    return (f'<p class="signin-top">Already using Overscan? '
+    return (f'<p class="signin-top">Already using LongLens? '
             f'<a href="{OVERSCAN_SIGNIN_URL}">Sign in</a></p>')
 
 
 DAILY_SECTION = 'daily'
 DAILY_TITLE = 'The VFX Supervisor Daily'
 DAILY_LEDE = "What the day's VFX news means, in a few lines, with a link to every story."
-DAILY_MADE_WITH = '/overscan/'
+DAILY_MADE_WITH = '/longlens/'
 DAILY_JOIN_URL = 'https://newsletter-edge.thevfxsupervisor.workers.dev/join/vfx'
 DAILY_JOIN_VERSION = 'vfx-daily-v2'
 DAILY_JOIN_CONSENT = 'Email me The VFX Supervisor Daily from Geoffrey Hancock each morning, in the format I picked, with the occasional note about his VFX updates. I can unsubscribe in one click from any email.'
@@ -2254,7 +2254,7 @@ def _daily_foot():
     made = ""
     if DAILY_MADE_WITH:
         made = (f' &middot; Made with <a href="{html.escape(DAILY_MADE_WITH)}">'
-                "Overscan</a>")
+                "LongLens</a>")
     return (f'<p class="daily-foot"><a href="{SITE_ROOT}{DAILY_SECTION}/feed.xml">RSS</a>'
             f' &middot; <a href="{SITE_ROOT}{DAILY_SECTION}/feed.json">JSON Feed</a>{made}</p>')
 
