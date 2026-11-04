@@ -1051,11 +1051,11 @@ def render_home():
     # LongLens sits right under the flagship: it is the system behind the Daily and the one
     # thing on the site sold to businesses, so a visitor scanning the work meets it early.
     cards.insert(1 if cards else 0,
-        f'<a class="proj-card" href="{SITE_ROOT}longlens/">'
+        f'<a class="proj-card" href="https://getlonglens.com/">'
         f'<span class="eyebrow os-brand"><img class="os-mark os-mark-sm" src="{SITE_ROOT}static/overscan/mark-e1.svg" alt="" width="22" height="22">LongLens &middot; for your business</span>'
         f'<h2>Your customers hear what changed in your trade from you, not from a competitor.</h2>'
         f'<p>LongLens turns the news in your trade into a briefing under your name, to read, hear or watch, with one line on why each story matters to your customers. LongLens is the system behind {html.escape(DAILY_NAME, quote=False)}, my own morning VFX briefing, and I set LongLens up with you.</p>'
-        f'<span class="proj-more mono">Put your name on your trade&rsquo;s news &rarr;</span></a>'
+        f'<span class="proj-more mono">Try LongLens: free during the pilot &rarr;</span></a>'
     )
     cards.append(
         f'<a class="proj-card" href="{SITE_ROOT}course/">'
@@ -1573,7 +1573,7 @@ INQUIRY_THANKS = SITE_ROOT + "work-with-me/thanks/"
 # lands on its own thanks page with the LongLens next step. Only the scripted post can route it:
 # the endpoint's no-script redirect is one URL (NL_INQUIRY_THANKS_URL) for every form, so the
 # generic thanks page also carries a short LongLens line.
-OVERSCAN_THANKS = SITE_ROOT + "longlens/thanks/"
+OVERSCAN_THANKS = SITE_ROOT + "work-with-me/thanks/"
 OVERSCAN_OFFER = "brief"
 # The keys the endpoint accepts (newsletter.inquiry.OFFERS); labels are what the visitor reads.
 INQUIRY_OFFERS = [
@@ -1795,22 +1795,16 @@ def format_strip():
 # controls and plays only when the reader presses play, so there is no strip script.
 
 
-LONGLENS_SIGNIN_URL = "https://newsletter-edge.thevfxsupervisor.workers.dev/"
+# The product was called Overscan until 2026-11-04. Every old /overscan/... address, and the old
+# LongLens guide and thanks pages, keep working as a small noindex page that forwards to getlonglens.com (regenerated on every build).
+OLD_OVERSCAN_REDIRECTS = [("overscan", "https://getlonglens.com/"),
+                          ("overscan/guide", "https://getlonglens.com/how-it-works/"),
+                          ("overscan/thanks", "https://getlonglens.com/contact/"),
+                          ("longlens/guide", "https://getlonglens.com/how-it-works/"),
+                          ("longlens/thanks", "https://getlonglens.com/contact/")]
 
 
-def longlens_signin_line():
-    return (f'<p class="signin-top">Already using LongLens? '
-            f'<a href="{LONGLENS_SIGNIN_URL}">Sign in</a></p>')
-
-
-# The product was called Overscan until 2026-11-04. Every old /overscan/... address keeps working
-# as a small noindex page that forwards to the new one (regenerated on every build).
-OLD_OVERSCAN_REDIRECTS = [("overscan", "longlens/"), ("overscan/guide", "longlens/guide/"),
-                          ("overscan/thanks", "longlens/thanks/")]
-
-
-def redirect_stub(new_rel):
-    url = SITE_CANONICAL + "/" + new_rel
+def redirect_stub(url):
     return ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
             '<title>Moved to LongLens</title>\n'
             '<meta name="robots" content="noindex">\n'
@@ -1820,254 +1814,30 @@ def redirect_stub(new_rel):
 
 
 def render_overscan():
+    """/longlens/: a short first-person case study. The product itself lives at getlonglens.com."""
     fm, body = parse_frontmatter((CONTENT_DIR / "pages" / "longlens.md").read_text(encoding="utf-8"))
-    steps, _ = extract_block(body, "steps")
-    feats, _ = extract_block(body, "features")
-    who, _ = extract_block(body, "who")
-    notfor, _ = extract_block(body, "notfor")
-    compare, _ = extract_block(body, "compare")
-    faq, _ = extract_block(body, "faq")
-    coming, _ = extract_block(body, "coming")
-    plans, _ = extract_block(body, "plans")
-    e = lambda k, d="": html.escape(fm.get(k, d), quote=False)
-
-    steps_html = "".join(
-        f'<li><h3>{html.escape(s["title"], quote=False)}</h3>{markdown_to_html(s["body"])}</li>' for s in steps
-    )
-    notfor_html = "".join(
-        f'<li><strong>{html.escape(n["title"], quote=False)}.</strong> {_md_inline(n["body"])}</li>' for n in notfor
-    )
-    faq_html = "".join(
-        f'<details><summary>{html.escape(q["title"], quote=False)}</summary>{markdown_to_html(q["body"])}</details>'
-        for q in faq
-    )
-    coming_html = "".join(
-        f'<li><strong>{html.escape(c["title"], quote=False)}</strong> <span class="tag-coming">coming</span>'
-        f'<br>{_md_inline(c["body"])}</li>'
-        for c in coming
-    )
-    # The steps block is optional: with no <!-- steps --> block the page has no "How it works".
-    steps_section = (f'<hr class="rule">\n<section>\n  <div class="wrap">\n    <div class="sec-head"><span class="eyebrow">How it works</span>'
-                     f'<h2>{e("steps_h2")}</h2></div>\n    <ol class="os-steps">{steps_html}</ol>\n  </div>\n</section>\n') if steps else ""
+    e = lambda k: html.escape(fm.get(k, ""), quote=False)
     content = f'''
 <section class="hero">
   <div class="wrap">
     <span class="eyebrow os-brand"><img class="os-mark" src="{SITE_ROOT}static/overscan/mark-e1.svg" alt="" width="40" height="40">{e("eyebrow")}</span>
     <h1 style="margin-top:18px">{e("h1")}</h1>
-    <p class="lede">{e("lede")}</p>
-    <div class="cta-row"><a class="btn btn-a" href="#inquiry">{e("cta_label")}</a></div>
-    {_price_line(fm)}
-    {_strip_label(fm)}
-    {format_strip()}
-    {_hero_coming(fm)}
-    <p class="door">The VFX news, every morning: {daily_link("Read the Daily")}. Shooting VFX: skip the expensive lessons and <a href="{SITE_ROOT}work-with-me/">put me on your show</a>.</p>
-  </div>
-</section>
-
-<hr class="rule">
-<section>
-  <div class="wrap">
-    <div class="os-proof">
-      <b>{e("proof_label")}</b>
-      <p>{e("proof_text")}</p>
-      <p class="os-proof-link">{daily_link("See it working")}</p>
+    <div class="cta-row" style="margin-top:22px">
+      <a class="btn btn-a" href="{html.escape(fm.get("cta_href", ""))}">{e("cta_label")}</a>
+      <a class="btn btn-b" href="{DAILY_PATH}">{e("daily_label")}</a>
     </div>
   </div>
 </section>
-
-{steps_section}
 <hr class="rule">
 <section>
-  <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Why it is different</span><h2>{e("features_h2")}</h2></div>
-    {"".join(_feature(f) for f in feats)}
-  </div>
-</section>
-
-<hr class="rule">
-<section>
-  <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Who it is for</span><h2>{e("who_h2")}</h2></div>
-    <div class="os-cards">{_cards(who, "os-card")}</div>
-    <p class="k os-k">{e("cadence")}</p>
-    <div class="os-not"><h3>What LongLens does not do</h3><ul>{notfor_html}</ul></div>
-  </div>
-</section>
-
-<hr class="rule">
-<section>
-  <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">An honest comparison</span><h2>{e("compare_h2")}</h2></div>
-    <div class="os-cards">{_cards(compare, "os-card")}</div>
-    <p class="k os-k">{e("compare_after")}</p>
-  </div>
-</section>
-
-<hr class="rule">
-<section id="plans">
-  <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Plans</span><h2>{e("plans_h2")}</h2></div>
-    {_plans(plans)}
-    <p class="k os-k">{_md_inline(fm.get("plans_after", ""))}</p>
-  </div>
-</section>
-
-<hr class="rule">
-<section>
-  <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Questions</span><h2>{e("faq_h2")}</h2></div>
-    <div class="os-faq">{faq_html}</div>
-    <p class="tiny os-guide-link">Already a customer: <a href="{OVERSCAN_GUIDE_PATH}">the LongLens guide</a> shows you how to change your next issue by replying.</p>
-  </div>
-</section>
-
-<hr class="rule">
-<section>
-  <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Coming</span><h2>{e("coming_h2")}</h2></div>
-    <ul class="os-coming">{coming_html}</ul>
-  </div>
-</section>
-
-<hr class="rule">
-<section id="inquiry">
-  <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">{e("form_eyebrow")}</span><h2>{e("form_h2")}</h2>
-      <p class="k">{e("form_k")}</p></div>
-    {inquiry_form(fm, offer=OVERSCAN_OFFER, source="longlens", form_id="os-form")}
-    <p class="tiny os-byline">{e("byline")}</p>
-    <p class="tiny os-byline">{e("sold_by")}</p>
-    <p class="tiny os-byline"><a href="https://getlonglens.com">getlonglens.com</a></p>
-    {longlens_signin_line()}
+  <div class="wrap prose">
+    {markdown_to_html(body)}
+    <p><a class="btn btn-a" href="{html.escape(fm.get("cta_href", ""))}">{e("cta_label")}</a></p>
   </div>
 </section>
 '''
-    content += related_section(
-        [("Work with me", SITE_ROOT + "work-with-me/"), ("Breakdown Studio", SITE_ROOT + "projects/breakdown-studio/"),
-         ("About", SITE_ROOT + "about/")],
-    )
-    return render_shell(fm.get("title", ""), fm.get("description", ""), content,
-                        extra_script=INQUIRY_SCRIPT, canonical_path="longlens/")
+    return render_shell(fm.get("title", ""), fm.get("description", ""), content, canonical_path="longlens/")
 
-
-# --------------------------------------------------------------------------
-# /longlens/guide/: the guide for a customer we have set up (R5 docs)
-# --------------------------------------------------------------------------
-# Every line must be true of the live app, or marked coming. Checked against the newsletter code
-# on 2026-10-14 (welcome screens, reply-to-adjust and its confirmation wording, the Sources page
-# toggle, reader formats and media hold, the link check). Change the app's labels there and here.
-
-OVERSCAN_GUIDE_PATH = SITE_ROOT + "longlens/guide/"
-
-
-def _guide_split(md):
-    """A section body: markdown with [[name]] lines where a widget goes. -> [(kind, text)]."""
-    parts = re.split(r"(?m)^\[\[(\w+)\]\]\s*$", md)
-    return [("md" if i % 2 == 0 else "widget", p) for i, p in enumerate(parts) if p.strip()]
-
-
-def _guide_exchange(fm):
-    """A reply and LongLens's answer, as two small mail cards. The answer's lines are the app's
-    own confirmation sentences (newsletter adjust.process.compose_confirmation)."""
-    lines = "".join(f"<p>{html.escape(l, quote=False)}</p>"
-                    for l in fm.get("exchange_longlens", "").split("\n") if l.strip())
-    return f'''
-    <div class="gd-mail" role="group" aria-label="An example reply and the answer">
-      <div class="gd-msg"><span class="gd-who">You reply</span><p>{html.escape(fm.get("exchange_you", ""), quote=False)}</p></div>
-      <div class="gd-msg gd-answer"><span class="gd-who">LongLens answers</span>{lines}</div>
-    </div>
-    <p class="gd-cap">{_md_inline(fm.get("exchange_caption", ""))}</p>'''
-
-
-def _guide_formats(items):
-    """The ways one issue reaches you. "Coming:" at the start of a body = not live yet."""
-    cards = []
-    for it in items:
-        body = it["body"].strip()
-        coming = body.startswith("Coming:")
-        if coming:
-            body = body[len("Coming:"):].strip()
-        tag = ' <span class="tag-coming">coming</span>' if coming else ""
-        cards.append(f'<div class="gd-fmt{" fmt-coming" if coming else ""}"><b>{html.escape(it["title"], quote=False)}</b>{tag}'
-                     f'<p>{_md_inline(body)}</p></div>')
-    return f'<div class="gd-fmts">{"".join(cards)}</div>'
-
-
-def _guide_shots(fm):
-    """Two real phone screens of the same issue (Read it, Listen), from the strip on /longlens/.
-    Each opens full size; the base template's lightbox enhances the link."""
-    m = MEDIA
-    return f'''
-    <div class="gd-shots">
-      <figure><a class="fmt-zoom" href="{m}phone-read.png"><img src="{m}phone-read.png" width="390" height="700" loading="lazy" alt="Read it: the 13 Oct 2026 issue as an email on a phone."></a><figcaption>Read it</figcaption></figure>
-      <figure><a class="fmt-zoom" href="{m}phone-listen.png"><img src="{m}phone-listen.png" width="390" height="700" loading="lazy" alt="Listen: the same issue with the play button on top and the letter below."></a><figcaption>Listen</figcaption></figure>
-    </div>
-    <p class="gd-cap">{_md_inline(fm.get("shots_caption", ""))}</p>'''
-
-
-def _guide_id(eyebrow):
-    return re.sub(r"[^a-z0-9]+", "-", eyebrow.lower()).strip("-")
-
-
-def render_overscan_guide():
-    fm, body = parse_frontmatter((CONTENT_DIR / "pages" / "longlens-guide.md").read_text(encoding="utf-8"))
-    sections, _ = extract_block(body, "sections")
-    formats, _ = extract_block(body, "formats")
-    coming, _ = extract_block(body, "coming")
-    e = lambda k, d="": html.escape(fm.get(k, d), quote=False)
-    widgets = {"exchange": lambda: _guide_exchange(fm), "formats": lambda: _guide_formats(formats),
-               "shots": lambda: _guide_shots(fm)}
-
-    jump, parts = [], []
-    for sec in sections:
-        eyebrow, h2 = [x.strip() for x in sec["title"].split("::", 1)]
-        sid = _guide_id(eyebrow)
-        jump.append((eyebrow, f"#{sid}"))
-        inner = "".join(markdown_to_html(t) if k == "md" else widgets[t.strip()]()
-                        for k, t in _guide_split(sec["body"]))
-        parts.append(f'''
-<hr class="rule">
-<section id="{sid}">
-  <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">{html.escape(eyebrow, quote=False)}</span><h2>{html.escape(h2, quote=False)}</h2></div>
-    <div class="prose gd-body">{inner}</div>
-  </div>
-</section>''')
-    coming_html = "".join(
-        f'<li><strong>{html.escape(c["title"], quote=False)}</strong> <span class="tag-coming">coming</span>'
-        f'<br>{_md_inline(c["body"])}</li>'
-        for c in coming
-    )
-    jump.append(("Coming", "#coming"))
-    jump_html = " &middot; ".join(f'<a href="{h}">{html.escape(l, quote=False)}</a>' for l, h in jump)
-    content = f'''
-<section class="hero">
-  <div class="wrap">
-    {longlens_signin_line()}
-    <span class="eyebrow os-brand"><img class="os-mark" src="{SITE_ROOT}static/overscan/mark-e1.svg" alt="" width="40" height="40">{e("eyebrow")}</span>
-    <h1 style="margin-top:18px">{e("h1")}</h1>
-    <p class="lede">{e("lede")}</p>
-    <p class="door">{_md_inline(fm.get("not_set_up", ""))}</p>
-    <nav class="quicklinks" aria-label="On this page"><span class="eyebrow">On this page</span><div class="ql-row">{jump_html}</div></nav>
-  </div>
-</section>
-{"".join(parts)}
-
-<hr class="rule">
-<section id="coming">
-  <div class="wrap">
-    <div class="sec-head"><span class="eyebrow">Coming</span><h2>Not built yet, and we say so</h2></div>
-    <ul class="os-coming">{coming_html}</ul>
-    <p class="k os-k">{_md_inline(fm.get("stuck", ""))}</p>
-  </div>
-</section>
-'''
-    content += related_section(
-        [("LongLens", SITE_ROOT + "longlens/"), ("See it working", DAILY_PATH),
-         ("Work with me", SITE_ROOT + "work-with-me/")],
-    )
-    return render_shell(fm.get("title", ""), fm.get("description", ""), content,
-                        canonical_path="longlens/guide/")
 
 
 def _wwm_record(fm, body):
@@ -2931,8 +2701,6 @@ def main():
     write_page("work-with-me", render_work_with_me())
     write_page("work-with-me/thanks", render_simple_page("work-with-me-thanks", robots="noindex, follow", path="work-with-me/thanks"))
     write_page("longlens", render_overscan())
-    write_page("longlens/guide", render_overscan_guide())
-    write_page("longlens/thanks", render_simple_page("longlens-thanks", robots="noindex, follow", path="longlens/thanks"))
     for old_rel, new_rel in OLD_OVERSCAN_REDIRECTS:
         write_page(old_rel, redirect_stub(new_rel))
     write_page("notes", render_notes())
@@ -2993,7 +2761,6 @@ def main():
         ("privacy/", [CONTENT_DIR / "pages" / "privacy.md"]),
         ("work-with-me/", [CONTENT_DIR / "pages" / "work-with-me.md"]),
         ("longlens/", [CONTENT_DIR / "pages" / "longlens.md"]),
-        ("longlens/guide/", [CONTENT_DIR / "pages" / "longlens-guide.md"]),
     ]
     sitemap_entries += [(f"projects/{s}/", [proj_paths[s]]) for s in proj_slugs]
     sitemap_entries += [(f"notes/{s}/", [note_paths[s]]) for s in note_slugs]
@@ -3007,8 +2774,7 @@ def main():
         ('Projects', base + '/projects/', 'Case studies for the open-source tools'),
         ('Course', base + '/course/', 'Breakdown and Budget the VFX of a Whole Film'),
         ('Work with me', base + '/work-with-me/', 'VES Award-winning VFX supervisor and producer: bid review, supervision and AI-assisted pipelines, built to land on budget and on time'),
-        ('LongLens', base + '/longlens/', 'Prove what you know, every morning: what changed in your trade and what it means, from you, to read, hear or watch; you shape it by replying'),
-        ('LongLens guide', base + '/longlens/guide/', 'For a customer already set up: the first issue, changing it by replying in plain words, picking a format, turning a website off, and what arrives each morning'),
+        ('LongLens', base + '/longlens/', 'Case study: I built LongLens, which puts a VFX briefing in your inbox every morning and runs The VFX Supervisor Daily. Free during the pilot at getlonglens.com'),
         ('Notes', base + '/notes/', 'Writing on VFX production and AI orchestration'),
     ]
     # Real frontmatter, not the slug: card_title/card_summary (falling back to
