@@ -527,7 +527,7 @@ What I collect. Your email, your name if you give it, and any question you send.
 Why. To email you the "Shoots You in the Foot" list and to tell you when a course date is set. The lawful basis is your consent, given when you join the waitlist.
 How long. Until you unsubscribe or ask me to delete it.
 The work-with-me form
-This is the form on Work with me and Overscan .
+This is the form on Work with me and LongLens .
 What I collect. Your name, your email, your company if you give it, which offer you picked, your message, which page you sent it from, and when you ticked the box agreeing that I may contact you. To stop spam, the form also keeps a scrambled, one-way code made from your internet address, used only to count how many messages come from one place. It cannot be turned back into the address.
 Why. To read your message and reply to it, because you asked me to. Nothing is sent to you automatically, and sending the form does not add you to any list or newsletter. Your message is not given to any AI service.
 Where. Your message is stored in a private database on a server I run, reached through Cloudflare, and a copy is emailed to my own Google Workspace mailbox so I see it.

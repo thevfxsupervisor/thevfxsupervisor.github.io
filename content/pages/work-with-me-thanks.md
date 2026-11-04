@@ -9,7 +9,7 @@ h1: Thanks, I have it.
 
 **What happens next.** I read your message myself and reply personally from geoff@thevfxsupervisor.com. My reply says what I need from you and what comes next. Nothing is sent to you automatically, and sending the form does not add you to any list.
 
-**Asked about Overscan?** My reply sets up a short call. Before then, [read the latest VFX Supervisor Daily](/daily/), the morning VFX briefing I run on Overscan.
+**Asked about LongLens?** My reply sets up a short call. Before then, [read the latest VFX Supervisor Daily](/daily/), the morning VFX briefing I run on LongLens.
 
 Left something out? Email me at [geoff@thevfxsupervisor.com](mailto:geoff@thevfxsupervisor.com).
 

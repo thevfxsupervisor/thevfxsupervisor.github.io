@@ -44,7 +44,7 @@ Weeks of breakdown and bidding in days, with a person still in charge of every s
 **How it starts:** a call about where your time goes today. We pick the one step that costs you the most and start there.
 
 ### Your customers hear it from you first
-Be the one your customers trust to know what changed in your trade and what it means: every morning or every week, from you, to read, hear or watch. You shape it by replying in plain words, and your name is on every issue. My own morning VFX briefing is crafted this way. More on [Overscan](/overscan/).
+Be the one your customers trust to know what changed in your trade and what it means: every morning or every week, from you, to read, hear or watch. You shape it by replying in plain words, and your name is on every issue. My own morning VFX briefing is crafted this way. More on [LongLens](/longlens/).
 
 **For:** a business whose customers should hear it from the person who knows it best.
 

@@ -723,10 +723,10 @@ OVERSCAN_FAVICON = ('<link rel="icon" type="image/svg+xml" href="{root}static/ov
 
 
 def _overscan_favicon(html_out, canonical_path):
-    """/overscan/ and the Daily (made with Overscan) carry the Overscan mark (E1) as their tab icon;
+    """/longlens/ and the Daily (made with LongLens) carry the LongLens mark (E1) as their tab icon;
     every other page keeps the site's aperture. Geoff 2026-10-14: favicon only on those pages."""
     first = canonical_path.strip("/").split("/")[0]
-    if first not in ("overscan", globals().get("DAILY_SECTION", "daily")):
+    if first not in ("longlens", globals().get("DAILY_SECTION", "daily")):
         return html_out
     return html_out.replace(SITE_FAVICON.format(root=SITE_ROOT), OVERSCAN_FAVICON.format(root=SITE_ROOT))
 
@@ -1048,13 +1048,13 @@ def render_home():
             f'<p>{html.escape(pfm.get("card_summary", pfm.get("description","")), quote=False)}</p>'
             f'<span class="proj-more mono">Read the case study &rarr;</span></a>'
         )
-    # Overscan sits right under the flagship: it is the system behind the Daily and the one
+    # LongLens sits right under the flagship: it is the system behind the Daily and the one
     # thing on the site sold to businesses, so a visitor scanning the work meets it early.
     cards.insert(1 if cards else 0,
-        f'<a class="proj-card" href="{SITE_ROOT}overscan/">'
-        f'<span class="eyebrow os-brand"><img class="os-mark os-mark-sm" src="{SITE_ROOT}static/overscan/mark-e1.svg" alt="" width="22" height="22">Overscan &middot; for your business</span>'
+        f'<a class="proj-card" href="{SITE_ROOT}longlens/">'
+        f'<span class="eyebrow os-brand"><img class="os-mark os-mark-sm" src="{SITE_ROOT}static/overscan/mark-e1.svg" alt="" width="22" height="22">LongLens &middot; for your business</span>'
         f'<h2>Your customers hear what changed in your trade from you, not from a competitor.</h2>'
-        f'<p>Overscan turns the news in your trade into a briefing under your name, to read, hear or watch, with one line on why each story matters to your customers. Overscan is the system behind {html.escape(DAILY_NAME, quote=False)}, my own morning VFX briefing, and I set Overscan up with you.</p>'
+        f'<p>LongLens turns the news in your trade into a briefing under your name, to read, hear or watch, with one line on why each story matters to your customers. LongLens is the system behind {html.escape(DAILY_NAME, quote=False)}, my own morning VFX briefing, and I set LongLens up with you.</p>'
         f'<span class="proj-more mono">Put your name on your trade&rsquo;s news &rarr;</span></a>'
     )
     cards.append(
@@ -1553,7 +1553,7 @@ def render_about():
 
 
 # --------------------------------------------------------------------------
-# Front door: /work-with-me/ and /overscan/ (one inquiry form, two pages)
+# Front door: /work-with-me/ and /longlens/ (one inquiry form, two pages)
 # --------------------------------------------------------------------------
 
 # The ONE place the public Daily's address lives. Settled on "/daily/" (Geoff, 2026-10-13):
@@ -1569,11 +1569,11 @@ DAILY_NAME = "The VFX Supervisor Daily"
 INQUIRY_ENDPOINT = "https://newsletter-edge.thevfxsupervisor.workers.dev/hooks/inquiry"
 CONTACT_EMAIL = "geoff@thevfxsupervisor.com"
 INQUIRY_THANKS = SITE_ROOT + "work-with-me/thanks/"
-# An Overscan inquiry (the /overscan/ form, or "Content for my business" picked on /work-with-me/)
-# lands on its own thanks page with the Overscan next step. Only the scripted post can route it:
+# a LongLens inquiry (the /longlens/ form, or "Content for my business" picked on /work-with-me/)
+# lands on its own thanks page with the LongLens next step. Only the scripted post can route it:
 # the endpoint's no-script redirect is one URL (NL_INQUIRY_THANKS_URL) for every form, so the
-# generic thanks page also carries a short Overscan line.
-OVERSCAN_THANKS = SITE_ROOT + "overscan/thanks/"
+# generic thanks page also carries a short LongLens line.
+OVERSCAN_THANKS = SITE_ROOT + "longlens/thanks/"
 OVERSCAN_OFFER = "brief"
 # The keys the endpoint accepts (newsletter.inquiry.OFFERS); labels are what the visitor reads.
 INQUIRY_OFFERS = [
@@ -1609,7 +1609,7 @@ def _cards(items, cls):
 
 
 def inquiry_form(fm, offer=None, source="work-with-me", form_id="inquiry-form"):
-    """The inquiry form. ``offer`` set = a hidden, fixed offer (the Overscan page); else a select."""
+    """The inquiry form. ``offer`` set = a hidden, fixed offer (the LongLens page); else a select."""
     if offer:
         offer_html = f'<input type="hidden" name="offer" value="{html.escape(offer)}">'
     else:
@@ -1795,8 +1795,32 @@ def format_strip():
 # controls and plays only when the reader presses play, so there is no strip script.
 
 
+LONGLENS_SIGNIN_URL = "https://newsletter-edge.thevfxsupervisor.workers.dev/"
+
+
+def longlens_signin_line():
+    return (f'<p class="signin-top">Already using LongLens? '
+            f'<a href="{LONGLENS_SIGNIN_URL}">Sign in</a></p>')
+
+
+# The product was called Overscan until 2026-11-04. Every old /overscan/... address keeps working
+# as a small noindex page that forwards to the new one (regenerated on every build).
+OLD_OVERSCAN_REDIRECTS = [("overscan", "longlens/"), ("overscan/guide", "longlens/guide/"),
+                          ("overscan/thanks", "longlens/thanks/")]
+
+
+def redirect_stub(new_rel):
+    url = SITE_CANONICAL + "/" + new_rel
+    return ('<!doctype html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+            '<title>Moved to LongLens</title>\n'
+            '<meta name="robots" content="noindex">\n'
+            f'<link rel="canonical" href="{url}">\n'
+            f'<meta http-equiv="refresh" content="0; url={url}">\n</head>\n'
+            f'<body><p>This page has moved to <a href="{url}">{url}</a>.</p></body>\n</html>\n')
+
+
 def render_overscan():
-    fm, body = parse_frontmatter((CONTENT_DIR / "pages" / "overscan.md").read_text(encoding="utf-8"))
+    fm, body = parse_frontmatter((CONTENT_DIR / "pages" / "longlens.md").read_text(encoding="utf-8"))
     steps, _ = extract_block(body, "steps")
     feats, _ = extract_block(body, "features")
     who, _ = extract_block(body, "who")
@@ -1866,7 +1890,7 @@ def render_overscan():
     <div class="sec-head"><span class="eyebrow">Who it is for</span><h2>{e("who_h2")}</h2></div>
     <div class="os-cards">{_cards(who, "os-card")}</div>
     <p class="k os-k">{e("cadence")}</p>
-    <div class="os-not"><h3>What Overscan does not do</h3><ul>{notfor_html}</ul></div>
+    <div class="os-not"><h3>What LongLens does not do</h3><ul>{notfor_html}</ul></div>
   </div>
 </section>
 
@@ -1893,7 +1917,7 @@ def render_overscan():
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">Questions</span><h2>{e("faq_h2")}</h2></div>
     <div class="os-faq">{faq_html}</div>
-    <p class="tiny os-guide-link">Already a customer: <a href="{OVERSCAN_GUIDE_PATH}">the Overscan guide</a> shows you how to change your next issue by replying.</p>
+    <p class="tiny os-guide-link">Already a customer: <a href="{OVERSCAN_GUIDE_PATH}">the LongLens guide</a> shows you how to change your next issue by replying.</p>
   </div>
 </section>
 
@@ -1910,10 +1934,11 @@ def render_overscan():
   <div class="wrap">
     <div class="sec-head"><span class="eyebrow">{e("form_eyebrow")}</span><h2>{e("form_h2")}</h2>
       <p class="k">{e("form_k")}</p></div>
-    {inquiry_form(fm, offer=OVERSCAN_OFFER, source="overscan", form_id="os-form")}
+    {inquiry_form(fm, offer=OVERSCAN_OFFER, source="longlens", form_id="os-form")}
     <p class="tiny os-byline">{e("byline")}</p>
     <p class="tiny os-byline">{e("sold_by")}</p>
-    {signin_line()}
+    <p class="tiny os-byline"><a href="https://getlonglens.com">getlonglens.com</a></p>
+    {longlens_signin_line()}
   </div>
 </section>
 '''
@@ -1922,17 +1947,17 @@ def render_overscan():
          ("About", SITE_ROOT + "about/")],
     )
     return render_shell(fm.get("title", ""), fm.get("description", ""), content,
-                        extra_script=INQUIRY_SCRIPT, canonical_path="overscan/")
+                        extra_script=INQUIRY_SCRIPT, canonical_path="longlens/")
 
 
 # --------------------------------------------------------------------------
-# /overscan/guide/: the guide for a customer we have set up (R5 docs)
+# /longlens/guide/: the guide for a customer we have set up (R5 docs)
 # --------------------------------------------------------------------------
 # Every line must be true of the live app, or marked coming. Checked against the newsletter code
 # on 2026-10-14 (welcome screens, reply-to-adjust and its confirmation wording, the Sources page
 # toggle, reader formats and media hold, the link check). Change the app's labels there and here.
 
-OVERSCAN_GUIDE_PATH = SITE_ROOT + "overscan/guide/"
+OVERSCAN_GUIDE_PATH = SITE_ROOT + "longlens/guide/"
 
 
 def _guide_split(md):
@@ -1942,14 +1967,14 @@ def _guide_split(md):
 
 
 def _guide_exchange(fm):
-    """A reply and Overscan's answer, as two small mail cards. The answer's lines are the app's
+    """A reply and LongLens's answer, as two small mail cards. The answer's lines are the app's
     own confirmation sentences (newsletter adjust.process.compose_confirmation)."""
     lines = "".join(f"<p>{html.escape(l, quote=False)}</p>"
-                    for l in fm.get("exchange_overscan", "").split("\n") if l.strip())
+                    for l in fm.get("exchange_longlens", "").split("\n") if l.strip())
     return f'''
     <div class="gd-mail" role="group" aria-label="An example reply and the answer">
       <div class="gd-msg"><span class="gd-who">You reply</span><p>{html.escape(fm.get("exchange_you", ""), quote=False)}</p></div>
-      <div class="gd-msg gd-answer"><span class="gd-who">Overscan answers</span>{lines}</div>
+      <div class="gd-msg gd-answer"><span class="gd-who">LongLens answers</span>{lines}</div>
     </div>
     <p class="gd-cap">{_md_inline(fm.get("exchange_caption", ""))}</p>'''
 
@@ -1969,7 +1994,7 @@ def _guide_formats(items):
 
 
 def _guide_shots(fm):
-    """Two real phone screens of the same issue (Read it, Listen), from the strip on /overscan/.
+    """Two real phone screens of the same issue (Read it, Listen), from the strip on /longlens/.
     Each opens full size; the base template's lightbox enhances the link."""
     m = MEDIA
     return f'''
@@ -1985,7 +2010,7 @@ def _guide_id(eyebrow):
 
 
 def render_overscan_guide():
-    fm, body = parse_frontmatter((CONTENT_DIR / "pages" / "overscan-guide.md").read_text(encoding="utf-8"))
+    fm, body = parse_frontmatter((CONTENT_DIR / "pages" / "longlens-guide.md").read_text(encoding="utf-8"))
     sections, _ = extract_block(body, "sections")
     formats, _ = extract_block(body, "formats")
     coming, _ = extract_block(body, "coming")
@@ -2018,7 +2043,7 @@ def render_overscan_guide():
     content = f'''
 <section class="hero">
   <div class="wrap">
-    {signin_line()}
+    {longlens_signin_line()}
     <span class="eyebrow os-brand"><img class="os-mark" src="{SITE_ROOT}static/overscan/mark-e1.svg" alt="" width="40" height="40">{e("eyebrow")}</span>
     <h1 style="margin-top:18px">{e("h1")}</h1>
     <p class="lede">{e("lede")}</p>
@@ -2038,11 +2063,11 @@ def render_overscan_guide():
 </section>
 '''
     content += related_section(
-        [("Overscan", SITE_ROOT + "overscan/"), ("See it working", DAILY_PATH),
+        [("LongLens", SITE_ROOT + "longlens/"), ("See it working", DAILY_PATH),
          ("Work with me", SITE_ROOT + "work-with-me/")],
     )
     return render_shell(fm.get("title", ""), fm.get("description", ""), content,
-                        canonical_path="overscan/guide/")
+                        canonical_path="longlens/guide/")
 
 
 def _wwm_record(fm, body):
@@ -2112,7 +2137,7 @@ def render_work_with_me():
 '''
     content += related_section(
         [("About", SITE_ROOT + "about/"), ("Reel", SITE_ROOT + "reel/"), ("Projects", SITE_ROOT + "projects/"),
-         ("Overscan", SITE_ROOT + "overscan/")],
+         ("LongLens", SITE_ROOT + "longlens/")],
     )
     # ?offer=<key> preselects an offer (a link from another page can say which one it means).
     preselect = """
@@ -2154,7 +2179,7 @@ def render_404():
     sideways on a phone."""
     links = [
         ("Read the latest Daily", DAILY_PATH, "btn btn-a"),
-        ("Overscan: your name on your trade\u2019s news", SITE_ROOT + "overscan/", "btn btn-b"),
+        ("LongLens: your name on your trade\u2019s news", SITE_ROOT + "longlens/", "btn btn-b"),
         ("Work with me", SITE_ROOT + "work-with-me/", "btn btn-b"),
         ("Home", SITE_ROOT, "btn btn-b"),
     ]
@@ -2905,9 +2930,11 @@ def main():
     write_page("privacy", render_simple_page("privacy"))
     write_page("work-with-me", render_work_with_me())
     write_page("work-with-me/thanks", render_simple_page("work-with-me-thanks", robots="noindex, follow", path="work-with-me/thanks"))
-    write_page("overscan", render_overscan())
-    write_page("overscan/guide", render_overscan_guide())
-    write_page("overscan/thanks", render_simple_page("overscan-thanks", robots="noindex, follow", path="overscan/thanks"))
+    write_page("longlens", render_overscan())
+    write_page("longlens/guide", render_overscan_guide())
+    write_page("longlens/thanks", render_simple_page("longlens-thanks", robots="noindex, follow", path="longlens/thanks"))
+    for old_rel, new_rel in OLD_OVERSCAN_REDIRECTS:
+        write_page(old_rel, redirect_stub(new_rel))
     write_page("notes", render_notes())
     (DOCS_DIR / "404.html").write_text(render_404(), encoding="utf-8")
     print("  wrote docs/404.html")
@@ -2965,8 +2992,8 @@ def main():
         ("notes/", list(note_paths.values())),
         ("privacy/", [CONTENT_DIR / "pages" / "privacy.md"]),
         ("work-with-me/", [CONTENT_DIR / "pages" / "work-with-me.md"]),
-        ("overscan/", [CONTENT_DIR / "pages" / "overscan.md"]),
-        ("overscan/guide/", [CONTENT_DIR / "pages" / "overscan-guide.md"]),
+        ("longlens/", [CONTENT_DIR / "pages" / "longlens.md"]),
+        ("longlens/guide/", [CONTENT_DIR / "pages" / "longlens-guide.md"]),
     ]
     sitemap_entries += [(f"projects/{s}/", [proj_paths[s]]) for s in proj_slugs]
     sitemap_entries += [(f"notes/{s}/", [note_paths[s]]) for s in note_slugs]
@@ -2980,8 +3007,8 @@ def main():
         ('Projects', base + '/projects/', 'Case studies for the open-source tools'),
         ('Course', base + '/course/', 'Breakdown and Budget the VFX of a Whole Film'),
         ('Work with me', base + '/work-with-me/', 'VES Award-winning VFX supervisor and producer: bid review, supervision and AI-assisted pipelines, built to land on budget and on time'),
-        ('Overscan', base + '/overscan/', 'Prove what you know, every morning: what changed in your trade and what it means, from you, to read, hear or watch; you shape it by replying'),
-        ('Overscan guide', base + '/overscan/guide/', 'For a customer already set up: the first issue, changing it by replying in plain words, picking a format, turning a website off, and what arrives each morning'),
+        ('LongLens', base + '/longlens/', 'Prove what you know, every morning: what changed in your trade and what it means, from you, to read, hear or watch; you shape it by replying'),
+        ('LongLens guide', base + '/longlens/guide/', 'For a customer already set up: the first issue, changing it by replying in plain words, picking a format, turning a website off, and what arrives each morning'),
         ('Notes', base + '/notes/', 'Writing on VFX production and AI orchestration'),
     ]
     # Real frontmatter, not the slug: card_title/card_summary (falling back to

@@ -1,21 +1,21 @@
 ---
 type: page
-slug: overscan-guide
-title: Overscan guide | the vfx supervisor
+slug: longlens-guide
+title: LongLens guide | the vfx supervisor
 description: Reply to any issue in plain words and the next one changes. Reply UNDO to take it back. Then your first issue, how your issue reaches you, turning a website off, and what lands each morning.
-eyebrow: Overscan guide
+eyebrow: LongLens guide
 h1: Reply to any issue in plain words. The next one changes.
 lede: Four answers cover most mornings. The rest of this page is there when you need it.
-not_set_up: Not a customer yet: [see what Overscan does for your business](/overscan/).
+not_set_up: Not a customer yet: [see what LongLens does for your business](/longlens/).
 exchange_you: Longer please. More on the new rules, less on trade shows.
-exchange_overscan: |
+exchange_longlens: |
   Got it. Your issues will be the usual length from the next one.
   You'll see more on the new rules from the next issue.
   You'll see less on trade shows from the next issue.
   Changed your mind? Just reply UNDO.
   All your settings are here: (a link to your page)
-exchange_caption: An example reply, and the answer in Overscan's own words, back in the same email thread.
-shots_caption: Two of the ways the same 13 Oct 2026 issue of my own VFX briefing lands on a phone. Tap either to see it full size, and hear, watch and flip that issue on the [Overscan page](/overscan/).
+exchange_caption: An example reply, and the answer in LongLens's own words, back in the same email thread.
+shots_caption: Two of the ways the same 13 Oct 2026 issue of my own VFX briefing lands on a phone. Tap either to see it full size, and hear, watch and flip that issue on the [LongLens page](/longlens/).
 stuck: Anything unclear, email me at [geoff@thevfxsupervisor.com](mailto:geoff@thevfxsupervisor.com). I read every message myself.
 ---
 
@@ -35,12 +35,12 @@ Three short questions follow. Answer them on your own, or ask me and we go throu
 2. **Where and when?** By email and on a web page, or on the web page only. How often, what time, and your time zone.
 3. **Where should we start looking?** Websites, feeds or keywords, one per line, or tick a starter set.
 
-Press `Make my newsletter`. For the first issue today, open `Issues` in the top menu and press `Make an issue now`. Overscan starts on it within ten minutes and emails it to you (or keeps it on the web page, if that is all you picked).
+Press `Make my newsletter`. For the first issue today, open `Issues` in the top menu and press `Make an issue now`. LongLens starts on it within ten minutes and emails it to you (or keeps it on the web page, if that is all you picked).
 
 Bookmark the page you land on. Signed out later? Type your email on the [sign-in page](https://newsletter-edge.thevfxsupervisor.workers.dev/) and a fresh link arrives by email.
 
 ### Make it yours :: Hit reply. The next issue listens.
-Teach Overscan the way you would teach a new hire: reply to any issue in your own words. Overscan answers in the same thread with what it understood, and the next issue follows it.
+Teach LongLens the way you would teach a new hire: reply to any issue in your own words. LongLens answers in the same thread with what it understood, and the next issue follows it.
 
 [[exchange]]
 
@@ -53,12 +53,12 @@ What a reply can change:
 - **Tone and layout**: how it sounds, how each story is laid out, an emoji on each heading.
 - **Extras**: add or drop the audio, the slides or the video.
 
-Reply `UNDO` on its own to take back the last change. Reply from the address your issue goes to: Overscan acts only on replies from you, and a forward to a colleague changes nothing.
+Reply `UNDO` on its own to take back the last change. Reply from the address your issue goes to: LongLens acts only on replies from you, and a forward to a colleague changes nothing.
 
 A reply cannot move the days or the time your issue arrives. Change those on the `Brief` page in the top menu, under `When it arrives`. Changes you save on that page, every reply, and every website you turn off or back on are listed at the bottom of it.
 
 ### Every format :: Read it, skim it, hear it, watch it, flip it.
-Take each issue the way your morning allows. Overscan crafts it once as a letter, and can turn the same issue into an audio overview, a short explainer video and slides. Pick the one that leads your email; the extras you turn on play on the issue's page in your account.
+Take each issue the way your morning allows. LongLens crafts it once as a letter, and can turn the same issue into an audio overview, a short explainer video and slides. Pick the one that leads your email; the extras you turn on play on the issue's page in your account.
 
 [[formats]]
 
@@ -66,30 +66,30 @@ Take each issue the way your morning allows. Overscan crafts it once as a letter
 
 **Pick yours.** Tell me which one should lead your email and I switch it for you, any time. Every extra starts switched off: tick the ones you like on the `Brief` page under `Extras`, or reply "add the slides". Audio comes two ways: the full conversation, or a shorter plain read, listed as `Simple podcast`. The list also offers `Infographic`, the whole issue as one picture.
 
-**When a piece is missing.** Each week you get up to two of the audio overview, video, slides and infographic. Once those two are used, audio still comes, as the plainer spoken version, and slides, video and the infographic wait until next week. If the piece that leads your email is the one missing, you get the full letter with one line saying so. Overscan checks every audio, slide and video against the stories before you see it, so on extras days your copy can arrive up to a few hours later.
+**When a piece is missing.** Each week you get up to two of the audio overview, video, slides and infographic. Once those two are used, audio still comes, as the plainer spoken version, and slides, video and the infographic wait until next week. If the piece that leads your email is the one missing, you get the full letter with one line saying so. LongLens checks every audio, slide and video against the stories before you see it, so on extras days your copy can arrive up to a few hours later.
 
 **Your customers.** Today the issue and its extras come to you, and you copy what you like into the tool you already use. Forward the whole email and you pass on your own `Pause this newsletter` link with it. Each customer picking their own is coming, below.
 
 ### What goes in :: Turn off a website in one tap. Turn it back on in one more.
-You decide where Overscan looks. Open `Sources` in the top menu: every website, feed, forum and channel on your list has a `Turn off` button. Press it and Overscan drops that one, and never adds it back by itself. `Turn back on` brings it straight back. `Delete` takes it off your list.
+You decide where LongLens looks. Open `Sources` in the top menu: every website, feed, forum and channel on your list has a `Turn off` button. Press it and LongLens drops that one, and never adds it back by itself. `Turn back on` brings it straight back. `Delete` takes it off your list.
 
-Or reply "drop" with the site's name, and Overscan confirms you won't see anything from it any more.
+Or reply "drop" with the site's name, and LongLens confirms you won't see anything from it any more.
 
-Overscan also finds new websites your stories came from and lists them in the next issue under "New sources for you", each with a way to remove it. Turn one back on yourself and it stays on, marked `Kept on`, unless it stops answering or starts sending junk.
+LongLens also finds new websites your stories came from and lists them in the next issue under "New sources for you", each with a way to remove it. Turn one back on yourself and it stays on, marked `Kept on`, unless it stops answering or starts sending junk.
 
 Away for a week? `Pause this newsletter` at the bottom of every issue stops it, and the same page starts it again.
 
 ### Every morning :: What lands in your inbox, and why you can trust it
-At the time you picked, Overscan turns the day's news in your trade into one issue with your newsletter's name on it.
+At the time you picked, LongLens turns the day's news in your trade into one issue with your newsletter's name on it.
 
-1. **Overscan catches anything new** from every website, feed, forum and channel you follow.
-2. **Overscan keeps what matters to your customers.** A story you have already had stays out, unless something changed. Then it comes back marked as an update.
+1. **LongLens catches anything new** from every website, feed, forum and channel you follow.
+2. **LongLens keeps what matters to your customers.** A story you have already had stays out, unless something changed. Then it comes back marked as an update.
 3. **Most stories carry a short line on why they matter to your customers**, and every story links to the original.
-4. **Every link is tried before the issue goes out.** A story whose only link is dead is left out, and a line at the foot of the issue says how many links were checked, how many were dead, and any Overscan could not check.
-5. **Your copy arrives by email, from Overscan**, unless you picked web page only. Nothing to press. Every issue is also kept on the `Issues` page.
+4. **Every link is tried before the issue goes out.** A story whose only link is dead is left out, and a line at the foot of the issue says how many links were checked, how many were dead, and any LongLens could not check.
+5. **Your copy arrives by email, from LongLens**, unless you picked web page only. Nothing to press. Every issue is also kept on the `Issues` page.
 6. **Audio, video and slides follow** on the issue's page once they pass their check.
 
-Your plan covers a set amount of writing each month. If you reach it, Overscan says so on your pages and picks up again next month.
+Your plan covers a set amount of writing each month. If you reach it, LongLens says so on your pages and picks up again next month.
 <!-- /sections -->
 
 <!-- formats -->
