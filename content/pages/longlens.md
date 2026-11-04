@@ -2,30 +2,30 @@
 type: page
 slug: longlens
 title: I built LongLens | the vfx supervisor
-description: I built LongLens, which puts each morning's news in your field under your name, so your audience hears it from you. My own VFX Supervisor Daily runs on it. Free pilot at getlonglens.com.
+description: I built LongLens, which writes a newsletter under your name on what changed in your field and what it means for your clients. My own VFX Supervisor Daily runs on it. Free pilot at getlonglens.com.
 eyebrow: Case study
-h1: I built LongLens so your audience hears the news from you, every morning.
-cta_label: Start my free LongLens pilot
-cta_href: https://getlonglens.com/
+h1: I built LongLens so your clients hear the news from you.
+cta_label: Ask for a free week
+cta_href: https://getlonglens.com/contact/
 daily_label: Read the latest Daily
 ---
 
-LongLens turns each morning's news in your field into a short read under your name, often with audio, and tells your readers what every story means for them. They stop hearing it from a feed or a competitor. They hear it from you.
+LongLens follows the news sites, forums and videos your field watches and writes a short newsletter under your name: what changed, and what it means for the people who read it. A letter, often with audio, slides, a picture or a short video. You read every issue first, change any line, and send it yourself.
 
 ## Why I built LongLens
 
-The person who explains the news is the person people remember as the expert. Doing that by hand every morning is a second job. LongLens does the reading and the writing. You pick the topics, the tone and the name on top, and you change the next issue by replying in plain words.
+Your clients already read industry news. When it comes from you, with what it means for them, you are the one they call about it. Doing that by hand every week is a second job, so I built LongLens to do the reading and the writing. You pick the topics, the tone and the name on top, and you change any line before it goes out.
 
 ## Who LongLens is for
 
-- Business owners who want customers to see them as the expert.
-- Experts starting a business who need an audience before the first sale.
-- Anyone building an audience they reach directly, with no algorithm in between.
+- Accountants, lawyers, vets and advisers whose clients need to know what a new rule or deadline means for them.
+- Consultants and coaches out on their own, who need the people they would like to work with to see what they know.
+- Communities, clubs and associations who need something worth sending their members every week.
 
 ## See LongLens working: The VFX Supervisor Daily
 
-My field is VFX, so my own [VFX Supervisor Daily](/daily/) is where LongLens runs first. It goes out most mornings: what changed, and what it means for the people reading. LongLens checks names and figures against the original story and tries every link before an issue goes out. A story whose only link is dead stays out.
+My field is visual effects for film and TV, so my own [VFX Supervisor Daily](/daily/) is where LongLens runs first, most mornings. Yours covers your field, for your readers. LongLens checks names and figures against the original story and checks links before an issue goes out.
 
 ## Start your own
 
-LongLens is free during the pilot, no card. Start at [getlonglens.com](https://getlonglens.com/), or email me at [geoff@wanglemedia.com](mailto:geoff@wanglemedia.com) and I set it up with you.
+The pilot is free and invite only: I set up every account myself, on a short call. After the pilot, plans start at $19 a month. [Ask for a free week at getlonglens.com](https://getlonglens.com/contact/), or email me at [geoff@wanglemedia.com](mailto:geoff@wanglemedia.com).
