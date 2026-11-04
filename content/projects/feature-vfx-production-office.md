@@ -48,7 +48,7 @@ The discipline is what made the agents safe on a client's money. Every write was
 
 ## Security: the footage pipeline ran on our own machines
 
-Shot detection, slate reading, thumbnails, reference clips and the cut-to-cut comparison all ran on our own machines, and the only footage that went out was the watermarked reference each vendor needed to bid. The only cloud model in the office was Claude Code, on a private account with training turned off. It looked at occasional stills when checking the breakdown, never the footage itself, and no other cloud AI service touched the show. And I made every send myself. On a show under NDA, that is the difference between an AI office a client can sign off and one they cannot.
+Shot detection, slate reading, thumbnails, reference clips and the cut-to-cut comparison all ran on our own machines, and vendors bid from watermarked reference clips. The only cloud model in the office was Claude Code, on a private account with training turned off. It looked at occasional stills when checking the breakdown, never the footage itself, and no other cloud AI service touched the show. And I made every send myself. On a show under NDA, that is the difference between an AI office a client can sign off and one they cannot.
 
 ## When it went wrong
 
