@@ -1131,7 +1131,7 @@ def render_home():
     return render_shell(fm.get("title", SITE_NAME), fm.get("description", ""), content, nav_active=None, extra_script=REEL_SCRIPT + CREDIT_SCRIPT, canonical_path="")
 
 
-PROJECT_ORDER = ["breakdown-studio", "feature-vfx-production-office", "feature-vfx-shot-pipeline", "signalbox", "link-session"]  # flagship first
+PROJECT_ORDER = ["breakdown-studio", "feature-vfx-production-office", "feature-vfx-shot-pipeline", "signalbox", "link-session", "storage-library"]  # flagship first
 
 
 def render_project(md_path):
