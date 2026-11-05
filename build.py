@@ -1784,11 +1784,9 @@ def format_strip():
         <audio controls preload="none" src="{m}issue-audio.m4a" aria-label="Audio overview of the issue"></audio></div></div>
       <div class="fmt-card"><div class="fmt-media wide"><video class="fmt-video" controls playsinline preload="none" poster="{m}issue-video-poster.jpg" width="1280" height="720" aria-label="A short clip of the issue's explainer video, silent"><source src="{m}issue-video.mp4" type="video/mp4"></video></div>
         <div class="fmt-txt"><b>Watch it</b><p>A short explainer, crafted from the same words.</p></div></div>
-      <div class="fmt-card"><div class="fmt-media wide"><a class="fmt-zoom" href="{m}issue-slide-1.png"><img src="{m}issue-slide-1.png" width="1280" height="714" loading="lazy" alt="The title slide of the same issue: Defending margins in an AI-augmented production reality."></a></div>
-        <div class="fmt-txt"><b>Flip the slides</b><p>For the Monday meeting, one story a slide.</p></div></div>
       <div class="fmt-card fmt-coming"><div class="fmt-txt"><b>The one picture</b> <span class="tag-coming">coming</span><p>The whole issue on one screen, for the person who will not read.</p></div></div>
     </div>
-    <p class="fmt-hint">The 13 Oct 2026 issue as the letter, the audio, the video and the slides. The audio and video here are short clips of the full 19 and 7 minutes.</p>'''
+    <p class="fmt-hint">The 13 Oct 2026 issue as the letter, the audio and the video. The audio and video here are short clips of the full 19 and 7 minutes.</p>'''
 
 
 # The video used to be a muted loop driven by a script (FMT_SCRIPT). It now carries its own

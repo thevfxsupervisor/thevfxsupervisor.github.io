@@ -10,7 +10,7 @@ cta_href: https://getlonglens.com/contact/
 daily_label: Read the latest Daily
 ---
 
-LongLens follows the news sites, forums and videos your field watches and writes a short newsletter under your name: what changed, and what it means for the people who read it. A letter, often with audio, slides, a picture or a short video. You read every issue first, change any line, and send it yourself.
+LongLens follows the news sites, forums and videos your field watches and writes a short newsletter under your name: what changed, and what it means for the people who read it. A letter, often with audio, a picture or a short video. You read every issue first, change any line, and send it yourself.
 
 ## Why I built LongLens
 
