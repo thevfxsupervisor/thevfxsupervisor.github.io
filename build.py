@@ -2091,11 +2091,15 @@ def render_note(md_path):
 # --------------------------------------------------------------------------
 
 DAILY_PROMISE = "What changed in VFX today, and what that means for your next bid."
-DAILY_FORMATS_LINE = ("Skip the trade-site scroll. Read every issue here. Audio, video and slides "
+DAILY_FORMATS_LINE = ("Skip the news-site scroll. Read every issue here. Audio, video and slides "
                       "come with an issue once they pass my fact check.")
 # Under an issue's own formats: why not every issue has every one.
 DAILY_MEDIA_LINE = ("Audio, video and slides come with an issue only once they pass my fact check, "
                     "so not every issue has every format.")
+# DAILY_SLIDES False (the app's NL_SLIDES_ENABLED is off): slides are not offered or shown, so
+# the sign-up, every issue's ways and formats, the samples and these lines leave them out.
+DAILY_MEDIA_LINE_NO_SLIDES = ("Audio and video come with an issue only once they pass my fact "
+                              "check, so not every issue has every format.")
 # Fallback samples (13 Oct 2026 issue, files already on the site), shown LOW on the index and
 # only for a format the latest issue lacks and no earlier issue has either (_daily_samples).
 # The latest issue itself always comes first, with its own formats. A missing file = no sample.
@@ -2126,6 +2130,7 @@ DAILY_MADE_WITH = '/longlens/'
 DAILY_JOIN_URL = 'https://newsletter-edge.thevfxsupervisor.workers.dev/join/vfx'
 DAILY_JOIN_VERSION = 'vfx-daily-v2'
 DAILY_JOIN_CONSENT = 'Email me The VFX Supervisor Daily from Geoffrey Hancock each morning, in the format I picked, with the occasional note about his VFX updates. I can unsubscribe in one click from any email.'
+DAILY_SLIDES = False
 DAILY_CSS = """
 @font-face{font-family:"EB Garamond";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/eb-garamond-600-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:400 600;font-display:swap;src:url(fonts/ibm-plex-sans-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
@@ -2246,6 +2251,8 @@ DAILY_THEME_HEAD = '<script>document.documentElement.className+=" dj-js";</scrip
 DAILY_FORMATS = [("read", "Read it", "Read"), ("listen", "Hear it", "Hear"),
                  ("watch", "Watch it", "Watch"), ("slides", "Slides", "Slides"),
                  ("picture", "One picture", "Picture")]
+if not DAILY_SLIDES:
+    DAILY_FORMATS = [x for x in DAILY_FORMATS if x[0] != "slides"]
 # The ways an issue offers it: the sign-up formats plus the one-minute vertical video (the
 # short), which is not a sign-up format. Same order as the app's DAILY_TAKES.
 DAILY_TAKES = DAILY_FORMATS[:3] + [("short", "One minute", "Short")] + DAILY_FORMATS[3:]
@@ -2418,7 +2425,7 @@ def _daily_media(fm, base=""):
     return f"""
   <section class="daily-media" aria-labelledby="media-h">
     <h2 id="media-h">This issue in other formats</h2>
-    <p class="daily-note">{html.escape(DAILY_MEDIA_LINE, quote=False)}</p>
+    <p class="daily-note">{html.escape(DAILY_MEDIA_LINE if DAILY_SLIDES else DAILY_MEDIA_LINE_NO_SLIDES, quote=False)}</p>
     <div class="daily-media-grid">{"".join(panels)}</div>
   </section>"""
 
@@ -2532,6 +2539,15 @@ def _daily_shell(title, description, content, canonical_path, script="", robots=
 
 def render_daily_thanks():
     t = html.escape(DAILY_TITLE, quote=False)
+    # The site's own CONTACT_EMAIL when it has one; a site without it gets the privacy note.
+    contact = globals().get("CONTACT_EMAIL", "")
+    if contact:
+        off = (f'<a href="mailto:{contact}?subject=Remove%20me%20from%20the%20Daily%20list">Email me '
+               f'to come off the list</a> and your address is deleted (see the '
+               f'<a href="{SITE_ROOT}privacy/">privacy note</a>).')
+    else:
+        off = (f'Write to the address in the <a href="{SITE_ROOT}privacy/">privacy note</a> and '
+               'your address is deleted.')
     content = f"""{_daily_css_link()}
 <main class="daily">
   <header class="daily-head">
@@ -2541,7 +2557,7 @@ def render_daily_thanks():
   </header>
   <div class="prose">
     <p>The latest issue is up: <a href="{SITE_ROOT}{DAILY_SECTION}/">read {t} now</a>, or follow it in <a href="{SITE_ROOT}{DAILY_SECTION}/feed.xml">RSS</a>.</p>
-    <p>Changed your mind? <a href="mailto:{CONTACT_EMAIL}?subject=Remove%20me%20from%20the%20Daily%20list">Email me to come off the list</a> and your address is deleted (see the <a href="{SITE_ROOT}privacy/">privacy note</a>).</p>
+    <p>Changed your mind? {off}</p>
   </div>
   {_daily_foot()}
 </main>
