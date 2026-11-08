@@ -2075,7 +2075,7 @@ def render_note(md_path):
 
 # --------------------------------------------------------------------------
 # The Daily: numbered public issues, one file each in content/<DAILY_SECTION>/
-# (added by the newsletter product, LongLens). Kept apart from notes/ so the
+# (added by the newsletter app, DAILY_PRODUCT). Kept apart from notes/ so the
 # hand-written essays are not buried. Styled by docs/static/daily.css (written
 # below): the site's dark ground and a light mode (Northlight palette), with a
 # light/dark switch that only exists on these pages. The DAILY_* constants are
@@ -2091,35 +2091,33 @@ def render_note(md_path):
 # --------------------------------------------------------------------------
 
 DAILY_PROMISE = "What changed in VFX today, and what that means for your next bid."
-DAILY_FORMATS_LINE = ("Skip the news-site scroll. Read every issue here. Audio, video and slides "
-                      "come with an issue once they pass my fact check.")
+DAILY_FORMATS_LINE = ("Skip the news-site scroll. Read every issue here, or take it in another format, "
+                      "each made from that issue.")
 # Under an issue's own formats: why not every issue has every one.
-DAILY_MEDIA_LINE = ("Audio, video and slides come with an issue only once they pass my fact check, "
-                    "so not every issue has every format.")
+DAILY_MEDIA_LINE = "Every format here is made from this issue."
 # DAILY_SLIDES False (the app's NL_SLIDES_ENABLED is off): slides are not offered or shown, so
 # the sign-up, every issue's ways and formats, the samples and these lines leave them out.
-DAILY_MEDIA_LINE_NO_SLIDES = ("Audio and video come with an issue only once they pass my fact "
-                              "check, so not every issue has every format.")
+DAILY_MEDIA_LINE_NO_SLIDES = "Every format here is made from this issue."
 # Fallback samples (13 Oct 2026 issue, files already on the site), shown LOW on the index and
 # only for a format the latest issue lacks and no earlier issue has either (_daily_samples).
 # The latest issue itself always comes first, with its own formats. A missing file = no sample.
 DAILY_SAMPLES_FROM = "13 October 2026"
-DAILY_SAMPLES = [("listen", "Hear it", "static/overscan/media/issue-audio.m4a", ""),
-                 ("watch", "Watch it", "static/overscan/media/issue-video.mp4",
+DAILY_SAMPLES = [("listen", "Podcast", "static/overscan/media/issue-audio.m4a", ""),
+                 ("watch", "Explainer video", "static/overscan/media/issue-video.mp4",
                   "static/overscan/media/issue-video-poster.jpg"),
-                 ("slides", "Slides", "static/overscan/media/issue-slide-1.png", "")]
+                 ("slides", "Carousel", "static/overscan/media/issue-slide-1.png", "")]
 DAILY_LIGHT = ("--bg:#F4EFE6;--panel:#FBF8F2;--raise:#ECE5D8;--line:#D9D0C1;--line2:#C9BFAE;"
                "--txt:#14213D;--dim:#3B4660;--mute:#56607A;--amber:#0567c4;--amber-soft:#0567c4;"
                "--dj-accent-line:#9cc3e8;--dj-btn:#0567c4;--dj-btn-ink:#ffffff;--dj-btn-hover:#04529c;"
                "color-scheme:light")
-# Where a LongLens customer signs in: the app root. It sends a signed-out visitor to the sign-in
+# Where a DAILY_PRODUCT customer signs in: the app root. It sends a signed-out visitor to the sign-in
 # page (an emailed link, no password) and a signed-in one straight in. Shown small at the top of
 # /overscan/ and /overscan/guide/ and in the footer, never in the top bar (it is full).
 OVERSCAN_SIGNIN_URL = "https://newsletter-edge.thevfxsupervisor.workers.dev/"
 
 
 def signin_line():
-    return (f'<p class="signin-top">Already using LongLens? '
+    return (f'<p class="signin-top">Already using {html.escape(DAILY_PRODUCT)}? '
             f'<a href="{OVERSCAN_SIGNIN_URL}">Sign in</a></p>')
 
 
@@ -2132,7 +2130,8 @@ DAILY_MADE_WORDS = 'Made with'
 DAILY_JOIN_URL = 'https://newsletter-edge.thevfxsupervisor.workers.dev/join/vfx'
 DAILY_JOIN_VERSION = 'vfx-daily-v2'
 DAILY_JOIN_CONSENT = 'Email me The VFX Supervisor Daily from Geoffrey Hancock each morning, in the format I picked, with the occasional note about his VFX updates. I can unsubscribe in one click from any email.'
-DAILY_SLIDES = False
+DAILY_SLIDES = True
+DAILY_SHORT = True
 DAILY_CSS = """
 @font-face{font-family:"EB Garamond";font-style:normal;font-weight:600;font-display:swap;src:url(fonts/eb-garamond-600-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
 @font-face{font-family:"IBM Plex Sans";font-style:normal;font-weight:400 600;font-display:swap;src:url(fonts/ibm-plex-sans-latin.woff2) format("woff2");unicode-range:U+0000-00FF,U+0131,U+0152-0153,U+02BB-02BC,U+02C6,U+02DA,U+02DC,U+0304,U+0308,U+0329,U+2000-206F,U+20AC,U+2122,U+2191,U+2193,U+2212,U+2215,U+FEFF,U+FFFD}
@@ -2249,24 +2248,26 @@ DAILY_CSS = """
 # follows the device when nothing is set.
 DAILY_THEME_HEAD = '<script>document.documentElement.className+=" dj-js";</script>'
 
-# (form value, chip label, index tag) for the five ways to take an issue.
-DAILY_FORMATS = [("read", "Read it", "Read"), ("listen", "Hear it", "Hear"),
-                 ("watch", "Watch it", "Watch"), ("slides", "Slides", "Slides"),
-                 ("picture", "One picture", "Picture")]
+# (form value, chip label, index tag) for the ways to take an issue.
+DAILY_FORMATS = [("read", "Email", "Email"), ("listen", "Podcast", "Podcast"),
+                 ("watch", "Explainer video", "Explainer"), ("short", "Reel", "Reel"),
+                 ("slides", "Carousel", "Carousel"), ("picture", "Infographic", "Infographic")]
 if not DAILY_SLIDES:
     DAILY_FORMATS = [x for x in DAILY_FORMATS if x[0] != "slides"]
-# The ways an issue offers it: the sign-up formats plus the one-minute vertical video (the
-# short), which is not a sign-up format. Same order as the app's DAILY_TAKES.
-DAILY_TAKES = DAILY_FORMATS[:3] + [("short", "One minute", "Short")] + DAILY_FORMATS[3:]
+# The ways an issue offers it (its cards and players): every format, the Reel included.
+DAILY_TAKES = list(DAILY_FORMATS)
+# DAILY_SHORT False (the list has the short video off): the sign-up does not offer the Reel.
+if not DAILY_SHORT:
+    DAILY_FORMATS = [x for x in DAILY_FORMATS if x[0] != "short"]
 # What each way IS, in a few words, on its card, so a visitor can tell them apart at a glance.
 DAILY_WAY_NOTES = {"read": "The stories, with what each one means",
-                   "listen": "The issue read aloud",
-                   "watch": "The issue as a video",
-                   "short": "A one-minute vertical video",
-                   "slides": "The issue as slides",
-                   "picture": "The whole issue as one picture"}
-DAILY_PANEL_TITLES = {"listen": "Hear it", "watch": "Watch it", "short": "One minute",
-                      "slides": "Slides", "picture": "One picture"}
+                   "listen": "Listen on the go",
+                   "watch": "A few minutes on the week's stories",
+                   "short": "A 60-second vertical video",
+                   "slides": "Swipeable slides",
+                   "picture": "The whole issue on one image"}
+DAILY_PANEL_TITLES = {"listen": "Podcast", "watch": "Explainer video", "short": "Reel",
+                      "slides": "Carousel", "picture": "Infographic"}
 # (issue number, format) pieces the frontmatter lists but the app no longer serves (its /pm/
 # address answers 404), so the page never shows a dead player. Checked by curl 2026-11-04.
 DAILY_MEDIA_GONE = {("17", "short")}
@@ -2299,8 +2300,8 @@ def _daily_css_link():
 def _daily_foot():
     made = ""
     if DAILY_MADE_WITH:
-        made = (f' &middot; Made with <a href="{html.escape(DAILY_MADE_WITH)}">'
-                "LongLens</a>")
+        made = (f' &middot; {html.escape(DAILY_MADE_WORDS)} '
+                f'<a href="{html.escape(DAILY_MADE_WITH)}">{html.escape(DAILY_PRODUCT)}</a>')
     return (f'<p class="daily-foot"><a href="{SITE_ROOT}{DAILY_SECTION}/feed.xml">RSS</a>'
             f' &middot; <a href="{SITE_ROOT}{DAILY_SECTION}/feed.json">JSON Feed</a>{made}</p>')
 
@@ -2393,18 +2394,18 @@ def _daily_panel(fm, f, base="", note=""):
     inner = f'<p class="daily-note">{e(extra)}</p>' if extra else ""
     if f == "listen":
         inner += (f'<audio controls preload="none" src="{src}">'
-                  f'<a href="{src}">Play the audio</a></audio>')
+                  f'<a href="{src}">Play the podcast</a></audio>')
     elif f in ("watch", "short"):
         cls = ' class="daily-short"' if f == "short" else ""
         inner += (f'<video{cls} controls preload="metadata" playsinline src="{src}#t=0.1">'
                   f'<a href="{src}">Play the video</a></video>')
     elif f == "slides":
-        inner += (f'<iframe class="daily-pdf" src="{src}" loading="lazy" title="Slides for this issue"></iframe>'
-                  f'<p class="daily-note"><a href="{src}">Open the slides (PDF)</a></p>')
+        inner += (f'<iframe class="daily-pdf" src="{src}" loading="lazy" title="Carousel for this issue"></iframe>'
+                  f'<p class="daily-note"><a href="{src}">Open the carousel (PDF)</a></p>')
     else:
         inner += (f'<a href="{src}"><img src="{src}" loading="lazy" decoding="async" '
-                  f'alt="This issue as one picture"></a>'
-                  '<p class="daily-note">Tap the picture to open it full size.</p>')
+                  f'alt="This issue as an infographic"></a>'
+                  '<p class="daily-note">Tap the infographic to open it full size.</p>')
     if note:
         inner += f'<p class="daily-note">{note}</p>'
     return (f'<div class="daily-panel" data-f="{f}"><h3>{e(DAILY_PANEL_TITLES[f])}</h3>'
@@ -2531,6 +2532,11 @@ def _daily_shell(title, description, content, canonical_path, script="", robots=
     """render_shell, passing the script and robots only when there are some (so a site whose
     render_shell predates those arguments still builds). nav_active defaults to "daily" so every
     Daily page lights up the header's Daily link; pass None to suppress it (none currently do)."""
+    # The site's base.html puts the title and description in content="..." attributes and
+    # render_shell escapes with quote=False, so a straight quote (the newsletter's name is set on
+    # the web, digest_name) would end the attribute. Curl it, as the issue page always has.
+    title = str(title).replace('"', "”")
+    description = str(description).replace('"', "”")
     kw = {"canonical_path": canonical_path, "nav_active": nav_active}
     if script:
         kw["extra_script"] = script
