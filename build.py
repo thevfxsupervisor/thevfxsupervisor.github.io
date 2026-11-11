@@ -2180,6 +2180,9 @@ DAILY_CSS = """
 .daily-panel audio,.daily-panel video,.daily-panel img{display:block;width:100%;max-width:100%;border-radius:12px}
 .daily-panel video{background:#000;aspect-ratio:16/9;height:auto}
 .daily-pdf{width:100%;height:480px;border:1px solid var(--line);border-radius:12px;background:var(--raise)}
+.daily-panel a.daily-cover{display:block;max-width:340px}
+.daily-panel a.daily-cover img{border-radius:0}
+.daily-panel img.daily-art{display:block;max-width:340px;margin:0 0 8px}
 .daily-note{margin:0;font-size:14px;color:var(--dim)}
 .daily-card{font-size:17px;line-height:1.6}
 .daily .prose{max-width:none;font-size:17px;line-height:1.6}
@@ -2392,13 +2395,30 @@ def _daily_panel(fm, f, base="", note=""):
     src = e(src)
     extra = fm.get(f"{key}_note", "").strip() if f in ("listen", "watch") else ""
     inner = f'<p class="daily-note">{e(extra)}</p>' if extra else ""
+    # The app's page picture (2026-11-10): the podcast's cover above its player, a video's
+    # poster frame on the player, so neither is a bare bar or a black box.
+    pic = _daily_media_src(fm, f"{key}_poster") if f in ("listen", "watch", "short") else ""
+    pic = e(base + pic) if pic else ""
     if f == "listen":
+        if pic:
+            inner += (f'<img class="daily-art" src="{pic}" loading="lazy" decoding="async" '
+                      f'alt="Podcast cover for this issue">')
         inner += (f'<audio controls preload="none" src="{src}">'
                   f'<a href="{src}">Play the podcast</a></audio>')
     elif f in ("watch", "short"):
         cls = ' class="daily-short"' if f == "short" else ""
-        inner += (f'<video{cls} controls preload="metadata" playsinline src="{src}#t=0.1">'
+        poster = f' poster="{pic}"' if pic else ""
+        inner += (f'<video{cls} controls preload="metadata" playsinline{poster} src="{src}#t=0.1">'
                   f'<a href="{src}">Play the video</a></video>')
+    elif f == "slides" and _daily_media_src(fm, "slides_cover"):
+        # The app's cover picture: the first slides stacked, with the page count.
+        cover = e(base + _daily_media_src(fm, "slides_cover"))
+        n = fm.get("slides_pages", "").strip()
+        alt = (f"Slides: {n} pages, tap to flip through" if n.isdigit() and int(n) > 1
+               else "Slides for this issue, tap to open")
+        inner += (f'<a class="daily-cover" href="{src}"><img src="{cover}" loading="lazy" '
+                  f'decoding="async" alt="{e(alt)}"></a>'
+                  f'<p class="daily-note"><a href="{src}">Open the carousel (PDF)</a></p>')
     elif f == "slides":
         inner += (f'<iframe class="daily-pdf" src="{src}" loading="lazy" title="Carousel for this issue"></iframe>'
                   f'<p class="daily-note"><a href="{src}">Open the carousel (PDF)</a></p>')

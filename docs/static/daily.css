@@ -45,6 +45,9 @@
 .daily-panel audio,.daily-panel video,.daily-panel img{display:block;width:100%;max-width:100%;border-radius:12px}
 .daily-panel video{background:#000;aspect-ratio:16/9;height:auto}
 .daily-pdf{width:100%;height:480px;border:1px solid var(--line);border-radius:12px;background:var(--raise)}
+.daily-panel a.daily-cover{display:block;max-width:340px}
+.daily-panel a.daily-cover img{border-radius:0}
+.daily-panel img.daily-art{display:block;max-width:340px;margin:0 0 8px}
 .daily-note{margin:0;font-size:14px;color:var(--dim)}
 .daily-card{font-size:17px;line-height:1.6}
 .daily .prose{max-width:none;font-size:17px;line-height:1.6}
