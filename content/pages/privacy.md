@@ -41,6 +41,8 @@ This is the form on [The VFX Supervisor Daily](/daily/) and on every issue.
 
 **How long.** If you confirm, until you unsubscribe (one click in every email) or ask me to delete it. If you do not confirm, your address is deleted 7 days after that one confirmation email. A record that you agreed, and to which words, is kept for two years after you unsubscribe, because Danish law asks me to be able to show it.
 
+**Links in each issue.** We count taps on the links in each issue, per link and never per person. That tells the sender which stories were read, and lets us stop emailing anyone who never reads them.
+
 ## Your rights
 
 You can ask me what I hold, correct it, or have it deleted, at any time. Every waitlist email and every issue of the Daily includes how to unsubscribe. To exercise any of this, reply to one of my emails or write to geoff@thevfxsupervisor.com, and I will delete both the stored message and the copy in my mailbox.
